@@ -1,13 +1,12 @@
 {
   "name": "quasar-form-builder",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "keywords": [
     "vue",
-    "tiptap",
-    "katex",
-    "vue-tiptap-katex"
+    "quasar",
+    "quasar-form-builder"
   ],
   "contributors": [
     {
