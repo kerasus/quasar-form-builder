@@ -1,14 +1,32 @@
 {
   "name": "quasar-form-builder",
   "version": "0.1.0",
-  "private": true,
+  "description": "Form Builder. Uses Quasar Framework and Vue.",
+  "main": "index.js",
+  "keywords": [
+    "vue",
+    "tiptap",
+    "katex",
+    "vue-tiptap-katex"
+  ],
+  "contributors": [
+    {
+      "name": "Ali Esmaeeli",
+      "email": "aliesmaeeli20@gmail.com",
+      "url": "https://github.com/kerasus/quasar-form-builder"
+    }
+  ],
+  "homepage": "https://github.com/kerasus/quasar-form-builder",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
+    "moment-jalaali": "^0.9.4",
+    "quasar": "^2.0.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -18,7 +36,11 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "postcss-rtl": "^1.2.3",
+    "sass": "1.32.12",
+    "sass-loader": "^10.1.0",
+    "vue-cli-plugin-quasar": "~4.0.4"
   },
   "eslintConfig": {
     "root": true,
