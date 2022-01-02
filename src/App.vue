@@ -3,12 +3,12 @@
     <q-header elevated class="glossy">
       <q-toolbar>
         <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-          icon="menu"
+            flat
+            dense
+            round
+            @click="leftDrawerOpen = !leftDrawerOpen"
+            aria-label="Menu"
+            icon="menu"
         />
 
         <q-toolbar-title>
@@ -20,10 +20,10 @@
     </q-header>
 
     <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      class="bg-grey-2"
+        v-model="leftDrawerOpen"
+        show-if-above
+        bordered
+        class="bg-grey-2"
     >
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
@@ -94,8 +94,9 @@ export default {
     return {
       inputs: [
         { type: 'input', name: 'id', responseKey: 'id', value: 'null', label: 'شناسه', col: 'col-md-4' },
-        { type: 'date', name: 'last_modification_time', responseKey: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4' },
+        { type: 'date', name: 'last_modification_time', responseKey: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
         { type: 'date', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4' },
+        { type: 'dateTime', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
         { type: 'file', name: 'thumbnail', responseKey: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
         { type: 'input', name: 'url', responseKey: 'url', label: 'منبع', col: 'col-md-12' },
         { type: 'inputEditor', name: 'summary', responseKey: 'summary', label: 'خلاصه', col: 'col-md-12' },
@@ -107,6 +108,9 @@ export default {
     return {
       leftDrawerOpen: ref(false)
     }
+  },
+  methods : {
+
   }
 }
 </script>
