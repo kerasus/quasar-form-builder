@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="form-date-time" v-if="canShowTime && canShowDate">
+    <div class="dateTime-input" v-if="canShowTime && canShowDate">
       <q-input class="form-calender" v-model="dateTime.date" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
         <template #prepend>
           <q-icon name="event" class="cursor-pointer">
@@ -14,7 +14,7 @@
           </q-icon>
         </template>
       </q-input>
-      <q-input class="form-time" v-model="dateTime.time" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
+      <q-input class="time-input-dateTime" v-model="dateTime.time" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
         <template #append>
           <q-icon name="access_time" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -179,12 +179,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-date-time{
+.dateTime-input{
   display: flex;
   flex-direction: row;
   .form-calender{
   }
-  .form-time{
+  .time-input-dateTime{
+    .q-field__native{
+      padding: 24px 0 8px !important;
+    }
   }
 }
 </style>
+<style lang="scss">
+.dateTime-input{
+  .time-input-dateTime{
+    .q-field__native{
+      padding: 24px 0 8px;
+    }
+  }
+}
+</style>
+
