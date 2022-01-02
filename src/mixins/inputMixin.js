@@ -56,6 +56,10 @@ export default {
       default: false,
       type: Boolean
     },
+    date: {
+      default: false,
+      type: Boolean
+    },
     range: {
       default: false,
       type: Boolean
