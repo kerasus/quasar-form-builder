@@ -1,4 +1,4 @@
-# quasar-form-builder package
+# quasar-form-builder
 this package just get you props and then give you form with inputs (it's make with **FormBuilder** component) or just any input you need.
 
 ## install
