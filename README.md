@@ -37,6 +37,30 @@ To use it in vue files, you need to import the component you want and use it lik
 
 >####important !
 >For any input you want,you have to specify its type.
+```vue
+<template>
+    <form-builder v-model:value="inputs"/>
+</template>
+
+<script>
+    import { FormBuilder } from 'quasar-form-builder'
+    export default {
+        components: { FormBuilder } ,
+      data(){
+          return {
+            inputs:[{
+              type: 'Input', // Avatar, date, dateTime and etc.
+              label: 'Label' 
+              //and other props of FormBuilderInput component
+            },
+            {type: 'date', label: 'Label', /*and other props of FormBuilderDateTime component*/ },
+            {type: 'Slider', label: 'Label', /*and other props of FormBuilderSlider component*/ }
+            ]
+          }
+      }
+    }
+</script>
+```
 
 
 + ###FormBuilderAvatar
@@ -195,7 +219,36 @@ To use it in vue files, you need to import the component you want and use it lik
 | multiple      |  false  | Boolean                               |
 | useChips      |  false  | Boolean                               |
 
+#### example of options prop usage :
+```vue
+<template>
+    <form-builder v-model:value="inputs"/>
+</template>
 
+<script>
+    import { FormBuilder } from 'quasar-form-builder'
+    export default {
+        components: { FormBuilder } ,
+      data(){
+          return {
+            inputs:[{
+              type: 'Select', // Avatar, date, dateTime and etc.
+              label: 'Label',
+              options: [
+                {label:'some label',value: 'some value'},//for first option of select input
+                {label:'some label',value: 'some value'},//for second option of select input
+                {label:'some label',value: 'some value'},//for third option of select input
+              ],
+              optionLabel: 'label',
+              optionValue: 'value',
+              //and other props of FormBuilderSelect component
+            },
+            ]
+          }
+      }
+    }
+</script>
+```
 
 
     			
