@@ -25,7 +25,7 @@ To use it in vue files, you need to import the component you want and use it lik
 
 ## Features:
 
-+ ###FormBuilder
++ ### FormBuilder
 
 | props               | default | type             |
 |---------------------|:-------:|:-----------------|
@@ -35,7 +35,7 @@ To use it in vue files, you need to import the component you want and use it lik
 
 
 
->####important !
+>#### important !
 >For any input you want,you have to specify its type.
 ```vue
 <template>
@@ -63,7 +63,7 @@ To use it in vue files, you need to import the component you want and use it lik
 ```
 
 
-+ ###FormBuilderAvatar
++ ### FormBuilderAvatar
   + types
     + Avtar
 
@@ -75,7 +75,7 @@ To use it in vue files, you need to import the component you want and use it lik
 | textColor         |  white  | String   |
 
 
-+ ###FormBuilderCheckbox
++ ### FormBuilderCheckbox
   + types
     + Checkbox
 
@@ -88,7 +88,7 @@ To use it in vue files, you need to import the component you want and use it lik
 | trueValue      |  true   | Object, String, Array, Number, Boolean  |
 | falseValue     |  false  | Object, String, Array, Number, Boolean  |
 
-+ ###FormBuilderDateTime
++ ### FormBuilderDateTime
     + types
         + date
         
@@ -131,7 +131,7 @@ To use it in vue files, you need to import the component you want and use it lik
           | disable   | false     |                Boolean                 |
           | range     | true      |                Boolean                 |
 
-+ ###FormBuilderFile
++ ### FormBuilderFile
     + types
         + File
 
@@ -145,7 +145,7 @@ To use it in vue files, you need to import the component you want and use it lik
 
 
 
-+ ###FormBuilderInput
++ ### FormBuilderInput
     + types
         + Input
 
@@ -155,7 +155,7 @@ To use it in vue files, you need to import the component you want and use it lik
 | label     |   ' '   | String                         |
 | disable   |  false  | Boolean                        |
 
-+ ###FormBuilderInputEditor
++ ### FormBuilderInputEditor
     + types
         + InputEditor
 
@@ -167,7 +167,7 @@ To use it in vue files, you need to import the component you want and use it lik
 
 
 
-+ ###FormBuilderOptionGroup
++ ### FormBuilderOptionGroup
     + types
         + date
         + OptionGroup
@@ -180,7 +180,7 @@ To use it in vue files, you need to import the component you want and use it lik
 | value   |   ' '   | Object, String, Array, Number, Boolean |
 | options |   []    | Array                                  |
   
-+ ###FormBuilderSlider
++ ### FormBuilderSlider
     + types
         + Slider
     
@@ -192,7 +192,7 @@ To use it in vue files, you need to import the component you want and use it lik
 | disable  |  false  | Boolean                         |
 
 
-+ ###FormBuilderRangeSlider
++ ### FormBuilderRangeSlider
     + types
         + RangeSlider
     
@@ -203,7 +203,7 @@ To use it in vue files, you need to import the component you want and use it lik
 | disable |        false        | Boolean                        |
 | range   |        true         | Boolean                        |
 
-+ ###FormBuilderSelect
++ ### FormBuilderSelect
     + types
         + Select
     
