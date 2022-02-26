@@ -49,6 +49,7 @@ export default {
     FormBuilderSlider: defineAsyncComponent(() => import('./components/FormBuilderSlider')),
     FormBuilderRangeSlider: defineAsyncComponent(() => import('./components/FormBuilderRangeSlider')),
     FormBuilderSpace: defineAsyncComponent(() => import('./components/FormBuilderSpace')),
+    FormBuilderSeparator: defineAsyncComponent(() => import('./components/FormBuilderSeparator')),
     FormBuilderDateTime: defineAsyncComponent(() => import('./components/FormBuilderDateTime'))
   },
   mixins: [inputMixin],
