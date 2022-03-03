@@ -99,8 +99,10 @@ export default {
         { type: 'dateTime', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
         { type: 'file', name: 'thumbnail', responseKey: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
         { type: 'input', name: 'url', responseKey: 'url', label: 'منبع', col: 'col-md-12' },
+        { type: 'separator', col: 'col-md-12' },
         { type: 'inputEditor', name: 'summary', responseKey: 'summary', label: 'خلاصه', col: 'col-md-12' },
         { type: 'inputEditor', name: 'text', responseKey: 'text', label: 'متن', col: 'col-md-12' },
+
       ]
     }
   },
