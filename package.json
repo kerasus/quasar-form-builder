@@ -1,6 +1,6 @@
 {
   "name": "quasar-form-builder",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "keywords": [

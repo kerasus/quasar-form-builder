@@ -93,7 +93,18 @@ export default {
   data () {
     return {
       inputs: [
-        { type: 'input', name: 'id', responseKey: 'id', value: 'null', label: 'شناسه', col: 'col-md-4' },
+        {
+          type: 'formBuilder',
+          name: 'formBuilderCol',
+          col: 'col-md-6',
+          value: [
+            { type: 'input', name: 'id1', responseKey: 'id1', value: 'null', label: 'شناسه1', col: 'col-md-6' },
+            { type: 'input', name: 'id2', responseKey: 'id2', value: 'null', label: 'شناسه2', col: 'col-md-6' },
+          ]
+        },
+
+        { type: 'input', name: 'id', responseKey: 'id', value: 'null', label: 'شناسه', col: 'col-md-6' },
+
         { type: 'date', name: 'last_modification_time', responseKey: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
         { type: 'date', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4' },
         { type: 'dateTime', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },

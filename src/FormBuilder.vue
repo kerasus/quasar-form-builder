@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div v-for="(input, inputIndex) in inputData" :key="inputIndex" class="q-pa-md" :class="(input.col) ? input.col : 'col'">
+    <div v-for="(input, inputIndex) in inputData" :key="inputIndex" :class="[(input.col) ? input.col : 'col', (getComponent(input) !== 'form-builder') ? 'q-pa-md' : getComponent(input), getComponent(input) + '-col']">
       <component
           :is="getComponent(input)"
           v-model:value="input.value"
@@ -39,6 +39,7 @@ import inputMixin from './mixins/inputMixin'
 export default {
   name: 'FormBuilder',
   components: {
+    FormBuilder: defineAsyncComponent(() => import('./FormBuilder.vue')),
     FormBuilderFile: defineAsyncComponent(() => import('./components/FormBuilderFile')),
     FormBuilderInput: defineAsyncComponent(() => import('./components/FormBuilderInput')),
     FormBuilderInputEditor: defineAsyncComponent(() => import('./components/FormBuilderInputEditor')),
@@ -75,6 +76,9 @@ export default {
   },
   methods: {
     getComponent (input) {
+      if (input.type === 'formBuilder') {
+        return 'form-builder'
+      }
       if (
           input.type === 'optionGroupRadio' ||
           input.type === 'optionGroupCheckbox' ||
