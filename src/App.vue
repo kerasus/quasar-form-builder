@@ -76,7 +76,11 @@
     </q-drawer>
 
     <q-page-container>
-      <form-builder v-model:value="inputs" />
+      <q-btn @click="getData" color="blue" class="q-my-md full-width">
+        get data
+      </q-btn>
+      <br>
+      <form-builder ref="formBuilder" v-model:value="inputs" />
     </q-page-container>
   </q-layout>
 </template>
@@ -98,12 +102,21 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-6',
           value: [
-            { type: 'input', name: 'id1', responseKey: 'id1', value: 'null', label: 'شناسه1', col: 'col-md-6' },
-            { type: 'input', name: 'id2', responseKey: 'id2', value: 'null', label: 'شناسه2', col: 'col-md-6' },
+            { type: 'input', name: 'id1', responseKey: 'id1', value: null, label: 'شناسه1', col: 'col-md-6' },
+            { type: 'input', name: 'id2', responseKey: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
+            {
+              type: 'formBuilder',
+              name: 'formBuilderCol',
+              col: 'col-md-6',
+              value: [
+                { type: 'input', name: 'id3', responseKey: 'id3', value: null, label: 'شناسه3', col: 'col-md-6' },
+                { type: 'input', name: 'id4', responseKey: 'id4', value: null, label: 'شناسه4', col: 'col-md-6' },
+              ]
+            },
           ]
         },
 
-        { type: 'input', name: 'id', responseKey: 'id', value: 'null', label: 'شناسه', col: 'col-md-6' },
+        { type: 'input', name: 'id', responseKey: 'id', value: null, label: 'شناسه', col: 'col-md-6' },
 
         { type: 'date', name: 'last_modification_time', responseKey: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
         { type: 'date', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4' },
@@ -123,7 +136,9 @@ export default {
     }
   },
   methods : {
-
+    getData () {
+      console.log('flat values: ', this.$refs.formBuilder.getValues())
+    }
   }
 }
 </script>
