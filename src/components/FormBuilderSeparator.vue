@@ -99,6 +99,14 @@ export default {
       return ''
     }
   },
+  computed: {
+    getSeparatorColor() {
+      if (this.colorTypes.map(item => this.color.includes(item))) {
+        return this.color
+      }
+      return 'var(--q-' + this.color + ')'
+    }
+  }
 
 }
 </script>
