@@ -13,6 +13,7 @@
           :use-chips="input.useChips"
           :create-new-value="input.createNewValue"
           :type="getOptionGroupType(input)"
+          :separator-type="input.separatorType"
           :min="input.min"
           :max="input.max"
           :range="isRange(input)"

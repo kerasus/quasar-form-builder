@@ -5,10 +5,12 @@
     </b>
     <template v-if="separator">
       <q-separator
+          class="separator-default-style"
+          :style="{ 'border-top' : getBorderVerticalStyle, 'border-left': getBorderHorizontalStyle }"
+          :class="[ (vertical) ? 'separator-vertical' : 'separator-horizontal' ]"
           :vertical="vertical"
           :inset="inset"
           :spaced="spaced"
-          :color="color"
           :size="size"
           :dark="darkMode"
       />
@@ -22,7 +24,18 @@ import inputMixin from '../mixins/inputMixin'
 export default {
   name: "FormBuilderSeparator",
   mixins: [inputMixin],
+  data () {
+    return {
+      colorTypes: ['#', 'rgb', 'rgba']
+    }
+  },
   props: {
+    color: {
+      type: String,
+      default () {
+        return ''
+      }
+    },
     size: {
       type: String,
       default () {
@@ -32,7 +45,7 @@ export default {
     separator: {
       type: Boolean,
       default () {
-        return false
+        return true
       }
     },
     darkMode: {
@@ -47,10 +60,28 @@ export default {
         return false
       }
     },
+    label: {
+      type: String,
+      default () {
+        return ''
+      }
+    },
     spaced: {
       type: [String, Boolean],
       default () {
         return false
+      }
+    },
+    separatorType: {
+      type: String,
+      default () {
+        return 'solid'
+      }
+    },
+    borderSize: {
+      type: String,
+      default () {
+        return ''
       }
     },
     inset: {
@@ -59,11 +90,41 @@ export default {
         return false
       }
     }
+  },
+  computed: {
+    getSeparatorColor () {
+      if (this.colorTypes.map(item => this.color.includes(item))) {
+        return this.color
+      }
+      return 'var(--q-' + this.color + ')'
+    },
+    getBorderVerticalStyle () {
+      if (!this.vertical && this.separatorType && this.size) {
+        return this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor
+      }
+      return ''
+    },
+    getBorderHorizontalStyle () {
+      if (this.vertical && this.separatorType && this.size) {
+        return this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor
+      }
+      return ''
+    }
   }
 
 }
 </script>
 
-<style scoped>
 
+<style scoped lang="scss">
+.separator-default-style {
+  background: none;
+}
+.separator-horizontal {
+  min-height: 0 !important;
+  height: 0 !important;
+}
+.separator-vertical {
+  min-width: 1px !important;
+}
 </style>
