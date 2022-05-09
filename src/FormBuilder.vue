@@ -23,7 +23,7 @@
           :vertical="input.vertical"
           :inset="input.inset"
           :spaced="input.spaced"
-          :dark="darkMode"
+          :dark="input.darkMode"
           :font-size="input.fontSize"
           :color="input.color"
           :text-color="input.textColor"
