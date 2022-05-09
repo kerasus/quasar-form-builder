@@ -6,7 +6,7 @@
     <template v-if="separator">
       <q-separator
           class="separator-default-style"
-          :style="{ 'border-top' : getBorderVerticalStyle, 'border-left': getBorderHorizontalStyle }"
+          :style="{ 'border-top' : getBorderStyle('top'), 'border-left': getBorderStyle('left') }"
           :class="[ (vertical) ? 'separator-vertical' : 'separator-horizontal' ]"
           :vertical="vertical"
           :inset="inset"
@@ -91,26 +91,14 @@ export default {
       }
     }
   },
-  computed: {
-    getSeparatorColor () {
-      if (this.colorTypes.map(item => this.color.includes(item))) {
-        return this.color
-      }
-      return 'var(--q-' + this.color + ')'
-    },
-    getBorderVerticalStyle () {
-      if (!this.vertical && this.separatorType && this.size) {
-        return this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor
-      }
-      return ''
-    },
-    getBorderHorizontalStyle () {
-      if (this.vertical && this.separatorType && this.size) {
+  methods: {
+    getBorderStyle (type) {
+      if (((type === 'top' && !this.vertical) || (type === 'left' && this.vertical)) && this.separatorType && this.size) {
         return this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor
       }
       return ''
     }
-  }
+  },
 
 }
 </script>
