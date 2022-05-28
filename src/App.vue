@@ -80,6 +80,10 @@
         get data
       </q-btn>
       <br>
+      <div>
+        test v-model
+        data from first input: {{ inputs[0].value }}
+      </div>
       <form-builder ref="formBuilder" v-model:value="inputs" />
     </q-page-container>
   </q-layout>
@@ -87,7 +91,8 @@
 
 <script>
 import { ref } from 'vue'
-import FormBuilder from './FormBuilder';
+import FormBuilder from './FormBuilder'
+import CustomComponent from './CustomComponent'
 
 export default {
   name: 'LayoutDefault',
@@ -97,6 +102,9 @@ export default {
   data () {
     return {
       inputs: [
+        { type: CustomComponent, props: {name: 'ali'}, name: 'ali', responseKey: 'id', value: 123, label: 'شناسه', col: 'col-md-6' },
+        { type: CustomComponent, props: {name: 'mostafa'}, name: 'mostafa', responseKey: 'id', value: 456, label: 'شناسه', col: 'col-md-6' },
+
         {
           type: 'formBuilder',
           name: 'formBuilderCol',

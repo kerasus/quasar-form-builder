@@ -76,6 +76,18 @@ export default {
       default: 'white',
       type: String
     },
+    icon: {
+      default: '',
+      type: String
+    },
+    class: {
+      default: '',
+      type: String
+    },
+    options: {
+      default: () => [],
+      type: Array
+    },
     hidden: {
       default: false,
       type: Boolean

@@ -4,6 +4,7 @@
       <component
           :is="getComponent(input)"
           v-model:value="input.value"
+          v-bind="input.props"
           :label="input.label"
           :disable="disable || input.disable"
           :options="input.options"
@@ -13,6 +14,7 @@
           :use-chips="input.useChips"
           :create-new-value="input.createNewValue"
           :type="getOptionGroupType(input)"
+          :separator-type="input.separatorType"
           :min="input.min"
           :max="input.max"
           :range="isRange(input)"
@@ -20,6 +22,10 @@
           :date="isDate(input)"
           :src="input.value"
           :size="input.size"
+          :vertical="input.vertical"
+          :inset="input.inset"
+          :spaced="input.spaced"
+          :dark="input.darkMode"
           :font-size="input.fontSize"
           :color="input.color"
           :text-color="input.textColor"
@@ -76,6 +82,9 @@ export default {
   },
   methods: {
     getComponent (input) {
+      if (typeof input.type === 'object') {
+        return input.type
+      }
       if (input.type === 'formBuilder') {
         return 'form-builder'
       }
