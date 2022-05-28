@@ -87,7 +87,8 @@
 
 <script>
 import { ref } from 'vue'
-import FormBuilder from './FormBuilder';
+import FormBuilder from './FormBuilder'
+import CustomComponent from './CustomComponent'
 
 export default {
   name: 'LayoutDefault',
@@ -97,6 +98,9 @@ export default {
   data () {
     return {
       inputs: [
+        { type: CustomComponent, props: {name: 'ali'}, name: 'ali', responseKey: 'id', value: null, label: 'شناسه', col: 'col-md-6' },
+        { type: CustomComponent, props: {name: 'mostafa'}, name: 'mostafa', responseKey: 'id', value: null, label: 'شناسه', col: 'col-md-6' },
+
         {
           type: 'formBuilder',
           name: 'formBuilderCol',

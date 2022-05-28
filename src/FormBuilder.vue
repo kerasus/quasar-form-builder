@@ -4,6 +4,7 @@
       <component
           :is="getComponent(input)"
           v-model:value="input.value"
+          :v-bind="input.props"
           :label="input.label"
           :disable="disable || input.disable"
           :options="input.options"
@@ -81,6 +82,9 @@ export default {
   },
   methods: {
     getComponent (input) {
+      if (typeof input.type === 'object') {
+        return input.type
+      }
       if (input.type === 'formBuilder') {
         return 'form-builder'
       }
