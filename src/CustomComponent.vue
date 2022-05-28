@@ -7,13 +7,13 @@
 <script>
 export default {
   name: "CustomComponent",
-  props: ['name'],
-  // props: {
-  //   name: {
-  //     type: String,
-  //     default: 'ali'
-  //   }
-  // }
+  // props: ['name'],
+  props: {
+    name: {
+      type: String,
+      default: 'ali'
+    }
+  }
 }
 </script>
 

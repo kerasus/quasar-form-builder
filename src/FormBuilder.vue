@@ -4,7 +4,7 @@
       <component
           :is="getComponent(input)"
           v-model:value="input.value"
-          :v-bind="input.props"
+          v-bind="input.props"
           :label="input.label"
           :disable="disable || input.disable"
           :options="input.options"
