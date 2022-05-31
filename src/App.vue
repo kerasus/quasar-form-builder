@@ -132,9 +132,8 @@ export default {
         { type: 'file', name: 'thumbnail', responseKey: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
         { type: 'input', name: 'url', responseKey: 'url', label: 'منبع', col: 'col-md-12' },
         { type: 'separator', col: 'col-md-12' },
-        { type: 'inputEditor', name: 'summary', responseKey: 'summary', label: 'خلاصه', col: 'col-md-12' },
-        { type: 'inputEditor', name: 'text', responseKey: 'text', label: 'متن', col: 'col-md-12' },
-
+        { type: 'inputEditor', name: 'inputEditor', responseKey: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
+        { type: 'tiptapEditor', name: 'inputEditor', responseKey: 'inputEditor', label: 'ادیتور پیشرفته', col: 'col-md-12' },
       ]
     }
   },

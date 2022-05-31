@@ -10,6 +10,7 @@
           :options="input.options"
           :option-label="input.optionLabel"
           :option-value="input.optionValue"
+          :upload-server="input.uploadServer"
           :multiple="isMultiple(input)"
           :use-chips="input.useChips"
           :create-new-value="input.createNewValue"
@@ -49,6 +50,7 @@ export default {
     FormBuilderFile: defineAsyncComponent(() => import('./components/FormBuilderFile')),
     FormBuilderInput: defineAsyncComponent(() => import('./components/FormBuilderInput')),
     FormBuilderInputEditor: defineAsyncComponent(() => import('./components/FormBuilderInputEditor')),
+    FormBuilderTiptapEditor: defineAsyncComponent(() => import('./components/FormBuilderTiptapEditor')),
     FormBuilderAvatar: defineAsyncComponent(() => import('./components/FormBuilderAvatar')),
     FormBuilderSelect: defineAsyncComponent(() => import('./components/FormBuilderSelect')),
     FormBuilderOptionGroup: defineAsyncComponent(() => import('./components/FormBuilderOptionGroup')),
