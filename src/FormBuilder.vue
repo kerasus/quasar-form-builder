@@ -32,6 +32,7 @@
           :text-color="input.textColor"
           :icon="input.icon"
           :class="{ 'hidden': input.hidden }"
+          @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
       />
@@ -140,6 +141,9 @@ export default {
 
       // this.inputData.value = inputValue
       this.$emit('input', this.inputData)
+    },
+    onValueUpdated(val) {
+      this.$emit('update:value', this.inputData)
     }
   }
 }
