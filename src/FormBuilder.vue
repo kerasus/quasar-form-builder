@@ -5,6 +5,7 @@
           :is="getComponent(input)"
           v-model:value="input.value"
           v-bind="input.props"
+          :input="input"
           :label="input.label"
           :disable="disable || input.disable"
           :options="input.options"

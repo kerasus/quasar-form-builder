@@ -183,8 +183,10 @@ export default {
   display: flex;
   flex-direction: row;
   .form-calender{
+    width: 50%;
   }
   .time-input-dateTime{
+    width: 50%;
     .q-field__native{
       padding: 24px 0 8px !important;
     }
