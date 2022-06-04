@@ -1,10 +1,11 @@
 <template>
-  <p v-text="label"/>
-  <q-editor
-    v-if="!disable"
-    v-model="inputData"
-    :dense="$q.screen.lt.md"
-    :toolbar="[
+  <div>
+    <p v-text="label"/>
+    <q-editor
+        v-if="!disable"
+        v-model="inputData"
+        :dense="$q.screen.lt.md"
+        :toolbar="[
     [
       {
         label: $q.lang.editor.align,
@@ -72,7 +73,7 @@
     ['undo', 'redo'],
     ['viewsource']
   ]"
-    :fonts="{
+        :fonts="{
     IRANSans: 'IRANSans',
     arial: 'Arial',
     arial_black: 'Arial Black',
@@ -83,10 +84,11 @@
     times_new_roman: 'Times New Roman',
     verdana: 'Verdana'
   }"
-    @update:model-value="change($event)"
-  />
-  <!--eslint-disable-next-line-->
-  <div v-else v-html="inputData" />
+        @update:model-value="change($event)"
+    />
+    <!--eslint-disable-next-line-->
+    <div v-else v-html="inputData" />
+  </div>
 </template>
 
 <script>

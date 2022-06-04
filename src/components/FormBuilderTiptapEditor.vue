@@ -1,15 +1,17 @@
 <template>
-  <p v-text="label"/>
-  <vue-tiptap-katex
-      v-if="!disable"
-      v-model="inputData"
-      :bubble-menu="false"
-      :floating-menu="false"
-      :options="{ bubbleMenu: false, floatingMenu: false, uploadServer }"
-      @update:model-value="change($event)"
-  />
-  <!--eslint-disable-next-line-->
-  <div v-else v-html="inputData" />
+  <div>
+    <p v-text="label"/>
+    <vue-tiptap-katex
+        v-if="!disable"
+        v-model="inputData"
+        :bubble-menu="false"
+        :floating-menu="false"
+        :options="{ bubbleMenu: false, floatingMenu: false, uploadServer }"
+        @update:model-value="change($event)"
+    />
+    <!--eslint-disable-next-line-->
+    <div v-else v-html="inputData" />
+  </div>
 </template>
 
 <script>
