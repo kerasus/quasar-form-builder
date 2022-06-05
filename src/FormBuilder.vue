@@ -143,7 +143,7 @@ export default {
       // this.inputData.value = inputValue
       this.$emit('input', this.inputData)
     },
-    onValueUpdated(val) {
+    onValueUpdated() {
       this.$emit('update:value', this.inputData)
     }
   }

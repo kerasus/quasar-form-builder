@@ -102,38 +102,50 @@ export default {
   data () {
     return {
       inputs: [
-        { type: CustomComponent, props: {name: 'ali'}, name: 'ali', responseKey: 'id', value: 123, label: 'شناسه', col: 'col-md-6' },
-        { type: CustomComponent, props: {name: 'mostafa'}, name: 'mostafa', responseKey: 'id', value: 456, label: 'شناسه', col: 'col-md-6' },
+        { type: CustomComponent, props: {name: 'ali'}, name: 'ali', value: 123, label: 'شناسه', col: 'col-md-6' },
+        { type: CustomComponent, props: {name: 'mostafa'}, name: 'mostafa', value: 456, label: 'شناسه', col: 'col-md-6' },
 
         {
           type: 'formBuilder',
           name: 'formBuilderCol',
           col: 'col-md-6',
           value: [
-            { type: 'input', name: 'id1', responseKey: 'id1', value: null, label: 'شناسه1', col: 'col-md-6' },
-            { type: 'input', name: 'id2', responseKey: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
+            { type: 'input', name: 'id1', value: null, label: 'شناسه1', col: 'col-md-6' },
+            { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
             {
               type: 'formBuilder',
               name: 'formBuilderCol',
               col: 'col-md-6',
               value: [
-                { type: 'input', name: 'id3', responseKey: 'id3', value: null, label: 'شناسه3', col: 'col-md-6' },
-                { type: 'input', name: 'id4', responseKey: 'id4', value: null, label: 'شناسه4', col: 'col-md-6' },
+                { type: 'input', name: 'id3', value: null, label: 'شناسه3', col: 'col-md-6' },
+                { type: 'input', name: 'id4', value: null, label: 'شناسه4', col: 'col-md-6' },
               ]
             },
           ]
         },
 
-        { type: 'input', name: 'id', responseKey: 'id', value: null, label: 'شناسه', col: 'col-md-6' },
+        { type: 'input', name: 'id', value: null, label: 'شناسه', col: 'col-md-6' },
 
-        { type: 'date', name: 'last_modification_time', responseKey: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
-        { type: 'date', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4' },
-        { type: 'dateTime', name: 'creation_time', responseKey: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
-        { type: 'file', name: 'thumbnail', responseKey: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
-        { type: 'input', name: 'url', responseKey: 'url', label: 'منبع', col: 'col-md-12' },
+        { type: 'date', name: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
+        { type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4' },
+        { type: 'dateTime', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
+        { type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
+        { type: 'input', name: 'url', label: 'منبع', col: 'col-md-12' },
         { type: 'separator', col: 'col-md-12' },
-        { type: 'inputEditor', name: 'inputEditor', responseKey: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
-        { type: 'tiptapEditor', name: 'inputEditor', responseKey: 'inputEditor', label: 'ادیتور پیشرفته', col: 'col-md-12' },
+        { type: 'inputEditor', name: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
+        { type: 'tiptapEditor', name: 'inputEditor', label: 'ادیتور پیشرفته', options: {
+            bubbleMenu: false,
+            floatingMenu: false,
+            poem: false,
+            reading: false,
+            persianKeyboard: true,
+            mathliveOptions: { smartFence: false },
+            uploadServer: {
+              url: 'imageUrl',
+              instantUpload: true,
+              headers: { Authorization: 'Bearer ' + '65465' }
+            }
+          }, col: 'col-md-12' },
       ]
     }
   },

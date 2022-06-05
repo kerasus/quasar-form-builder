@@ -6,7 +6,7 @@
         v-model="inputData"
         :bubble-menu="false"
         :floating-menu="false"
-        :options="{ bubbleMenu: false, floatingMenu: false, uploadServer }"
+        :options="options"
         @update:model-value="change($event)"
     />
     <!--eslint-disable-next-line-->
@@ -29,7 +29,7 @@ export default {
       default: '',
       type: [String, Number, Boolean]
     },
-    uploadServer: {
+    options: {
       default: () => {
         return {}
       },
