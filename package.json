@@ -1,6 +1,6 @@
 {
   "name": "quasar-form-builder",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "keywords": [
@@ -32,7 +32,7 @@
     "moment-jalaali": "^0.9.4",
     "quasar": "^2.0.0",
     "vue": "^3.0.0",
-    "vue3-tiptap-katex": "^1.0.23"
+    "vue3-tiptap-katex": "^1.0.24"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
