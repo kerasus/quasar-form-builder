@@ -24,7 +24,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "@quasar/extras": "^1.14.1",
@@ -35,12 +35,13 @@
     "vue3-tiptap-katex": "^1.0.24"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.6",
-    "@vue/cli-plugin-eslint": "~5.0.6",
-    "@vue/cli-service": "~5.0.6",
+    "@babel/eslint-parser": "^7.18.2",
+    "@vue/cli-plugin-babel": "~5.0.4",
+    "@vue/cli-plugin-eslint": "~5.0.4",
+    "@vue/cli-service": "~5.0.4",
     "@vue/compiler-sfc": "^3.2.37",
     "autoprefixer": "^9.8.8",
-    "@babel/eslint-parser": "^7.18.2",
+    "babel-eslint": "^10.1.0",
     "eslint": "^8.18.0",
     "eslint-plugin-vue": "^9.1.1",
     "postcss": "^7.0.39",
@@ -61,7 +62,27 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vue/attributes-order": "warn",
+      "vue/this-in-template": "error",
+      "vue/arrow-spacing": "error",
+      "vue/block-spacing": "error",
+      "vue/comma-dangle": "error",
+      "vue/eqeqeq": "warn",
+      "vue/multi-word-component-names": "off",
+      "vue/key-spacing": "error",
+      "vue/keyword-spacing": "error",
+      "vue/no-deprecated-scope-attribute": "warn",
+      "vue/no-deprecated-slot-attribute": "warn",
+      "vue/no-deprecated-slot-scope-attribute": "warn",
+      "vue/no-irregular-whitespace": "error",
+      "vue/no-reserved-component-names": "error",
+      "vue/valid-v-slot": "error",
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
   },
   "browserslist": [
     "> 1%",

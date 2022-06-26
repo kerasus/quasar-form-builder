@@ -1,10 +1,10 @@
 <template>
   <div>
     <q-file
+        :id="inputUid"
         v-model="file"
         :label="label"
         :disable="disable"
-        :id="inputUid"
         clearable
         :model-value="file"
         @update:model-value="change($event)"

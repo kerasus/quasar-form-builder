@@ -6,9 +6,9 @@
             flat
             dense
             round
-            @click="leftDrawerOpen = !leftDrawerOpen"
             aria-label="Menu"
             icon="menu"
+            @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
         <q-toolbar-title>
@@ -76,7 +76,7 @@
     </q-drawer>
 
     <q-page-container>
-      <q-btn @click="getData" color="blue" class="q-my-md full-width">
+      <q-btn color="blue" class="q-my-md full-width" @click="getData">
         get data
       </q-btn>
       <br>

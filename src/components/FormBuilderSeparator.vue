@@ -6,7 +6,7 @@
     <template v-if="separator">
       <q-separator
           class="separator-default-style"
-          :style="{ 'border-top' : borderTopStyle, 'border-left': borderLeftStyle }"
+          :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
           :class="[ (vertical) ? 'separator-vertical' : 'separator-horizontal' ]"
           :vertical="vertical"
           :inset="inset"
@@ -22,7 +22,7 @@
 import inputMixin from '../mixins/inputMixin'
 
 export default {
-  name: "FormBuilderSeparator",
+  name: 'FormBuilderSeparator',
   mixins: [inputMixin],
   data () {
     return {

@@ -8,7 +8,7 @@
 <script>
 import { inputMixin } from '../index'
 export default {
-  name: "CustomComponent",
+  name: 'CustomComponent',
   mixins: [inputMixin],
   props: {
     value: {
