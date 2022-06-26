@@ -61,7 +61,7 @@ export default {
     FormBuilderRangeSlider: defineAsyncComponent(() => import('./components/FormBuilderRangeSlider')),
     FormBuilderSpace: defineAsyncComponent(() => import('./components/FormBuilderSpace')),
     FormBuilderSeparator: defineAsyncComponent(() => import('./components/FormBuilderSeparator')),
-    FormBuilderDateTime: defineAsyncComponent(() => import('./components/FormBuilderDateTime'))
+    FormBuilderColor: defineAsyncComponent(() => import('./components/FormBuilderColor.vue')),
   },
   mixins: [inputMixin],
   props: {

@@ -112,6 +112,7 @@ export default {
           value: [
             { type: 'input', name: 'id1', value: null, label: 'شناسه1', col: 'col-md-6' },
             { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
+            { type: 'separator', size: '3px', separatorType: 'double', vertical: true, label: 'جدا کننده عمودی' },
             {
               type: 'formBuilder',
               name: 'formBuilderCol',
@@ -130,8 +131,10 @@ export default {
         { type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4' },
         { type: 'dateTime', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
         { type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
-        { type: 'input', name: 'url', label: 'منبع', col: 'col-md-12' },
-        { type: 'separator', col: 'col-md-12' },
+        { type: 'separator', color: 'primary', size: '5px', separatorType: 'dashed', label: 'جدا کننده افقی', col: 'col-md-12' },
+        { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
+        { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
+        { type: 'separator', size: '3px', separatorType: 'double', label: 'جدا کننده افقی', col: 'col-md-12' },
         { type: 'inputEditor', name: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
         { type: 'tiptapEditor', name: 'inputEditor', label: 'ادیتور پیشرفته', options: {
             bubbleMenu: false,
