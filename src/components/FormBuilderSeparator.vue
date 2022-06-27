@@ -97,7 +97,6 @@ export default {
       if (((type === 'top' && !this.vertical) || (type === 'left' && this.vertical)) && this.separatorType && this.size) {
         style = this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor
       }
-      console.log('style', style)
       return style
     }
   },
