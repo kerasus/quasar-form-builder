@@ -140,6 +140,57 @@ export default {
     },
 
 
+    setInputValues (responseData, inputs) {
+      const that = this
+      function setValueOfNestedInputData (responseData, inputs) {
+        inputs.forEach(input => {
+          if (typeof input.responseKey === 'undefined' || input.responseKey === null) {
+            return
+          }
+          if (input.type === 'formBuilder') {
+            setValueOfNestedInputData(responseData, input.value)
+            return
+          }
+          const validChainedObject = that.getValidChainedObject(responseData, input.responseKey)
+          input.value = validChainedObject
+        })
+      }
+
+      if (!inputs) {
+        inputs = this.inputData
+      }
+      setValueOfNestedInputData(responseData, inputs)
+    },
+    getValidChainedObject (object, keys) {
+      if (!Array.isArray(keys) && typeof keys !== 'string') {
+        console.warn('keys must be array or string')
+        return false
+      }
+
+      if (keys === '') {
+        return object
+      }
+
+      let keysArray = keys
+      if (typeof keys === 'string') {
+        keysArray = keys.split('.')
+      }
+
+      if (keysArray.length === 1) {
+        if (!object || typeof object[keysArray[0]] === 'undefined') {
+          return null
+        }
+        return object[keysArray[0]]
+      }
+
+      if (typeof object[keysArray[0]] !== 'undefined' && object[keysArray[0]] !== null) {
+        return this.getValidChainedObject(object[keysArray[0]], keysArray.splice(1))
+      }
+
+      return (typeof object[keysArray[0]] !== 'undefined' && object[keysArray[0]] !== null)
+    },
+
+
     getComponent (input) {
       if (typeof input.type === 'object') {
         return input.type
