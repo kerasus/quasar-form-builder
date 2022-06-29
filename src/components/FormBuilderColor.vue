@@ -3,14 +3,15 @@
       v-model="inputData"
       :label="label"
       :disable="disable"
-      @update:model-value="change($event)"
   >
     <template v-slot:append>
       <q-icon name="colorize" class="cursor-pointer">
         <q-popup-proxy cover transition-show="scale" transition-hide="scale">
           <q-color v-model="inputData" square flat
                    default-value="#4b9c70ff"
-                   :palette="palette"/>
+                   :palette="palette"
+                   @update:model-value="change($event)"
+          />
         </q-popup-proxy>
       </q-icon>
     </template>
