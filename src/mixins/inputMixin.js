@@ -32,6 +32,10 @@ export default {
       default: true,
       type: Boolean
     },
+    rounded: {
+      default: true,
+      type: Boolean
+    },
     multiple: {
       default: false,
       type: Boolean
@@ -42,6 +46,10 @@ export default {
     },
     createNewValue: {
       default: false,
+      type: Boolean
+    },
+    separator: {
+      default: true,
       type: Boolean
     },
     optionValue: {

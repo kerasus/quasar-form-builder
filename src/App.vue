@@ -135,6 +135,7 @@ export default {
         { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
         { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
         { type: 'separator', size: '3px', separatorType: 'double', label: 'جدا کننده افقی', col: 'col-md-12' },
+        { type: 'separator', size: '3px', separator: false , label: 'لیبل', col: 'col-md-12' },
         { type: 'inputEditor', name: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
         { type: 'tiptapEditor', name: 'inputEditor', label: 'ادیتور پیشرفته', options: {
             bubbleMenu: false,
@@ -164,3 +165,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.q-field__inner{
+  .q-field__control{
+    background-color : white;
+    .q-field__append{
+      .q-icon{
+        color: black;
+        font-size: 20px;
+        padding: 7px;
+      }
+    }
+  }
+}
+</style>
