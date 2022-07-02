@@ -76,6 +76,18 @@ export default {
       default: 'white',
       type: String
     },
+    icon: {
+      default: '',
+      type: String
+    },
+    class: {
+      default: '',
+      type: String
+    },
+    options: {
+      default: () => [],
+      type: Array
+    },
     hidden: {
       default: false,
       type: Boolean
@@ -102,6 +114,22 @@ export default {
   methods: {
     change (val) {
       this.$emit('update:value', val)
+    },
+    getValues () {
+      function getFlatInputs (inputs) {
+        let values = []
+        inputs.forEach( input => {
+          if (input.type !== 'formBuilder') {
+            values.push(input)
+          } else {
+            const formBuilderInputs = getFlatInputs(input.value)
+            values = values.concat(formBuilderInputs);
+          }
+        })
+        return values
+      }
+
+      return getFlatInputs(this.inputData)
     }
   }
 }

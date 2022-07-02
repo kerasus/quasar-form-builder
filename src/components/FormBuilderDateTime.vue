@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="dateTime-input" v-if="canShowTime && canShowDate">
-      <q-input class="form-calender" v-model="dateTime.date" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
+    <div v-if="canShowTime && canShowDate" class="dateTime-input">
+      <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
         <template #prepend>
           <q-icon name="event" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -14,7 +14,7 @@
           </q-icon>
         </template>
       </q-input>
-      <q-input class="time-input-dateTime" v-model="dateTime.time" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
+      <q-input v-model="dateTime.time" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
         <template #append>
           <q-icon name="access_time" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import moment from "moment-jalaali";
+import moment from 'moment-jalaali';
 import inputMixin from '../mixins/inputMixin'
 import { date } from 'quasar'
 
@@ -183,8 +183,10 @@ export default {
   display: flex;
   flex-direction: row;
   .form-calender{
+    width: 50%;
   }
   .time-input-dateTime{
+    width: 50%;
     .q-field__native{
       padding: 24px 0 8px !important;
     }
