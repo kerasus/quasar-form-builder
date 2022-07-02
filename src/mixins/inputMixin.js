@@ -48,10 +48,6 @@ export default {
       default: false,
       type: Boolean
     },
-    separator: {
-      default: true,
-      type: Boolean
-    },
     optionValue: {
       default: 'value',
       type: String

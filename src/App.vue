@@ -134,8 +134,8 @@ export default {
         { type: 'separator', color: 'primary', size: '5px', separatorType: 'dashed', label: 'جدا کننده افقی', col: 'col-md-12' },
         { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
         { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
-        { type: 'separator', size: '3px', separatorType: 'double', label: 'جدا کننده افقی', col: 'col-md-12' },
-        { type: 'separator', size: '3px', separator: false , label: 'لیبل', col: 'col-md-12' },
+        { type: 'separator', size: '0', separatorType: 'double', label: 'جدا کننده افقی', col: 'col-md-12' },
+        { type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12' },
         { type: 'inputEditor', name: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
         { type: 'tiptapEditor', name: 'inputEditor', label: 'ادیتور پیشرفته', options: {
             bubbleMenu: false,
