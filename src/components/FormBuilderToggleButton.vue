@@ -40,9 +40,49 @@ export default {
       default: '',
       type: [Object, String, Array, Number, Boolean]
     },
-    options: {
-      default: () => [], // { label: 'Option 1', value: 'op1' }
-      type: Array
+    toggleTextColor: {
+      default: 'black',
+      type: [String]
+    },
+    toggleColor: {
+      default: '',
+      type: [String]
+    },
+    push: {
+      default: false,
+      type: [Boolean]
+    },
+    glossy: {
+      default: false,
+      type: [Boolean]
+    },
+    clearable: {
+      default: false,
+      type: [Boolean]
+    },
+    unelevated: {
+      default: false,
+      type: [Boolean]
+    },
+    stretch: {
+      default: false,
+      type: [Boolean]
+    },
+    stack: {
+      default: false,
+      type: [Boolean]
+    },
+    spread: {
+      default: false,
+      type: [Boolean]
+    },
+    noWrap: {
+      default: false,
+      type: [Boolean]
+    },
+    noCaps: {
+      default: false,
+      type: [Boolean]
     }
   }
 }
