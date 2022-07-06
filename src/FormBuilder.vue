@@ -57,7 +57,6 @@
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
-          @clear="clear"
       />
     </div>
   </div>

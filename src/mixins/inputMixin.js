@@ -175,9 +175,6 @@ export default {
     change (val) {
       this.$emit('update:value', val)
     },
-    clear () {
-      this.$emit('clear')
-    },
     getValues () {
       function getFlatInputs (inputs) {
         let values = []

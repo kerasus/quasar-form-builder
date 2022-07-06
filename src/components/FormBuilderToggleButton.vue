@@ -26,7 +26,6 @@
       :stack="stack"
       :stretch="stretch"
       @update:model-value="change($event)"
-      @clear="clear"
 
   />
 </template>
