@@ -33,7 +33,7 @@ export default {
       type: Boolean
     },
     rounded: {
-      default: true,
+      default: false,
       type: Boolean
     },
     multiple: {
@@ -99,6 +99,62 @@ export default {
     src: {
       default: '',
       type: [String, Number, Boolean, Array, Boolean]
+    },
+    ripple: {
+      default: false,
+      type: [Boolean, Object]
+    },
+    outline: {
+      default: false,
+      type: [Boolean]
+    },
+    flat: {
+      default: false,
+      type: [Boolean]
+    },
+    toggleTextColor: {
+      default: 'black',
+      type: [String]
+    },
+    toggleColor: {
+      default: '',
+      type: [String]
+    },
+    push: {
+      default: false,
+      type: [Boolean]
+    },
+    glossy: {
+      default: false,
+      type: [Boolean]
+    },
+    clearable: {
+      default: false,
+      type: [Boolean]
+    },
+    unelevated: {
+      default: false,
+      type: [Boolean]
+    },
+    stretch: {
+      default: false,
+      type: [Boolean]
+    },
+    stack: {
+      default: false,
+      type: [Boolean]
+    },
+    spread: {
+      default: false,
+      type: [Boolean]
+    },
+    noWrap: {
+      default: false,
+      type: [Boolean]
+    },
+    noCaps: {
+      default: false,
+      type: [Boolean]
     }
   },
   watch: {
@@ -118,6 +174,9 @@ export default {
   methods: {
     change (val) {
       this.$emit('update:value', val)
+    },
+    clear () {
+      this.$emit('clear')
     },
     getValues () {
       function getFlatInputs (inputs) {

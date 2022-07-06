@@ -41,10 +41,23 @@
           :text-color="input.textColor"
           :icon="input.icon"
           :rounded="input.rounded"
+          :name="input.name"
+          :push="input.push"
+          :glossy="input.glossy"
+          :clearable="input.clearable"
+          :inline="input.inline"
+          :dense="input.dense"
+          :toggle-color="input.toggleColor"
+          :toggle-text-color="input.toggleTextColor"
+          :unelevated="input.unelevated"
+          :flat="input.flat"
+          :outline="input.outline"
+          :ripple="input.ripple"
           :class="{ 'hidden': input.hidden }"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
+          @clear="clear"
       />
     </div>
   </div>
@@ -71,7 +84,8 @@ export default {
     FormBuilderSpace: defineAsyncComponent(() => import('./components/FormBuilderSpace')),
     FormBuilderSeparator: defineAsyncComponent(() => import('./components/FormBuilderSeparator')),
     FormBuilderDateTime: defineAsyncComponent(() => import('./components/FormBuilderDateTime')),
-    FormBuilderColor: defineAsyncComponent(() => import('./components/FormBuilderColor.vue'))
+    FormBuilderColor: defineAsyncComponent(() => import('./components/FormBuilderColor.vue')),
+    FormBuilderToggleButton: defineAsyncComponent(() => import('./components/FormBuilderToggleButton'))
   },
   mixins: [inputMixin],
   props: {
@@ -215,6 +229,9 @@ export default {
           input.type === 'time'
       ) {
         return 'form-builder-date-time'
+      }
+      if (input.type === 'toggleButton') {
+        return 'form-builder-toggle-button'
       }
       return 'form-builder-' + input.type
     },
