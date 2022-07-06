@@ -53,6 +53,8 @@
           :flat="input.flat"
           :outline="input.outline"
           :ripple="input.ripple"
+          :calendar-icon="input.calendarIcon"
+          :clock-icon="input.clockIcon"
           :class="{ 'hidden': input.hidden }"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
