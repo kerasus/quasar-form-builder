@@ -32,6 +32,10 @@ export default {
       default: true,
       type: Boolean
     },
+    rounded: {
+      default: false,
+      type: Boolean
+    },
     multiple: {
       default: false,
       type: Boolean
@@ -95,6 +99,18 @@ export default {
     src: {
       default: '',
       type: [String, Number, Boolean, Array, Boolean]
+    },
+    ripple: {
+      default: false,
+      type: [Boolean, Object]
+    },
+    outline: {
+      default: false,
+      type: [Boolean]
+    },
+    flat: {
+      default: false,
+      type: [Boolean]
     }
   },
   watch: {
