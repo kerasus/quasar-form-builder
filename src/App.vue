@@ -106,6 +106,31 @@ export default {
           name: 'id',
           options: [
             {
+              label: 'tab111',
+              value: '1',
+            },
+            {
+              label: 'tab222',
+              value: '2',
+            },
+            {
+              label: 'tab333',
+              value: '3',
+            },
+          ],
+          col: 'col-md-6',
+          color: 'red',
+          textColor: 'black',
+          size: '20px'
+        },
+        { type: 'optionGroup',
+          name: 'id',
+          inline: false,
+          dense: true,
+          label: 'optionGroup',
+          value: [],
+          options: [
+            {
               label: 'tab1',
               value: '1',
             },
@@ -119,9 +144,18 @@ export default {
             },
           ],
           col: 'col-md-6',
-          color: 'red',
+          color: 'green',
+          typeOfInput: 'checkbox',
           textColor: 'black',
           size: '20px'
+
+
+  // :options="options"
+  // :color="color"
+  // :inline="inline"
+  // :dense="dense"
+  // :type="type"
+  // :disable="disable"
         },
 
         { type: CustomComponent, props: {name: 'ali'}, name: 'ali', value: 123, label: 'شناسه', col: 'col-md-6' },

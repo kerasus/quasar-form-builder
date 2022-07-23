@@ -9,7 +9,7 @@
       :color="color"
       :inline="inline"
       :dense="dense"
-      :type="type"
+      :type="typeOfInput"
       :disable="disable"
       @update:model-value="change($event)"
     />
@@ -23,13 +23,19 @@ export default {
   mixins: [inputMixin],
   props: {
     value: {
-      default: '',
+      default: null,
       type: [Object, String, Array, Number, Boolean]
     },
     options: {
       default: () => [], // { label: 'Option 1', value: 'op1' }
       type: Array
+    },
+    typeOfInput : {
+      default: 'radio', // radio checkbox toggle
+      type: String
     }
+  },
+  created() {
   },
   methods: {
 
