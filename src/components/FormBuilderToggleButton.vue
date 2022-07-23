@@ -45,7 +45,7 @@ export default {
       type: [String]
     },
     toggleColor: {
-      default: '',
+      default: 'primary',
       type: [String]
     },
     push: {
