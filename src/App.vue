@@ -102,6 +102,28 @@ export default {
   data () {
     return {
       inputs: [
+        { type: 'toggleButton',
+          name: 'id',
+          options: [
+            {
+              label: 'tab1',
+              value: '1',
+            },
+            {
+              label: 'tab2',
+              value: '2',
+            },
+            {
+              label: 'tab3',
+              value: '3',
+            },
+          ],
+          col: 'col-md-6',
+          color: 'red',
+          textColor: 'black',
+          size: '20px'
+        },
+
         { type: CustomComponent, props: {name: 'ali'}, name: 'ali', value: 123, label: 'شناسه', col: 'col-md-6' },
         { type: CustomComponent, props: {name: 'mostafa'}, name: 'mostafa', value: 456, label: 'شناسه', col: 'col-md-6' },
 
@@ -127,14 +149,16 @@ export default {
 
         { type: 'input', name: 'id', value: null, label: 'شناسه', col: 'col-md-6' },
 
+
         { type: 'date', name: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
-        { type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4' },
+        { type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4'},
         { type: 'dateTime', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
         { type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
         { type: 'separator', color: 'primary', size: '5px', separatorType: 'dashed', label: 'جدا کننده افقی', col: 'col-md-12' },
         { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
         { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
-        { type: 'separator', size: '3px', separatorType: 'double', label: 'جدا کننده افقی', col: 'col-md-12' },
+        { type: 'separator', size: '0', separatorType: 'double', label: 'جدا کننده افقی', col: 'col-md-12' },
+        { type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12' },
         { type: 'inputEditor', name: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
         { type: 'tiptapEditor', name: 'inputEditor', label: 'ادیتور پیشرفته', options: {
             bubbleMenu: false,
@@ -164,3 +188,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.q-field__inner{
+  .q-field__control{
+    background-color : white;
+    .q-field__append{
+      .q-icon{
+        color: black;
+        font-size: 20px;
+        padding: 7px;
+      }
+    }
+  }
+}
+</style>

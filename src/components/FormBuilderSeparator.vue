@@ -3,8 +3,7 @@
     <b v-if="label">
       {{ label }}
     </b>
-    <template v-if="separator">
-      <q-separator
+    <q-separator
           class="separator-default-style"
           :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
           :class="[ (vertical) ? 'separator-vertical' : 'separator-horizontal' ]"
@@ -14,7 +13,6 @@
           :size="size"
           :dark="darkMode"
       />
-    </template>
   </div>
 </template>
 
@@ -40,12 +38,6 @@ export default {
       type: String,
       default () {
         return '1px'
-      }
-    },
-    separator: {
-      type: Boolean,
-      default () {
-        return true
       }
     },
     darkMode: {

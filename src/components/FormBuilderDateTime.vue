@@ -3,7 +3,7 @@
     <div v-if="canShowTime && canShowDate" class="dateTime-input">
       <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
         <template #prepend>
-          <q-icon name="event" class="cursor-pointer">
+          <q-icon :name="calendarIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
               <q-date v-model="dateTime.date" :calendar="calendar" mask="YYYY-MM-DD" :range="range" :multiple="multiple" :disable="disable" @update:model-value="change($event)">
                 <div class="row items-center justify-end">
@@ -16,7 +16,7 @@
       </q-input>
       <q-input v-model="dateTime.time" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
         <template #append>
-          <q-icon name="access_time" class="cursor-pointer">
+          <q-icon :name="clockIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
               <q-time v-model="dateTime.time" mask="HH:mm:00" format24h :disable="disable" @update:model-value="change($event)">
                 <div class="row items-center justify-end">
@@ -31,7 +31,7 @@
     <div v-else>
       <q-input v-model="outputText" :clearable="true" dir="ltr" :disable="disable" :label="label" @clear="clearDate">
         <template v-if="canShowDate" #prepend>
-          <q-icon name="event" class="cursor-pointer">
+          <q-icon :name="calendarIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
               <q-date v-model="inputData" :calendar="calendar" :mask="mask" :range="range" :multiple="multiple" :disable="disable" @update:model-value="change($event)">
                 <div class="row items-center justify-end">
@@ -42,7 +42,7 @@
           </q-icon>
         </template>
         <template v-if="canShowTime" #append>
-          <q-icon name="access_time" class="cursor-pointer">
+          <q-icon :name="clockIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
               <q-time v-model="inputData" :mask="mask" format24h :disable="disable" @update:model-value="change($event)">
                 <div class="row items-center justify-end">
@@ -73,7 +73,15 @@ export default {
     calendar: {
       default: 'persian',
       type: String
-    }
+    },
+    calendarIcon: {
+      default: 'event',
+      type: String
+    },
+    clockIcon: {
+      default: 'access_time',
+      type: String
+    },
   },
   emits: ['update:value'],
   data () {
