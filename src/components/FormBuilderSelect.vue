@@ -8,6 +8,7 @@
     :option-disable="optionDisable"
     :options="filteredOptions"
     :label="label"
+    :placeholder="placeholder"
     :multiple="multiple"
     :use-chips="useChips"
     use-input

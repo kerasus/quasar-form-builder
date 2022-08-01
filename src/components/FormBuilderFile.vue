@@ -4,6 +4,7 @@
         :id="inputUid"
         v-model="file"
         :label="label"
+        :placeholder="placeholder"
         :disable="disable"
         clearable
         :model-value="file"

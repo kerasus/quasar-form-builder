@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="canShowTime && canShowDate" class="dateTime-input">
-      <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
+      <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" :placeholder="placeholder" mask="date" @clear="clearDate">
         <template #prepend>
           <q-icon :name="calendarIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -14,7 +14,7 @@
           </q-icon>
         </template>
       </q-input>
-      <q-input v-model="dateTime.time" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
+      <q-input v-model="dateTime.time" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" :placeholder="placeholder" mask="time" @clear="clearDate">
         <template #append>
           <q-icon :name="clockIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -29,7 +29,7 @@
       </q-input>
     </div>
     <div v-else>
-      <q-input v-model="outputText" :clearable="true" dir="ltr" :disable="disable" :label="label" @clear="clearDate">
+      <q-input v-model="outputText" :placeholder="placeholder" :clearable="true" dir="ltr" :disable="disable" :label="label" @clear="clearDate">
         <template v-if="canShowDate" #prepend>
           <q-icon :name="calendarIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -82,6 +82,10 @@ export default {
       default: 'access_time',
       type: String
     },
+    placeholder: {
+      default: 'placeholder',
+      type: String
+    }
   },
   emits: ['update:value'],
   data () {
