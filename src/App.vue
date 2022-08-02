@@ -162,7 +162,7 @@ export default {
           col: 'col-md-4',
           value: '',
         },
-        { type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
+        { type: 'file', name: 'thumbnail', label: 'تصویر', rules: [(val) => !!val || 'فیلد ضروری است'], lazyRules: true, col: 'col-md-4' },
         {
           type: 'separator',
           color: 'primary',
@@ -209,7 +209,7 @@ export default {
         {
           type: 'select',
           name: 'inputSelect',
-          label: 'سلکت',
+          label: 'سلکت ضروری',
           options: ['test1', 'test2', 'test3'],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length

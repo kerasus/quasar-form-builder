@@ -7,6 +7,8 @@
         :disable="disable"
         clearable
         :model-value="file"
+        :rules="rules"
+        :lazy-rules="lazyRules"
         @update:model-value="change($event)"
         @clear="onClearInputFile"
     />
