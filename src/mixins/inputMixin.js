@@ -111,7 +111,11 @@ export default {
     flat: {
       default: false,
       type: [Boolean]
-    }
+    },
+    placeholder: {
+      default: '',
+      type: String
+    },
   },
   watch: {
     value () {

@@ -1,4 +1,6 @@
 <template>
+  <div class="outsideLabel">{{placeholder? label : null}}</div>
+  
   <q-select
     v-model="inputData"
     transition-show="jump-down"
@@ -7,7 +9,9 @@
     :option-label="optionLabel"
     :option-disable="optionDisable"
     :options="filteredOptions"
-    :label="label"
+    :label="placeholder? null : label"
+    :stack-label="!!placeholder"
+    :placeholder="!!inputData? '':placeholder"
     :multiple="multiple"
     :use-chips="useChips"
     use-input

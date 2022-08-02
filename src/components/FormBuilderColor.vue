@@ -1,8 +1,11 @@
 <template>
+  <div class="outsideLabel">{{placeholder? label : null}}</div>
   <q-input
       v-model="inputData"
-      :label="label"
       :disable="disable"
+      :label="placeholder? null : label"
+      :stack-label="!!placeholder" 
+      :placeholder="placeholder"
   >
     <template v-slot:append>
       <q-icon name="colorize" class="cursor-pointer">

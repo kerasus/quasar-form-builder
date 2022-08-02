@@ -8,12 +8,14 @@
              getComponent(input) + '-col'
              ]"
     >
+    
       <component
           :is="getComponent(input)"
           v-model:value="input.value"
           v-bind="input.props"
           :input="input"
           :label="input.label"
+          :placeholder="input.placeholder"
           :disable="disable || input.disable"
           :options="input.options"
           :option-label="input.optionLabel"
@@ -55,7 +57,6 @@
           :ripple="input.ripple"
           :calendar-icon="input.calendarIcon"
           :clock-icon="input.clockIcon"
-          :class="{ 'hidden': input.hidden }"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
