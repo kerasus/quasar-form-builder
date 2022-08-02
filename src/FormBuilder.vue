@@ -17,6 +17,7 @@
           :label="input.label"
           :placeholder="input.placeholder"
           :disable="disable || input.disable"
+          :type-of-input="input.typeOfInput"
           :options="input.options"
           :option-label="input.optionLabel"
           :option-value="input.optionValue"
