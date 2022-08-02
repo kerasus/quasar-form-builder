@@ -8,15 +8,14 @@
              getComponent(input) + '-col'
              ]"
     >
-      {{input.placeholder? input.label : null}}
+    
       <component
           :is="getComponent(input)"
           v-model:value="input.value"
           v-bind="input.props"
           :input="input"
-          :label="setLabel"
-          :stack-label="input.placeholder? true: false"
-          :placeholder="input.value? '': input.placeholder"
+          :label="input.label"
+          :placeholder="input.placeholder"
           :disable="disable || input.disable"
           :options="input.options"
           :option-label="input.optionLabel"
@@ -58,7 +57,6 @@
           :ripple="input.ripple"
           :calendar-icon="input.calendarIcon"
           :clock-icon="input.clockIcon"
-          :class="{ 'hidden': input.hidden }"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
@@ -274,13 +272,6 @@ export default {
     },
     onValueUpdated() {
       this.$emit('update:value', this.inputData)
-    }
-  },
-  computed:{
-    setLabel(){
-      console.log(this.inputData[0].placeholder)
-      // return this.input.placeholder? null: this.input.label
-      return ''
     }
   }
 }

@@ -115,7 +115,7 @@ export default {
     placeholder: {
       default: '',
       type: String
-    }
+    },
   },
   watch: {
     value () {
