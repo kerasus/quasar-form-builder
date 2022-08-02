@@ -157,12 +157,14 @@ export default {
         {
           type: 'dateTime',
           name: 'creation_time',
+          rules: [(val) => !!val || 'فیلد ضروری است'],
+
           label: 'تاریخ ایجاد',
           calendar: 'persian',
           col: 'col-md-4',
           value: '',
         },
-        { type: 'file', name: 'thumbnail', label: 'تصویر', rules: [(val) => !!val || 'فیلد ضروری است'], lazyRules: true, col: 'col-md-4' },
+        { type: 'file', name: 'thumbnail', label: ' تصویر ضروری', rules: [(val) => !!val || 'فیلد ضروری است'], lazyRules: true, col: 'col-md-4' },
         {
           type: 'separator',
           color: 'primary',

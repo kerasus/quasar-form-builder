@@ -1,7 +1,8 @@
 <template>
   <div>
+    {{rules}}
     <div v-if="canShowTime && canShowDate" class="dateTime-input">
-      <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
+      <q-input v-model="dateTime.date" :rules="rules" :lazy-rules="lazyRules"  class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
         <template #prepend>
           <q-icon :name="calendarIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -14,7 +15,7 @@
           </q-icon>
         </template>
       </q-input>
-      <q-input v-model="dateTime.time" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
+      <q-input v-model="dateTime.time" :rules="rules" :lazy-rules="lazyRules" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
         <template #append>
           <q-icon :name="clockIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -29,7 +30,7 @@
       </q-input>
     </div>
     <div v-else>
-      <q-input v-model="outputText" :clearable="true" dir="ltr" :disable="disable" :label="label" @clear="clearDate">
+      <q-input v-model="outputText" :rules="rules" :lazy-rules="lazyRules" :clearable="true" dir="ltr" :disable="disable" :label="label" @clear="clearDate">
         <template v-if="canShowDate" #prepend>
           <q-icon :name="calendarIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
