@@ -174,7 +174,7 @@ export default {
           col: 'col-md-12',
         },
         { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
-        { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
+        { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6', rules: [(val) => !!val || 'فیلد ضروری است'] },
         {
           type: 'separator',
           size: '0',
