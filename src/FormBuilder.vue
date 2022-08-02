@@ -56,6 +56,8 @@
           :calendar-icon="input.calendarIcon"
           :clock-icon="input.clockIcon"
           :class="{ 'hidden': input.hidden }"
+          :rules="input.rules"
+          :lazy-rules="input.lazyRules? input.lazyRules: false"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
