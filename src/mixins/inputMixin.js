@@ -111,6 +111,14 @@ export default {
     flat: {
       default: false,
       type: [Boolean]
+    },
+    rules: {
+      default: () => [],
+      type: [Array]
+    },
+    lazyRules:{
+      default: false,
+      type: [Boolean]
     }
   },
   watch: {

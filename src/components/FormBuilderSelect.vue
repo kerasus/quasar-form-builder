@@ -7,6 +7,8 @@
     :option-label="optionLabel"
     :option-disable="optionDisable"
     :options="filteredOptions"
+    :rules="rules"
+    :lazy-rules="lazyRules"
     :label="label"
     :multiple="multiple"
     :use-chips="useChips"
@@ -22,61 +24,61 @@
   >
     <template #no-option>
       <q-item>
-        <q-item-section class="text-grey">
-          موردی یافت نشد
-        </q-item-section>
+        <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
       </q-item>
     </template>
   </q-select>
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin'
+import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderSelect',
   mixins: [inputMixin],
   props: {
     value: {
       default: () => [],
-      type: [Array, String, Number, Boolean]
+      type: [Array, String, Number, Boolean],
     },
     options: {
       default: () => [],
-      type: Array
+      type: Array,
     },
     optionDisable: {
       default: 'disable',
-      type: String
-    }
+      type: String,
+    },
   },
-  data () {
+  data() {
     return {
       model: null,
-      filteredOptions: this.options
-    }
+      filteredOptions: this.options,
+      test: null
+    };
   },
   methods: {
-    filterFn (val, update) {
-      const isObjectList = (this.options.length > 0 && typeof this.options[0] === 'object')
+    filterFn(val, update) {
+      const isObjectList =
+        this.options.length > 0 && typeof this.options[0] === 'object';
 
       if (val === '') {
         update(() => {
-          this.filteredOptions = this.options
-        })
-        return
+          this.filteredOptions = this.options;
+        });
+        return;
       }
 
       update(() => {
-        const needle = val.toLowerCase()
-        this.filteredOptions = this.options.filter(v => {
-          const itemLabel = (isObjectList) ? v[this.optionLabel] : v
-          return itemLabel.toString().toLowerCase().indexOf(needle) > -1
-        })
-      })
+        const needle = val.toLowerCase();
+        this.filteredOptions = this.options.filter((v) => {
+          const itemLabel = isObjectList ? v[this.optionLabel] : v;
+          return itemLabel.toString().toLowerCase().indexOf(needle) > -1;
+        });
+      });
     },
-    createValue (val, done) {
+    createValue(val, done) {
       if (!this.createNewValue) {
-        return
+        return;
       }
       // Calling done(var) when new-value-mode is not set or "add", or done(var, "add") adds "var" content to the model
       // and it resets the input textbox to empty string
@@ -94,16 +96,13 @@ export default {
 
       if (val.length > 0) {
         if (!this.filteredOptions.includes(val)) {
-          this.filteredOptions.push(val)
+          this.filteredOptions.push(val);
         }
-        done(val, 'toggle')
+        done(val, 'toggle');
       }
-    }
-  }
-
-}
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

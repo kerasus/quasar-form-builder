@@ -10,7 +10,7 @@
           icon="menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-
+        
         <q-toolbar-title> Quasar Form Builder </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -22,6 +22,7 @@
       </q-btn>
       <br />
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
+     
       <form-builder ref="formBuilder" v-model:value="inputs" />
     </q-page-container>
   </q-layout>
@@ -206,10 +207,15 @@ export default {
           col: 'col-md-12',
         },
         {
-          type: 'avatar',
-          name: 'inputAvatar',
-          label: 'آواتار',
+          type: 'select',
+          name: 'inputSelect',
+          label: 'سلکت',
+          options: ['test1', 'test2', 'test3'],
           col: 'col-md-12',
+          // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
+          rules: [ val => !!val.length || 'فیلد ضروری است' ],
+          lazyRules: true,
+
         },
       ],
     };
@@ -223,6 +229,11 @@ export default {
     getData() {
       console.log('flat values: ', this.$refs.formBuilder.getValues());
     },
+    myRule (val) {
+      if (val === null) {
+        return 'You must make a selection!'        
+      }
+    }
   },
 };
 </script>
