@@ -6,6 +6,8 @@
       :label="placeholder? null : label"
       :stack-label="!!placeholder" 
       :placeholder="placeholder"
+      :rules="rules"
+      :lazy-rules="lazyRules"
   >
     <template v-slot:append>
       <q-icon name="colorize" class="cursor-pointer">
