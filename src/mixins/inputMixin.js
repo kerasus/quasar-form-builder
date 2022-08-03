@@ -116,6 +116,14 @@ export default {
       default: '',
       type: String
     },
+    rules: {
+      default: () => [],
+      type: [Array]
+    },
+    lazyRules:{
+      default: false,
+      type: [Boolean]
+    }
   },
   watch: {
     value () {

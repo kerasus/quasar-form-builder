@@ -2,16 +2,18 @@
   <div>
     <div class="outsideLabel">{{ placeholder ? label : null }}</div>
     <q-file
-      :id="inputUid"
-      v-model="file"
-      :label="placeholder? null : label" 
-      :stack-label="!!placeholder"
-      :placeholder="placeholder"
-      :disable="disable"
-      clearable
-      :model-value="file"
-      @update:model-value="change($event)"
-      @clear="onClearInputFile"
+        :id="inputUid"
+        v-model="file"
+        :label="placeholder? null : label" 
+        :stack-label="!!placeholder"
+        :placeholder="placeholder"
+        :disable="disable"
+        clearable
+        :model-value="file"
+        :rules="rules"
+        :lazy-rules="lazyRules"
+        @update:model-value="change($event)"
+        @clear="onClearInputFile"
     />
     <label :for="inputUid">
       <q-img

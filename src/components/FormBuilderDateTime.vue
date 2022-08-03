@@ -12,6 +12,8 @@
           :label="placeholder ? null : label"
           :stack-label="!!placeholder"
           :placeholder="placeholder"
+          :rules="rules" 
+          :lazy-rules="lazyRules"
           mask="date"
           @clear="clearDate"
         >
@@ -45,6 +47,8 @@
           :stack-label="!!placeholder"
           :placeholder="placeholder"
           mask="time"
+          :rules="rules" 
+          :lazy-rules="lazyRules"
           @clear="clearDate"
         >
           <template #append>
@@ -74,6 +78,8 @@
         :label="placeholder ? null : label"
         :stack-label="!!placeholder"
         :placeholder="placeholder"
+        :rules="rules"
+        :lazy-rules="lazyRules" 
         :clearable="true"
         dir="ltr"
         :disable="disable"
