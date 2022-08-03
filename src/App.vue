@@ -130,6 +130,7 @@ export default {
           name: 'id',
           value: null,
           label: 'شناسه ضروری',
+          outlined: true,
           col: 'col-md-6',
           rules: [(val) => !!val || 'فیلد ضروری است'],
           lazyRules: true,
@@ -210,6 +211,7 @@ export default {
           type: 'select',
           name: 'inputSelect',
           label: 'سلکت ضروری',
+          outlined: true,
           options: ['test1', 'test2', 'test3'],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length

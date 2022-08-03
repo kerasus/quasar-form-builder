@@ -54,7 +54,7 @@
           :toggle-text-color="input.toggleTextColor"
           :unelevated="input.unelevated"
           :flat="input.flat"
-          :outline="input.outline"
+          :outlined="input.outlined"
           :ripple="input.ripple"
           :calendar-icon="input.calendarIcon"
           :clock-icon="input.clockIcon"

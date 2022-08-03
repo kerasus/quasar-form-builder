@@ -20,6 +20,7 @@
     input-debounce="500"
     :disable="disable"
     emit-value
+    :outlined="outlined"
     map-options
     clearable
     @update:model-value="change($event)"
