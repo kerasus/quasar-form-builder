@@ -104,7 +104,7 @@ export default {
       default: false,
       type: [Boolean, Object]
     },
-    outline: {
+    outlined: {
       default: false,
       type: [Boolean]
     },
