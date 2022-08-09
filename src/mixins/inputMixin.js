@@ -1,5 +1,9 @@
 export default {
   props: {
+    name: {
+      default: '',
+      type: String
+    },
     label: {
       default: '',
       type: String
@@ -22,7 +26,8 @@ export default {
     },
     type: {
       default: 'radio', // checkbox-toggle
-      type: String
+      // Object type is for custom components
+      type: [String, Object]
     },
     inline: {
       default: true,
@@ -123,7 +128,15 @@ export default {
     lazyRules:{
       default: false,
       type: [Boolean]
-    }
+    },
+    col: {
+      default: '',
+      type: String
+    },
+    customLabelStyle: {
+      default: '',
+      type: String
+    },
   },
   watch: {
     value () {

@@ -167,7 +167,7 @@ export default {
 
     getComponent (input) {
       if (typeof input.type === 'object') {
-        return input.type
+        return {...input.type}
       }
       if (input.type === 'formBuilder') {
         return 'form-builder'
