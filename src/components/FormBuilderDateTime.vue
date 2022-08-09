@@ -15,6 +15,7 @@
           :rules="rules"
           :lazy-rules="lazyRules"
           mask="date"
+          readonly
           @click="showPicker"
           @clear="clearDate"
         >
@@ -86,6 +87,7 @@
         :clearable="true"
         dir="ltr"
         :disable="disable"
+        readonly
         @click="showPicker"
         @clear="clearDate"
       >
