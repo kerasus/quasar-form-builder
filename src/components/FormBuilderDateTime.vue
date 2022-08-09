@@ -33,7 +33,7 @@
                   @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
-                    <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
+                    <q-btn v-close-popup label="بستن" color="primary" flat />
                   </div>
                 </q-date>
               </q-menu>
@@ -65,7 +65,7 @@
                   @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
-                    <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
+                    <q-btn v-close-popup label="بستن" color="primary" flat />
                   </div>
                 </q-time>
             </q-menu>
@@ -104,7 +104,7 @@
               @update:model-value="change($event)"
             >
               <div class="row items-center justify-end">
-                <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
+                <q-btn v-close-popup label="بستن" color="primary" flat />
               </div>
             </q-date>
           </q-menu>
@@ -121,7 +121,7 @@
               @update:model-value="change($event)"
             >
               <div class="row items-center justify-end">
-                <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
+                <q-btn v-close-popup label="بستن" color="primary" flat />
               </div>
             </q-time>
           </q-menu>
