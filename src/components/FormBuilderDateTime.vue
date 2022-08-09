@@ -12,14 +12,15 @@
           :label="placeholder ? null : label"
           :stack-label="!!placeholder"
           :placeholder="placeholder"
-          :rules="rules" 
+          :rules="rules"
           :lazy-rules="lazyRules"
           mask="date"
+          @click="showPicker"
           @clear="clearDate"
         >
           <template #prepend>
             <q-icon :name="calendarIcon" class="cursor-pointer">
-              <q-popup-proxy transition-show="scale" transition-hide="scale">
+              <q-menu v-model="showing">
                 <q-date
                   v-model="dateTime.date"
                   :calendar="calendar"
@@ -27,14 +28,14 @@
                   :range="range"
                   :multiple="multiple"
                   :disable="disable"
-                  :title="title? title : label"
+                  :title="title ? title : label"
                   @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
-                    <q-btn v-close-popup label="بستن" color="primary" flat />
+                    <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
                   </div>
                 </q-date>
-              </q-popup-proxy>
+              </q-menu>
             </q-icon>
           </template>
         </q-input>
@@ -48,26 +49,26 @@
           :stack-label="!!placeholder"
           :placeholder="placeholder"
           mask="time"
-          :rules="rules" 
+          :rules="rules"
           :lazy-rules="lazyRules"
           @clear="clearDate"
         >
           <template #append>
-            <q-icon :name="clockIcon" class="cursor-pointer">
-              <q-popup-proxy transition-show="scale" transition-hide="scale">
-                <q-time
+            <q-menu v-model="showing">
+              <q-time
                   v-model="dateTime.time"
                   mask="HH:mm:00"
                   format24h
                   :disable="disable"
-                  :title="title? title : label"
+                  :title="title ? title : label"
                   @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
-                    <q-btn v-close-popup label="بستن" color="primary" flat />
+                    <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
                   </div>
                 </q-time>
-              </q-popup-proxy>
+            </q-menu>
+            <q-icon :name="clockIcon" class="cursor-pointer">
             </q-icon>
           </template>
         </q-input>
@@ -81,50 +82,48 @@
         :stack-label="!!placeholder"
         :placeholder="placeholder"
         :rules="rules"
-        :lazy-rules="lazyRules" 
+        :lazy-rules="lazyRules"
         :clearable="true"
         dir="ltr"
         :disable="disable"
+        @click="showPicker"
         @clear="clearDate"
       >
         <template v-if="canShowDate" #prepend>
-      
-          <q-icon :name="calendarIcon" class="cursor-pointer">
-            <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-date
-                v-model="inputData"
-                :calendar="calendar"
-                :mask="mask"
-                :range="range"
-                :multiple="multiple"
-                :disable="disable"
-                :title="title? title : label"
-                @update:model-value="change($event)"
-              >
-                <div class="row items-center justify-end">
-                  <q-btn v-close-popup label="بستن" color="primary" flat />
-                </div>
-              </q-date>
-            </q-popup-proxy>
-          </q-icon>
+          <q-menu v-model="showing">
+            <q-date
+              v-model="inputData"
+              :calendar="calendar"
+              :mask="mask"
+              :range="range"
+              :multiple="multiple"
+              :disable="disable"
+              :title="title ? title : label"
+              @update:model-value="change($event)"
+            >
+              <div class="row items-center justify-end">
+                <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
+              </div>
+            </q-date>
+          </q-menu>
+          <q-icon :name="calendarIcon" class="cursor-pointer"> </q-icon>
         </template>
         <template v-if="canShowTime" #append>
-          <q-icon :name="clockIcon" class="cursor-pointer">
-            <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-time
-                v-model="inputData"
-                :mask="mask"
-                format24h
-                :disable="disable"
-                :title="title? title : label"
-                @update:model-value="change($event)"
-              >
-                <div class="row items-center justify-end">
-                  <q-btn v-close-popup label="بستن" color="primary" flat />
-                </div>
-              </q-time>
-            </q-popup-proxy>
-          </q-icon>
+          <q-menu v-model="showing">
+            <q-time
+              v-model="inputData"
+              :mask="mask"
+              format24h
+              :disable="disable"
+              :title="title ? title : label"
+              @update:model-value="change($event)"
+            >
+              <div class="row items-center justify-end">
+                <q-btn v-close-popup @click="test2" label="بستن" color="primary" flat />
+              </div>
+            </q-time>
+          </q-menu>
+          <q-icon :name="clockIcon" class="cursor-pointer"> </q-icon>
         </template>
       </q-input>
     </div>
@@ -162,11 +161,11 @@ export default {
     },
     range: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
-     title: {
+    title: {
       default: '',
-      type: String
+      type: String,
     },
   },
   emits: ['update:value'],
@@ -176,14 +175,15 @@ export default {
         date: '',
         time: '',
       },
+      showing: false
     };
   },
   computed: {
     time() {
-      return this.type === 'time' || this.type === 'dateTime' 
+      return this.type === 'time' || this.type === 'dateTime';
     },
     date() {
-      return this.type === 'date' || this.type === 'dateTime'
+      return this.type === 'date' || this.type === 'dateTime';
     },
     canShowTime() {
       // return this.type === 'dateTime'
@@ -281,6 +281,9 @@ export default {
       } else {
         return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
       }
+    },
+    showPicker() {
+        this.showing = true;
     },
   },
 };
