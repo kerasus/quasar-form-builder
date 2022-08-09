@@ -227,11 +227,13 @@ export default {
           type: 'select',
           name: 'inputSelect',
           label: 'سلکت ضروری',
+          placeholder: 'انتخاب نمایید',
           outlined: true,
+          multiple: true,
           options: ['test1', 'test2', 'test3'],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [ val => !!val.length || 'فیلد ضروری است' ],
+          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
           lazyRules: true,
 
         },

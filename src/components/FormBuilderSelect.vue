@@ -1,6 +1,5 @@
 <template>
   <div class="outsideLabel">{{placeholder? label : null}}</div>
-  
   <q-select
     v-model="inputData"
     transition-show="jump-down"
@@ -11,7 +10,7 @@
     :options="filteredOptions"
     :label="placeholder? null : label"
     :stack-label="!!placeholder"
-    :placeholder="!!inputData? '':placeholder"
+    :placeholder="placeholderSetter"
     :rules="rules"
     :lazy-rules="lazyRules"
     :multiple="multiple"
@@ -107,6 +106,26 @@ export default {
       }
     },
   },
+  computed: {
+    placeholderSetter(){
+      // in single select after setting value, 
+      // v-model type changes to string
+      if(typeof this.inputData === 'string'){
+        return '';
+      }
+      if(!this.inputData){
+        return this.placeholder;
+      }
+      // in the multiple scenario, inputData type changes to Array!
+      if(this.multiple){
+        if(this.inputData.length){
+          return ''
+        }
+        return this.placeholder;
+      }
+      return this.placeholder;
+    }
+  }
 };
 </script>
 
