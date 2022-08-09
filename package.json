@@ -1,6 +1,6 @@
 {
   "name": "quasar-form-builder",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "keywords": [
@@ -44,7 +44,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^8.18.0",
     "eslint-plugin-vue": "^9.1.1",
-    "postcss": "^7.0.39",
+    "postcss": "^8.4.16",
     "postcss-rtl": "^0.0.3",
     "sass": "1.53.0",
     "sass-loader": "^13.0.1",
