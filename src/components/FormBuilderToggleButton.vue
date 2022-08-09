@@ -1,4 +1,5 @@
 <template>
+  {{value}}
   <q-btn-toggle
       v-model="inputData"
       :name="name"
@@ -16,7 +17,7 @@
       :toggle-text-color="toggleTextColor"
       :unelevated="unelevated"
       :flat="flat"
-      :outline="outline"
+      :outlined="outlined"
       :rounded="rounded"
       :size="size"
       :ripple="ripple"
@@ -25,6 +26,7 @@
       :spread="spread"
       :stack="stack"
       :stretch="stretch"
+      :class="col"
       @update:model-value="change($event)"
 
   />
@@ -37,7 +39,7 @@ export default {
   mixins: [inputMixin],
   props: {
     value: {
-      default: '',
+      default: ()=>{''},
       type: [Object, String, Array, Number, Boolean]
     },
     toggleTextColor: {
