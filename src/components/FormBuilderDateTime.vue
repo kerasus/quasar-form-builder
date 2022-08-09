@@ -27,6 +27,7 @@
                   :range="range"
                   :multiple="multiple"
                   :disable="disable"
+                  :title="title? title : label"
                   @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
@@ -59,6 +60,7 @@
                   mask="HH:mm:00"
                   format24h
                   :disable="disable"
+                  :title="title? title : label"
                   @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
@@ -86,6 +88,7 @@
         @clear="clearDate"
       >
         <template v-if="canShowDate" #prepend>
+      
           <q-icon :name="calendarIcon" class="cursor-pointer">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
               <q-date
@@ -95,6 +98,7 @@
                 :range="range"
                 :multiple="multiple"
                 :disable="disable"
+                :title="title? title : label"
                 @update:model-value="change($event)"
               >
                 <div class="row items-center justify-end">
@@ -112,6 +116,7 @@
                 :mask="mask"
                 format24h
                 :disable="disable"
+                :title="title? title : label"
                 @update:model-value="change($event)"
               >
                 <div class="row items-center justify-end">
@@ -155,6 +160,14 @@ export default {
       default: '',
       type: String,
     },
+    range: {
+      default: false,
+      type: Boolean
+    },
+     title: {
+      default: '',
+      type: String
+    },
   },
   emits: ['update:value'],
   data() {
@@ -166,7 +179,14 @@ export default {
     };
   },
   computed: {
+    time() {
+      return this.type === 'time' || this.type === 'dateTime' 
+    },
+    date() {
+      return this.type === 'date' || this.type === 'dateTime'
+    },
     canShowTime() {
+      // return this.type === 'dateTime'
       return !this.range && !this.multiple && this.time;
     },
     canShowDate() {

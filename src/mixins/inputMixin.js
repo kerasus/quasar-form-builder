@@ -61,18 +61,7 @@ export default {
       default: 'label',
       type: String
     },
-    time: {
-      default: false,
-      type: Boolean
-    },
-    date: {
-      default: false,
-      type: Boolean
-    },
-    range: {
-      default: false,
-      type: Boolean
-    },
+    
     size: {
       default: '50px',
       type: String
