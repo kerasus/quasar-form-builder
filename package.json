@@ -40,7 +40,7 @@
     "@vue/cli-plugin-eslint": "~5.0.4",
     "@vue/cli-service": "~5.0.4",
     "@vue/compiler-sfc": "^3.2.37",
-    "autoprefixer": "^9.8.8",
+    "autoprefixer": "10.4.7",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.18.0",
     "eslint-plugin-vue": "^9.1.1",
@@ -48,7 +48,12 @@
     "postcss-rtl": "^0.0.3",
     "sass": "1.53.0",
     "sass-loader": "^13.0.1",
-    "vue-cli-plugin-quasar": "~5.0.1"
+    "vue-cli-plugin-quasar": "~5.0.1",
+    "compressorjs": "^1.1.1",
+    "uuid": "^3.4.0",
+    "scss-tokenizer":"0.4.2",
+    "sass-graph": "^4.0.0",
+    "node-sass": "^7.0.1"
   },
   "eslintConfig": {
     "root": true,
