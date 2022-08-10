@@ -1,4 +1,5 @@
 <template>
+  outputText: {{outputText}}
   <div>
     <div v-if="canShowTime && canShowDate">
       <div class="outsideLabel">{{ placeholder ? label : null }}</div>
@@ -68,7 +69,7 @@
                 :disable="disable"
                 :title="title ? title : label"
                 :now-btn="nowBtn"
-                @update:model-value="change($event)"
+                @update:model-value="changeTime($event)"
               >
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="بستن" color="primary" flat />
@@ -198,6 +199,7 @@ export default {
         date: '',
         time: '',
       },
+      dateTimeConcated: '',
       showing: false,
       showingDate: false,
       showingTime: false,
@@ -226,6 +228,10 @@ export default {
       }
     },
     outputText() {
+      if(this.canShowTime && this.canShowDate){
+        
+        return this.dateTimeConcated
+      }
       if (!this.inputData) {
         return ;
       }
@@ -242,8 +248,10 @@ export default {
       } else if (this.inputData.from) {
         return '(' + this.inputData.from + '-' + this.inputData.to + ')';
       }
-      // if(this.inputData === 'Invalid date'){
-      // }
+      if(this.inputData === 'Invalid date'){
+        console.error('There is a problem on constructing date')
+      }
+     
       return this.inputData;
     },
   },
@@ -281,7 +289,7 @@ export default {
         this.dateTime.date = date.formatDate(this.dateTime.date, 'YYYY-MM-DD');
         fullDate = this.dateTime.date + ' ' + this.dateTime.time;
       }
-      
+
       // BUG: there is a problem in this if statement
       // which makes fullDate Invalid date in range: true multiple: true
       // but outputText is working properly
@@ -298,7 +306,13 @@ export default {
         fullDate.from = this.shamsiToMiladiDate(fullDate.from);
         fullDate.to = this.shamsiToMiladiDate(fullDate.to);
       }
+      return fullDate;
       // this.$emit('update:value', fullDate);
+    },
+    changeTime(val){
+      if(this.dateTime.date){
+        this.dateTimeConcated = this.dateTime.date + ' ' + val
+      }
     },
     miladiToShamsiDate(date) {
       if (this.canShowDate && this.canShowTime) {
