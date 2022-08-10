@@ -5,19 +5,21 @@
       :disable="disable"
       :label="placeholder? null : label"
       :stack-label="!!placeholder" 
+      :outlined="outlined"
       :placeholder="placeholder"
       :rules="rules"
       :lazy-rules="lazyRules"
+      @click="showing = true"
   >
     <template v-slot:append>
       <q-icon name="colorize" class="cursor-pointer">
-        <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+        <q-menu v-model="showing">
           <q-color v-model="inputData" square flat
                    default-value="#4b9c70ff"
                    :palette="palette"
                    @update:model-value="change($event)"
           />
-        </q-popup-proxy>
+        </q-menu>
       </q-icon>
     </template>
   </q-input>
@@ -36,6 +38,11 @@ export default {
     palette: {
       default: () => [], // ['#019A9D', '#D9B801', '#E8045A', '#B2028A']
       type: Array
+    }
+  },
+  data(){
+    return {
+      showing: false
     }
   },
   methods: {
