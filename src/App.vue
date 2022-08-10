@@ -142,6 +142,7 @@ export default {
           name: 'last_modification_time',
           label: 'تاریخ آخرین تغییرات',
           placeholder: 'وارد کنید',
+          todayBtn: true,
           title: 'عنوان فرعی',
           calendar: 'persian',
           col: 'col-md-4',

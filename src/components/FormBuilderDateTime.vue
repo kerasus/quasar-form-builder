@@ -31,6 +31,7 @@
                   :multiple="multiple"
                   :disable="disable"
                   :title="title ? title : label"
+                  :today-btn="todayBtn"
                   @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
@@ -66,6 +67,7 @@
                 format24h
                 :disable="disable"
                 :title="title ? title : label"
+                :now-btn="nowBtn"
                 @update:model-value="change($event)"
               >
                 <div class="row items-center justify-end">
@@ -105,6 +107,7 @@
               :multiple="multiple"
               :disable="disable"
               :title="title ? title : label"
+              :today-btn="todayBtn"
               @update:model-value="change($event)"
             >
               <div class="row items-center justify-end">
@@ -122,6 +125,7 @@
               format24h
               :disable="disable"
               :title="title ? title : label"
+              :now-btn="nowBtn"
               @update:model-value="change($event)"
             >
               <div class="row items-center justify-end">
@@ -177,6 +181,15 @@ export default {
       default: '',
       type: String,
     },
+    todayBtn: {
+      default: false,
+      type: Boolean
+    },
+
+    nowBtn: {
+      default: false,
+      type: Boolean
+    }
   },
   emits: ['update:value'],
   data() {
