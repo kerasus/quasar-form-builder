@@ -1,5 +1,4 @@
 <template>
-  outputText: {{outputText}}
   <div>
     <div v-if="canShowTime && canShowDate">
       <div class="outsideLabel">{{ placeholder ? label : null }}</div>
