@@ -16,12 +16,13 @@
           :lazy-rules="lazyRules"
           mask="date"
           readonly
-          @click="showPicker"
+          :outlined="outlined"
+          @click="showingDate = true"
           @clear="clearDate"
         >
           <template #prepend>
             <q-icon :name="calendarIcon" class="cursor-pointer">
-              <q-menu v-model="showing">
+              <q-menu v-model="showingDate">
                 <q-date
                   v-model="dateTime.date"
                   :calendar="calendar"
@@ -52,25 +53,27 @@
           mask="time"
           :rules="rules"
           :lazy-rules="lazyRules"
+          readonly
+          :outlined="outlined"
+          @click="showingTime = true"
           @clear="clearDate"
         >
           <template #append>
-            <q-menu v-model="showing">
+            <q-menu v-model="showingTime">
               <q-time
-                  v-model="dateTime.time"
-                  mask="HH:mm:00"
-                  format24h
-                  :disable="disable"
-                  :title="title ? title : label"
-                  @update:model-value="change($event)"
-                >
-                  <div class="row items-center justify-end">
-                    <q-btn v-close-popup label="بستن" color="primary" flat />
-                  </div>
-                </q-time>
+                v-model="dateTime.time"
+                mask="HH:mm:00"
+                format24h
+                :disable="disable"
+                :title="title ? title : label"
+                @update:model-value="change($event)"
+              >
+                <div class="row items-center justify-end">
+                  <q-btn v-close-popup label="بستن" color="primary" flat />
+                </div>
+              </q-time>
             </q-menu>
-            <q-icon :name="clockIcon" class="cursor-pointer">
-            </q-icon>
+            <q-icon :name="clockIcon" class="cursor-pointer"> </q-icon>
           </template>
         </q-input>
       </div>
@@ -88,7 +91,8 @@
         dir="ltr"
         :disable="disable"
         readonly
-        @click="showPicker"
+        :outlined="outlined"
+        @click="showing = true"
         @clear="clearDate"
       >
         <template v-if="canShowDate" #prepend>
@@ -165,6 +169,10 @@ export default {
       default: false,
       type: Boolean,
     },
+    multiple: {
+      default: false,
+      type: Boolean,
+    },
     title: {
       default: '',
       type: String,
@@ -177,7 +185,9 @@ export default {
         date: '',
         time: '',
       },
-      showing: false
+      showing: false,
+      showingDate: false,
+      showingTime: false,
     };
   },
   computed: {
@@ -188,7 +198,6 @@ export default {
       return this.type === 'date' || this.type === 'dateTime';
     },
     canShowTime() {
-      // return this.type === 'dateTime'
       return !this.range && !this.multiple && this.time;
     },
     canShowDate() {
@@ -205,7 +214,7 @@ export default {
     },
     outputText() {
       if (!this.inputData) {
-        return;
+        return ;
       }
       if (Array.isArray(this.inputData)) {
         let ranges = this.inputData.map((item) => {
@@ -220,6 +229,8 @@ export default {
       } else if (this.inputData.from) {
         return '(' + this.inputData.from + '-' + this.inputData.to + ')';
       }
+      // if(this.inputData === 'Invalid date'){
+      // }
       return this.inputData;
     },
   },
@@ -250,10 +261,16 @@ export default {
     },
     change(val) {
       let fullDate = val;
+      if(fullDate[0] === ''){
+        fullDate.shift();
+      }
       if (this.canShowTime && this.canShowDate) {
         this.dateTime.date = date.formatDate(this.dateTime.date, 'YYYY-MM-DD');
         fullDate = this.dateTime.date + ' ' + this.dateTime.time;
       }
+      // TODO: there is a problem in this if statement
+      // which makes fullDate Invalid date in range: true multiple: true
+      // but outputText is working properly
       if (
         fullDate &&
         !fullDate.from &&
@@ -262,11 +279,12 @@ export default {
       ) {
         fullDate = this.shamsiToMiladiDate(fullDate);
       }
+
       if (fullDate && fullDate.from) {
         fullDate.from = this.shamsiToMiladiDate(fullDate.from);
         fullDate.to = this.shamsiToMiladiDate(fullDate.to);
       }
-      this.$emit('update:value', fullDate);
+      // this.$emit('update:value', fullDate);
     },
     miladiToShamsiDate(date) {
       if (this.canShowDate && this.canShowTime) {
@@ -283,9 +301,6 @@ export default {
       } else {
         return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
       }
-    },
-    showPicker() {
-        this.showing = true;
     },
   },
 };
@@ -313,5 +328,13 @@ export default {
       padding: 24px 0 8px;
     }
   }
+}
+// removing dotted border for readonly fields from project
+.q-field--outlined.q-field--readonly .q-field__control:before {
+  border-style: solid;
+}
+.q-field--standard.q-field--readonly .q-field__control:before {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
