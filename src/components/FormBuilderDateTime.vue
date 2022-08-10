@@ -281,6 +281,7 @@ export default {
         this.dateTime.date = date.formatDate(this.dateTime.date, 'YYYY-MM-DD');
         fullDate = this.dateTime.date + ' ' + this.dateTime.time;
       }
+      
       // BUG: there is a problem in this if statement
       // which makes fullDate Invalid date in range: true multiple: true
       // but outputText is working properly
