@@ -28,8 +28,7 @@
     @filter="filterFn"
   >
     <template #no-option>
-      <q-item
-      v-show="showNoOption">
+      <q-item v-show="showNoOption">
         <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
       </q-item>
     </template>
