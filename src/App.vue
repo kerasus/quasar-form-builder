@@ -225,7 +225,7 @@ export default {
         },
         {
           type: 'select',
-          name: 'The-New-value-mode-Prop',
+          name: 'NewValueEventSelect',
           label: ' سلکت  چندتایی اینپوت غیر یونیک',
           placeholder: 'تایپ کنین سپس اینتر را بزنین',
           outlined: true,
