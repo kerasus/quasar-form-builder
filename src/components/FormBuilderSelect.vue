@@ -27,8 +27,7 @@
     @new-value="createValue"
     @filter="filterFn"
   >
-    <template
-        #no-option>
+    <template #no-option>
       <q-item
       v-show="showNoOption">
         <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
@@ -54,6 +53,18 @@ export default {
     optionDisable: {
       default: 'disable',
       type: String,
+    },
+    newValueMode: {
+      default: 'add-unique',
+      type: String
+    },
+    hideDropdownIcon: {
+      default: false,
+      type: Boolean
+    },
+    showNoOption: {
+      default: true,
+      type: Boolean
     },
   },
   data() {
