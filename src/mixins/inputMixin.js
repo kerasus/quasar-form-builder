@@ -61,6 +61,19 @@ export default {
       default: 'label',
       type: String
     },
+    newValueMode: {
+      default: 'add-unique',
+      type: String
+    },
+    hideDropdownIcon: {
+      default: false,
+      type: Boolean
+    },
+    showNoOption: {
+      default: true,
+      type: Boolean
+    },
+
     
     size: {
       default: '50px',

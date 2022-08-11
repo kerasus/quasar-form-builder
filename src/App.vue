@@ -225,6 +225,21 @@ export default {
         },
         {
           type: 'select',
+          name: 'The-New-value-mode-Prop',
+          label: ' سلکت  چندتایی اینپوت غیر یونیک',
+          placeholder: 'تایپ کنین و اینتر را بزنین',
+          outlined: true,
+          showNoOption : false,
+          createNewValue : true,
+          newValueMode : 'add',
+          multiple: true,
+          useChips: true,
+          hideDropdownIcon: true,
+          col: 'col-md-12',
+          // The New-Value-Event have 3 mode u that u can read on quasar.dev, and we define 'createNewValue' for turning on this feature
+        },
+        {
+          type: 'select',
           name: 'inputMultipleSelect',
           label: 'سلکت ضروری چند تایی',
           placeholder: 'انتخاب نمایید',
