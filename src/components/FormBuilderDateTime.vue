@@ -1,4 +1,5 @@
 <template>
+  value: {{value}}
   <div>
     <div v-if="canShowTime && canShowDate">
       <div class="outsideLabel">{{ placeholder ? label : null }}</div>
@@ -149,6 +150,10 @@ export default {
   name: 'FormBuilderDateTime',
   mixins: [inputMixin],
   props: {
+    value: {
+      default: '',
+      type: [String, Array],
+    },
     calendar: {
       default: 'persian',
       type: String,
@@ -198,7 +203,6 @@ export default {
       showing: false,
       showingDate: false,
       showingTime: false,
-      value: null
     };
   },
   computed: {
@@ -267,7 +271,7 @@ export default {
     //   this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00');
     // },
     outputText(n){
-      this.value = n;
+      this.change(n)
     }
   },
   created() {
@@ -292,21 +296,21 @@ export default {
       // BUG: there is a problem in this if statement
       // which makes fullDate Invalid date in range: true multiple: true
       // but outputText is working properly
-      if (
-        fullDate &&
-        !fullDate.from &&
-        this.calendar === 'persian' &&
-        this.canShowDate
-      ) {
-        fullDate = this.shamsiToMiladiDate(fullDate);
-      }
+      // if (
+      //   fullDate &&
+      //   !fullDate.from &&
+      //   this.calendar === 'persian' &&
+      //   this.canShowDate
+      // ) {
+      //   fullDate = this.shamsiToMiladiDate(fullDate);
+      // }
 
-      if (fullDate && fullDate.from) {
-        fullDate.from = this.shamsiToMiladiDate(fullDate.from);
-        fullDate.to = this.shamsiToMiladiDate(fullDate.to);
-      }
+      // if (fullDate && fullDate.from) {
+      //   fullDate.from = this.shamsiToMiladiDate(fullDate.from);
+      //   fullDate.to = this.shamsiToMiladiDate(fullDate.to);
+      // }
+      this.$emit('update:value', fullDate);
       return fullDate;
-      // this.$emit('update:value', fullDate);
     },
     changeTime(val){
       if(this.dateTime.date){

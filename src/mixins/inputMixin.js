@@ -61,8 +61,6 @@ export default {
       default: 'label',
       type: String
     },
-
-
     
     size: {
       default: '50px',
@@ -145,6 +143,7 @@ export default {
   },
   methods: {
     change (val) {
+      console.log(val);
       this.$emit('update:value', val)
     },
     getValues () {
