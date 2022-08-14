@@ -20,6 +20,7 @@
     :disable="disable"
     emit-value
     :outlined="outlined"
+    :hide-dropdown-icon = "hideDropdownIcon"
     map-options
     clearable
     @update:model-value="change($event)"
@@ -27,7 +28,7 @@
     @filter="filterFn"
   >
     <template #no-option>
-      <q-item>
+      <q-item v-show="showNoOption">
         <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
       </q-item>
     </template>
@@ -51,6 +52,18 @@ export default {
     optionDisable: {
       default: 'disable',
       type: String,
+    },
+    newValueMode: {
+      default: 'add-unique',
+      type: String
+    },
+    hideDropdownIcon: {
+      default: false,
+      type: Boolean
+    },
+    showNoOption: {
+      default: true,
+      type: Boolean
     },
   },
   data() {
@@ -97,12 +110,15 @@ export default {
       // If "var" content is undefined/null, then it doesn't tampers with the model
       // and only resets the input textbox to empty string
 
-      if (val.length > 0) {
-        if (!this.filteredOptions.includes(val)) {
-          this.filteredOptions.push(val);
-        }
-        done(val, 'toggle');
-      }
+
+      //mr kerasus : why im wrote this code?
+      // if (val.length > 0) {
+      //   if (!this.filteredOptions.includes(val)) {
+      //     this.filteredOptions.push(val);
+      //   }
+      //   done(val, 'toggle');
+      // }
+        done(val, this.newValueMode);
     },
     test(){
       this.inputData = []
