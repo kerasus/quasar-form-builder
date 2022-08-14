@@ -61,8 +61,6 @@ export default {
       default: 'label',
       type: String
     },
-
-
     
     size: {
       default: '50px',
