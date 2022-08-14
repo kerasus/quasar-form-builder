@@ -1,5 +1,5 @@
 <template>
-  <div class="outsideLabel">{{placeholder? label : null}}</div>
+  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <q-select
     v-model="inputData"
     transition-show="jump-down"
@@ -8,7 +8,7 @@
     :option-label="optionLabel"
     :option-disable="optionDisable"
     :options="filteredOptions"
-    :label="placeholder? null : label"
+    :label="placeholder ? null : label"
     :stack-label="!!placeholder"
     :placeholder="placeholderSetter"
     :rules="rules"
@@ -57,7 +57,6 @@ export default {
     return {
       model: null,
       filteredOptions: this.options,
-      test: null
     };
   },
   methods: {
@@ -105,27 +104,32 @@ export default {
         done(val, 'toggle');
       }
     },
+    test(){
+      this.inputData = []
+    }
   },
   computed: {
-    placeholderSetter(){
-      // in single select after setting value, 
+    placeholderSetter() {
+      // in single select after setting value,
       // v-model type changes to string
-      if(typeof this.inputData === 'string'){
+      if (typeof this.inputData === 'string') {
         return '';
       }
-      if(!this.inputData){
-        return this.placeholder;
-      }
       // in the multiple scenario, inputData type changes to Array!
-      if(this.multiple){
-        if(this.inputData.length){
-          return ''
-        }
+      if (this.multiple) {
+        if (this.inputData.length == 0) {
         return this.placeholder;
+        }
+          return '';
       }
-      return this.placeholder;
-    }
-  }
+      // be an object
+      if (Object.keys(this.inputData).length === 0) {
+        return this.placeholder
+      }
+      return '';
+    },
+  },
+ 
 };
 </script>
 

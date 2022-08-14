@@ -256,8 +256,73 @@ export default {
           label: 'سلکت ضروری تکی',
           placeholder: 'انتخاب نمایید',
           outlined: true,
+          multiple: true,
+          optionLabel: 'name',
+          options: [
+            
+                {
+                  id: 1,
+                  name: 'آقا',
+                  title: 'آقا'
+                },
+                {
+                  id: 2,
+                  name: 'خانم',
+                  title: 'خانم'
+                },
+                {
+                  id: 3,
+                  name: 'تست',
+                  title: 'تست'
+                }
+              
+          ],
+          col: 'col-md-12',
+          // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
+          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          lazyRules: true,
+        },
+        {
+          type: 'select',
+          name: 'inputSingleSelect',
+          label: 'سلکت ضروری تکی',
+          placeholder: 'انتخاب نمایید',
+          outlined: true,
           multiple: false,
-          options: ['test1', 'test2', 'test3'],
+          optionLabel: 'name',
+          options: [
+            
+                {
+                  id: 1,
+                  name: 'آقا',
+                  title: 'آقا'
+                },
+                {
+                  id: 2,
+                  name: 'خانم',
+                  title: 'خانم'
+                }
+              
+          ],
+          col: 'col-md-12',
+          // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
+          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          lazyRules: true,
+        },
+        {
+          type: 'select',
+          name: 'inputSingleSelect',
+          label: 'سلکت ضروری تکی',
+          placeholder: 'انتخاب نمایید',
+          outlined: true,
+          multiple: false,
+          optionLabel: 'name',
+          options: [
+            'test1',
+            'test2',
+            'test3',
+            'test4',
+          ],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
           rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
