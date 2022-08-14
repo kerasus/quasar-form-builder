@@ -149,10 +149,6 @@ export default {
   name: 'FormBuilderDateTime',
   mixins: [inputMixin],
   props: {
-    value: {
-      default: '',
-      type: [String, Array],
-    },
     calendar: {
       default: 'persian',
       type: String,
@@ -202,6 +198,7 @@ export default {
       showing: false,
       showingDate: false,
       showingTime: false,
+      value: null
     };
   },
   computed: {
@@ -255,20 +252,23 @@ export default {
     },
   },
   watch: {
-    value(newValue) {
-      if (!newValue) {
-        this.inputData = newValue;
-        return;
-      }
-      if (!newValue.from && this.calendar === 'persian' && this.canShowDate) {
-        this.inputData = this.miladiToShamsiDate(newValue);
-      } else if (newValue.from) {
-        this.inputData.from = this.miladiToShamsiDate(newValue.from);
-        this.inputData.to = this.miladiToShamsiDate(newValue.to);
-      }
-      this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD');
-      this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00');
-    },
+    // value(newValue) {
+    //   if (!newValue) {
+    //     this.inputData = newValue;
+    //     return;
+    //   }
+    //   if (!newValue.from && this.calendar === 'persian' && this.canShowDate) {
+    //     this.inputData = this.miladiToShamsiDate(newValue);
+    //   } else if (newValue.from) {
+    //     this.inputData.from = this.miladiToShamsiDate(newValue.from);
+    //     this.inputData.to = this.miladiToShamsiDate(newValue.to);
+    //   }
+    //   this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD');
+    //   this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00');
+    // },
+    outputText(n){
+      this.value = n;
+    }
   },
   created() {
     this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD');
