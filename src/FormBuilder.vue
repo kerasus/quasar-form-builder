@@ -8,38 +8,11 @@
              getComponent(input) + '-col'
              ]"
     >
+    
       <component
           :is="getComponent(input)"
           v-model:value="input.value"
-          v-bind="input.props"
-          :input="input"
-          :label="input.label"
-          :disable="disable || input.disable"
-          :options="input.options"
-          :option-label="input.optionLabel"
-          :option-value="input.optionValue"
-          :upload-server="input.uploadServer"
-          :multiple="isMultiple(input)"
-          :use-chips="input.useChips"
-          :create-new-value="input.createNewValue"
-          :type="getOptionGroupType(input)"
-          :separator-type="input.separatorType"
-          :min="input.min"
-          :max="input.max"
-          :range="isRange(input)"
-          :time="isTime(input)"
-          :date="isDate(input)"
-          :src="input.value"
-          :size="input.size"
-          :vertical="input.vertical"
-          :inset="input.inset"
-          :spaced="input.spaced"
-          :dark="input.darkMode"
-          :font-size="input.fontSize"
-          :color="input.color"
-          :text-color="input.textColor"
-          :icon="input.icon"
-          :class="{ 'hidden': input.hidden }"
+          v-bind="input"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
@@ -69,7 +42,8 @@ export default {
     FormBuilderSpace: defineAsyncComponent(() => import('./components/FormBuilderSpace')),
     FormBuilderSeparator: defineAsyncComponent(() => import('./components/FormBuilderSeparator')),
     FormBuilderDateTime: defineAsyncComponent(() => import('./components/FormBuilderDateTime')),
-    FormBuilderColor: defineAsyncComponent(() => import('./components/FormBuilderColor.vue'))
+    FormBuilderColor: defineAsyncComponent(() => import('./components/FormBuilderColor.vue')),
+    FormBuilderToggleButton: defineAsyncComponent(() => import('./components/FormBuilderToggleButton'))
   },
   mixins: [inputMixin],
   props: {
@@ -193,7 +167,7 @@ export default {
 
     getComponent (input) {
       if (typeof input.type === 'object') {
-        return input.type
+        return {...input.type}
       }
       if (input.type === 'formBuilder') {
         return 'form-builder'
@@ -213,6 +187,9 @@ export default {
           input.type === 'time'
       ) {
         return 'form-builder-date-time'
+      }
+      if (input.type === 'toggleButton') {
+        return 'form-builder-toggle-button'
       }
       return 'form-builder-' + input.type
     },
