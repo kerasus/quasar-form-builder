@@ -86,6 +86,7 @@
         v-model="outputText"
         :label="placeholder ? null : label"
         :stack-label="!!placeholder"
+        :mask="date"
         :placeholder="placeholder"
         :rules="rules"
         :lazy-rules="lazyRules"
@@ -228,7 +229,6 @@ export default {
     },
     outputText() {
       if(this.canShowTime && this.canShowDate){
-        
         return this.dateTimeConcated
       }
       if (!this.inputData) {
@@ -250,7 +250,6 @@ export default {
       if(this.inputData === 'Invalid date'){
         console.error('There is a problem on constructing date')
       }
-     
       return this.inputData;
     },
   },
