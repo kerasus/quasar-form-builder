@@ -268,7 +268,7 @@ export default {
         {
           type: 'select',
           name: 'inputSingleSelect',
-          label: 'سلکت ضروری تکی',
+          label: 'سلکت ضروری چندتایی',
           placeholder: 'انتخاب نمایید',
           outlined: true,
           multiple: true,
