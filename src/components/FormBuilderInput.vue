@@ -1,5 +1,6 @@
 <template>
-  <q-input v-model="inputData" :label="label" :type="type" :disable="disable" @update:model-value="change($event)" />
+  <div class="outsideLabel">{{placeholder? label : null}}</div>
+  <q-input v-model="inputData" :rules="rules" :lazy-rules="lazyRules"  :label="placeholder? null : label" :stack-label="!!placeholder" :type="type" :disable="disable" :rounded="rounded" :outlined="outlined" :placeholder="placeholder" @update:model-value="change($event)" />
 </template>
 
 <script>

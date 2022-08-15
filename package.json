@@ -1,6 +1,6 @@
 {
   "name": "quasar-form-builder",
-  "version": "0.1.13",
+  "version": "0.1.32",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "keywords": [
@@ -24,27 +24,36 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
-    "core-js": "^3.6.5",
-    "moment-jalaali": "^0.9.4",
-    "quasar": "^2.0.0",
-    "vue": "^3.0.0"
+    "@quasar/extras": "^1.15.1",
+    "core-js": "^3.24.1",
+    "moment-jalaali": "^0.9.6",
+    "quasar": "^2.7.6",
+    "vue": "^3.2.37",
+    "vue3-tiptap-katex": "^1.0.24"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
+    "@babel/eslint-parser": "^7.18.2",
+    "@vue/cli-plugin-babel": "~5.0.4",
+    "@vue/cli-plugin-eslint": "~5.0.4",
+    "@vue/cli-service": "~5.0.4",
+    "@vue/compiler-sfc": "^3.2.37",
+    "autoprefixer": "10.4.7",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0",
-    "postcss-rtl": "^1.2.3",
-    "sass": "1.32.12",
-    "sass-loader": "^10.1.0",
-    "vue-cli-plugin-quasar": "~4.0.4"
+    "eslint": "^8.18.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "postcss": "^8.4.16",
+    "postcss-rtl": "^0.0.3",
+    "sass": "1.53.0",
+    "sass-loader": "^13.0.1",
+    "vue-cli-plugin-quasar": "~5.0.1",
+    "compressorjs": "^1.1.1",
+    "uuid": "^3.4.0",
+    "scss-tokenizer":"0.4.2",
+    "sass-graph": "^4.0.0",
+    "node-sass": "^7.0.1"
   },
   "eslintConfig": {
     "root": true,
@@ -56,9 +65,29 @@
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vue/attributes-order": "warn",
+      "vue/this-in-template": "error",
+      "vue/arrow-spacing": "error",
+      "vue/block-spacing": "error",
+      "vue/comma-dangle": "error",
+      "vue/eqeqeq": "warn",
+      "vue/multi-word-component-names": "off",
+      "vue/key-spacing": "error",
+      "vue/keyword-spacing": "error",
+      "vue/no-deprecated-scope-attribute": "warn",
+      "vue/no-deprecated-slot-attribute": "warn",
+      "vue/no-deprecated-slot-scope-attribute": "warn",
+      "vue/no-irregular-whitespace": "error",
+      "vue/no-reserved-component-names": "error",
+      "vue/valid-v-slot": "error",
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
   },
   "browserslist": [
     "> 1%",
