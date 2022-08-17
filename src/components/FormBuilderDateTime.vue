@@ -4,35 +4,35 @@
       <div class="outsideLabel">{{ placeholder ? label : null }}</div>
       <div class="dateTime-input">
         <q-input
-          v-model="dateTime.date"
-          class="form-calender"
-          :clearable="true"
-          dir="ltr"
-          :disable="disable"
-          :label="placeholder ? null : label"
-          :stack-label="!!placeholder"
-          :placeholder="placeholder"
-          :rules="rules"
-          :lazy-rules="lazyRules"
-          mask="date"
-          readonly
-          :outlined="outlined"
-          @click="showingDate = true"
-          @clear="clearDate"
+            v-model="dateTime.date"
+            class="form-calender"
+            :clearable="true"
+            dir="ltr"
+            :disable="disable"
+            :label="placeholder ? null : label"
+            :stack-label="!!placeholder"
+            :placeholder="placeholder"
+            :rules="rules"
+            :lazy-rules="lazyRules"
+            mask="date"
+            readonly
+            :outlined="outlined"
+            @click="showingDate = true"
+            @clear="clearDate"
         >
           <template #prepend>
             <q-icon :name="calendarIcon" class="cursor-pointer">
               <q-menu v-model="showingDate">
                 <q-date
-                  v-model="dateTime.date"
-                  :calendar="calendar"
-                  mask="YYYY-MM-DD"
-                  :range="range"
-                  :multiple="multiple"
-                  :disable="disable"
-                  :title="title ? title : label"
-                  :today-btn="todayBtn"
-                  @update:model-value="change($event)"
+                    v-model="dateTime.date"
+                    :calendar="calendar"
+                    mask="YYYY-MM-DD"
+                    :range="range"
+                    :multiple="multiple"
+                    :disable="disable"
+                    :title="title ? title : label"
+                    :today-btn="todayBtn"
+                    @update:model-value="change($event)"
                 >
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="بستن" color="primary" flat />
@@ -43,32 +43,32 @@
           </template>
         </q-input>
         <q-input
-          v-model="dateTime.time"
-          class="time-input-dateTime"
-          :clearable="true"
-          dir="ltr"
-          :disable="disable"
-          :label="placeholder ? null : label"
-          :stack-label="!!placeholder"
-          :placeholder="placeholder"
-          mask="time"
-          :rules="rules"
-          :lazy-rules="lazyRules"
-          readonly
-          :outlined="outlined"
-          @click="showingTime = true"
-          @clear="clearDate"
+            v-model="dateTime.time"
+            class="time-input-dateTime"
+            :clearable="true"
+            dir="ltr"
+            :disable="disable"
+            :label="placeholder ? null : label"
+            :stack-label="!!placeholder"
+            :placeholder="placeholder"
+            mask="time"
+            :rules="rules"
+            :lazy-rules="lazyRules"
+            readonly
+            :outlined="outlined"
+            @click="showingTime = true"
+            @clear="clearDate"
         >
           <template #append>
             <q-menu v-model="showingTime">
               <q-time
-                v-model="dateTime.time"
-                mask="HH:mm:00"
-                format24h
-                :disable="disable"
-                :title="title ? title : label"
-                :now-btn="nowBtn"
-                @update:model-value="changeTime($event)"
+                  v-model="dateTime.time"
+                  mask="HH:mm:00"
+                  format24h
+                  :disable="disable"
+                  :title="title ? title : label"
+                  :now-btn="nowBtn"
+                  @update:model-value="changeTime($event)"
               >
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="بستن" color="primary" flat />
@@ -83,33 +83,33 @@
     <div v-else>
       <div class="outsideLabel">{{ placeholder ? label : null }}</div>
       <q-input
-        v-model="outputText"
-        :label="placeholder ? null : label"
-        :stack-label="!!placeholder"
-        :mask="date"
-        :placeholder="placeholder"
-        :rules="rules"
-        :lazy-rules="lazyRules"
-        :clearable="true"
-        dir="ltr"
-        :disable="disable"
-        readonly
-        :outlined="outlined"
-        @click="showing = true"
-        @clear="clearDate"
+          v-model="outputText"
+          :label="placeholder ? null : label"
+          :stack-label="!!placeholder"
+          :mask="date"
+          :placeholder="placeholder"
+          :rules="rules"
+          :lazy-rules="lazyRules"
+          :clearable="true"
+          dir="ltr"
+          :disable="disable"
+          readonly
+          :outlined="outlined"
+          @click="showing = true"
+          @clear="clearDate"
       >
         <template v-if="canShowDate" #prepend>
           <q-menu v-model="showing">
             <q-date
-              v-model="inputData"
-              :calendar="calendar"
-              :mask="mask"
-              :range="range"
-              :multiple="multiple"
-              :disable="disable"
-              :title="title ? title : label"
-              :today-btn="todayBtn"
-              @update:model-value="change($event)"
+                v-model="inputData"
+                :calendar="calendar"
+                :mask="mask"
+                :range="range"
+                :multiple="multiple"
+                :disable="disable"
+                :title="title ? title : label"
+                :today-btn="todayBtn"
+                @update:model-value="change($event)"
             >
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="بستن" color="primary" flat />
@@ -121,13 +121,13 @@
         <template v-if="canShowTime" #append>
           <q-menu v-model="showing">
             <q-time
-              v-model="inputData"
-              :mask="mask"
-              format24h
-              :disable="disable"
-              :title="title ? title : label"
-              :now-btn="nowBtn"
-              @update:model-value="change($event)"
+                v-model="inputData"
+                :mask="mask"
+                format24h
+                :disable="disable"
+                :title="title ? title : label"
+                :now-btn="nowBtn"
+                @update:model-value="change($event)"
             >
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="بستن" color="primary" flat />
@@ -254,29 +254,33 @@ export default {
     },
   },
   watch: {
-    // value(newValue) {
-    //   if (!newValue) {
-    //     this.inputData = newValue;
-    //     return;
-    //   }
-    //   if (!newValue.from && this.calendar === 'persian' && this.canShowDate) {
-    //     this.inputData = this.miladiToShamsiDate(newValue);
-    //   } else if (newValue.from) {
-    //     this.inputData.from = this.miladiToShamsiDate(newValue.from);
-    //     this.inputData.to = this.miladiToShamsiDate(newValue.to);
-    //   }
-    //   this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD');
-    //   this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00');
-    // },
+    value(newValue) {
+      this.updateDateTime()
+      // if (!newValue) {
+      //   this.inputData = newValue;
+      //   return;
+      // }
+      // if (!newValue.from && this.calendar === 'persian' && this.canShowDate) {
+      //   this.inputData = this.miladiToShamsiDate(newValue);
+      // } else if (newValue.from) {
+      //   this.inputData.from = this.miladiToShamsiDate(newValue.from);
+      //   this.inputData.to = this.miladiToShamsiDate(newValue.to);
+      // }
+      // this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD');
+      // this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00');
+    },
     outputText(n){
       this.change(n)
     }
   },
   created() {
-    this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD');
-    this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00');
+    this.updateDateTime()
   },
   methods: {
+    updateDateTime() {
+      this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD');
+      this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00');
+    },
     clearDate() {
       this.inputData = null;
       this.change(null);
@@ -325,7 +329,7 @@ export default {
     shamsiToMiladiDate(date) {
       if (this.canShowDate && this.canShowTime) {
         return moment(date, 'jYYYY/jMM/jDD HH:mm:00').format(
-          'YYYY-MM-DD HH:mm:00'
+            'YYYY-MM-DD HH:mm:00'
         );
       } else {
         return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
