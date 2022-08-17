@@ -126,6 +126,9 @@ export default {
   },
   computed: {
     placeholderSetter() {
+      if(this.inputData === null){
+        return this.placeholder
+      }
       // in single select after setting value,
       // v-model type changes to string
       if (typeof this.inputData === 'string') {
