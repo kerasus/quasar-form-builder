@@ -126,6 +126,10 @@ export default {
       default: '',
       type: String
     },
+    inputType: {
+      default: 'text',
+      type: String
+    }
   },
   watch: {
     value () {

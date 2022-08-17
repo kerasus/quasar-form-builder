@@ -110,7 +110,7 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-6',
           value: [
-            { type: 'input', name: 'id1', value: null, label: 'شناسه1', placeholder:'salam', col: 'col-md-6' },
+            { type: 'input', name: 'id1', value: null, label: 'شناسه1', inputType: 'number', placeholder:'salam', col: 'col-md-6' },
             { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
             { type: 'separator', size: '3px', separatorType: 'double', vertical: true, label: 'جدا کننده عمودی' },
             {
@@ -268,7 +268,7 @@ export default {
         {
           type: 'select',
           name: 'inputSingleSelect',
-          label: 'سلکت ضروری تکی',
+          label: 'سلکت ضروری چندتایی',
           placeholder: 'انتخاب نمایید',
           outlined: true,
           multiple: true,
