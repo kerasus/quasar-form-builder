@@ -12,6 +12,10 @@ export default {
       default: false,
       type: Boolean
     },
+    filled: {
+      default: false,
+      type: Boolean
+    },
     min: {
       default: 0,
       type: Number
@@ -61,7 +65,6 @@ export default {
       default: 'label',
       type: String
     },
-    
     size: {
       default: '50px',
       type: String
