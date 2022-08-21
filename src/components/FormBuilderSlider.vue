@@ -8,7 +8,7 @@
       :min="min"
       :max="max"
       :disable="disable"
-      @input="change($event)"
+      @update:model-value="change($event)"
     />
   </div>
 </template>

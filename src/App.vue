@@ -40,6 +40,18 @@ export default {
     return {
       inputs: [
         {
+          type: 'RangeSlider',
+          name: 'ZoomRate',
+          col: 'col-md-6',
+          label: 'میزان زوم از',
+          min: 0,
+          max: 11,
+          value: {
+            min:5,
+            max:7
+          }
+        },
+        {
           type: 'toggleButton',
           name: 'id',
           options: [
