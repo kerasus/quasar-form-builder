@@ -1,4 +1,5 @@
 <template>
+  nowBtn:{{ nowBtn }}
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <div class="dateTime-input">
     <q-input
@@ -8,7 +9,6 @@
       readonly
       mask="date"
       dir="ltr"
-      :clearable="true"
       :disable="disable"
       :label="placeholder ? null : label"
       :stack-label="!!placeholder"
@@ -17,7 +17,6 @@
       :lazy-rules="lazyRules"
       :outlined="outlined"
       @click="showDate = true"
-      @clear="clearDate"
     >
       <template #prepend>
         <q-icon :name="calendarIcon" class="cursor-pointer">
@@ -122,6 +121,14 @@ export default {
     value: {
       default: '',
       type: String,
+    },
+    nowBtn: {
+      default: false,
+      type: Boolean,
+    },
+    todayBtn: {
+      default: false,
+      type: Boolean,
     },
   },
   watch: {

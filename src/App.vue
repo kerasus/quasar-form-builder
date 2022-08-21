@@ -208,6 +208,7 @@ export default {
           calendar: 'persian',
           col: 'col-md-4',
           placeholder: 'وارد نمایید',
+          nowBtn: true,
         },
         // {
         //   type: 'dateTime',
