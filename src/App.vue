@@ -10,7 +10,7 @@
           icon="menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-        
+
         <q-toolbar-title> Quasar Form Builder </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -20,9 +20,11 @@
       <q-btn color="blue" class="q-my-md full-width" @click="getData">
         get data
       </q-btn>
+      <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
+
       <br />
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-     
+
       <form-builder ref="formBuilder" v-model:value="inputs" />
     </q-page-container>
   </q-layout>
@@ -59,9 +61,10 @@ export default {
           col: 'col-md-6',
           color: 'red',
           textColor: 'black',
-          size: '20px'
+          size: '20px',
         },
-        { type: 'optionGroup',
+        {
+          type: 'optionGroup',
           name: 'id',
           inline: false,
           dense: true,
@@ -110,17 +113,51 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-6',
           value: [
-            { type: 'input', name: 'id1', value: null, label: 'شناسه1', inputType: 'number', placeholder:'salam', col: 'col-md-6' },
-            { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
-            { type: 'separator', size: '3px', separatorType: 'double', vertical: true, label: 'جدا کننده عمودی' },
+            {
+              type: 'input',
+              name: 'id1',
+              value: null,
+              label: 'شناسه1',
+              inputType: 'number',
+              placeholder: 'salam',
+              col: 'col-md-6',
+            },
+            {
+              type: 'input',
+              name: 'id2',
+              value: null,
+              label: 'شناسه2',
+              col: 'col-md-6',
+            },
+            {
+              type: 'separator',
+              size: '3px',
+              separatorType: 'double',
+              vertical: true,
+              label: 'جدا کننده عمودی',
+            },
             {
               type: 'formBuilder',
               name: 'formBuilderCol',
               col: 'col-md-6',
               value: [
-                { type: 'input', name: 'id3', value: null, label: 'شناسه3', placeholder: 'test', col: 'col-md-6' },
-                { type: 'input', name: 'id4', value: null, label: 'شناسه4', col: 'col-md-6', customLabelStyle: 'color: yellow !important;' },
-              ]
+                {
+                  type: 'input',
+                  name: 'id3',
+                  value: null,
+                  label: 'شناسه3',
+                  placeholder: 'test',
+                  col: 'col-md-6',
+                },
+                {
+                  type: 'input',
+                  name: 'id4',
+                  value: null,
+                  label: 'شناسه4',
+                  col: 'col-md-6',
+                  customLabelStyle: 'color: yellow !important;',
+                },
+              ],
             },
           ],
         },
@@ -134,13 +171,14 @@ export default {
           col: 'col-md-6',
           rules: [(val) => !!val || 'فیلد ضروری است'],
           lazyRules: true,
-          placeholder:'test' 
+          placeholder: 'test',
         },
-
         {
           type: 'date',
           name: 'last_modification_time',
           label: 'تاریخ آخرین تغییرات',
+          responseKey: 'test',
+          // value: '1401-07-24',
           placeholder: 'وارد کنید',
           todayBtn: true,
           title: 'عنوان فرعی',
@@ -149,50 +187,57 @@ export default {
           rules: [(val) => !!val || 'فیلد ضروری است'],
         },
         {
-          type: 'date',
+          type: 'dateTime',
           name: 'creation_time',
-          range: true,
-          multiple: true,
+          range: false,
+          multiple: false,
           todayBtn: true,
+          responseKey: 'test1',
           label: 'تاریخ ایجاد',
           calendar: 'persian',
           col: 'col-md-4',
-        },
-        {
-          type: 'dateTime',
-          name: 'creation_dateTime',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
-          label: 'تاریخ ایجاد',
-          multiple: true,
-          outlined: true,
-          calendar: 'persian',
-          col: 'col-md-4',
-          value: '',
-          placeholder:'وارد نمایید',
-        },
-         {
-          type: 'dateTime',
-          name: 'creation_dateTime',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
-          label: 'تاریخ امتحان',
-          calendar: 'persian',
-          col: 'col-md-4',
-          value: '',
-          placeholder:'وارد نمایید',
         },
         {
           type: 'time',
-          name: 'creation_time',
-          nowBtn: true,
+          name: 'creation_dateTime',
           rules: [(val) => !!val || 'فیلد ضروری است'],
+          label: 'تاریخ ایجاد',
+          multiple: false,
+          responseKey: 'test2',
           outlined: true,
-          label: 'زمان ایجاد',
           calendar: 'persian',
           col: 'col-md-4',
-          value: '',
-          placeholder:'وارد نمایید',
+          placeholder: 'وارد نمایید',
         },
-        { type: 'file', name: 'thumbnail', label: ' تصویر ضروری', rules: [(val) => !!val || 'فیلد ضروری است'], lazyRules: true, col: 'col-md-4' },
+        // {
+        //   type: 'dateTime',
+        //   name: 'creation_dateTime',
+        //   label: 'تاریخ امتحان',
+        //   responseKey: 'test1',
+        //   calendar: 'persian',
+        //   col: 'col-md-4',
+        //   placeholder: 'وارد نمایید',
+        // },
+        // {
+        //   type: 'time',
+        //   name: 'creation_time',
+        //   nowBtn: true,
+        //   rules: [(val) => !!val || 'فیلد ضروری است'],
+        //   outlined: true,
+        //   label: 'زمان ایجاد',
+        //   responseKey: 'test2',
+        //   calendar: 'persian',
+        //   col: 'col-md-4',
+        //   placeholder: 'وارد نمایید',
+        // },
+        {
+          type: 'file',
+          name: 'thumbnail',
+          label: ' تصویر ضروری',
+          rules: [(val) => !!val || 'فیلد ضروری است'],
+          lazyRules: true,
+          col: 'col-md-4',
+        },
         {
           type: 'separator',
           color: 'primary',
@@ -202,7 +247,14 @@ export default {
           col: 'col-md-12',
         },
         { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
-        { type: 'color',placeholder:'وارد نمایید', name: 'url', label: 'رنگ', col: 'col-md-6', rules: [(val) => !!val || 'فیلد ضروری است'] },
+        {
+          type: 'color',
+          placeholder: 'وارد نمایید',
+          name: 'url',
+          label: 'رنگ',
+          col: 'col-md-6',
+          rules: [(val) => !!val || 'فیلد ضروری است'],
+        },
         {
           type: 'separator',
           size: '0',
@@ -243,9 +295,9 @@ export default {
           placeholder: 'تایپ کنین سپس اینتر را بزنین',
           outlined: true,
           multiple: true,
-          showNoOption : false,
-          createNewValue : true,
-          newValueMode : 'add',
+          showNoOption: false,
+          createNewValue: true,
+          newValueMode: 'add',
           useChips: true,
           hideDropdownIcon: true,
           col: 'col-md-12',
@@ -261,9 +313,8 @@ export default {
           options: ['test1', 'test2', 'test3'],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
           lazyRules: true,
-
         },
         {
           type: 'select',
@@ -274,27 +325,25 @@ export default {
           multiple: true,
           optionLabel: 'name',
           options: [
-            
-                {
-                  id: 1,
-                  name: 'آقا',
-                  title: 'آقا'
-                },
-                {
-                  id: 2,
-                  name: 'خانم',
-                  title: 'خانم'
-                },
-                {
-                  id: 3,
-                  name: 'تست',
-                  title: 'تست'
-                }
-              
+            {
+              id: 1,
+              name: 'آقا',
+              title: 'آقا',
+            },
+            {
+              id: 2,
+              name: 'خانم',
+              title: 'خانم',
+            },
+            {
+              id: 3,
+              name: 'تست',
+              title: 'تست',
+            },
           ],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
           lazyRules: true,
         },
         {
@@ -306,22 +355,20 @@ export default {
           multiple: false,
           optionLabel: 'name',
           options: [
-            
-                {
-                  id: 1,
-                  name: 'آقا',
-                  title: 'آقا'
-                },
-                {
-                  id: 2,
-                  name: 'خانم',
-                  title: 'خانم'
-                }
-              
+            {
+              id: 1,
+              name: 'آقا',
+              title: 'آقا',
+            },
+            {
+              id: 2,
+              name: 'خانم',
+              title: 'خانم',
+            },
           ],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
           lazyRules: true,
         },
         {
@@ -332,15 +379,10 @@ export default {
           outlined: true,
           multiple: false,
           optionLabel: 'name',
-          options: [
-            'test1',
-            'test2',
-            'test3',
-            'test4',
-          ],
+          options: ['test1', 'test2', 'test3', 'test4'],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
           lazyRules: true,
         },
       ],
@@ -353,13 +395,32 @@ export default {
   },
   methods: {
     getData() {
-      console.log('flat values: ', this.$refs.formBuilder.getValues());
+      console.log(
+        'flat values: ',
+        this.$refs.formBuilder.getValues()[10].value
+      );
+      console.log(
+        'flat values: ',
+        this.$refs.formBuilder.getValues()[11].value
+      );
+      console.log(
+        'flat values: ',
+        this.$refs.formBuilder.getValues()[12].value
+      );
     },
-    myRule (val) {
+    myRule(val) {
       if (val === null) {
-        return 'You must make a selection!'        
+        return 'You must make a selection!';
       }
-    }
+    },
+    mockDataDatePickers() {
+      // debugger; // eslint-disable-line no-debugger
+      this.$refs.formBuilder.setInputValues({
+        test: '1400/02/05',
+        test1: '1401/02/05 12:30',
+        test2: '12:25:00',
+      });
+    },
   },
 };
 </script>
