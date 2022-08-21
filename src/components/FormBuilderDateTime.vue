@@ -1,5 +1,4 @@
 <template>
-  nowBtn:{{ nowBtn }}
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <div class="dateTime-input">
     <q-input
@@ -181,4 +180,20 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+.dateTime-input {
+  .time-input-dateTime {
+    .q-field__native {
+      padding: 24px 0 8px;
+    }
+  }
+}
+// removing dotted border for readonly fields from project
+:deep(.q-field--outlined.q-field--readonly .q-field__control:before) {
+  border-style: solid;
+}
+:deep(.q-field--standard.q-field--readonly .q-field__control:before) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>
