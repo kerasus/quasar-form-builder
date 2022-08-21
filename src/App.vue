@@ -178,7 +178,6 @@ export default {
           name: 'last_modification_time',
           label: 'تاریخ آخرین تغییرات',
           responseKey: 'test',
-          // value: '1401-07-24',
           placeholder: 'وارد کنید',
           todayBtn: true,
           title: 'عنوان فرعی',
@@ -196,6 +195,7 @@ export default {
           label: 'تاریخ ایجاد',
           calendar: 'persian',
           col: 'col-md-4',
+          placeholder: 'وارد نمایید',
         },
         {
           type: 'time',
