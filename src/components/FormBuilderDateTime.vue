@@ -134,15 +134,17 @@ export default {
     dateTime: {
       handler(n) {
         if (this.type === 'dateTime') {
-          this.tempValue = this.shamsiToMiladiDate(n.date) + ' ' + n.time;
+          this.tempValue =
+            this.shamsiToMiladiDate(n.date) + ' ' + this.formatTime(n.time);
         } else {
           if (this.type === 'date') {
             this.tempValue = this.shamsiToMiladiDate(n.date);
           }
           if (this.type === 'time') {
-            this.tempValue = n.time;
+            this.tempValue = this.formatTime(n.time);
           }
         }
+        console.log(this.tempValue);
         this.change(this.tempValue);
       },
       deep: true,
@@ -175,6 +177,9 @@ export default {
     },
     miladiToShamsiDate(date) {
       return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
+    },
+    formatTime(time) {
+      return moment(time, 'HH:mm:00').format('HH:mm:00');
     },
   },
 };
