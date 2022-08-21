@@ -1,5 +1,5 @@
 <template>
-  <div class="outsideLabel">{{placeholder? label : null}}</div>
+  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <q-select
     v-model="inputData"
     transition-show="jump-down"
@@ -8,7 +8,7 @@
     :option-label="optionLabel"
     :option-disable="optionDisable"
     :options="filteredOptions"
-    :label="placeholder? null : label"
+    :label="placeholder ? null : label"
     :stack-label="!!placeholder"
     :placeholder="placeholderSetter"
     :rules="rules"
@@ -20,6 +20,7 @@
     :disable="disable"
     emit-value
     :outlined="outlined"
+    :hide-dropdown-icon = "hideDropdownIcon"
     map-options
     clearable
     @update:model-value="change($event)"
@@ -27,7 +28,7 @@
     @filter="filterFn"
   >
     <template #no-option>
-      <q-item>
+      <q-item v-show="showNoOption">
         <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
       </q-item>
     </template>
@@ -52,12 +53,23 @@ export default {
       default: 'disable',
       type: String,
     },
+    newValueMode: {
+      default: 'add-unique',
+      type: String
+    },
+    hideDropdownIcon: {
+      default: false,
+      type: Boolean
+    },
+    showNoOption: {
+      default: true,
+      type: Boolean
+    },
   },
   data() {
     return {
       model: null,
       filteredOptions: this.options,
-      test: null
     };
   },
   methods: {
@@ -98,34 +110,45 @@ export default {
       // If "var" content is undefined/null, then it doesn't tampers with the model
       // and only resets the input textbox to empty string
 
-      if (val.length > 0) {
-        if (!this.filteredOptions.includes(val)) {
-          this.filteredOptions.push(val);
-        }
-        done(val, 'toggle');
-      }
+
+      //mr kerasus : why im wrote this code?
+      // if (val.length > 0) {
+      //   if (!this.filteredOptions.includes(val)) {
+      //     this.filteredOptions.push(val);
+      //   }
+      //   done(val, 'toggle');
+      // }
+        done(val, this.newValueMode);
     },
+    test(){
+      this.inputData = []
+    }
   },
   computed: {
-    placeholderSetter(){
-      // in single select after setting value, 
+    placeholderSetter() {
+      if(this.inputData === null){
+        return this.placeholder
+      }
+      // in single select after setting value,
       // v-model type changes to string
-      if(typeof this.inputData === 'string'){
+      if (typeof this.inputData === 'string') {
         return '';
       }
-      if(!this.inputData){
-        return this.placeholder;
-      }
       // in the multiple scenario, inputData type changes to Array!
-      if(this.multiple){
-        if(this.inputData.length){
-          return ''
-        }
+      if (this.multiple) {
+        if (this.inputData.length == 0) {
         return this.placeholder;
+        }
+          return '';
       }
-      return this.placeholder;
-    }
-  }
+      // be an object
+      if (Object.keys(this.inputData).length === 0) {
+        return this.placeholder
+      }
+      return '';
+    },
+  },
+ 
 };
 </script>
 

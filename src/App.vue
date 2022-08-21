@@ -110,7 +110,7 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-6',
           value: [
-            { type: 'input', name: 'id1', value: null, label: 'شناسه1', placeholder:'salam', col: 'col-md-6' },
+            { type: 'input', name: 'id1', value: null, label: 'شناسه1', inputType: 'number', placeholder:'salam', col: 'col-md-6' },
             { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
             { type: 'separator', size: '3px', separatorType: 'double', vertical: true, label: 'جدا کننده عمودی' },
             {
@@ -142,6 +142,7 @@ export default {
           name: 'last_modification_time',
           label: 'تاریخ آخرین تغییرات',
           placeholder: 'وارد کنید',
+          todayBtn: true,
           title: 'عنوان فرعی',
           calendar: 'persian',
           col: 'col-md-4',
@@ -162,6 +163,18 @@ export default {
           name: 'creation_dateTime',
           rules: [(val) => !!val || 'فیلد ضروری است'],
           label: 'تاریخ ایجاد',
+          multiple: true,
+          outlined: true,
+          calendar: 'persian',
+          col: 'col-md-4',
+          value: '',
+          placeholder:'وارد نمایید',
+        },
+         {
+          type: 'dateTime',
+          name: 'creation_dateTime',
+          rules: [(val) => !!val || 'فیلد ضروری است'],
+          label: 'تاریخ امتحان',
           calendar: 'persian',
           col: 'col-md-4',
           value: '',
@@ -172,7 +185,7 @@ export default {
           name: 'creation_time',
           nowBtn: true,
           rules: [(val) => !!val || 'فیلد ضروری است'],
-
+          outlined: true,
           label: 'زمان ایجاد',
           calendar: 'persian',
           col: 'col-md-4',
@@ -225,6 +238,21 @@ export default {
         },
         {
           type: 'select',
+          name: 'NewValueEventSelect',
+          label: ' سلکت  چندتایی اینپوت غیر یونیک',
+          placeholder: 'تایپ کنین سپس اینتر را بزنین',
+          outlined: true,
+          multiple: true,
+          showNoOption : false,
+          createNewValue : true,
+          newValueMode : 'add',
+          useChips: true,
+          hideDropdownIcon: true,
+          col: 'col-md-12',
+          // The New-Value-Event have 3 mode u that u can read on quasar.dev, and we define 'createNewValue' for turning on this feature
+        },
+        {
+          type: 'select',
           name: 'inputMultipleSelect',
           label: 'سلکت ضروری چند تایی',
           placeholder: 'انتخاب نمایید',
@@ -240,11 +268,76 @@ export default {
         {
           type: 'select',
           name: 'inputSingleSelect',
+          label: 'سلکت ضروری چندتایی',
+          placeholder: 'انتخاب نمایید',
+          outlined: true,
+          multiple: true,
+          optionLabel: 'name',
+          options: [
+            
+                {
+                  id: 1,
+                  name: 'آقا',
+                  title: 'آقا'
+                },
+                {
+                  id: 2,
+                  name: 'خانم',
+                  title: 'خانم'
+                },
+                {
+                  id: 3,
+                  name: 'تست',
+                  title: 'تست'
+                }
+              
+          ],
+          col: 'col-md-12',
+          // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
+          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          lazyRules: true,
+        },
+        {
+          type: 'select',
+          name: 'inputSingleSelect',
           label: 'سلکت ضروری تکی',
           placeholder: 'انتخاب نمایید',
           outlined: true,
           multiple: false,
-          options: ['test1', 'test2', 'test3'],
+          optionLabel: 'name',
+          options: [
+            
+                {
+                  id: 1,
+                  name: 'آقا',
+                  title: 'آقا'
+                },
+                {
+                  id: 2,
+                  name: 'خانم',
+                  title: 'خانم'
+                }
+              
+          ],
+          col: 'col-md-12',
+          // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
+          rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
+          lazyRules: true,
+        },
+        {
+          type: 'select',
+          name: 'inputSingleSelect',
+          label: 'سلکت ضروری تکی',
+          placeholder: 'انتخاب نمایید',
+          outlined: true,
+          multiple: false,
+          optionLabel: 'name',
+          options: [
+            'test1',
+            'test2',
+            'test3',
+            'test4',
+          ],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
           rules: [ val => val.length !== 0 || 'فیلد ضروری است' ],
