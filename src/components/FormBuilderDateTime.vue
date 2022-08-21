@@ -182,6 +182,11 @@ export default {
 
 <style scoped lang="scss">
 .dateTime-input {
+  display: flex;
+  flex-direction: row;
+  label {
+    width: 100%;
+  }
   .time-input-dateTime {
     .q-field__native {
       padding: 24px 0 8px;
