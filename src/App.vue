@@ -395,18 +395,7 @@ export default {
   },
   methods: {
     getData() {
-      console.log(
-        'flat values: ',
-        this.$refs.formBuilder.getValues()[10].value
-      );
-      console.log(
-        'flat values: ',
-        this.$refs.formBuilder.getValues()[11].value
-      );
-      console.log(
-        'flat values: ',
-        this.$refs.formBuilder.getValues()[12].value
-      );
+      console.log('flat values: ', this.$refs.formBuilder.getValues());
     },
     myRule(val) {
       if (val === null) {

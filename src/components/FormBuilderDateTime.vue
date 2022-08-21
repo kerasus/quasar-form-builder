@@ -151,7 +151,6 @@ export default {
         let temp = n.split(' ');
         this.dateTime.date = temp[0];
         this.dateTime.time = temp[1];
-        console.log(this.dateTime);
       }
     },
   },
