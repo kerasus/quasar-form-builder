@@ -49,6 +49,10 @@ export default {
       default: false,
       type: Boolean
     },
+    range: {
+      default: false,
+      type: Boolean
+    },
     useChips: {
       default: false,
       type: Boolean
@@ -167,6 +171,7 @@ export default {
       }
 
       return getFlatInputs(this.inputData)
-    }
+    },
+    
   }
 }
