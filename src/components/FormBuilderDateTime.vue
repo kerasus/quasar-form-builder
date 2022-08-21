@@ -81,11 +81,12 @@
 <script>
 import moment from 'moment-jalaali';
 import inputMixin from '../mixins/inputMixin';
-// NOTE: Value accepted from this component is based on Jalali format
-// you should pass to it Jalali date as string
+// NOTE: Value accepted from this component is based on Miladi format
+// you should pass to it Miladi date as string
 // output of this component (which name is 'value') is based on Miladi format.
 // SO:
-// INPUT: JALALI (STRING)
+// INPUT: MILADI (STRING)
+// SHOWING IN CALENDAR: JALALI (STRING)
 // OUTPUT: MILADI (STRING)
 export default {
   name: 'FormBuilderDateTime',
@@ -144,13 +145,16 @@ export default {
             this.tempValue = this.formatTime(n.time);
           }
         }
-        console.log(this.tempValue);
         this.change(this.tempValue);
       },
       deep: true,
     },
     value(n) {
-      if (n === '' || Number(n.split('-')[0]) > 2000) return;
+      if (n === '' || Number(n.split(' ')[0].split('-')[0]) > 2000) {
+        this.dateTime.date = this.miladiToShamsiDate(n.split(' ')[0]);
+        this.dateTime.time = this.formatTime(n.split(' ')[1]);
+        return;
+      }
       if (this.type === 'time') {
         this.dateTime.time = n;
       } else if (this.type === 'date') {
@@ -176,10 +180,10 @@ export default {
       return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
     },
     miladiToShamsiDate(date) {
-      return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
+      return moment(date, 'YYYY/MM/DD').format('jYYYY-jMM-jDD');
     },
     formatTime(time) {
-      return moment(time, 'HH:mm:00').format('HH:mm:00');
+      return moment(time, 'HH:mm').format('HH:mm:00');
     },
   },
 };

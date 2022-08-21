@@ -144,7 +144,7 @@ export default {
                 {
                   type: 'input',
                   name: 'id3',
-                  value: null,
+                  value: 1111111,
                   label: 'شناسه3',
                   placeholder: 'test',
                   col: 'col-md-6',
@@ -165,8 +165,9 @@ export default {
         {
           type: 'input',
           name: 'id',
-          value: null,
+          value: 1233333,
           label: 'شناسه ضروری',
+          responseKey: 'sss',
           outlined: true,
           col: 'col-md-6',
           rules: [(val) => !!val || 'فیلد ضروری است'],
@@ -406,8 +407,8 @@ export default {
     mockDataDatePickers() {
       // debugger; // eslint-disable-line no-debugger
       this.$refs.formBuilder.setInputValues({
-        test: '1400/02/05',
-        test1: '1401/02/05 12:30',
+        test: '2017-08-02',
+        test1: '2012-08-02 21:10',
         test2: '12:25:00',
       });
     },
