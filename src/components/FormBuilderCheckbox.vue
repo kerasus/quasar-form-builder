@@ -8,6 +8,7 @@
       :false-value="falseValue"
       :disable="disable"
       @update:model-value="change($event)"
+      @click="onClick"
     />
   </div>
 </template>

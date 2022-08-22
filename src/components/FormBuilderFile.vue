@@ -4,7 +4,7 @@
     <q-file
         :id="inputUid"
         v-model="file"
-        :label="placeholder? null : label" 
+        :label="placeholder? null : label"
         :stack-label="!!placeholder"
         :placeholder="placeholder"
         :disable="disable"
@@ -14,6 +14,7 @@
         :lazy-rules="lazyRules"
         @update:model-value="change($event)"
         @clear="onClearInputFile"
+        @click="onClick"
     />
     <label :for="inputUid">
       <q-img

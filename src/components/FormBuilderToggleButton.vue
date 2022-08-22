@@ -28,7 +28,7 @@
       :stretch="stretch"
       :class="col"
       @update:model-value="change($event)"
-
+      @click="onClick"
   />
 </template>
 

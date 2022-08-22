@@ -19,6 +19,7 @@
         @update:value="onValueUpdated"
         @input="change($event, inputIndex)"
         @change="change($event, inputIndex)"
+        @onClick="onClick($event, input)"
       />
     </div>
   </div>
@@ -89,7 +90,7 @@ export default {
       type: Boolean,
     },
   },
-  emits: ['input'],
+  emits: ['input', 'onClick'],
   data() {
     return {
       currentInput: null,
@@ -100,6 +101,9 @@ export default {
     };
   },
   methods: {
+    onClick (event, input) {
+      this.$emit('onClick', {event, input})
+    },
     getFormData() {
       const formHasFileInput = this.formHasFileInput();
       const formData = formHasFileInput ? new FormData() : {};

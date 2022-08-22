@@ -8,6 +8,7 @@
         :floating-menu="false"
         :options="options"
         @update:model-value="change($event)"
+        @click="onClick"
     />
     <!--eslint-disable-next-line-->
     <div v-else v-html="inputData" />

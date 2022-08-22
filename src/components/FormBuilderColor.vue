@@ -4,7 +4,7 @@
       v-model="inputData"
       :disable="disable"
       :label="placeholder? null : label"
-      :stack-label="!!placeholder" 
+      :stack-label="!!placeholder"
       :outlined="outlined"
       :placeholder="placeholder"
       :rules="rules"
@@ -18,6 +18,7 @@
                    default-value="#4b9c70ff"
                    :palette="palette"
                    @update:model-value="change($event)"
+                   @click="onClick"
           />
         </q-menu>
       </q-icon>

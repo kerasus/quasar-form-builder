@@ -13,6 +13,7 @@
       :outlined="outlined"
       :placeholder="placeholder"
       @update:model-value="change($event)"
+      @click="onClick"
   />
 </template>
 

@@ -55,7 +55,6 @@
       readonly
       :outlined="outlined"
       @click="showTime = true"
-      @clear="clearDate"
     >
       <template #append>
         <q-menu v-model="showTime">
@@ -112,6 +111,10 @@ export default {
     },
     clockIcon: {
       default: 'access_time',
+      type: String,
+    },
+    title: {
+      default: '',
       type: String,
     },
     placeholder: {

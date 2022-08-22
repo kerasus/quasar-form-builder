@@ -21,11 +21,9 @@
         get data
       </q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
-
       <br />
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-
-      <form-builder ref="formBuilder" v-model:value="inputs" />
+      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" />
     </q-page-container>
   </q-layout>
 </template>
@@ -177,14 +175,14 @@ export default {
         {
           type: 'input',
           name: 'id',
-          value: 1233333,
+          // value: 1233333,
           label: 'شناسه ضروری',
-          responseKey: 'sss',
-          outlined: true,
+          // responseKey: 'sss',
+          // outlined: true,
           col: 'col-md-6',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
-          lazyRules: true,
-          placeholder: 'test',
+          // rules: [(val) => !!val || 'فیلد ضروری است'],
+          // lazyRules: true,
+          // placeholder: 'test',
         },
         {
           type: 'date',
@@ -408,6 +406,9 @@ export default {
     };
   },
   methods: {
+    onClick (data) {
+      console.log('data', data)
+    },
     getData() {
       console.log('flat values: ', this.$refs.formBuilder.getValues());
     },
