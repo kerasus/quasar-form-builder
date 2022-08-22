@@ -16,6 +16,7 @@
         :is="getComponent(input)"
         v-model:value="input.value"
         v-bind="input"
+        :disable="disable"
         @update:value="onValueUpdated"
         @input="change($event, inputIndex)"
         @change="change($event, inputIndex)"
