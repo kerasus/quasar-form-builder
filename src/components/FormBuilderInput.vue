@@ -1,8 +1,8 @@
 <template>
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <q-input
-    :filled="filled"
     v-model="inputData"
+    :filled="filled"
     :rules="rules"
     :lazy-rules="lazyRules"
     :label="placeholder ? null : label"

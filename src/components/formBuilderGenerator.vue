@@ -22,7 +22,8 @@
           ></q-select>
         </div>
         <div v-if="state === 'chooseConfig'">
-          <div v-if="type.value === 'FormBuilderInput'">
+          <!-- <div v-if="type.value === 'FormBuilderInput'"> -->
+          <div>
             demo for {{ type.value }}:
             <p>
               note that <b>name</b> will be used for finding inputs, so it
@@ -33,9 +34,15 @@
               There are two options to show label in here, if you don't pass
               <b>placeholder</b> (remove it down here) label will float in style
               of material. Passing both placeholder and label to input will make
-              label stick above the input.
+              label stick above the input. <br />
+              If you use <b>select</b> and have options which will fetch from
+              server, and you use <b>quasar-crud</b>, you can use
+              <b>afterGetData</b> method from there to load those options to
+              your input.
             </p>
-            <form-builder ref="formBuilder" v-model:value="newInput" />
+            <div class="generated-element">
+              <form-builder ref="formBuilder" v-model:value="newInput" />
+            </div>
             <div class="q-mt-md">configs to tweak:</div>
             <div v-for="c in selectedConfig.value" :key="c">
               <q-input
@@ -54,6 +61,13 @@
                 :label="c.value"
                 :options="c.options"
               ></q-select>
+              <div v-if="c.type === 'options'" class="options-generator">
+                Option Generator:
+                {{ generatedOptions }}
+                <q-input v-model="optionLabel" label="label"></q-input>
+                <q-input v-model="optionValue" label="value"></q-input>
+                <q-btn @click="addToOptions()">add</q-btn>
+              </div>
             </div>
             <q-btn @click="submitConfig()" class="q-mt-md">submit</q-btn>
           </div>
@@ -62,12 +76,13 @@
       <div class="input-generator"></div>
     </q-card-section>
   </q-card>
-  <q-card v-show="inputs" class="q-ma-lg">
+  <q-card v-show="inputs.length" class="q-ma-lg">
+    <div class="title">Generated Form</div>
     inputs : {{ inputs }}
 
     <form-builder v-model:value="inputs" />
     <q-card-actions>
-      <q-btn flat color="primary">Generate JSON</q-btn>
+      <q-btn flat color="primary">Show JSON</q-btn>
       <q-btn flat color="secondary">Copy JSON</q-btn>
     </q-card-actions>
   </q-card>
@@ -88,6 +103,10 @@ export default {
           label: 'simple input',
           value: 'FormBuilderInput',
         },
+        {
+          label: 'select input',
+          value: 'FormBuilderSelect',
+        },
       ],
       type: null,
       config: {
@@ -95,6 +114,7 @@ export default {
         label: 'label',
         placeholder: 'placeholder',
         col: 'col-md-12',
+        inputType: 'text',
       },
       configs: [
         {
@@ -104,10 +124,6 @@ export default {
             { type: 'text', value: 'label' },
             { type: 'text', value: 'placeholder' },
             { type: 'text', value: 'col' },
-            { type: 'boolean', value: 'filled' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'boolean', value: 'rounded' },
             {
               type: 'select',
               value: 'inputType',
@@ -121,9 +137,33 @@ export default {
                 'url',
               ],
             },
+            { type: 'boolean', value: 'filled' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
+          ],
+        },
+        {
+          type: 'select',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'text', value: 'col' },
+            { type: 'boolean', value: 'multiple' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'useChips' },
+            {
+              type: 'options',
+              value: 'options',
+            },
           ],
         },
       ],
+      optionLabel: '',
+      optionValue: '',
+      generatedOptions: [],
     };
   },
   methods: {
@@ -132,6 +172,7 @@ export default {
       // flushing newInput
       this.newInput = [];
       this.prepareConfig();
+      console.log(this.config);
       this.newInput.push(this.config);
     },
     prepareConfig() {
@@ -140,6 +181,12 @@ export default {
         this.selectedConfig = this.configs.find(
           (c) => c.type == this.config.type
         );
+      } else if (this.type.value === 'FormBuilderSelect') {
+        this.config.type = 'select';
+        this.selectedConfig = this.configs.find(
+          (c) => c.type == this.config.type
+        );
+        this.config.options = this.generatedOptions;
       }
     },
     submitConfig() {
@@ -153,6 +200,14 @@ export default {
         col: 'col-md-12',
       };
     },
+    addToOptions() {
+      this.generatedOptions.push({
+        label: this.optionLabel,
+        value: this.optionValue,
+      });
+      this.optionLabel = '';
+      this.optionValue = '';
+    },
   },
   components: {
     FormBuilder,
@@ -164,5 +219,10 @@ export default {
 .title {
   font-size: 16px;
   padding: 20px;
+}
+.generated-element {
+  margin: 20px;
+  border: 1px dashed;
+  border-radius: 8px;
 }
 </style>

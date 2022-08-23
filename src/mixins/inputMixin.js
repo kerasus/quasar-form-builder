@@ -136,7 +136,7 @@ export default {
     inputType: {
       default: 'text',
       type: String
-    }
+    },
   },
   watch: {
     value () {
