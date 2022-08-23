@@ -181,13 +181,7 @@ export default {
       this.showTime = true
     },
     show(t) {
-      if (this.type === 'dateTime') {
-        return true;
-      }
-      if (this.type === t) {
-        return true;
-      }
-      return false;
+      return this.type === 'dateTime' || this.type === t;
     },
     shamsiToMiladiDate(date) {
       return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
