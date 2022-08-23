@@ -23,7 +23,7 @@
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
       <br />
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" />
+      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="true" />
     </q-page-container>
   </q-layout>
 </template>

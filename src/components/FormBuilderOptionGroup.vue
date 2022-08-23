@@ -10,7 +10,7 @@
       :inline="inline"
       :dense="dense"
       :type="typeOfInput"
-      :disable="disable"
+      :disable="disable || readonly"
       @update:model-value="change($event)"
       @click="onClick"
     />

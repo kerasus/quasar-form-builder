@@ -18,6 +18,7 @@
     use-input
     input-debounce="500"
     :disable="disable"
+    :readonly="readonly"
     emit-value
     :outlined="outlined"
     :hide-dropdown-icon = "hideDropdownIcon"

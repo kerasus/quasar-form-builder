@@ -9,6 +9,7 @@
       :stack-label="!!placeholder"
       :type="inputType"
       :disable="disable"
+      :readonly="readonly"
       :rounded="rounded"
       :outlined="outlined"
       :placeholder="placeholder"

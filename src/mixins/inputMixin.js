@@ -12,6 +12,10 @@ export default {
       default: false,
       type: Boolean
     },
+    readonly: {
+      default: false,
+      type: Boolean,
+    },
     filled: {
       default: false,
       type: Boolean

@@ -2,7 +2,7 @@
   <div>
     <p v-text="label"/>
     <q-editor
-        v-if="!disable"
+        v-if="!disable && !readonly"
         v-model="inputData"
         :dense="$q.screen.lt.md"
         :toolbar="[

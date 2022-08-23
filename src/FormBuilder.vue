@@ -17,6 +17,7 @@
         v-model:value="input.value"
         v-bind="input"
         :disable="disable"
+        :readonly="readonly"
         @update:value="onValueUpdated"
         @input="change($event, inputIndex)"
         @change="change($event, inputIndex)"
@@ -85,11 +86,7 @@ export default {
     value: {
       default: () => [],
       type: Array,
-    },
-    disable: {
-      default: false,
-      type: Boolean,
-    },
+    }
   },
   emits: ['input', 'onClick'],
   data() {
@@ -103,7 +100,16 @@ export default {
   },
   methods: {
     onClick (event, input) {
-      this.$emit('onClick', {event, input})
+      function getEvent (data) {
+        if (data.event) {
+          return getEvent(data.event)
+        }
+
+        return data
+      }
+
+      const absEvent = getEvent(event)
+      this.$emit('onClick', {event: absEvent, input})
     },
     getFormData() {
       const formHasFileInput = this.formHasFileInput();

@@ -8,6 +8,7 @@
       :min="min"
       :max="max"
       :disable="disable"
+      :readonly="readonly"
       @update:model-value="change($event)"
       @click="onClick"
     />

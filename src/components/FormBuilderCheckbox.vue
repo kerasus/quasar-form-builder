@@ -7,6 +7,7 @@
       :true-value="trueValue"
       :false-value="falseValue"
       :disable="disable"
+      :readonly="readonly"
       @update:model-value="change($event)"
       @click="onClick"
     />

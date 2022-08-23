@@ -8,6 +8,7 @@
         :stack-label="!!placeholder"
         :placeholder="placeholder"
         :disable="disable"
+        :readonly="readonly"
         clearable
         :model-value="file"
         :rules="rules"

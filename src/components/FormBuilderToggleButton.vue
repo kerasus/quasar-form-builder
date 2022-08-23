@@ -12,6 +12,7 @@
       :dense="dense"
       :type="type"
       :disable="disable"
+      :readonly="readonly"
       :text-color="textColor"
       :toggle-color="toggleColor"
       :toggle-text-color="toggleTextColor"
