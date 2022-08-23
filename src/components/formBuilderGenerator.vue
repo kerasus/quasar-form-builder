@@ -144,6 +144,14 @@ export default {
           label: 'dateTime input',
           value: 'dateTime',
         },
+        {
+          label: 'inputEditor',
+          value: 'inputEditor',
+        },
+        {
+          label: 'file input',
+          value: 'file',
+        },
       ],
       type: null,
       config: {
@@ -250,6 +258,25 @@ export default {
             { type: 'text', value: 'clockIcon' },
             { type: 'boolean', value: 'nowBtn' },
             { type: 'boolean', value: 'todayBtn' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'inputEditor',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'file',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
             { type: 'text', value: 'col' },
           ],
         },
