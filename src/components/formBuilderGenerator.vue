@@ -152,6 +152,10 @@ export default {
           label: 'file input',
           value: 'file',
         },
+        {
+          label: 'avatar input',
+          value: 'avatar',
+        },
       ],
       type: null,
       config: {
@@ -277,6 +281,19 @@ export default {
             { type: 'text', value: 'label' },
             { type: 'text', value: 'placeholder' },
             { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'avatar',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'size' },
+            { type: 'text', value: 'fontSize' },
+            { type: 'text', value: 'color' },
+            { type: 'text', value: 'textColor' },
+            { type: 'text', value: 'src' },
+
             { type: 'text', value: 'col' },
           ],
         },
