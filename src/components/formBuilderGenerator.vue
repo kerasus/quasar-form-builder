@@ -72,11 +72,15 @@
                 :options="c.options"
               ></q-select>
               <div v-if="c.type === 'options'" class="options-generator">
-                Option Generator:
-                {{ generatedOptions }}
-                <q-input v-model="optionLabel" label="label"></q-input>
-                <q-input v-model="optionValue" label="value"></q-input>
-                <q-btn @click="addToOptions()">add</q-btn>
+                <div class="option-json">
+                  Option Generator:
+                  {{ generatedOptions }}
+                </div>
+                <div class="options-inputs">
+                  <q-input v-model="optionLabel" label="label"></q-input>
+                  <q-input v-model="optionValue" label="value"></q-input>
+                  <q-btn @click="addToOptions()">add</q-btn>
+                </div>
               </div>
             </div>
             <q-btn @click="submitConfig()" class="q-mt-md">submit</q-btn>
@@ -174,6 +178,32 @@ export default {
             },
           ],
         },
+        {
+          type: 'checkbox',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'text', value: 'color' },
+            { type: 'text', value: 'trueValue' },
+            { type: 'text', value: 'falseValue' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' },
+            {
+              type: 'select',
+              value: 'inputType',
+              options: [
+                'number',
+                'text',
+                'textarea',
+                'password',
+                'email',
+                'tel',
+                'url',
+              ],
+            },
+          ],
+        },
       ],
       optionLabel: '',
       optionValue: '',
@@ -183,7 +213,6 @@ export default {
   methods: {
     newInputBuild() {
       this.state = 'chooseConfig';
-      // flushing newInput
       this.newInput = [];
       this.generatedOptions = [];
       this.prepareConfig();
@@ -252,5 +281,13 @@ export default {
 .top {
   display: flex;
   justify-content: space-between;
+}
+.options-inputs {
+  display: flex;
+  justify-content: space-between;
+  label {
+    width: 100%;
+    margin-right: 20px;
+  }
 }
 </style>
