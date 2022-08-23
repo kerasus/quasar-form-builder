@@ -13,7 +13,7 @@
     </div>
     <q-card-section>
       <p class="desc">
-        Form builder is a tool for creating forms with ease and speed. Add
+        Form builder is a great tool for creating forms with ease and speed. Add
         inputs you want, and copy the generated json for using inside your
         project.
       </p>
@@ -48,7 +48,13 @@
               If you use <b>select</b> and have options which will fetch from
               server, and you use <b>quasar-crud</b>, you can use
               <b>afterGetData</b> method from there to load those options to
-              your input.
+              your input. <br />
+              For <b>dateTime picker</b>, note that
+              <b>user will always see shamsi date</b>, but the end result (
+              which stored in <b>value</b> ) will be in <b>miladi</b> . <br />
+              Also note that in <b>dateTime picker</b> the final date will be in
+              format of
+              <b>"YYYY-MM-DD HH:mm:00"</b>
             </p>
             <div class="generated-element">
               <form-builder ref="formBuilder" v-model:value="newInput" />
@@ -133,6 +139,10 @@ export default {
         {
           label: 'color input',
           value: 'color',
+        },
+        {
+          label: 'dateTime input',
+          value: 'dateTime',
         },
       ],
       type: null,
@@ -220,6 +230,26 @@ export default {
             { type: 'boolean', value: 'disable' },
             { type: 'boolean', value: 'outlined' },
             { type: 'boolean', value: 'rounded' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'dateTime',
+          value: [
+            {
+              type: 'select',
+              value: 'type',
+              options: ['date', 'time', 'dateTime'],
+            },
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'text', value: 'calendarIcon' },
+            { type: 'text', value: 'clockIcon' },
+            { type: 'boolean', value: 'nowBtn' },
+            { type: 'boolean', value: 'todayBtn' },
             { type: 'text', value: 'col' },
           ],
         },
