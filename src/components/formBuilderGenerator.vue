@@ -57,6 +57,7 @@
             <div v-for="c in selectedConfig.value" :key="c">
               <q-input
                 v-if="c.type === 'text'"
+                :type="c.inputType"
                 v-model="config[c.value]"
                 :label="c.value"
               ></q-input>
@@ -125,6 +126,10 @@ export default {
           label: 'checkbox input',
           value: 'checkbox',
         },
+        {
+          label: 'range slider input',
+          value: 'rangeSlider',
+        },
       ],
       type: null,
       config: {
@@ -188,6 +193,16 @@ export default {
             { type: 'text', value: 'trueValue' },
             { type: 'text', value: 'falseValue' },
             { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'rangeSlider',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', inputType: 'number', value: 'min' },
+            { type: 'text', inputType: 'number', value: 'max' },
             { type: 'text', value: 'col' },
           ],
         },
