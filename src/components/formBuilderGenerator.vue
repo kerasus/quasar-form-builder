@@ -1,6 +1,16 @@
 <template>
   <q-card class="q-ma-lg">
-    <div class="title">Form Builder Generator</div>
+    <div class="top">
+      <div class="title">Form Builder Generator</div>
+      <q-btn
+        v-show="state !== ''"
+        class="back-btn"
+        size="12px"
+        rounded
+        @click="back()"
+        >back</q-btn
+      >
+    </div>
     <q-card-section>
       <p class="desc">
         Form builder is a tool for creating forms with ease and speed. Add
@@ -101,11 +111,15 @@ export default {
       options: [
         {
           label: 'simple input',
-          value: 'FormBuilderInput',
+          value: 'input',
         },
         {
           label: 'select input',
-          value: 'FormBuilderSelect',
+          value: 'select',
+        },
+        {
+          label: 'checkbox input',
+          value: 'checkbox',
         },
       ],
       type: null,
@@ -171,23 +185,17 @@ export default {
       this.state = 'chooseConfig';
       // flushing newInput
       this.newInput = [];
+      this.generatedOptions = [];
       this.prepareConfig();
-      console.log(this.config);
       this.newInput.push(this.config);
     },
     prepareConfig() {
-      if (this.type.value === 'FormBuilderInput') {
-        this.config.type = 'input';
-        this.selectedConfig = this.configs.find(
-          (c) => c.type == this.config.type
-        );
-      } else if (this.type.value === 'FormBuilderSelect') {
-        this.config.type = 'select';
-        this.selectedConfig = this.configs.find(
-          (c) => c.type == this.config.type
-        );
-        this.config.options = this.generatedOptions;
-      }
+      // finding appropriate config and set it.
+      this.selectedConfig = this.configs.find((c) => c.type == this.type.value);
+      // manully set type to config to load it.
+      this.config.type = this.type.value;
+      // this will use for select copmonent to make options dynamic.
+      this.config.options = this.generatedOptions;
     },
     submitConfig() {
       this.inputs.push(...this.newInput);
@@ -208,6 +216,18 @@ export default {
       this.optionLabel = '';
       this.optionValue = '';
     },
+    back() {
+      this.state = '';
+      this.type = null;
+      this.newInput = [];
+      this.generatedOptions = [];
+      this.config = {
+        name: 'name',
+        label: 'label',
+        placeholder: 'placeholder',
+        col: 'col-md-12',
+      };
+    },
   },
   components: {
     FormBuilder,
@@ -224,5 +244,13 @@ export default {
   margin: 20px;
   border: 1px dashed;
   border-radius: 8px;
+}
+.back-btn {
+  font-size: 12px;
+  margin: 10px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
