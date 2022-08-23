@@ -130,6 +130,10 @@ export default {
           label: 'range slider input',
           value: 'rangeSlider',
         },
+        {
+          label: 'color input',
+          value: 'color',
+        },
       ],
       type: null,
       config: {
@@ -203,6 +207,19 @@ export default {
             { type: 'text', value: 'label' },
             { type: 'text', inputType: 'number', value: 'min' },
             { type: 'text', inputType: 'number', value: 'max' },
+            { type: 'text', value: 'col' },
+            { type: 'boolean', value: 'disable' },
+          ],
+        },
+        {
+          type: 'color',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
             { type: 'text', value: 'col' },
           ],
         },
