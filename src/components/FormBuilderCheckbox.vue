@@ -6,8 +6,7 @@
       :label="label"
       :true-value="trueValue"
       :false-value="falseValue"
-      :disable="disable"
-      :readonly="readonly"
+      :disable="disable || readonly"
       @update:model-value="change($event)"
       @click="onClick"
     />

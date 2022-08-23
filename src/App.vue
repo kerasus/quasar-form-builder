@@ -108,6 +108,7 @@ export default {
           size: '20px',
         },
 
+        { type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-4' },
         {
           type: CustomComponent,
           props: { name: 'ali' },
