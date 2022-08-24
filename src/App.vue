@@ -17,6 +17,7 @@
       </q-toolbar>
     </q-header>
     <q-page-container>
+      <form-builder-generator></form-builder-generator>
       <q-btn color="blue" class="q-my-md full-width" @click="getData">
         get data
       </q-btn>
@@ -36,11 +37,12 @@
 <script>
 import { ref } from 'vue';
 import FormBuilder from './FormBuilder';
+import FormBuilderGenerator from './components/formBuilderGenerator';
 import CustomComponent from './CustomComponent';
 
 export default {
   name: 'LayoutDefault',
-  components: { FormBuilder },
+  components: { FormBuilder,FormBuilderGenerator },
   data() {
     return {
       readonly: false,

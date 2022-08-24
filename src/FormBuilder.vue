@@ -12,6 +12,20 @@
         getComponent(input) + '-col',
       ]"
     >
+      <div v-if="showGeneratorButtons">
+        <q-btn size="xs" round color="primary" @click="edit(inputIndex)"
+          >edit</q-btn
+        >
+        <q-btn
+          size="xs"
+          round
+          class="q-ml-xs"
+          color="red"
+          @click="remove(inputIndex)"
+          >x</q-btn
+        >
+      </div>
+
       <component
         :is="getComponent(input)"
         v-model:value="input.value"
@@ -86,7 +100,15 @@ export default {
     value: {
       default: () => [],
       type: Array,
-    }
+    },
+    disable: {
+      default: false,
+      type: Boolean,
+    },
+    showGeneratorButtons: {
+      default: false,
+      type: Boolean,
+    },
   },
   emits: ['input', 'onClick'],
   data() {
@@ -293,6 +315,13 @@ export default {
     },
     onValueUpdated() {
       this.$emit('update:value', this.inputData);
+    },
+    remove(i) {
+      this.inputData.splice(i, 1);
+      this.onValueUpdated();
+    },
+    edit(i) {
+      this.$emit('edit', i);
     },
   },
 };

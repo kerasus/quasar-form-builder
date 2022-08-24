@@ -1,5 +1,5 @@
 <template>
-  <div class="outsideLabel">{{placeholder? label : null}}</div>
+  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <q-input
       :filled="filled"
       v-model="inputData"
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin'
+import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderInput',
   mixins: [inputMixin],
@@ -32,6 +32,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
