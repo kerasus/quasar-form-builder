@@ -2,12 +2,13 @@
   <div>
     <p v-text="label"/>
     <vue-tiptap-katex
-        v-if="!disable"
+        v-if="!disable && !readonly"
         v-model="inputData"
         :bubble-menu="false"
         :floating-menu="false"
         :options="options"
         @update:model-value="change($event)"
+        @click="onClick"
     />
     <!--eslint-disable-next-line-->
     <div v-else v-html="inputData" />

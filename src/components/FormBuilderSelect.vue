@@ -18,6 +18,7 @@
     use-input
     input-debounce="500"
     :disable="disable"
+    :readonly="readonly"
     emit-value
     :outlined="outlined"
     :hide-dropdown-icon = "hideDropdownIcon"
@@ -26,6 +27,7 @@
     @update:model-value="change($event)"
     @new-value="createValue"
     @filter="filterFn"
+    @click="onClick"
   >
     <template #no-option>
       <q-item v-show="showNoOption">
@@ -148,7 +150,7 @@ export default {
       return '';
     },
   },
- 
+
 };
 </script>
 

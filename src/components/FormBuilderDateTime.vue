@@ -15,11 +15,13 @@
       :rules="rules"
       :lazy-rules="lazyRules"
       :outlined="outlined"
-      @click="showDate = true"
+      @click="showDateMenu"
     >
       <template #prepend>
         <q-icon :name="calendarIcon" class="cursor-pointer">
-          <q-menu v-model="showDate">
+          <q-menu v-if="!readonly"
+                  v-model="showDate"
+          >
             <q-date
               v-model="dateTime.date"
               :calendar="calendar"
@@ -54,11 +56,12 @@
       :lazy-rules="lazyRules"
       readonly
       :outlined="outlined"
-      @click="showTime = true"
-      @clear="clearDate"
+      @click="showTimeMenu"
     >
       <template #append>
-        <q-menu v-model="showTime">
+        <q-menu v-if="!readonly"
+                v-model="showTime"
+        >
           <q-time
             v-model="dateTime.time"
             mask="HH:mm:00"
@@ -114,6 +117,10 @@ export default {
       default: 'access_time',
       type: String,
     },
+    title: {
+      default: '',
+      type: String,
+    },
     placeholder: {
       default: '',
       type: String,
@@ -167,14 +174,14 @@ export default {
     },
   },
   methods: {
+    showDateMenu () {
+      this.showDate = true
+    },
+    showTimeMenu () {
+      this.showTime = true
+    },
     show(t) {
-      if (this.type === 'dateTime') {
-        return true;
-      }
-      if (this.type === t) {
-        return true;
-      }
-      return false;
+      return this.type === 'dateTime' || this.type === t;
     },
     shamsiToMiladiDate(date) {
       return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');

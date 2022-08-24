@@ -2,7 +2,7 @@
   <div>
     <p v-text="label"/>
     <q-editor
-        v-if="!disable"
+        v-if="!disable && !readonly"
         v-model="inputData"
         :dense="$q.screen.lt.md"
         :toolbar="[
@@ -85,6 +85,7 @@
     verdana: 'Verdana'
   }"
         @update:model-value="change($event)"
+        @click="onClick"
     />
     <!--eslint-disable-next-line-->
     <div v-else v-html="inputData" />

@@ -22,11 +22,14 @@
         get data
       </q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
-
+      <br />
+      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly" />
+      <q-checkbox v-model="disable" :model-value="disable" label="disable" />
+      <br />
+      <br />
       <br />
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-
-      <form-builder ref="formBuilder" v-model:value="inputs" />
+      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly" :disable="disable" />
     </q-page-container>
   </q-layout>
 </template>
@@ -42,6 +45,8 @@ export default {
   components: { FormBuilder,FormBuilderGenerator },
   data() {
     return {
+      readonly: false,
+      disable: false,
       inputs: [
         {
           type: 'RangeSlider',
@@ -105,6 +110,7 @@ export default {
           size: '20px',
         },
 
+        { type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-4' },
         {
           type: CustomComponent,
           props: { name: 'ali' },
@@ -179,14 +185,14 @@ export default {
         {
           type: 'input',
           name: 'id',
-          value: 1233333,
+          // value: 1233333,
           label: 'شناسه ضروری',
-          responseKey: 'sss',
-          outlined: true,
+          // responseKey: 'sss',
+          // outlined: true,
           col: 'col-md-6',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
-          lazyRules: true,
-          placeholder: 'test',
+          // rules: [(val) => !!val || 'فیلد ضروری است'],
+          // lazyRules: true,
+          // placeholder: 'test',
         },
         {
           type: 'date',
@@ -410,6 +416,9 @@ export default {
     };
   },
   methods: {
+    onClick (data) {
+      console.log('data', data)
+    },
     getData() {
       console.log('flat values: ', this.$refs.formBuilder.getValues());
     },

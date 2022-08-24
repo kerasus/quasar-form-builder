@@ -6,8 +6,9 @@
       :label="label"
       :true-value="trueValue"
       :false-value="falseValue"
-      :disable="disable"
+      :disable="disable || readonly"
       @update:model-value="change($event)"
+      @click="onClick"
     />
   </div>
 </template>

@@ -30,9 +30,12 @@
         :is="getComponent(input)"
         v-model:value="input.value"
         v-bind="input"
+        :disable="disable"
+        :readonly="readonly"
         @update:value="onValueUpdated"
         @input="change($event, inputIndex)"
         @change="change($event, inputIndex)"
+        @onClick="onClick($event, input)"
       />
     </div>
   </div>
@@ -107,7 +110,7 @@ export default {
       type: Boolean,
     },
   },
-  emits: ['input'],
+  emits: ['input', 'onClick'],
   data() {
     return {
       currentInput: null,
@@ -118,6 +121,18 @@ export default {
     };
   },
   methods: {
+    onClick (event, input) {
+      function getEvent (data) {
+        if (data.event) {
+          return getEvent(data.event)
+        }
+
+        return data
+      }
+
+      const absEvent = getEvent(event)
+      this.$emit('onClick', {event: absEvent, input})
+    },
     getFormData() {
       const formHasFileInput = this.formHasFileInput();
       const formData = formHasFileInput ? new FormData() : {};

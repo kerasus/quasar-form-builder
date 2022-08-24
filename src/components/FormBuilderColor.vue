@@ -4,7 +4,7 @@
       v-model="inputData"
       :disable="disable"
       :label="placeholder? null : label"
-      :stack-label="!!placeholder" 
+      :stack-label="!!placeholder"
       :outlined="outlined"
       :placeholder="placeholder"
       :rules="rules"
@@ -13,11 +13,12 @@
   >
     <template v-slot:append>
       <q-icon name="colorize" class="cursor-pointer">
-        <q-menu v-model="showing">
+        <q-menu v-if="!readonly" v-model="showing">
           <q-color v-model="inputData" square flat
                    default-value="#4b9c70ff"
                    :palette="palette"
                    @update:model-value="change($event)"
+                   @click="onClick"
           />
         </q-menu>
       </q-icon>
