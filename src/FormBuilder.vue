@@ -304,7 +304,6 @@ export default {
     remove(i) {
       this.inputData.splice(i, 1);
       this.onValueUpdated();
-      console.log(this.inputData);
     },
     edit(i) {
       this.$emit('edit', i);

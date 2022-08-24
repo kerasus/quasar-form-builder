@@ -528,8 +528,6 @@ export default {
         this.newInput = [];
         this.prepareConfig();
         this.newInput.push(this.config);
-      } else {
-        console.log('here');
       }
     },
     prepareConfig() {
@@ -544,7 +542,6 @@ export default {
       if (!this.editMode) {
         this.inputs.push(...this.newInput);
       } else {
-        console.log(this.newInput);
         this.inputs[this.editIndex] = this.newInput[0];
       }
       this.state = '';
@@ -586,7 +583,6 @@ export default {
     edit(i) {
       this.editMode = true;
       this.editIndex = i;
-      console.log(this.inputs[i].type);
       this.type = this.options.find((o) => o.value === this.inputs[i].type);
       this.selectedConfig = this.configs.find((c) => c.type == this.type.value);
       this.config = this.inputs[i];
