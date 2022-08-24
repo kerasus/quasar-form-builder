@@ -156,6 +156,10 @@ export default {
           label: 'avatar input',
           value: 'avatar',
         },
+        {
+          label: 'optionGroup input',
+          value: 'optionGroup',
+        },
       ],
       type: null,
       config: {
@@ -289,6 +293,41 @@ export default {
           value: [
             { type: 'text', value: 'name' },
             { type: 'text', value: 'size' },
+            { type: 'text', value: 'fontSize' },
+            { type: 'text', value: 'color' },
+            { type: 'text', value: 'textColor' },
+            { type: 'text', value: 'src' },
+
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'optionGroup',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'color' },
+            { type: 'boolean', value: 'inline' },
+            {
+              type: 'options',
+              value: 'options',
+            },
+            {
+              type: 'select',
+              value: 'typeOfInput',
+              options: ['radio', 'checkbox', 'toggle'],
+            },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'separator',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'boolean', value: 'borderTopStyle' },
+            { type: 'boolean', value: 'borderLeftStyle' },
+            { type: 'boolean', value: 'borderTopStyle' },
             { type: 'text', value: 'fontSize' },
             { type: 'text', value: 'color' },
             { type: 'text', value: 'textColor' },
