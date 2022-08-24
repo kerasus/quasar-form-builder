@@ -77,10 +77,12 @@
           </ul>
         </div>
         <q-btn @click="state = 'chooseType'">add new input</q-btn>
+        <q-btn class="q-ml-md" @click="state = 'addJson'"
+          >import json to work on</q-btn
+        >
       </div>
-
-      <div class="controls">
-        <div v-if="state === 'chooseType'">
+      <div v-if="state === 'chooseType'" class="controls">
+        <div>
           generating new input: <br />
           selected input: {{ type?.value }}
           <q-select
@@ -132,7 +134,11 @@
           </div>
         </div>
       </div>
-      <div class="input-generator"></div>
+      <div v-if="state === 'addJson'">
+        here you can import your formbuilder json to work on it. <br />
+        Try to copy paste, not type in here.
+        <q-input v-model="importJson"></q-input>
+      </div>
     </q-card-section>
   </q-card>
 </template>
@@ -456,6 +462,7 @@ export default {
       generatedOptions: [],
       jsonShow: false,
       gFormShow: false,
+      importJson: '',
     };
   },
   methods: {
@@ -513,6 +520,15 @@ export default {
   components: {
     FormBuilder,
     VueJsonPretty,
+  },
+  watch: {
+    importJson(n) {
+      this.inputs = eval(n);
+      alert('json imported successfully');
+      this.jsonShow = true;
+      this.gFormShow = true;
+      this.state = '';
+    },
   },
 };
 </script>
