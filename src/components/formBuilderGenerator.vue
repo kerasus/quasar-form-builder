@@ -1,5 +1,23 @@
 <template>
   <q-card class="q-ma-lg">
+    <div class="title">Generated Form</div>
+    <div v-show="jsonShow" class="q-ma-md">
+      <div class="sub-title">Generated Json:</div>
+      <vue-json-pretty :data="inputs" />
+    </div>
+    <div v-show="gFormShow">
+      <div class="sub-title q-pl-md">Generated Form:</div>
+      <form-builder v-model:value="inputs" />
+    </div>
+    <q-card-actions>
+      <q-btn flat color="purple" @click="copyJson()">Copy JSON</q-btn>
+      <q-btn flat color="primary" @click="jsonShow = true">Show JSON</q-btn>
+      <q-btn flat color="secondary" @click="gFormShow = true"
+        >Show Generated Form</q-btn
+      >
+    </q-card-actions>
+  </q-card>
+  <q-card class="q-ma-lg">
     <div class="top">
       <div class="title">Form Builder Generator</div>
       <q-btn
@@ -12,14 +30,55 @@
       >
     </div>
     <q-card-section>
-      <p class="desc">
-        Form builder is a great tool for creating forms with ease and speed. Add
-        inputs you want, and copy the generated json for using inside your
-        project.
-      </p>
-      <q-btn v-if="state === ''" @click="state = 'chooseType'"
-        >add new input</q-btn
-      >
+      <div v-if="state === ''">
+        <p class="desc">
+          Form builder is a great tool for creating forms with ease and speed.
+          Add inputs you want, and copy the generated json for using inside your
+          project.
+        </p>
+        <div class="sub-title">note that:</div>
+        <div class="notes">
+          <ul>
+            <li>
+              <b>name</b> will be used for finding inputs, so it should be
+              english and unique.
+            </li>
+            <li>
+              for custom css classes you can use <b>col</b> like this:
+              'col-md-12 customClass' which customClass will be defined inside
+              of your component, not here.
+            </li>
+            <li>
+              There are two options to show label in here, if you don't pass
+              <b>placeholder</b> (remove it down here) label will float in style
+              of material. Passing both placeholder and label to input will make
+              label stick above the input.
+            </li>
+            <li>
+              If you use <b>select</b> and have options which will fetch from
+              server, and you use <b>quasar-crud</b>, you can use
+              <b>afterGetData</b> method from there to load those options to
+              your input.
+            </li>
+            <li>
+              <b>File input</b> has no placeholder. it's just there to show to
+              options for label. try to remove placeholder to see.
+            </li>
+            <li>
+              For <b>dateTime picker</b>, note that
+              <b>user will always see shamsi date</b>, but the end result (
+              which stored in <b>value</b> ) will be in <b>miladi</b> .
+            </li>
+            <li>
+              Also note that in <b>dateTime picker</b> the final date will be in
+              format of
+              <b>"YYYY-MM-DD HH:mm:00"</b>
+            </li>
+          </ul>
+        </div>
+        <q-btn @click="state = 'chooseType'">add new input</q-btn>
+      </div>
+
       <div class="controls">
         <div v-if="state === 'chooseType'">
           generating new input: <br />
@@ -35,27 +94,6 @@
           <!-- <div v-if="type.value === 'FormBuilderInput'"> -->
           <div>
             demo for {{ type.value }}:
-            <p>
-              note that <b>name</b> will be used for finding inputs, so it
-              should be english and unique. <br />
-              for custom css classes you can use <b>col</b> like this:
-              'col-md-12 customClass' which customClass will be defined inside
-              of your component, not here. <br />
-              There are two options to show label in here, if you don't pass
-              <b>placeholder</b> (remove it down here) label will float in style
-              of material. Passing both placeholder and label to input will make
-              label stick above the input. <br />
-              If you use <b>select</b> and have options which will fetch from
-              server, and you use <b>quasar-crud</b>, you can use
-              <b>afterGetData</b> method from there to load those options to
-              your input. <br />
-              For <b>dateTime picker</b>, note that
-              <b>user will always see shamsi date</b>, but the end result (
-              which stored in <b>value</b> ) will be in <b>miladi</b> . <br />
-              Also note that in <b>dateTime picker</b> the final date will be in
-              format of
-              <b>"YYYY-MM-DD HH:mm:00"</b>
-            </p>
             <div class="generated-element">
               <form-builder ref="formBuilder" v-model:value="newInput" />
             </div>
@@ -63,8 +101,8 @@
             <div v-for="c in selectedConfig.value" :key="c">
               <q-input
                 v-if="c.type === 'text'"
-                :type="c.inputType"
                 v-model="config[c.value]"
+                :type="c.inputType"
                 :label="c.value"
               ></q-input>
               <q-toggle
@@ -90,28 +128,19 @@
                 </div>
               </div>
             </div>
-            <q-btn @click="submitConfig()" class="q-mt-md">submit</q-btn>
+            <q-btn class="q-mt-md" @click="submitConfig()">submit</q-btn>
           </div>
         </div>
       </div>
       <div class="input-generator"></div>
     </q-card-section>
   </q-card>
-  <q-card v-show="inputs.length" class="q-ma-lg">
-    <div class="title">Generated Form</div>
-    inputs : {{ inputs }}
-
-    <form-builder v-model:value="inputs" />
-    <q-card-actions>
-      <q-btn flat color="primary">Show JSON</q-btn>
-      <q-btn flat color="secondary">Copy JSON</q-btn>
-    </q-card-actions>
-  </q-card>
 </template>
 
 <script>
 import FormBuilder from '../FormBuilder';
-
+import VueJsonPretty from 'vue-json-pretty';
+import 'vue-json-pretty/lib/styles.css';
 export default {
   name: 'FormBuilderGenerator',
   data() {
@@ -137,6 +166,10 @@ export default {
           value: 'rangeSlider',
         },
         {
+          label: 'slider input',
+          value: 'slider',
+        },
+        {
           label: 'color input',
           value: 'color',
         },
@@ -149,6 +182,10 @@ export default {
           value: 'inputEditor',
         },
         {
+          label: 'tiptapEditor',
+          value: 'tiptapEditor',
+        },
+        {
           label: 'file input',
           value: 'file',
         },
@@ -159,6 +196,18 @@ export default {
         {
           label: 'optionGroup input',
           value: 'optionGroup',
+        },
+        {
+          label: 'separator',
+          value: 'separator',
+        },
+        {
+          label: 'space',
+          value: 'space',
+        },
+        {
+          label: 'toggleButton',
+          value: 'toggleButton',
         },
       ],
       type: null,
@@ -238,6 +287,17 @@ export default {
           ],
         },
         {
+          type: 'slider',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', inputType: 'number', value: 'min' },
+            { type: 'text', inputType: 'number', value: 'max' },
+            { type: 'text', value: 'col' },
+            { type: 'boolean', value: 'disable' },
+          ],
+        },
+        {
           type: 'color',
           value: [
             { type: 'text', value: 'name' },
@@ -274,6 +334,16 @@ export default {
           value: [
             { type: 'text', value: 'name' },
             { type: 'text', value: 'label' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'tiptapEditor',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'options' },
             { type: 'boolean', value: 'disable' },
             { type: 'text', value: 'col' },
           ],
@@ -325,14 +395,58 @@ export default {
           type: 'separator',
           value: [
             { type: 'text', value: 'name' },
-            { type: 'boolean', value: 'borderTopStyle' },
-            { type: 'boolean', value: 'borderLeftStyle' },
-            { type: 'boolean', value: 'borderTopStyle' },
-            { type: 'text', value: 'fontSize' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'borderTopStyle' },
+            { type: 'text', value: 'borderLeftStyle' },
+            { type: 'boolean', value: 'inset' },
+            { type: 'boolean', value: 'darkMode' },
+            { type: 'boolean', value: 'vertical' },
+            { type: 'boolean', value: 'spaced' },
+            { type: 'text', value: 'size' },
             { type: 'text', value: 'color' },
+            {
+              type: 'select',
+              value: 'separatorType',
+              options: ['dashed', 'double', 'solid'],
+            },
+            { type: 'text', value: 'borderSize' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'space',
+          value: [
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'toggleButton',
+          value: [
+            { type: 'text', value: 'label' },
+            { type: 'options', value: 'options' },
+            { type: 'text', value: 'color' },
+            { type: 'text', value: 'type' },
             { type: 'text', value: 'textColor' },
-            { type: 'text', value: 'src' },
-
+            { type: 'text', value: 'toggleColor' },
+            { type: 'text', value: 'toggleTextColor' },
+            { type: 'text', value: 'size' },
+            { type: 'boolean', value: 'push' },
+            { type: 'boolean', value: 'glossy' },
+            { type: 'boolean', value: 'clearable' },
+            { type: 'boolean', value: 'inline' },
+            { type: 'boolean', value: 'dense' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'unelevated' },
+            { type: 'boolean', value: 'flat' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
+            { type: 'boolean', value: 'ripple' },
+            { type: 'boolean', value: 'noCaps' },
+            { type: 'boolean', value: 'noWrap' },
+            { type: 'boolean', value: 'spread' },
+            { type: 'boolean', value: 'stack' },
+            { type: 'boolean', value: 'stretch' },
             { type: 'text', value: 'col' },
           ],
         },
@@ -340,6 +454,8 @@ export default {
       optionLabel: '',
       optionValue: '',
       generatedOptions: [],
+      jsonShow: false,
+      gFormShow: false,
     };
   },
   methods: {
@@ -389,17 +505,25 @@ export default {
         col: 'col-md-12',
       };
     },
+    copyJson() {
+      navigator.clipboard.writeText(JSON.stringify(this.inputs));
+      alert('json copied to clipboard');
+    },
   },
   components: {
     FormBuilder,
+    VueJsonPretty,
   },
 };
 </script>
 
 <style scoped lang="scss">
 .title {
-  font-size: 16px;
+  font-size: 18px;
   padding: 20px;
+}
+.sub-title {
+  font-size: 16px;
 }
 .generated-element {
   margin: 20px;
