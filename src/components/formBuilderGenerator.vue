@@ -7,13 +7,19 @@
     </div>
     <div v-show="gFormShow">
       <div class="sub-title q-pl-md">Generated Form:</div>
-      <form-builder v-model:value="inputs" />
+      <form-builder
+        v-model:value="inputs"
+        :showGeneratorButtons="true"
+        @edit="edit"
+      />
     </div>
     <q-card-actions>
       <q-btn flat color="purple" @click="copyJson()">Copy JSON</q-btn>
-      <q-btn flat color="primary" @click="jsonShow = true">Show JSON</q-btn>
-      <q-btn flat color="secondary" @click="gFormShow = true"
-        >Show Generated Form</q-btn
+      <q-btn flat color="primary" @click="jsonShow = !jsonShow"
+        >{{ jsonShow ? 'Hide' : 'Show' }} JSON</q-btn
+      >
+      <q-btn flat color="secondary" @click="gFormShow = !gFormShow"
+        >{{ gFormShow ? 'Hide' : 'Show' }} Generated Form</q-btn
       >
     </q-card-actions>
   </q-card>
@@ -30,7 +36,6 @@
       >
     </div>
     <q-card-section>
-      state: {{ state }}
       <div v-if="state === ''">
         <p class="desc">
           Form builder is a great tool for creating forms with ease and speed.
@@ -95,7 +100,6 @@
         </div>
       </div>
       <div v-if="state === 'chooseConfig'">
-        <!-- <div v-if="type.value === 'FormBuilderInput'"> -->
         <div>
           demo for {{ type.value }}:
           <div class="generated-element">
@@ -183,6 +187,14 @@ export default {
         {
           label: 'dateTime input',
           value: 'dateTime',
+        },
+        {
+          label: 'date input',
+          value: 'date',
+        },
+        {
+          label: 'time input',
+          value: 'time',
         },
         {
           label: 'inputEditor',
@@ -337,6 +349,46 @@ export default {
           ],
         },
         {
+          type: 'date',
+          value: [
+            {
+              type: 'select',
+              value: 'type',
+              options: ['date', 'time', 'dateTime'],
+            },
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'text', value: 'calendarIcon' },
+            { type: 'text', value: 'clockIcon' },
+            { type: 'boolean', value: 'nowBtn' },
+            { type: 'boolean', value: 'todayBtn' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
+          type: 'time',
+          value: [
+            {
+              type: 'select',
+              value: 'type',
+              options: ['date', 'time', 'dateTime'],
+            },
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'text', value: 'calendarIcon' },
+            { type: 'text', value: 'clockIcon' },
+            { type: 'boolean', value: 'nowBtn' },
+            { type: 'boolean', value: 'todayBtn' },
+            { type: 'text', value: 'col' },
+          ],
+        },
+        {
           type: 'inputEditor',
           value: [
             { type: 'text', value: 'name' },
@@ -464,15 +516,21 @@ export default {
       jsonShow: false,
       gFormShow: false,
       importJson: '',
+      editMode: false,
+      editIndex: -1,
     };
   },
   methods: {
     newInputBuild() {
       this.state = 'chooseConfig';
-      this.newInput = [];
       this.generatedOptions = [];
-      this.prepareConfig();
-      this.newInput.push(this.config);
+      if (!this.editMode) {
+        this.newInput = [];
+        this.prepareConfig();
+        this.newInput.push(this.config);
+      } else {
+        console.log('here');
+      }
     },
     prepareConfig() {
       // finding appropriate config and set it.
@@ -483,7 +541,12 @@ export default {
       this.config.options = this.generatedOptions;
     },
     submitConfig() {
-      this.inputs.push(...this.newInput);
+      if (!this.editMode) {
+        this.inputs.push(...this.newInput);
+      } else {
+        console.log(this.newInput);
+        this.inputs[this.editIndex] = this.newInput[0];
+      }
       this.state = '';
       this.type = null;
       this.config = {
@@ -492,6 +555,9 @@ export default {
         placeholder: 'placeholder',
         col: 'col-md-12',
       };
+      this.newInput = [];
+      this.editIndex = -1;
+      this.editMode = false;
     },
     addToOptions() {
       this.generatedOptions.push({
@@ -516,6 +582,19 @@ export default {
     copyJson() {
       navigator.clipboard.writeText(JSON.stringify(this.inputs));
       alert('json copied to clipboard');
+    },
+    edit(i) {
+      this.editMode = true;
+      this.editIndex = i;
+      console.log(this.inputs[i].type);
+      this.type = this.options.find((o) => o.value === this.inputs[i].type);
+      this.selectedConfig = this.configs.find((c) => c.type == this.type.value);
+      this.config = this.inputs[i];
+      this.generatedOptions = this.inputs[i].options;
+      this.newInput = [];
+      this.newInput.push(this.config);
+
+      this.state = 'chooseConfig';
     },
   },
   components: {
