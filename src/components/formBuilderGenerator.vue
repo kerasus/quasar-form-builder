@@ -423,7 +423,7 @@ export default {
         {
           type: 'toggleButton',
           value: [
-            { type: 'text', value: 'label' },
+            { type: 'text', value: 'name' },
             { type: 'options', value: 'options' },
             { type: 'text', value: 'color' },
             { type: 'text', value: 'type' },
