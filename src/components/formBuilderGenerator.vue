@@ -30,6 +30,7 @@
       >
     </div>
     <q-card-section>
+      state: {{ state }}
       <div v-if="state === ''">
         <p class="desc">
           Form builder is a great tool for creating forms with ease and speed.
@@ -92,46 +93,46 @@
             @update:model-value="newInputBuild()"
           ></q-select>
         </div>
-        <div v-if="state === 'chooseConfig'">
-          <!-- <div v-if="type.value === 'FormBuilderInput'"> -->
-          <div>
-            demo for {{ type.value }}:
-            <div class="generated-element">
-              <form-builder ref="formBuilder" v-model:value="newInput" />
-            </div>
-            <div class="q-mt-md">configs to tweak:</div>
-            <div v-for="c in selectedConfig.value" :key="c">
-              <q-input
-                v-if="c.type === 'text'"
-                v-model="config[c.value]"
-                :type="c.inputType"
-                :label="c.value"
-              ></q-input>
-              <q-toggle
-                v-if="c.type === 'boolean'"
-                v-model="config[c.value]"
-                :label="c.value"
-              />
-              <q-select
-                v-if="c.type === 'select'"
-                v-model="config[c.value]"
-                :label="c.value"
-                :options="c.options"
-              ></q-select>
-              <div v-if="c.type === 'options'" class="options-generator">
-                <div class="option-json">
-                  Option Generator:
-                  {{ generatedOptions }}
-                </div>
-                <div class="options-inputs">
-                  <q-input v-model="optionLabel" label="label"></q-input>
-                  <q-input v-model="optionValue" label="value"></q-input>
-                  <q-btn @click="addToOptions()">add</q-btn>
-                </div>
+      </div>
+      <div v-if="state === 'chooseConfig'">
+        <!-- <div v-if="type.value === 'FormBuilderInput'"> -->
+        <div>
+          demo for {{ type.value }}:
+          <div class="generated-element">
+            <form-builder ref="formBuilder" v-model:value="newInput" />
+          </div>
+          <div class="q-mt-md">configs to tweak:</div>
+          <div v-for="c in selectedConfig.value" :key="c">
+            <q-input
+              v-if="c.type === 'text'"
+              v-model="config[c.value]"
+              :type="c.inputType"
+              :label="c.value"
+            ></q-input>
+            <q-toggle
+              v-if="c.type === 'boolean'"
+              v-model="config[c.value]"
+              :label="c.value"
+            />
+            <q-select
+              v-if="c.type === 'select'"
+              v-model="config[c.value]"
+              :label="c.value"
+              :options="c.options"
+            ></q-select>
+            <div v-if="c.type === 'options'" class="options-generator">
+              <div class="option-json">
+                Option Generator:
+                {{ generatedOptions }}
+              </div>
+              <div class="options-inputs">
+                <q-input v-model="optionLabel" label="label"></q-input>
+                <q-input v-model="optionValue" label="value"></q-input>
+                <q-btn @click="addToOptions()">add</q-btn>
               </div>
             </div>
-            <q-btn class="q-mt-md" @click="submitConfig()">submit</q-btn>
           </div>
+          <q-btn class="q-mt-md" @click="submitConfig()">submit</q-btn>
         </div>
       </div>
       <div v-if="state === 'addJson'">
