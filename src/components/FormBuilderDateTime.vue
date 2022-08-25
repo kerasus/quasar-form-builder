@@ -4,6 +4,7 @@
     <q-input
       v-show="show('date')"
       v-model="dateTime.date"
+      :name="name"
       class="form-calender"
       readonly
       mask="date"
@@ -19,9 +20,7 @@
     >
       <template #prepend>
         <q-icon :name="calendarIcon" class="cursor-pointer">
-          <q-menu v-if="!readonly"
-                  v-model="showDate"
-          >
+          <q-menu v-if="!readonly" v-model="showDate">
             <q-date
               v-model="dateTime.date"
               :calendar="calendar"
@@ -44,6 +43,7 @@
     <q-input
       v-show="show('time')"
       v-model="dateTime.time"
+      :name="name"
       class="time-input-dateTime"
       :clearable="true"
       dir="ltr"
@@ -59,9 +59,7 @@
       @click="showTimeMenu"
     >
       <template #append>
-        <q-menu v-if="!readonly"
-                v-model="showTime"
-        >
+        <q-menu v-if="!readonly" v-model="showTime">
           <q-time
             v-model="dateTime.time"
             mask="HH:mm:00"
@@ -105,6 +103,10 @@ export default {
     };
   },
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     calendar: {
       default: 'persian',
       type: String,
@@ -174,11 +176,11 @@ export default {
     },
   },
   methods: {
-    showDateMenu () {
-      this.showDate = true
+    showDateMenu() {
+      this.showDate = true;
     },
-    showTimeMenu () {
-      this.showTime = true
+    showTimeMenu() {
+      this.showTime = true;
     },
     show(t) {
       return this.type === 'dateTime' || this.type === t;

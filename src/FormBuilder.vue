@@ -121,17 +121,17 @@ export default {
     };
   },
   methods: {
-    onClick (event, input) {
-      function getEvent (data) {
+    onClick(event, input) {
+      function getEvent(data) {
         if (data.event) {
-          return getEvent(data.event)
+          return getEvent(data.event);
         }
 
-        return data
+        return data;
       }
 
-      const absEvent = getEvent(event)
-      this.$emit('onClick', {event: absEvent, input})
+      const absEvent = getEvent(event);
+      this.$emit('onClick', { event: absEvent, input });
     },
     getFormData() {
       const formHasFileInput = this.formHasFileInput();
@@ -209,6 +209,25 @@ export default {
         inputs = this.inputData;
       }
       setValueOfNestedInputData(responseData, inputs);
+    },
+    getInputsByName(name) {
+      let inputs = this.getValues();
+      let founded = inputs.filter((input) => {
+        if (input.name === name) {
+          return input;
+        }
+      });
+      console.log(founded);
+      return founded;
+    },
+    setInputByName(name, value) {
+      let inputs = this.getValues();
+      let founded = inputs.find((input) => {
+        if (input.name === name) {
+          input.value = value;
+        }
+      });
+      return founded;
     },
     getValidChainedObject(object, keys) {
       if (!Array.isArray(keys) && typeof keys !== 'string') {

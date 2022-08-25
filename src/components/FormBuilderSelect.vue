@@ -4,6 +4,7 @@
     v-model="inputData"
     transition-show="jump-down"
     transition-hide="jump-up"
+    :name="name"
     :filled="filled"
     :rounded="rounded"
     :outlined="outlined"
@@ -45,6 +46,10 @@ export default {
   name: 'FormBuilderSelect',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
       default: () => [],
       type: [Array, String, Number, Boolean],

@@ -2,6 +2,7 @@
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <q-input
     v-model="inputData"
+    :name="name"
     :filled="filled"
     :rules="rules"
     :lazy-rules="lazyRules"
@@ -24,6 +25,10 @@ export default {
   name: 'FormBuilderInput',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
       default: '',
       type: [String, Number, Boolean],

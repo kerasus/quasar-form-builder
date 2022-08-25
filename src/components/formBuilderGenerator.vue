@@ -8,10 +8,23 @@
     <div v-show="gFormShow">
       <div class="sub-title q-pl-md">Generated Form:</div>
       <form-builder
+        ref="fb"
         v-model:value="inputs"
         :showGeneratorButtons="true"
         @edit="edit"
       />
+    </div>
+    <div v-show="setGetValue" class="q-ma-lg">
+      <q-select
+        v-model="searchName"
+        :options="searchOptions"
+        placeholder="name of input of form to get"
+      ></q-select>
+      <q-input
+        v-model="setValue"
+        placeholder="value of input of form to set"
+      ></q-input>
+      <q-btn class="q-mt-md" @click="getSetValue()">submit</q-btn>
     </div>
     <q-card-actions>
       <q-btn flat color="purple" @click="copyJson()">Copy JSON</q-btn>
@@ -20,6 +33,9 @@
       >
       <q-btn flat color="secondary" @click="gFormShow = !gFormShow"
         >{{ gFormShow ? 'Hide' : 'Show' }} Generated Form</q-btn
+      >
+      <q-btn flat color="green" @click="setGetValue = !setGetValue"
+        >{{ setGetValue ? 'Hide' : 'Show' }} get/set value</q-btn
       >
     </q-card-actions>
   </q-card>
@@ -156,7 +172,186 @@ export default {
   name: 'FormBuilderGenerator',
   data() {
     return {
-      inputs: [],
+      inputs: [
+        {
+          type: 'formBuilder',
+          name: 'formBuilderCol',
+          col: 'col-md-12 q-card custom-card q-px-md q-pb-sm',
+          value: [
+            {
+              type: 'separator',
+              size: '0',
+              label: 'مشخصات حساب',
+              col: 'col-md-12 title',
+            },
+            {
+              type: 'input',
+              name: 'id',
+              responseKey: 'data.id',
+              label: 'شناسه',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+              disable: true,
+            },
+            {
+              type: 'input',
+              name: 'mobile',
+              responseKey: 'data.mobile',
+              label: 'شماره موبایل',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+          ],
+        },
+        {
+          type: 'formBuilder',
+          name: 'formBuilderCol',
+          col: 'col-md-12 q-card custom-card q-mt-md q-px-md q-pb-sm',
+          value: [
+            {
+              type: 'separator',
+              size: '0',
+              label: 'مشخصات فردی',
+              col: 'col-md-12 title',
+            },
+
+            {
+              type: 'input',
+              name: 'first_name',
+              responseKey: 'data.first_name',
+              label: 'نام',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+            {
+              type: 'input',
+              name: 'first_name',
+              responseKey: 'data.first_name',
+              label: 'نام',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+            {
+              type: 'input',
+              name: 'last_name',
+              responseKey: 'data.last_name',
+              label: 'نام خانوادگی',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+            {
+              type: 'date',
+              name: 'birthdate',
+              responseKey: 'data.birthdate',
+              label: 'تاریخ تولد',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+            {
+              type: 'select',
+              name: 'gender',
+              label: 'جنسیت',
+              responseKey: 'data.gender',
+              placeholder: 'انتخاب نمایید',
+              optionLabel: 'name',
+              outlined: true,
+              multiple: false,
+              col: 'col-md-6',
+            },
+            {
+              type: 'input',
+              name: 'national_code',
+              responseKey: 'data.national_code',
+              label: 'کد ملی',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+          ],
+        },
+        {
+          type: 'formBuilder',
+          name: 'formBuilderCol',
+          col: 'col-md-12 q-card custom-card  q-mt-md q-px-md q-pb-sm',
+          value: [
+            {
+              type: 'separator',
+              size: '0',
+              label: 'مشخصات تحصیلی',
+              col: 'col-md-12 title',
+            },
+            {
+              type: 'select',
+              name: 'grade',
+              label: 'مقطع تحصیلی',
+              placeholder: 'انتخاب نمایید',
+              responseKey: 'data.grade',
+              optionLabel: 'name',
+              outlined: true,
+              multiple: false,
+              col: 'col-md-6',
+            },
+            {
+              type: 'select',
+              name: 'major',
+              label: 'رشته تحصیلی',
+              placeholder: 'انتخاب نمایید',
+              responseKey: 'data.major',
+              optionLabel: 'name',
+              outlined: true,
+              multiple: false,
+              col: 'col-md-6',
+            },
+          ],
+        },
+        {
+          type: 'formBuilder',
+          name: 'formBuilderCol',
+          col: 'col-md-12 q-card custom-card  q-mt-md q-px-md q-pb-sm',
+          value: [
+            {
+              type: 'separator',
+              size: '0',
+              label: 'اطلاعات تماس',
+              col: 'col-md-12 title',
+            },
+
+            {
+              type: 'input',
+              name: 'postal_code',
+              responseKey: 'data.postal_code',
+              label: 'کدپستی',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+            {
+              type: 'input',
+              name: 'email',
+              responseKey: 'data.email',
+              label: 'ایمیل',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-6',
+            },
+            {
+              type: 'input',
+              name: 'address',
+              responseKey: 'data.address',
+              label: 'آدرس محل سکونت',
+              outlined: true,
+              placeholder: 'وارد نمایید',
+              col: 'col-md-12',
+            },
+          ],
+        },
+      ],
       newInput: [],
       state: '',
       options: [
@@ -518,9 +713,12 @@ export default {
       generatedOptions: [],
       jsonShow: false,
       gFormShow: false,
+      setGetValue: false,
       importJson: '',
       editMode: false,
       editIndex: -1,
+      searchName: '',
+      setValue: '',
     };
   },
   methods: {
@@ -599,6 +797,51 @@ export default {
 
       this.state = 'chooseConfig';
     },
+    getSetValue() {
+      if (this.searchName === '') {
+        alert('you have to specify the name of input');
+        return;
+      }
+      let founded = this.$refs.fb.getInputsByName(this.searchName);
+      if (founded) {
+        founded.forEach((f) => {
+          this.setValueOne(f);
+        });
+      } else {
+        alert('no such name existed on this form');
+      }
+    },
+    getValues() {
+      function getFlatInputs(inputs) {
+        let values = [];
+        inputs.forEach((input) => {
+          if (input.type !== 'formBuilder') {
+            values.push(input);
+          } else {
+            const formBuilderInputs = getFlatInputs(input.value);
+            values = values.concat(formBuilderInputs);
+          }
+        });
+        return values;
+      }
+
+      return getFlatInputs(this.inputs);
+    },
+    setValueOne(founded) {
+      // GET value
+      if (this.setValue === '') {
+        if (founded.value) {
+          this.setValue = founded.value;
+        } else {
+          // input is present but has no value
+          alert('input is present but has no value');
+        }
+      }
+      // SET Value
+      else {
+        this.$refs.fb.setInputByName(this.searchName, this.setValue);
+      }
+    },
   },
   components: {
     FormBuilder,
@@ -611,6 +854,15 @@ export default {
       this.jsonShow = true;
       this.gFormShow = true;
       this.state = '';
+    },
+  },
+  computed: {
+    searchOptions() {
+      return this.getValues()
+        .map((input) => {
+          return input.name;
+        })
+        .filter((i) => i !== undefined);
     },
   },
 };

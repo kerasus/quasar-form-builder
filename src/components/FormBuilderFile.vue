@@ -2,20 +2,21 @@
   <div>
     <div class="outsideLabel">{{ placeholder ? label : null }}</div>
     <q-file
-        :id="inputUid"
-        v-model="file"
-        :label="placeholder? null : label"
-        :stack-label="!!placeholder"
-        :placeholder="placeholder"
-        :disable="disable"
-        :readonly="readonly"
-        clearable
-        :model-value="file"
-        :rules="rules"
-        :lazy-rules="lazyRules"
-        @update:model-value="change($event)"
-        @clear="onClearInputFile"
-        @click="onClick"
+      :id="inputUid"
+      v-model="file"
+      :name="name"
+      :label="placeholder ? null : label"
+      :stack-label="!!placeholder"
+      :placeholder="placeholder"
+      :disable="disable"
+      :readonly="readonly"
+      clearable
+      :model-value="file"
+      :rules="rules"
+      :lazy-rules="lazyRules"
+      @update:model-value="change($event)"
+      @clear="onClearInputFile"
+      @click="onClick"
     />
     <label :for="inputUid">
       <q-img
@@ -47,6 +48,10 @@ export default {
   name: 'FormBuilderFile',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
       default: '',
       type: [String, File],
