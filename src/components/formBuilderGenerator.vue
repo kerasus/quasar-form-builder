@@ -15,9 +15,15 @@
       />
     </div>
     <div v-show="setGetValue" class="q-ma-lg">
+      <p>
+        Here you can provide your name of input, and will get the value to the
+        second input.
+      </p>
+      <p>If you want to set, fill both inputs.</p>
       <q-select
         v-model="searchName"
         :options="searchOptions"
+        label="name of input of form to get"
         placeholder="name of input of form to get"
       ></q-select>
       <q-input
