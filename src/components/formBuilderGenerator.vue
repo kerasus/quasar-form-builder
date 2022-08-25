@@ -271,9 +271,10 @@ export default {
             { type: 'text', value: 'label' },
             { type: 'text', value: 'placeholder' },
             { type: 'boolean', value: 'filled' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
             { type: 'boolean', value: 'multiple' },
             { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
             { type: 'boolean', value: 'useChips' },
             { type: 'text', value: 'col' },
 

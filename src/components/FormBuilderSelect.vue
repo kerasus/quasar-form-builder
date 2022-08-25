@@ -5,6 +5,8 @@
     transition-show="jump-down"
     transition-hide="jump-up"
     :filled="filled"
+    :rounded="rounded"
+    :outlined="outlined"
     :option-value="optionValue"
     :option-label="optionLabel"
     :option-disable="optionDisable"
@@ -21,7 +23,6 @@
     :disable="disable"
     :readonly="readonly"
     emit-value
-    :outlined="outlined"
     :hide-dropdown-icon="hideDropdownIcon"
     map-options
     clearable
@@ -69,6 +70,14 @@ export default {
       type: Boolean,
     },
     filled: {
+      default: false,
+      type: Boolean,
+    },
+    rounded: {
+      default: false,
+      type: Boolean,
+    },
+    outlined: {
       default: false,
       type: Boolean,
     },
