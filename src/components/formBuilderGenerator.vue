@@ -270,11 +270,13 @@ export default {
             { type: 'text', value: 'name' },
             { type: 'text', value: 'label' },
             { type: 'text', value: 'placeholder' },
-            { type: 'text', value: 'col' },
+            { type: 'boolean', value: 'filled' },
             { type: 'boolean', value: 'multiple' },
             { type: 'boolean', value: 'disable' },
             { type: 'boolean', value: 'outlined' },
             { type: 'boolean', value: 'useChips' },
+            { type: 'text', value: 'col' },
+
             {
               type: 'options',
               value: 'options',
