@@ -1,7 +1,9 @@
 # quasar-form-builder
+
 This package just get you props and then give you form with inputs (it's created with **FormBuilder** component) or just any input you need.
 
 ## install
+
 ```
 npm i quasar-form-builder
 ```
@@ -12,246 +14,267 @@ To use it in vue files, you need to import the component you want and use it lik
 
 ```vue
 <template>
-    <form-builder/>
+  <form-builder />
 </template>
 
 <script>
-    import { FormBuilder } from 'quasar-form-builder'
-    export default {
-        components: { FormBuilder } 
-    }
+import { FormBuilder } from 'quasar-form-builder';
+export default {
+  components: { FormBuilder },
+};
 </script>
 ```
+
+## Generator
+
+Generator is a visual way to make forms to use in form builder. You can build your forms using generator and then import the json generated to your project. to use it in your project, just import it and use it like so:
+
+```vue
+<template>
+  <form-builder-generator />
+</template>
+
+<script>
+import { FormBuilderGenerator } from 'quasar-form-builder';
+export default {
+  components: { FormBuilderGenerator },
+};
+</script>
+```
+
+Then after building your form, you can copy the json of the form, and use it in your project.
+Also, if you have a form you want to update, you can import it in generator and work on it.
 
 ## Features:
 
-+ ### FormBuilder
+- ### FormBuilder
 
-| props               | default | type             |
-|---------------------|:-------:|:-----------------|
-| value               |   [ ]   | Array            |
-| disable             |  false  | Boolean          |
+| props   | default | type    |
+| ------- | :-----: | :------ |
+| value   |   [ ]   | Array   |
+| disable |  false  | Boolean |
 
+> #### important !
+>
+> For any input you want,you have to specify its type.
 
-
-
->#### important !
->For any input you want,you have to specify its type.
 ```vue
 <template>
-    <form-builder v-model:value="inputs"/>
+  <form-builder v-model:value="inputs" />
 </template>
 
 <script>
-    import { FormBuilder } from 'quasar-form-builder'
-    export default {
-        components: { FormBuilder } ,
-      data(){
-          return {
-            inputs:[{
-              type: 'Input', // Avatar, date, dateTime and etc.
-              label: 'Label' 
-              //and other props of FormBuilderInput component
-            },
-            {type: 'date', label: 'Label', /*and other props of FormBuilderDateTime component*/ },
-            {type: 'Slider', label: 'Label', /*and other props of FormBuilderSlider component*/ }
-            ]
-          }
-      }
-    }
+import { FormBuilder } from 'quasar-form-builder';
+export default {
+  components: { FormBuilder },
+  data() {
+    return {
+      inputs: [
+        {
+          type: 'Input', // Avatar, date, dateTime and etc.
+          label: 'Label',
+          //and other props of FormBuilderInput component
+        },
+        {
+          type: 'date',
+          label: 'Label' /*and other props of FormBuilderDateTime component*/,
+        },
+        {
+          type: 'Slider',
+          label: 'Label' /*and other props of FormBuilderSlider component*/,
+        },
+      ],
+    };
+  },
+};
 </script>
 ```
 
+- ### FormBuilderAvatar
+  - types
+    - Avtar
 
-+ ### FormBuilderAvatar
-  + types
-    + Avtar
+| props     | default | type   |
+| --------- | :-----: | :----- |
+| size      |  50px   | String |
+| fontSize  |  14px   | String |
+| color     | primary | String |
+| textColor |  white  | String |
 
-| props             | default | type     |
-|-------------------|:-------:|:---------|
-| size              |  50px   | String   |
-| fontSize          |  14px   | String   |
-| color             | primary | String   |
-| textColor         |  white  | String   |
+- ### FormBuilderCheckbox
+  - types
+    - Checkbox
 
+| props      | default | type                                   |
+| ---------- | :-----: | :------------------------------------- |
+| value      |   ' '   | Object, String, Array, Number, Boolean |
+| label      |   ' '   | String                                 |
+| color      | primary | String                                 |
+| disable    |  false  | Boolean                                |
+| trueValue  |  true   | Object, String, Array, Number, Boolean |
+| falseValue |  false  | Object, String, Array, Number, Boolean |
 
-+ ### FormBuilderCheckbox
-  + types
-    + Checkbox
+- ### FormBuilderDateTime
 
-| props          | default | type                                    |
-|----------------|:-------:|:----------------------------------------|
-| value          |   ' '   | Object, String, Array, Number, Boolean  |
-| label          |   ' '   | String                                  |
-| color          | primary | String                                  |
-| disable        |  false  | Boolean                                 |
-| trueValue      |  true   | Object, String, Array, Number, Boolean  |
-| falseValue     |  false  | Object, String, Array, Number, Boolean  |
+  - types
 
-+ ### FormBuilderDateTime
-    + types
-        + date
-        
-             | props       | default |                  type                  |
-             |---------|:--------------------------------------:|:---------------------------------------|
-             | value       | ' '     |             Object,  Array             |
-             | calendar    | persian |                 String                 |
-             | multiple    | false   |                Boolean                 |
-             | disable     | false   |                Boolean                 | 
-        + time
-         
-             | props       | default |                  type                  |
-             |---------|:--------------------------------------:|:---------------------------------------|
-             | value       | ' '     |             Object,  Array             |
-             | disable     | false   |                Boolean                 |
-        + dateTime
+    - date
 
-          | props       | default |                  type                  |
-          |---------|:--------------------------------------:|:---------------------------------------|
-          | value       | ' '     |             Object,  Array             |
-          | calendar    | persian |                 String                 |
-          | multiple    | false   |                Boolean                 |
-          | disable     | false   |                Boolean                 | 
-        + dateRange
+      | props    | default | type          |
+      | -------- | :-----: | :------------ |
+      | value    |   ' '   | Object, Array |
+      | calendar | persian | String        |
+      | multiple |  false  | Boolean       |
+      | disable  |  false  | Boolean       |
 
-          | props     | default |                  type                  |
-          |---------|:--------------------------------------:|:---------------------------------------|
-          | value     | ' '     |             Object,  Array             |
-          | calendar  | persian |                 String                 |
-          | multiple  | false   |                Boolean                 |
-          | disable   | false   |                Boolean                 |
-          | range     | true   |                Boolean                 | 
-        + dateMultipleRange
+    - time
 
-          | props     | default   |                  type                  |
-          |-----------|:---------:|:---------------------------------------|
-          | value     | ' '       |             Object,  Array             |
-          | calendar  | persian   |                 String                 |
-          | multiple  | true      |                Boolean                 |
-          | disable   | false     |                Boolean                 |
-          | range     | true      |                Boolean                 |
+      | props   | default | type          |
+      | ------- | :-----: | :------------ |
+      | value   |   ' '   | Object, Array |
+      | disable |  false  | Boolean       |
 
-+ ### FormBuilderFile
-    + types
-        + File
+    - dateTime
+
+      | props    | default | type          |
+      | -------- | :-----: | :------------ |
+      | value    |   ' '   | Object, Array |
+      | calendar | persian | String        |
+      | multiple |  false  | Boolean       |
+      | disable  |  false  | Boolean       |
+
+    - dateRange
+
+      | props    | default | type          |
+      | -------- | :-----: | :------------ |
+      | value    |   ' '   | Object, Array |
+      | calendar | persian | String        |
+      | multiple |  false  | Boolean       |
+      | disable  |  false  | Boolean       |
+      | range    |  true   | Boolean       |
+
+    - dateMultipleRange
+
+      | props    | default | type          |
+      | -------- | :-----: | :------------ |
+      | value    |   ' '   | Object, Array |
+      | calendar | persian | String        |
+      | multiple |  true   | Boolean       |
+      | disable  |  false  | Boolean       |
+      | range    |  true   | Boolean       |
+
+- ### FormBuilderFile
+  - types
+    - File
 
 | props     | default | type                                   |
-|-----------|:-------:|:---------------------------------------|
+| --------- | :-----: | :------------------------------------- |
 | value     |   ' '   | Object, String, Array, Number, Boolean |
 | label     |   ' '   | String                                 |
 | disable   |  false  | Boolean                                |
 | clearable |  true   | Boolean                                |
 | src       |   ' '   | String, Number, Boolean, Array         |
 
+- ### FormBuilderInput
+  - types
+    - Input
 
+| props   | default | type                    |
+| ------- | :-----: | :---------------------- |
+| value   |   ' '   | String, Number, Boolean |
+| label   |   ' '   | String                  |
+| disable |  false  | Boolean                 |
 
-+ ### FormBuilderInput
-    + types
-        + Input
+- ### FormBuilderInputEditor
+  - types
+    - InputEditor
 
-| props     | default | type                           |
-|-----------|:-------:|:-------------------------------|
-| value     |   ' '   | String, Number, Boolean        |
-| label     |   ' '   | String                         |
-| disable   |  false  | Boolean                        |
+| props   | default | type                    |
+| ------- | :-----: | :---------------------- |
+| value   |   ' '   | String, Number, Boolean |
+| label   |   ' '   | String                  |
+| disable |  false  | Boolean                 |
 
-+ ### FormBuilderInputEditor
-    + types
-        + InputEditor
+- ### FormBuilderOptionGroup
+  - types
+    - date
+    - OptionGroup
+    - optionGroupRadio
+    - optionGroupCheckbox
+    - optionGroupToggle
 
-| props     | default | type                           |
-|-----------|:-------:|:-------------------------------|
-| value     |   ' '   | String, Number, Boolean        |
-| label     |   ' '   | String                         |
-| disable   |  false  | Boolean                        |
-
-
-
-+ ### FormBuilderOptionGroup
-    + types
-        + date
-        + OptionGroup
-        + optionGroupRadio
-        + optionGroupCheckbox
-        + optionGroupToggle
-        
 | props   | default | type                                   |
-|---------|:-------:|:---------------------------------------|
+| ------- | :-----: | :------------------------------------- |
 | value   |   ' '   | Object, String, Array, Number, Boolean |
 | options |   []    | Array                                  |
-  
-+ ### FormBuilderSlider
-    + types
-        + Slider
-    
-| props    | default | type                            |
-|----------|:-------:|:--------------------------------|
-| value    |    0    | Number                          |
-| min      |    0    | Number                          |
-| max      |   100   | Number                          |
-| disable  |  false  | Boolean                         |
 
+- ### FormBuilderSlider
+  - types
+    - Slider
 
-+ ### FormBuilderRangeSlider
-    + types
-        + RangeSlider
-    
-| props   |       default       | type                           |
-|---------|:-------------------:|:-------------------------------|
-| value   | { min: 9, max: 35 } | Object                         |
-| label   |         ' '         | String                         |
-| disable |        false        | Boolean                        |
-| range   |        true         | Boolean                        |
+| props   | default | type    |
+| ------- | :-----: | :------ |
+| value   |    0    | Number  |
+| min     |    0    | Number  |
+| max     |   100   | Number  |
+| disable |  false  | Boolean |
 
-+ ### FormBuilderSelect
-    + types
-        + Select
-    
-| props         | default | type                                  |
-|---------------|:-------:|:--------------------------------------|
-| value         |   []    | Array, String, Number, Boolean        |
-| options       |   []    | Array                                 |
-| optionDisable | disable | String                                |
-| optionValue   |  value  | String                                |
-| optionLabel   |  label  | String                                |
-| label         |   ' '   | String                                |
-| disable       |  false  | Boolean                               |
-| multiple      |  false  | Boolean                               |
-| useChips      |  false  | Boolean                               |
+- ### FormBuilderRangeSlider
+  - types
+    - RangeSlider
+
+| props   |       default       | type    |
+| ------- | :-----------------: | :------ |
+| value   | { min: 9, max: 35 } | Object  |
+| label   |         ' '         | String  |
+| disable |        false        | Boolean |
+| range   |        true         | Boolean |
+
+- ### FormBuilderSelect
+  - types
+    - Select
+
+| props         | default | type                           |
+| ------------- | :-----: | :----------------------------- |
+| value         |   []    | Array, String, Number, Boolean |
+| options       |   []    | Array                          |
+| optionDisable | disable | String                         |
+| optionValue   |  value  | String                         |
+| optionLabel   |  label  | String                         |
+| label         |   ' '   | String                         |
+| disable       |  false  | Boolean                        |
+| multiple      |  false  | Boolean                        |
+| useChips      |  false  | Boolean                        |
 
 #### example of options prop usage :
+
 ```vue
 <template>
-    <form-builder v-model:value="inputs"/>
+  <form-builder v-model:value="inputs" />
 </template>
 
 <script>
-    import { FormBuilder } from 'quasar-form-builder'
-    export default {
-        components: { FormBuilder } ,
-      data(){
-          return {
-            inputs:[{
-              type: 'Select', // Avatar, date, dateTime and etc.
-              label: 'Label',
-              options: [
-                {label:'some label',value: 'some value'},//for first option of select input
-                {label:'some label',value: 'some value'},//for second option of select input
-                {label:'some label',value: 'some value'},//for third option of select input
-              ],
-              optionLabel: 'label',
-              optionValue: 'value',
-              //and other props of FormBuilderSelect component
-            },
-            ]
-          }
-      }
-    }
+import { FormBuilder } from 'quasar-form-builder';
+export default {
+  components: { FormBuilder },
+  data() {
+    return {
+      inputs: [
+        {
+          type: 'Select', // Avatar, date, dateTime and etc.
+          label: 'Label',
+          options: [
+            { label: 'some label', value: 'some value' }, //for first option of select input
+            { label: 'some label', value: 'some value' }, //for second option of select input
+            { label: 'some label', value: 'some value' }, //for third option of select input
+          ],
+          optionLabel: 'label',
+          optionValue: 'value',
+          //and other props of FormBuilderSelect component
+        },
+      ],
+    };
+  },
+};
 </script>
 ```
-
-
-    			
-
-
-    			
