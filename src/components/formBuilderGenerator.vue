@@ -537,6 +537,10 @@ export default {
       this.selectedConfig = this.configs.find((c) => c.type == this.type.value);
       // manully set type to config to load it.
       this.config.type = this.type.value;
+      // removing indeterminate condition to false values.
+      this.selectedConfig.value.forEach((v) => {
+        if (v.type === 'boolean') this.config[v.value] = false;
+      });
       // this will use for select copmonent to make options dynamic.
       this.config.options = this.generatedOptions;
     },
