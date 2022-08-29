@@ -487,6 +487,7 @@ export default {
             { type: 'text', value: 'name' },
             { type: 'text', value: 'label' },
             { type: 'text', value: 'col' },
+            { type: 'text', value: 'value' },
             {
               type: 'options',
               value: 'props',
