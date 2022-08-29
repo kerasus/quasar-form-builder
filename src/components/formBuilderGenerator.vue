@@ -102,6 +102,12 @@
               format of
               <b>"YYYY-MM-DD HH:mm:00"</b>
             </li>
+            <li>
+              For extending generator to cover new inputs and components for
+              future, just add to this.configs appropriate config of the new
+              comer. Generator will make a form containing your input with
+              controls on the props which will be given.
+            </li>
           </ul>
         </div>
         <q-btn @click="state = 'chooseType'">add new input</q-btn>
@@ -115,8 +121,7 @@
           selected input: {{ type?.value }}
           <q-select
             v-model="type"
-            option-value="value"
-            :options="options"
+            :options="showConfigs()"
             @update:model-value="newInputBuild()"
           ></q-select>
         </div>
@@ -173,84 +178,25 @@
 <script>
 import FormBuilder from '../FormBuilder';
 import VueJsonPretty from 'vue-json-pretty';
+import CustomComponent from '../CustomComponent';
+
 import 'vue-json-pretty/lib/styles.css';
 export default {
   name: 'FormBuilderGenerator',
   data() {
     return {
-      inputs: [],
-      newInput: [],
-      state: '',
-      options: [
+      inputs: [
         {
-          label: 'simple input',
-          value: 'input',
-        },
-        {
-          label: 'select input',
-          value: 'select',
-        },
-        {
-          label: 'checkbox input',
-          value: 'checkbox',
-        },
-        {
-          label: 'range slider input',
-          value: 'rangeSlider',
-        },
-        {
-          label: 'slider input',
-          value: 'slider',
-        },
-        {
-          label: 'color input',
-          value: 'color',
-        },
-        {
-          label: 'dateTime input',
-          value: 'dateTime',
-        },
-        {
-          label: 'date input',
-          value: 'date',
-        },
-        {
-          label: 'time input',
-          value: 'time',
-        },
-        {
-          label: 'inputEditor',
-          value: 'inputEditor',
-        },
-        {
-          label: 'tiptapEditor',
-          value: 'tiptapEditor',
-        },
-        {
-          label: 'file input',
-          value: 'file',
-        },
-        {
-          label: 'avatar input',
-          value: 'avatar',
-        },
-        {
-          label: 'optionGroup input',
-          value: 'optionGroup',
-        },
-        {
-          label: 'separator',
-          value: 'separator',
-        },
-        {
-          label: 'space',
-          value: 'space',
-        },
-        {
-          label: 'toggleButton',
-          value: 'toggleButton',
+          type: CustomComponent,
+          props: { name: 'ali' },
+          name: 'ali',
+          value: 123,
+          label: 'شناسه',
+          col: 'col-md-6',
         },
       ],
+      newInput: [],
+      state: '',
       type: null,
       config: {
         name: 'name',
@@ -534,6 +480,19 @@ export default {
             { type: 'text', value: 'col' },
           ],
         },
+        {
+          type: CustomComponent,
+          isCustomComponent: true,
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'col' },
+            {
+              type: 'options',
+              value: 'props',
+            },
+          ],
+        },
       ],
       optionLabel: '',
       optionValue: '',
@@ -560,9 +519,18 @@ export default {
     },
     prepareConfig() {
       // finding appropriate config and set it.
-      this.selectedConfig = this.configs.find((c) => c.type == this.type.value);
+      this.selectedConfig = this.configs.find((c) => {
+        if (c.isCustomComponent) {
+          if (c.type.name == this.type) {
+            return c;
+          }
+        }
+        if (c.type == this.type) {
+          return c;
+        }
+      });
       // manully set type to config to load it.
-      this.config.type = this.type.value;
+      this.config.type = this.selectedConfig.type;
       // removing indeterminate condition to false values.
       this.selectedConfig.value.forEach((v) => {
         if (v.type === 'boolean') this.config[v.value] = false;
@@ -668,6 +636,17 @@ export default {
       else {
         this.$refs.fb.setInputByName(this.searchName, this.setValue);
       }
+    },
+    showConfigs() {
+      return this.configs
+        .map((c) => {
+          if (typeof c.type === 'string') {
+            return c.type;
+          } else {
+            return c.type.name;
+          }
+        })
+        .filter((c) => c !== undefined);
     },
   },
   components: {
