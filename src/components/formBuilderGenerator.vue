@@ -185,16 +185,7 @@ export default {
   name: 'FormBuilderGenerator',
   data() {
     return {
-      inputs: [
-        {
-          type: CustomComponent,
-          props: { name: 'ali' },
-          name: 'ali',
-          value: 123,
-          label: 'شناسه',
-          col: 'col-md-6',
-        },
-      ],
+      inputs: [],
       newInput: [],
       state: '',
       type: null,
