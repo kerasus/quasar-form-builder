@@ -1,20 +1,21 @@
 <template>
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <q-input
-      :filled="filled"
-      v-model="inputData"
-      :rules="rules"
-      :lazy-rules="lazyRules"
-      :label="placeholder? null : label"
-      :stack-label="!!placeholder"
-      :type="inputType"
-      :disable="disable"
-      :readonly="readonly"
-      :rounded="rounded"
-      :outlined="outlined"
-      :placeholder="placeholder"
-      @update:model-value="change($event)"
-      @click="onClick"
+    v-model="inputData"
+    :name="name"
+    :filled="filled"
+    :rules="rules"
+    :lazy-rules="lazyRules"
+    :label="placeholder ? null : label"
+    :stack-label="!!placeholder"
+    :type="inputType"
+    :disable="disable"
+    :readonly="readonly"
+    :rounded="rounded"
+    :outlined="outlined"
+    :placeholder="placeholder"
+    @update:model-value="change($event)"
+    @click="onClick"
   />
 </template>
 
@@ -24,12 +25,16 @@ export default {
   name: 'FormBuilderInput',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
       default: '',
-      type: [String, Number, Boolean]
-    }
-  }
-}
+      type: [String, Number, Boolean],
+    },
+  },
+};
 </script>
 
 <style scoped></style>

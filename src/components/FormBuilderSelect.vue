@@ -4,6 +4,10 @@
     v-model="inputData"
     transition-show="jump-down"
     transition-hide="jump-up"
+    :name="name"
+    :filled="filled"
+    :rounded="rounded"
+    :outlined="outlined"
     :option-value="optionValue"
     :option-label="optionLabel"
     :option-disable="optionDisable"
@@ -20,8 +24,7 @@
     :disable="disable"
     :readonly="readonly"
     emit-value
-    :outlined="outlined"
-    :hide-dropdown-icon = "hideDropdownIcon"
+    :hide-dropdown-icon="hideDropdownIcon"
     map-options
     clearable
     @update:model-value="change($event)"
@@ -43,6 +46,10 @@ export default {
   name: 'FormBuilderSelect',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
       default: () => [],
       type: [Array, String, Number, Boolean],
@@ -57,15 +64,27 @@ export default {
     },
     newValueMode: {
       default: 'add-unique',
-      type: String
+      type: String,
     },
     hideDropdownIcon: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     showNoOption: {
       default: true,
-      type: Boolean
+      type: Boolean,
+    },
+    filled: {
+      default: false,
+      type: Boolean,
+    },
+    rounded: {
+      default: false,
+      type: Boolean,
+    },
+    outlined: {
+      default: false,
+      type: Boolean,
     },
   },
   data() {
@@ -112,7 +131,6 @@ export default {
       // If "var" content is undefined/null, then it doesn't tampers with the model
       // and only resets the input textbox to empty string
 
-
       //mr kerasus : why im wrote this code?
       // if (val.length > 0) {
       //   if (!this.filteredOptions.includes(val)) {
@@ -120,16 +138,16 @@ export default {
       //   }
       //   done(val, 'toggle');
       // }
-        done(val, this.newValueMode);
+      done(val, this.newValueMode);
     },
-    test(){
-      this.inputData = []
-    }
+    test() {
+      this.inputData = [];
+    },
   },
   computed: {
     placeholderSetter() {
-      if(this.inputData === null){
-        return this.placeholder
+      if (this.inputData === null) {
+        return this.placeholder;
       }
       // in single select after setting value,
       // v-model type changes to string
@@ -139,18 +157,17 @@ export default {
       // in the multiple scenario, inputData type changes to Array!
       if (this.multiple) {
         if (this.inputData.length == 0) {
-        return this.placeholder;
+          return this.placeholder;
         }
-          return '';
+        return '';
       }
       // be an object
       if (Object.keys(this.inputData).length === 0) {
-        return this.placeholder
+        return this.placeholder;
       }
       return '';
     },
   },
-
 };
 </script>
 

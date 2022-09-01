@@ -8,10 +8,29 @@
     <div v-show="gFormShow">
       <div class="sub-title q-pl-md">Generated Form:</div>
       <form-builder
+        ref="fb"
         v-model:value="inputs"
         :showGeneratorButtons="true"
         @edit="edit"
       />
+    </div>
+    <div v-show="setGetValue" class="q-ma-lg">
+      <p>
+        Here you can provide your name of input, and will get the value to the
+        second input.
+      </p>
+      <p>If you want to set, fill both inputs.</p>
+      <q-select
+        v-model="searchName"
+        :options="searchOptions"
+        label="name of input of form to get"
+        placeholder="name of input of form to get"
+      ></q-select>
+      <q-input
+        v-model="setValue"
+        placeholder="value of input of form to set"
+      ></q-input>
+      <q-btn class="q-mt-md" @click="getSetValue()">submit</q-btn>
     </div>
     <q-card-actions>
       <q-btn flat color="purple" @click="copyJson()">Copy JSON</q-btn>
@@ -20,6 +39,9 @@
       >
       <q-btn flat color="secondary" @click="gFormShow = !gFormShow"
         >{{ gFormShow ? 'Hide' : 'Show' }} Generated Form</q-btn
+      >
+      <q-btn flat color="green" @click="setGetValue = !setGetValue"
+        >{{ setGetValue ? 'Hide' : 'Show' }} get/set value</q-btn
       >
     </q-card-actions>
   </q-card>
@@ -80,6 +102,12 @@
               format of
               <b>"YYYY-MM-DD HH:mm:00"</b>
             </li>
+            <li>
+              For extending generator to cover new inputs and components for
+              future, just add to this.configs appropriate config of the new
+              comer. Generator will make a form containing your input with
+              controls on the props which will be given.
+            </li>
           </ul>
         </div>
         <q-btn @click="state = 'chooseType'">add new input</q-btn>
@@ -93,8 +121,7 @@
           selected input: {{ type?.value }}
           <q-select
             v-model="type"
-            option-value="value"
-            :options="options"
+            :options="showConfigs()"
             @update:model-value="newInputBuild()"
           ></q-select>
         </div>
@@ -151,6 +178,8 @@
 <script>
 import FormBuilder from '../FormBuilder';
 import VueJsonPretty from 'vue-json-pretty';
+import CustomComponent from '../CustomComponent';
+
 import 'vue-json-pretty/lib/styles.css';
 export default {
   name: 'FormBuilderGenerator',
@@ -159,76 +188,6 @@ export default {
       inputs: [],
       newInput: [],
       state: '',
-      options: [
-        {
-          label: 'simple input',
-          value: 'input',
-        },
-        {
-          label: 'select input',
-          value: 'select',
-        },
-        {
-          label: 'checkbox input',
-          value: 'checkbox',
-        },
-        {
-          label: 'range slider input',
-          value: 'rangeSlider',
-        },
-        {
-          label: 'slider input',
-          value: 'slider',
-        },
-        {
-          label: 'color input',
-          value: 'color',
-        },
-        {
-          label: 'dateTime input',
-          value: 'dateTime',
-        },
-        {
-          label: 'date input',
-          value: 'date',
-        },
-        {
-          label: 'time input',
-          value: 'time',
-        },
-        {
-          label: 'inputEditor',
-          value: 'inputEditor',
-        },
-        {
-          label: 'tiptapEditor',
-          value: 'tiptapEditor',
-        },
-        {
-          label: 'file input',
-          value: 'file',
-        },
-        {
-          label: 'avatar input',
-          value: 'avatar',
-        },
-        {
-          label: 'optionGroup input',
-          value: 'optionGroup',
-        },
-        {
-          label: 'separator',
-          value: 'separator',
-        },
-        {
-          label: 'space',
-          value: 'space',
-        },
-        {
-          label: 'toggleButton',
-          value: 'toggleButton',
-        },
-      ],
       type: null,
       config: {
         name: 'name',
@@ -270,11 +229,14 @@ export default {
             { type: 'text', value: 'name' },
             { type: 'text', value: 'label' },
             { type: 'text', value: 'placeholder' },
-            { type: 'text', value: 'col' },
+            { type: 'boolean', value: 'filled' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
             { type: 'boolean', value: 'multiple' },
             { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
             { type: 'boolean', value: 'useChips' },
+            { type: 'text', value: 'col' },
+
             {
               type: 'options',
               value: 'options',
@@ -509,15 +471,32 @@ export default {
             { type: 'text', value: 'col' },
           ],
         },
+        {
+          type: CustomComponent,
+          isCustomComponent: true,
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'col' },
+            { type: 'text', value: 'value' },
+            {
+              type: 'options',
+              value: 'props',
+            },
+          ],
+        },
       ],
       optionLabel: '',
       optionValue: '',
       generatedOptions: [],
       jsonShow: false,
       gFormShow: false,
+      setGetValue: false,
       importJson: '',
       editMode: false,
       editIndex: -1,
+      searchName: '',
+      setValue: '',
     };
   },
   methods: {
@@ -532,9 +511,22 @@ export default {
     },
     prepareConfig() {
       // finding appropriate config and set it.
-      this.selectedConfig = this.configs.find((c) => c.type == this.type.value);
+      this.selectedConfig = this.configs.find((c) => {
+        if (c.isCustomComponent) {
+          if (c.type.name == this.type) {
+            return c;
+          }
+        }
+        if (c.type == this.type) {
+          return c;
+        }
+      });
       // manully set type to config to load it.
-      this.config.type = this.type.value;
+      this.config.type = this.selectedConfig.type;
+      // removing indeterminate condition to false values.
+      this.selectedConfig.value.forEach((v) => {
+        if (v.type === 'boolean') this.config[v.value] = false;
+      });
       // this will use for select copmonent to make options dynamic.
       this.config.options = this.generatedOptions;
     },
@@ -592,6 +584,62 @@ export default {
 
       this.state = 'chooseConfig';
     },
+    getSetValue() {
+      if (this.searchName === '') {
+        alert('you have to specify the name of input');
+        return;
+      }
+      let founded = this.$refs.fb.getInputsByName(this.searchName);
+      if (founded) {
+        founded.forEach((f) => {
+          this.setValueOne(f);
+        });
+      } else {
+        alert('no such name existed on this form');
+      }
+    },
+    getValues() {
+      function getFlatInputs(inputs) {
+        let values = [];
+        inputs.forEach((input) => {
+          if (input.type !== 'formBuilder') {
+            values.push(input);
+          } else {
+            const formBuilderInputs = getFlatInputs(input.value);
+            values = values.concat(formBuilderInputs);
+          }
+        });
+        return values;
+      }
+
+      return getFlatInputs(this.inputs);
+    },
+    setValueOne(founded) {
+      // GET value
+      if (this.setValue === '') {
+        if (founded.value) {
+          this.setValue = founded.value;
+        } else {
+          // input is present but has no value
+          alert('input is present but has no value');
+        }
+      }
+      // SET Value
+      else {
+        this.$refs.fb.setInputByName(this.searchName, this.setValue);
+      }
+    },
+    showConfigs() {
+      return this.configs
+        .map((c) => {
+          if (typeof c.type === 'string') {
+            return c.type;
+          } else {
+            return c.type.name;
+          }
+        })
+        .filter((c) => c !== undefined);
+    },
   },
   components: {
     FormBuilder,
@@ -604,6 +652,15 @@ export default {
       this.jsonShow = true;
       this.gFormShow = true;
       this.state = '';
+    },
+  },
+  computed: {
+    searchOptions() {
+      return this.getValues()
+        .map((input) => {
+          return input.name;
+        })
+        .filter((i) => i !== undefined);
     },
   },
 };
