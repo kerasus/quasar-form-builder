@@ -1,10 +1,22 @@
 export default {
   props: {
+    name: {
+      default: '',
+      type: String
+    },
     label: {
       default: '',
       type: String
     },
     disable: {
+      default: false,
+      type: Boolean
+    },
+    readonly: {
+      default: false,
+      type: Boolean,
+    },
+    filled: {
       default: false,
       type: Boolean
     },
@@ -22,7 +34,8 @@ export default {
     },
     type: {
       default: 'radio', // checkbox-toggle
-      type: String
+      // Object type is for custom components
+      type: [String, Object]
     },
     inline: {
       default: true,
@@ -37,6 +50,10 @@ export default {
       type: Boolean
     },
     multiple: {
+      default: false,
+      type: Boolean
+    },
+    range: {
       default: false,
       type: Boolean
     },
@@ -55,18 +72,6 @@ export default {
     optionLabel: {
       default: 'label',
       type: String
-    },
-    time: {
-      default: false,
-      type: Boolean
-    },
-    date: {
-      default: false,
-      type: Boolean
-    },
-    range: {
-      default: false,
-      type: Boolean
     },
     size: {
       default: '50px',
@@ -100,25 +105,55 @@ export default {
       default: '',
       type: [String, Number, Boolean, Array, Boolean]
     },
+    responseKey: {
+      default: () => {
+        return {}
+      },
+      type: [String, Number, Boolean, Array, Boolean, Object]
+    },
     ripple: {
       default: false,
       type: [Boolean, Object]
     },
-    outline: {
+    outlined: {
       default: false,
       type: [Boolean]
     },
     flat: {
       default: false,
       type: [Boolean]
-    }
+    },
+    placeholder: {
+      default: '',
+      type: String
+    },
+    rules: {
+      default: () => [],
+      type: [Array]
+    },
+    lazyRules:{
+      default: false,
+      type: [Boolean]
+    },
+    col: {
+      default: '',
+      type: String
+    },
+    customLabelStyle: {
+      default: '',
+      type: String
+    },
+    inputType: {
+      default: 'text',
+      type: String
+    },
   },
   watch: {
     value () {
       this.inputData = this.value
     }
   },
-  emits: ['update:value', 'input', 'change'],
+  emits: ['update:value', 'input', 'change', 'onClick'],
   data () {
     return {
       inputData: null
@@ -128,6 +163,9 @@ export default {
     this.inputData = this.value
   },
   methods: {
+    onClick (data) {
+      this.$emit('onClick', data)
+    },
     change (val) {
       this.$emit('update:value', val)
     },
@@ -146,6 +184,7 @@ export default {
       }
 
       return getFlatInputs(this.inputData)
-    }
+    },
+
   }
 }

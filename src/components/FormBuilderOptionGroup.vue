@@ -5,38 +5,45 @@
     </div>
     <q-option-group
       v-model="inputData"
+      :name="name"
       :options="options"
       :color="color"
       :inline="inline"
       :dense="dense"
-      :type="type"
-      :disable="disable"
+      :type="typeOfInput"
+      :disable="disable || readonly"
       @update:model-value="change($event)"
+      @click="onClick"
     />
   </div>
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin'
+import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderOptionGroup',
   mixins: [inputMixin],
   props: {
-    value: {
+    name: {
       default: '',
-      type: [Object, String, Array, Number, Boolean]
+      type: String,
+    },
+    value: {
+      default: null,
+      type: [Object, String, Array, Number, Boolean],
     },
     options: {
       default: () => [], // { label: 'Option 1', value: 'op1' }
-      type: Array
-    }
+      type: Array,
+    },
+    typeOfInput: {
+      default: 'radio', // radio checkbox toggle
+      type: String,
+    },
   },
-  methods: {
-
-  }
-}
+  created() {},
+  methods: {},
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
