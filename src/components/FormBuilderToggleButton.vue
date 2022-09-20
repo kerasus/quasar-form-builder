@@ -43,9 +43,7 @@ export default {
       type: String,
     },
     value: {
-      default: () => {
-        '';
-      },
+      default: '',
       type: [Object, String, Array, Number, Boolean],
     },
     toggleTextColor: {
