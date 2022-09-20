@@ -4,6 +4,8 @@
     <q-editor
         v-if="!disable"
         v-model="inputData"
+        :class="customClass"
+        :content-class="customClass"
         :dense="$q.screen.lt.md"
         :toolbar="[
     [

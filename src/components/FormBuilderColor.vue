@@ -3,6 +3,7 @@
       v-model="inputData"
       :label="label"
       :disable="disable"
+      :class="customClass"
   >
     <template v-slot:append>
       <q-icon name="colorize" class="cursor-pointer">

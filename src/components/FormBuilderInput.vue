@@ -1,5 +1,5 @@
 <template>
-  <q-input v-model="inputData" :label="label" :type="type" :disable="disable" :rounded="rounded" @update:model-value="change($event)" />
+  <q-input v-model="inputData" :label="label" :type="type" :disable="disable" :rounded="rounded" :class="customClass" :input-class="customClass" @update:model-value="change($event)" />
 </template>
 
 <script>

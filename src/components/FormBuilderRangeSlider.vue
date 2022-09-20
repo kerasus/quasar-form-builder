@@ -8,6 +8,8 @@
       :min="min"
       :max="max"
       :disable="disable"
+      :class="customClass"
+      :marker-labels-class="customClass"
       @input="change($event)"
     />
   </div>

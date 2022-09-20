@@ -6,7 +6,7 @@
     <q-separator
           class="separator-default-style"
           :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
-          :class="[ (vertical) ? 'separator-vertical' : 'separator-horizontal' ]"
+          :class="[customClass ,[(vertical) ? 'separator-vertical' : 'separator-horizontal']]"
           :vertical="vertical"
           :inset="inset"
           :spaced="spaced"
@@ -123,3 +123,4 @@ export default {
   min-width: 1px !important;
 }
 </style>
+

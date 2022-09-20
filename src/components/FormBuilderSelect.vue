@@ -13,6 +13,9 @@
     use-input
     input-debounce="500"
     :disable="disable"
+    :class="customClass"
+    :popup-content-class="customClass"
+    :input-class="customClass"
     emit-value
     map-options
     clearable

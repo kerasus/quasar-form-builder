@@ -7,6 +7,7 @@
       :true-value="trueValue"
       :false-value="falseValue"
       :disable="disable"
+      :class="customClass"
       @update:model-value="change($event)"
     />
   </div>

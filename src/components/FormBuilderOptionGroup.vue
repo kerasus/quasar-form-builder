@@ -11,6 +11,7 @@
       :dense="dense"
       :type="typeOfInput"
       :disable="disable"
+      :class="customClass"
       @update:model-value="change($event)"
     />
   </div>

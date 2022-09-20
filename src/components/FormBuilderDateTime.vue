@@ -1,11 +1,11 @@
 <template>
   <div>
     <div v-if="canShowTime && canShowDate" class="dateTime-input">
-      <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" @clear="clearDate">
+      <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" :class="customClass" :input-class="customClass" @clear="clearDate">
         <template #prepend>
-          <q-icon :name="calendarIcon" class="cursor-pointer">
+          <q-icon :name="calendarIcon" class="cursor-pointer" :class="customClass">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-date v-model="dateTime.date" :calendar="calendar" mask="YYYY-MM-DD" :range="range" :multiple="multiple" :disable="disable" @update:model-value="change($event)">
+              <q-date v-model="dateTime.date" :calendar="calendar" mask="YYYY-MM-DD" :range="range" :multiple="multiple" :disable="disable" @update:model-value="change($event)" :class="customClass">
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="بستن" color="primary" flat />
                 </div>
@@ -14,11 +14,11 @@
           </q-icon>
         </template>
       </q-input>
-      <q-input v-model="dateTime.time" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" mask="time" @clear="clearDate">
+      <q-input v-model="dateTime.time" class="time-input-dateTime" :clearable="true" dir="ltr" :disable="disable" mask="time" :class="customClass" :input-class="customClass" @clear="clearDate">
         <template #append>
-          <q-icon :name="clockIcon" class="cursor-pointer">
+          <q-icon :name="clockIcon" class="cursor-pointer" :class="customClass">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-time v-model="dateTime.time" mask="HH:mm:00" format24h :disable="disable" @update:model-value="change($event)">
+              <q-time v-model="dateTime.time" mask="HH:mm:00" format24h :disable="disable" :class="customClass" @update:model-value="change($event)">
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="بستن" color="primary" flat />
                 </div>
@@ -29,11 +29,11 @@
       </q-input>
     </div>
     <div v-else>
-      <q-input v-model="outputText" :clearable="true" dir="ltr" :disable="disable" :label="label" @clear="clearDate">
+      <q-input v-model="outputText" :clearable="true" dir="ltr" :disable="disable" :label="label" :class="customClass" :input-class="customClass" @clear="clearDate">
         <template v-if="canShowDate" #prepend>
-          <q-icon :name="calendarIcon" class="cursor-pointer">
+          <q-icon :name="calendarIcon" class="cursor-pointer" :class="customClass">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-date v-model="inputData" :calendar="calendar" :mask="mask" :range="range" :multiple="multiple" :disable="disable" @update:model-value="change($event)">
+              <q-date v-model="inputData" :calendar="calendar" :mask="mask" :range="range" :multiple="multiple" :disable="disable" :class="customClass"  @update:model-value="change($event)">
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="بستن" color="primary" flat />
                 </div>
@@ -42,9 +42,9 @@
           </q-icon>
         </template>
         <template v-if="canShowTime" #append>
-          <q-icon :name="clockIcon" class="cursor-pointer">
+          <q-icon :name="clockIcon" class="cursor-pointer" :class="customClass">
             <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-time v-model="inputData" :mask="mask" format24h :disable="disable" @update:model-value="change($event)">
+              <q-time v-model="inputData" :mask="mask" format24h :disable="disable" :class="customClass" @update:model-value="change($event)">
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="بستن" color="primary" flat />
                 </div>

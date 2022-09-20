@@ -7,6 +7,7 @@
         :bubble-menu="false"
         :floating-menu="false"
         :options="options"
+        :class="customClass"
         @update:model-value="change($event)"
     />
     <!--eslint-disable-next-line-->

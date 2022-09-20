@@ -25,6 +25,7 @@
       :spread="spread"
       :stack="stack"
       :stretch="stretch"
+      :class="customClass"
       @update:model-value="change($event)"
 
   />
