@@ -93,11 +93,6 @@ export default {
       default: '',
       type: String
     },
-    customClass: {
-      default: '',
-      type: String
-    },
-
     options: {
       default: () => [],
       type: Array
@@ -152,6 +147,11 @@ export default {
       default: 'text',
       type: String
     },
+  },
+  computed: {
+    customClass () {
+      return this.class
+    }
   },
   watch: {
     value () {
