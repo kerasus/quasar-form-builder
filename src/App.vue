@@ -48,7 +48,7 @@ export default {
       readonly: false,
       disable: false,
       inputs: [
-        { type: 'select', class: 'testCustomClass',name: 'question_type', responseKey: 'data.question_type', options: [{ label: 'konkur', value: '6225f4828044517f52500c04' }, { label: 'psychometric', value: '6225f4828044517f52500c05' }, { label: 'descriptive', value: '6225f4828044517f52500c06' }], col: 'col-12' },
+        { type: 'select', dropdownIcon: 'add',class: 'testCustomClass',name: 'question_type', responseKey: 'data.question_type', options: [{ label: 'konkur', value: '6225f4828044517f52500c04' }, { label: 'psychometric', value: '6225f4828044517f52500c05' }, { label: 'descriptive', value: '6225f4828044517f52500c06' }], col: 'col-12' },
         {
           type: 'hidden',
           col: 'col-md-6',
