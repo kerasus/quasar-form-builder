@@ -8,6 +8,8 @@
       :max="max"
       :disable="disable"
       :readonly="readonly"
+      :class="customClass"
+      :marker-labels-class="customClass"
       @update:model-value="change($event)"
       @click="onClick"
     />

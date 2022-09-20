@@ -93,6 +93,11 @@ export default {
       default: '',
       type: String
     },
+    customClass: {
+      default: '',
+      type: String
+    },
+
     options: {
       default: () => [],
       type: Array

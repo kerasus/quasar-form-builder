@@ -7,7 +7,7 @@
       class="separator-default-style"
       :name="name"
       :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
-      :class="[vertical ? 'separator-vertical' : 'separator-horizontal']"
+      :class="[customClass ,[(vertical) ? 'separator-vertical' : 'separator-horizontal']]"
       :vertical="vertical"
       :inset="inset"
       :spaced="spaced"

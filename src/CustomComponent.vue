@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="customClass">
     hi {{ name }} from CustomComponent with value: {{ value }}
     <button @click="addValue">+</button>
   </div>

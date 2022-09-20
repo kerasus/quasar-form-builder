@@ -1,5 +1,4 @@
 <template>
-  {{ value }}
   <q-btn-toggle
     v-model="inputData"
     :name="name"
@@ -27,7 +26,7 @@
     :spread="spread"
     :stack="stack"
     :stretch="stretch"
-    :class="col"
+    :class="{customClass, col}"
     @update:model-value="change($event)"
     @click="onClick"
   />

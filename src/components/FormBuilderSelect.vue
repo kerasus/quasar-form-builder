@@ -23,6 +23,9 @@
     input-debounce="500"
     :disable="disable"
     :readonly="readonly"
+    :class="customClass"
+    :popup-content-class="customClass"
+    :input-class="customClass"
     emit-value
     :hide-dropdown-icon="hideDropdownIcon"
     map-options

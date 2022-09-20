@@ -5,6 +5,8 @@
     <q-editor
       v-if="!disable && !readonly"
       v-model="inputData"
+      :class="customClass"
+      :content-class="customClass"
       :name="name"
       :dense="$q.screen.lt.md"
       :toolbar="[

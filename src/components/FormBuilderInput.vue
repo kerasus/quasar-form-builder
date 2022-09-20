@@ -14,6 +14,7 @@
     :rounded="rounded"
     :outlined="outlined"
     :placeholder="placeholder"
+    :class="customClass" :input-class="customClass"
     @update:model-value="change($event)"
     @click="onClick"
   />
