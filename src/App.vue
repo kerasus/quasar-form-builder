@@ -48,6 +48,7 @@ export default {
       readonly: false,
       disable: false,
       inputs: [
+        { type: 'select', customClass: 'testCustomClass',name: 'question_type', responseKey: 'data.question_type', options: [{ label: 'konkur', value: '6225f4828044517f52500c04' }, { label: 'psychometric', value: '6225f4828044517f52500c05' }, { label: 'descriptive', value: '6225f4828044517f52500c06' }], col: 'col-12' },
         {
           type: 'RangeSlider',
           name: 'ZoomRate',
@@ -62,8 +63,6 @@ export default {
         },
         {
           type: 'toggleButton',
-        { type: 'select', customClass: 'testCustomClass',name: 'question_type', responseKey: 'data.question_type', options: [{ label: 'konkur', value: '6225f4828044517f52500c04' }, { label: 'psychometric', value: '6225f4828044517f52500c05' }, { label: 'descriptive', value: '6225f4828044517f52500c06' }], col: 'col-12' },
-        { type: 'toggleButton',
           name: 'id',
           options: [
             {
