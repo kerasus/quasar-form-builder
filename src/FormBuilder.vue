@@ -346,4 +346,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-builder-hidden-col {
+  display: none;
+}
+</style>
