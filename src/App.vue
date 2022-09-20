@@ -102,6 +102,7 @@ export default {
   data () {
     return {
       inputs: [
+        { type: 'select', customClass: 'testCustomClass',name: 'question_type', responseKey: 'data.question_type', options: [{ label: 'konkur', value: '6225f4828044517f52500c04' }, { label: 'psychometric', value: '6225f4828044517f52500c05' }, { label: 'descriptive', value: '6225f4828044517f52500c06' }], col: 'col-12' },
         { type: 'toggleButton',
           name: 'id',
           options: [
@@ -168,7 +169,7 @@ export default {
           value: [
             { type: 'input', name: 'id1', value: null, label: 'شناسه1', col: 'col-md-6' },
             { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
-            { type: 'separator', size: '3px', separatorType: 'double', vertical: true, label: 'جدا کننده عمودی' },
+            { type: 'separator', size: '3px', separatorType: 'double', vertical: true, customClass: 'testCustomClass', label: 'جدا کننده عمودی' },
             {
               type: 'formBuilder',
               name: 'formBuilderCol',
@@ -181,7 +182,7 @@ export default {
           ]
         },
 
-        { type: 'input', name: 'id', value: null, label: 'شناسه', col: 'col-md-6' },
+        { type: 'input', customClass: 'testCustomClass',name: 'id', value: 'hiiiiiiiiiiiiiiii', label: 'شناسه', col: 'col-md-6' },
 
 
         { type: 'date', name: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
@@ -191,7 +192,7 @@ export default {
         { type: 'separator', color: 'primary', size: '5px', separatorType: 'dashed', label: 'جدا کننده افقی', col: 'col-md-12' },
         { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
         { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
-        { type: 'separator', size: '0', separatorType: 'double', label: 'جدا کننده افقی', col: 'col-md-12' },
+        { type: 'separator', customClass: 'testCustomClass', size: '0', separatorType: 'double', label: 'tessssssssssssssssssst', col: 'col-md-12',vertical: true },
         { type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12' },
         { type: 'inputEditor', name: 'inputEditor', label: 'ادیتور ساده', col: 'col-md-12' },
         { type: 'tiptapEditor', name: 'inputEditor', label: 'ادیتور پیشرفته', options: {
@@ -235,5 +236,11 @@ export default {
       }
     }
   }
+}
+</style>
+<style>
+.testCustomClass {
+  color: red;
+  background: blue;
 }
 </style>
