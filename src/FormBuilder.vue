@@ -1,286 +1,349 @@
 <template>
   <div class="row">
-    <div v-for="(input, inputIndex) in inputData"
-         :key="inputIndex"
-         :class="[
-             (input.col) ? input.col : 'col',
-             (getComponent(input) !== 'form-builder') ? 'q-pa-md' : getComponent(input),
-             getComponent(input) + '-col'
-             ]"
+    <div
+      v-for="(input, inputIndex) in inputData"
+      :key="inputIndex"
+      :class="[
+        input.col ? input.col : 'col',
+        getComponent(input) !== 'form-builder'
+          ? 'q-pa-md'
+          : getComponent(input),
+        // eslint-disable-next-line vue/comma-dangle
+        getComponent(input) + '-col',
+      ]"
     >
+      <div v-if="showGeneratorButtons">
+        <q-btn size="xs" round color="primary" @click="edit(inputIndex)"
+          >edit</q-btn
+        >
+        <q-btn
+          size="xs"
+          round
+          class="q-ml-xs"
+          color="red"
+          @click="remove(inputIndex)"
+          >x</q-btn
+        >
+      </div>
+
       <component
-          :is="getComponent(input)"
-          v-model:value="input.value"
-          v-bind="input.props"
-          :input="input"
-          :label="input.label"
-          :disable="disable || input.disable"
-          :type-of-input="input.typeOfInput"
-          :options="input.options"
-          :option-label="input.optionLabel"
-          :option-value="input.optionValue"
-          :upload-server="input.uploadServer"
-          :multiple="isMultiple(input)"
-          :use-chips="input.useChips"
-          :create-new-value="input.createNewValue"
-          :type="getOptionGroupType(input)"
-          :separator-type="input.separatorType"
-          :separator="input.separator"
-          :min="input.min"
-          :max="input.max"
-          :range="isRange(input)"
-          :time="isTime(input)"
-          :date="isDate(input)"
-          :src="input.value"
-          :size="input.size"
-          :vertical="input.vertical"
-          :inset="input.inset"
-          :spaced="input.spaced"
-          :dark="input.darkMode"
-          :font-size="input.fontSize"
-          :color="input.color"
-          :text-color="input.textColor"
-          :icon="input.icon"
-          :rounded="input.rounded"
-          :name="input.name"
-          :push="input.push"
-          :glossy="input.glossy"
-          :clearable="input.clearable"
-          :inline="input.inline"
-          :dense="input.dense"
-          :toggle-color="input.toggleColor"
-          :toggle-text-color="input.toggleTextColor"
-          :unelevated="input.unelevated"
-          :flat="input.flat"
-          :outline="input.outline"
-          :ripple="input.ripple"
-          :calendar-icon="input.calendarIcon"
-          :clock-icon="input.clockIcon"
-          :class="input.customClass"
-          :input-class="input.customClass"
-          :content-class="input.customClass"
-          :marker-labels-class="input.customClass"
-          :popup-content-class="input.customClass"
-          @update:value="onValueUpdated"
-          @input="change($event, inputIndex)"
-          @change="change($event, inputIndex)"
+        :is="getComponent(input)"
+        v-model:value="input.value"
+        v-bind="input"
+        :disable="disable"
+        :readonly="readonly"
+        @update:value="onValueUpdated"
+        @input="change($event, inputIndex)"
+        @change="change($event, inputIndex)"
+        @onClick="onClick($event, input)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
-import inputMixin from './mixins/inputMixin'
+import { defineAsyncComponent } from 'vue';
+import inputMixin from './mixins/inputMixin';
 
 export default {
   name: 'FormBuilder',
   components: {
     FormBuilder: defineAsyncComponent(() => import('./FormBuilder.vue')),
-    FormBuilderFile: defineAsyncComponent(() => import('./components/FormBuilderFile')),
-    FormBuilderInput: defineAsyncComponent(() => import('./components/FormBuilderInput')),
-    FormBuilderInputEditor: defineAsyncComponent(() => import('./components/FormBuilderInputEditor')),
-    FormBuilderTiptapEditor: defineAsyncComponent(() => import('./components/FormBuilderTiptapEditor')),
-    FormBuilderAvatar: defineAsyncComponent(() => import('./components/FormBuilderAvatar')),
-    FormBuilderSelect: defineAsyncComponent(() => import('./components/FormBuilderSelect')),
-    FormBuilderOptionGroup: defineAsyncComponent(() => import('./components/FormBuilderOptionGroup')),
-    FormBuilderCheckbox: defineAsyncComponent(() => import('./components/FormBuilderCheckbox')),
-    FormBuilderSlider: defineAsyncComponent(() => import('./components/FormBuilderSlider')),
-    FormBuilderRangeSlider: defineAsyncComponent(() => import('./components/FormBuilderRangeSlider')),
-    FormBuilderSpace: defineAsyncComponent(() => import('./components/FormBuilderSpace')),
-    FormBuilderSeparator: defineAsyncComponent(() => import('./components/FormBuilderSeparator')),
-    FormBuilderDateTime: defineAsyncComponent(() => import('./components/FormBuilderDateTime')),
-    FormBuilderColor: defineAsyncComponent(() => import('./components/FormBuilderColor.vue')),
-    FormBuilderToggleButton: defineAsyncComponent(() => import('./components/FormBuilderToggleButton'))
+    FormBuilderFile: defineAsyncComponent(() =>
+      import('./components/FormBuilderFile')
+    ),
+    FormBuilderInput: defineAsyncComponent(() =>
+      import('./components/FormBuilderInput')
+    ),
+    FormBuilderInputEditor: defineAsyncComponent(() =>
+      import('./components/FormBuilderInputEditor')
+    ),
+    FormBuilderTiptapEditor: defineAsyncComponent(() =>
+      import('./components/FormBuilderTiptapEditor')
+    ),
+    FormBuilderAvatar: defineAsyncComponent(() =>
+      import('./components/FormBuilderAvatar')
+    ),
+    FormBuilderSelect: defineAsyncComponent(() =>
+      import('./components/FormBuilderSelect')
+    ),
+    FormBuilderOptionGroup: defineAsyncComponent(() =>
+      import('./components/FormBuilderOptionGroup')
+    ),
+    FormBuilderCheckbox: defineAsyncComponent(() =>
+      import('./components/FormBuilderCheckbox')
+    ),
+    FormBuilderSlider: defineAsyncComponent(() =>
+      import('./components/FormBuilderSlider')
+    ),
+    FormBuilderRangeSlider: defineAsyncComponent(() =>
+      import('./components/FormBuilderRangeSlider')
+    ),
+    FormBuilderSpace: defineAsyncComponent(() =>
+      import('./components/FormBuilderSpace')
+    ),
+    FormBuilderSeparator: defineAsyncComponent(() =>
+      import('./components/FormBuilderSeparator')
+    ),
+    FormBuilderDateTime: defineAsyncComponent(() =>
+      import('./components/FormBuilderDateTime')
+    ),
+    FormBuilderColor: defineAsyncComponent(() =>
+      import('./components/FormBuilderColor.vue')
+    ),
+    FormBuilderToggleButton: defineAsyncComponent(() =>
+      import('./components/FormBuilderToggleButton')
+    ),
   },
   mixins: [inputMixin],
   props: {
     value: {
       default: () => [],
-      type: Array
+      type: Array,
     },
     disable: {
       default: false,
-      type: Boolean
-    }
+      type: Boolean,
+    },
+    showGeneratorButtons: {
+      default: false,
+      type: Boolean,
+    },
   },
-  emits: ['input'],
-  data () {
+  emits: ['input', 'onClick'],
+  data() {
     return {
       currentInput: null,
       optionGroupType: null,
       dateTime_Range: null,
       dateTime_Multiple: null,
-      dateTime_Time: null
-    }
+      dateTime_Time: null,
+    };
   },
   methods: {
-    getFormData () {
-      const formHasFileInput = this.formHasFileInput()
-      const formData = formHasFileInput ? new FormData() : {}
-      const inputs = this.getValues()
-      inputs.forEach(item => {
-        if (item.disable || typeof item.value === 'undefined' || item.value === null) {
-          return
+    onClick(event, input) {
+      function getEvent(data) {
+        if (data.event) {
+          return getEvent(data.event);
+        }
+
+        return data;
+      }
+
+      const absEvent = getEvent(event);
+      this.$emit('onClick', { event: absEvent, input });
+    },
+    getFormData() {
+      const formHasFileInput = this.formHasFileInput();
+      const formData = formHasFileInput ? new FormData() : {};
+      const inputs = this.getValues();
+      inputs.forEach((item) => {
+        if (
+          item.disable ||
+          typeof item.value === 'undefined' ||
+          item.value === null
+        ) {
+          return;
         }
 
         if (item.type === 'file' && !this.isFile(item.value)) {
-          return
+          return;
         }
 
         if (formHasFileInput) {
-          formData.append(item.name, item.value)
+          formData.append(item.name, item.value);
         } else {
-          this.createChainedObject(formData, item.name, item.value)
+          this.createChainedObject(formData, item.name, item.value);
         }
-      })
+      });
 
-      return formData
+      return formData;
     },
-    formHasFileInput () {
-      const inputs = this.getValues()
-      const target = inputs.find(item => item.type === 'file')
-      return !!target
+    formHasFileInput() {
+      const inputs = this.getValues();
+      const target = inputs.find((item) => item.type === 'file');
+      return !!target;
     },
-    isFile (file) {
-      return file instanceof File
+    isFile(file) {
+      return file instanceof File;
     },
-    createChainedObject (formData, chainedName, value) {
-      let keysArray = chainedName
+    createChainedObject(formData, chainedName, value) {
+      let keysArray = chainedName;
       if (typeof chainedName === 'string') {
-        keysArray = chainedName.split('.')
+        keysArray = chainedName.split('.');
       }
       if (keysArray.length === 1) {
-        formData[keysArray[0]] = value
+        formData[keysArray[0]] = value;
       } else {
         if (typeof formData[keysArray[0]] === 'undefined') {
-          formData[keysArray[0]] = {}
+          formData[keysArray[0]] = {};
         }
-        const newKeysArray = keysArray.filter((item, index) => index !== 0)
-        this.createChainedObject(formData[keysArray[0]], newKeysArray, value)
+        const newKeysArray = keysArray.filter((item, index) => index !== 0);
+        this.createChainedObject(formData[keysArray[0]], newKeysArray, value);
       }
     },
 
-
-    setInputValues (responseData, inputs) {
-      const that = this
-      function setValueOfNestedInputData (responseData, inputs) {
-        inputs.forEach(input => {
-          if (typeof input.responseKey === 'undefined' || input.responseKey === null) {
-            return
+    setInputValues(responseData, inputs) {
+      const that = this;
+      function setValueOfNestedInputData(responseData, inputs) {
+        inputs.forEach((input) => {
+          if (
+            typeof input.responseKey === 'undefined' ||
+            input.responseKey === null
+          ) {
+            return;
           }
           if (input.type === 'formBuilder') {
-            setValueOfNestedInputData(responseData, input.value)
-            return
+            setValueOfNestedInputData(responseData, input.value);
+            return;
           }
-          const validChainedObject = that.getValidChainedObject(responseData, input.responseKey)
-          input.value = validChainedObject
-        })
+          const validChainedObject = that.getValidChainedObject(
+            responseData,
+            input.responseKey
+          );
+          input.value = validChainedObject;
+        });
       }
 
       if (!inputs) {
-        inputs = this.inputData
+        inputs = this.inputData;
       }
-      setValueOfNestedInputData(responseData, inputs)
+      setValueOfNestedInputData(responseData, inputs);
     },
-    getValidChainedObject (object, keys) {
+    getInputsByName(name) {
+      let inputs = this.getValues();
+      let founded = inputs.filter((input) => {
+        if (input.name === name) {
+          return input;
+        }
+      });
+      console.log(founded);
+      return founded;
+    },
+    setInputByName(name, value) {
+      let inputs = this.getValues();
+      let founded = inputs.find((input) => {
+        if (input.name === name) {
+          input.value = value;
+        }
+      });
+      return founded;
+    },
+    getValidChainedObject(object, keys) {
       if (!Array.isArray(keys) && typeof keys !== 'string') {
-        console.warn('keys must be array or string')
-        return false
+        console.warn('keys must be array or string');
+        return false;
       }
 
       if (keys === '') {
-        return object
+        return object;
       }
 
-      let keysArray = keys
+      let keysArray = keys;
       if (typeof keys === 'string') {
-        keysArray = keys.split('.')
+        keysArray = keys.split('.');
       }
 
       if (keysArray.length === 1) {
         if (!object || typeof object[keysArray[0]] === 'undefined') {
-          return null
+          return null;
         }
-        return object[keysArray[0]]
+        return object[keysArray[0]];
       }
 
-      if (typeof object[keysArray[0]] !== 'undefined' && object[keysArray[0]] !== null) {
-        return this.getValidChainedObject(object[keysArray[0]], keysArray.splice(1))
+      if (
+        typeof object[keysArray[0]] !== 'undefined' &&
+        object[keysArray[0]] !== null
+      ) {
+        return this.getValidChainedObject(
+          object[keysArray[0]],
+          keysArray.splice(1)
+        );
       }
 
-      return (typeof object[keysArray[0]] !== 'undefined' && object[keysArray[0]] !== null)
+      return (
+        typeof object[keysArray[0]] !== 'undefined' &&
+        object[keysArray[0]] !== null
+      );
     },
 
-
-    getComponent (input) {
+    getComponent(input) {
       if (typeof input.type === 'object') {
-        return input.type
+        return { ...input.type };
       }
       if (input.type === 'formBuilder') {
-        return 'form-builder'
+        return 'form-builder';
       }
       if (
-          input.type === 'optionGroupRadio' ||
-          input.type === 'optionGroupCheckbox' ||
-          input.type === 'optionGroupToggle'
+        input.type === 'optionGroupRadio' ||
+        input.type === 'optionGroupCheckbox' ||
+        input.type === 'optionGroupToggle'
       ) {
-        return 'form-builder-option-group'
+        return 'form-builder-option-group';
       }
       if (
-          input.type === 'dateMultipleRange' ||
-          input.type === 'dateRange' ||
-          input.type === 'date' ||
-          input.type === 'dateTime' ||
-          input.type === 'time'
+        input.type === 'dateMultipleRange' ||
+        input.type === 'dateRange' ||
+        input.type === 'date' ||
+        input.type === 'dateTime' ||
+        input.type === 'time'
       ) {
-        return 'form-builder-date-time'
+        return 'form-builder-date-time';
       }
       if (input.type === 'toggleButton') {
-        return 'form-builder-toggle-button'
+        return 'form-builder-toggle-button';
       }
-      return 'form-builder-' + input.type
+      return 'form-builder-' + input.type;
     },
-    getOptionGroupType (input) {
+    getOptionGroupType(input) {
       if (input.type === 'optionGroupRadio') {
-        return 'radio'
+        return 'radio';
       } else if (input.type === 'optionGroupCheckbox') {
-        return 'checkbox'
+        return 'checkbox';
       } else if (input.type === 'optionGroupToggle') {
-        return 'toggle'
+        return 'toggle';
       }
 
-      return null
+      return null;
     },
-    isMultiple (input) {
-      return input.multiple || input.type === 'dateMultipleRange'
+    isMultiple(input) {
+      return input.multiple || input.type === 'dateMultipleRange';
     },
-    isRange (input) {
-      return input.type === 'dateMultipleRange' || input.type === 'dateRange'
+    isRange(input) {
+      return input.type === 'dateMultipleRange' || input.type === 'dateRange';
     },
-    isTime (input) {
-      return input.type === 'time' || input.type === 'dateTime'
+    isTime(input) {
+      return input.type === 'time' || input.type === 'dateTime';
     },
-    isDate (input) {
-      return input.type === 'date' || input.type === 'dateTime'
+    isDate(input) {
+      return input.type === 'date' || input.type === 'dateTime';
     },
-    change (event, inputIndex) {
-      if (typeof event.target !== 'undefined' && typeof event.target.files !== 'undefined' && event.target.files[0]) {
-        this.inputData[inputIndex].value = event.target.files[0]
+    change(event, inputIndex) {
+      if (
+        typeof event.target !== 'undefined' &&
+        typeof event.target.files !== 'undefined' &&
+        event.target.files[0]
+      ) {
+        this.inputData[inputIndex].value = event.target.files[0];
       } else {
-        this.inputData[inputIndex].value = event
+        this.inputData[inputIndex].value = event;
       }
 
       // this.inputData.value = inputValue
-      this.$emit('input', this.inputData)
+      this.$emit('input', this.inputData);
     },
     onValueUpdated() {
-      this.$emit('update:value', this.inputData)
-    }
-  }
-}
+      this.$emit('update:value', this.inputData);
+    },
+    remove(i) {
+      this.inputData.splice(i, 1);
+      this.onValueUpdated();
+    },
+    edit(i) {
+      this.$emit('edit', i);
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

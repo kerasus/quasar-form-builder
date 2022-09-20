@@ -1,4 +1,84 @@
 <template>
+  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
+  <div class="dateTime-input">
+    <q-input
+      v-show="show('date')"
+      v-model="dateTime.date"
+      :name="name"
+      class="form-calender"
+      readonly
+      mask="date"
+      dir="ltr"
+      :disable="disable"
+      :label="placeholder ? null : label"
+      :stack-label="!!placeholder"
+      :placeholder="placeholder"
+      :rules="rules"
+      :lazy-rules="lazyRules"
+      :outlined="outlined"
+      :class="customClass"
+      :input-class="customClass"
+      @click="showDateMenu"
+    >
+      <template #prepend>
+        <q-icon :name="calendarIcon" class="cursor-pointer" :class="customClass">
+          <q-menu v-if="!readonly" v-model="showDate">
+            <q-date
+              v-model="dateTime.date"
+              :calendar="calendar"
+              mask="YYYY-MM-DD"
+              :range="range"
+              :multiple="multiple"
+              :disable="disable"
+              :title="title ? title : label"
+              :today-btn="todayBtn"
+              :class="customClass"
+              @update:model-value="change($event)"
+            >
+              <div class="row items-center justify-end">
+                <q-btn v-close-popup label="بستن" color="primary" flat />
+              </div>
+            </q-date>
+          </q-menu>
+        </q-icon>
+      </template>
+    </q-input>
+    <q-input
+      v-show="show('time')"
+      v-model="dateTime.time"
+      :name="name"
+      class="time-input-dateTime"
+      :clearable="true"
+      dir="ltr"
+      :disable="disable"
+      :label="placeholder ? null : label"
+      :stack-label="!!placeholder"
+      :placeholder="placeholder"
+      mask="time"
+      :rules="rules"
+      :lazy-rules="lazyRules"
+      readonly
+      :outlined="outlined"
+      @click="showTimeMenu"
+    >
+      <template #append>
+        <q-menu v-if="!readonly" v-model="showTime">
+          <q-time
+            v-model="dateTime.time"
+            mask="HH:mm:00"
+            format24h
+            :disable="disable"
+            :title="title ? title : label"
+            :now-btn="nowBtn"
+          >
+            <div class="row items-center justify-end">
+              <q-btn v-close-popup label="بستن" color="primary" flat />
+            </div>
+          </q-time>
+        </q-menu>
+        <q-icon :name="clockIcon" class="cursor-pointer"> </q-icon>
+      </template>
+    </q-input>
   <div>
     <div v-if="canShowTime && canShowDate" class="dateTime-input">
       <q-input v-model="dateTime.date" class="form-calender" :clearable="true" dir="ltr" :disable="disable" :label="label" mask="date" :class="customClass" :input-class="customClass" @clear="clearDate">
@@ -59,155 +139,142 @@
 
 <script>
 import moment from 'moment-jalaali';
-import inputMixin from '../mixins/inputMixin'
-import { date } from 'quasar'
-
+import inputMixin from '../mixins/inputMixin';
+// NOTE: Value accepted from this component is based on Miladi format
+// you should pass to it Miladi date as string
+// output of this component (which name is 'value') is based on Miladi format.
+// SO:
+// INPUT: MILADI (STRING)
+// SHOWING IN CALENDAR: JALALI (STRING)
+// OUTPUT: MILADI (STRING)
 export default {
   name: 'FormBuilderDateTime',
   mixins: [inputMixin],
-  props: {
-    value: {
-      default: '',
-      type: [String, Array]
-    },
-    calendar: {
-      default: 'persian',
-      type: String
-    },
-    calendarIcon: {
-      default: 'event',
-      type: String
-    },
-    clockIcon: {
-      default: 'access_time',
-      type: String
-    },
-  },
-  emits: ['update:value'],
-  data () {
+  data() {
     return {
       dateTime: {
         date: '',
-        time: ''
-      }
-    }
+        time: '',
+      },
+      showDate: false,
+      showTime: false,
+    };
   },
-  computed: {
-    canShowTime () {
-      return (!this.range && !this.multiple) && this.time
+  props: {
+    name: {
+      default: '',
+      type: String,
     },
-    canShowDate () {
-      return this.date
+    calendar: {
+      default: 'persian',
+      type: String,
     },
-    mask () {
-      if (this.canShowTime && !this.canShowDate) {
-        return 'HH:mm:00'
-      } else if (!this.canShowTime && this.canShowDate) {
-        return 'YYYY-MM-DD'
-      } else {
-        return ''
-      }
+    calendarIcon: {
+      default: 'event',
+      type: String,
     },
-    outputText () {
-      if (!this.inputData) {
-        return
-      }
-      if (Array.isArray(this.inputData)) {
-        let ranges = this.inputData.map(item => {
-          if (item.from) {
-            return ('(' + item.from + '-' + item.to + ')')
-          } else {
-            return ('(' + item + ')')
-          }
-        })
-        ranges = ranges.join(', ')
-        return ranges
-      } else if (this.inputData.from) {
-        return ('(' + this.inputData.from + '-' + this.inputData.to + ')')
-      }
-      return this.inputData
-    }
+    clockIcon: {
+      default: 'access_time',
+      type: String,
+    },
+    title: {
+      default: '',
+      type: String,
+    },
+    placeholder: {
+      default: '',
+      type: String,
+    },
+    value: {
+      default: '',
+      type: String,
+    },
+    nowBtn: {
+      default: false,
+      type: Boolean,
+    },
+    todayBtn: {
+      default: false,
+      type: Boolean,
+    },
   },
   watch: {
-    value (newValue) {
-      if (!newValue) {
-        this.inputData = newValue
-        return
+    dateTime: {
+      handler(n) {
+        if (this.type === 'dateTime') {
+          this.tempValue =
+            this.shamsiToMiladiDate(n.date) + ' ' + this.formatTime(n.time);
+        } else {
+          if (this.type === 'date') {
+            this.tempValue = this.shamsiToMiladiDate(n.date);
+          }
+          if (this.type === 'time') {
+            this.tempValue = this.formatTime(n.time);
+          }
+        }
+        this.change(this.tempValue);
+      },
+      deep: true,
+    },
+    value(n) {
+      if (n === '' || Number(n.split(' ')[0].split('-')[0]) > 2000) {
+        this.dateTime.date = this.miladiToShamsiDate(n.split(' ')[0]);
+        this.dateTime.time = this.formatTime(n.split(' ')[1]);
+        return;
       }
-      if (!newValue.from && this.calendar === 'persian' && this.canShowDate) {
-        this.inputData = this.miladiToShamsiDate(newValue)
-      } else if (newValue.from) {
-        this.inputData.from = this.miladiToShamsiDate(newValue.from)
-        this.inputData.to = this.miladiToShamsiDate(newValue.to)
+      if (this.type === 'time') {
+        this.dateTime.time = n;
+      } else if (this.type === 'date') {
+        this.dateTime.date = n;
+      } else {
+        let temp = n.split(' ');
+        this.dateTime.date = temp[0];
+        this.dateTime.time = temp[1];
       }
-      this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD')
-      this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00')
-    }
-  },
-  created () {
-    this.dateTime.date = date.formatDate(this.inputData, 'YYYY-MM-DD')
-    this.dateTime.time = date.formatDate(this.inputData, 'HH:mm:00')
+    },
   },
   methods: {
-    clearDate () {
-      this.inputData = null
-      this.change(null)
+    showDateMenu() {
+      this.showDate = true;
     },
-    change (val) {
-      let fullDate = val
-      if (this.canShowTime && this.canShowDate) {
-        this.dateTime.date = date.formatDate(this.dateTime.date, 'YYYY-MM-DD')
-        fullDate = this.dateTime.date + ' ' + this.dateTime.time
-      }
-      if (fullDate && !fullDate.from && this.calendar === 'persian' && this.canShowDate) {
-        fullDate = this.shamsiToMiladiDate(fullDate)
-      }
-      if (fullDate && fullDate.from) {
-        fullDate.from = this.shamsiToMiladiDate(fullDate.from)
-        fullDate.to = this.shamsiToMiladiDate(fullDate.to)
-      }
-      this.$emit('update:value', fullDate)
+    showTimeMenu() {
+      this.showTime = true;
     },
-    miladiToShamsiDate (date) {
-      if (this.canShowDate && this.canShowTime) {
-        return moment(new Date(date)).format('jYYYY/jM/jD HH:mm:00')
-      } else {
-        return moment(new Date(date)).format('jYYYY/jM/jD')
-      }
+    show(t) {
+      return this.type === 'dateTime' || this.type === t;
     },
-    shamsiToMiladiDate (date) {
-      if (this.canShowDate && this.canShowTime) {
-        return moment(date, 'jYYYY/jMM/jDD HH:mm:00').format('YYYY-MM-DD HH:mm:00')
-      } else {
-        return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
-      }
-    }
-  }
-}
+    shamsiToMiladiDate(date) {
+      return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
+    },
+    miladiToShamsiDate(date) {
+      return moment(date, 'YYYY/MM/DD').format('jYYYY-jMM-jDD');
+    },
+    formatTime(time) {
+      return moment(time, 'HH:mm').format('HH:mm:00');
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-.dateTime-input{
+<style scoped lang="scss">
+.dateTime-input {
   display: flex;
   flex-direction: row;
-  .form-calender{
-    width: 50%;
+  label {
+    width: 100%;
   }
-  .time-input-dateTime{
-    width: 50%;
-    .q-field__native{
-      padding: 24px 0 8px !important;
-    }
-  }
-}
-</style>
-<style lang="scss">
-.dateTime-input{
-  .time-input-dateTime{
-    .q-field__native{
+  .time-input-dateTime {
+    .q-field__native {
       padding: 24px 0 8px;
     }
   }
 }
+// removing dotted border for readonly fields from project
+:deep(.q-field--outlined.q-field--readonly .q-field__control:before) {
+  border-style: solid;
+}
+:deep(.q-field--standard.q-field--readonly .q-field__control:before) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+}
 </style>
-

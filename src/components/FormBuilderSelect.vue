@@ -1,85 +1,124 @@
 <template>
+  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <q-select
     v-model="inputData"
     transition-show="jump-down"
     transition-hide="jump-up"
+    :name="name"
+    :filled="filled"
+    :rounded="rounded"
+    :outlined="outlined"
     :option-value="optionValue"
     :option-label="optionLabel"
     :option-disable="optionDisable"
     :options="filteredOptions"
-    :label="label"
+    :label="placeholder ? null : label"
+    :stack-label="!!placeholder"
+    :placeholder="placeholderSetter"
+    :rules="rules"
+    :lazy-rules="lazyRules"
     :multiple="multiple"
     :use-chips="useChips"
     use-input
     input-debounce="500"
     :disable="disable"
+    :readonly="readonly"
     :class="customClass"
     :popup-content-class="customClass"
     :input-class="customClass"
     emit-value
+    :hide-dropdown-icon="hideDropdownIcon"
     map-options
     clearable
     @update:model-value="change($event)"
     @new-value="createValue"
     @filter="filterFn"
+    @click="onClick"
   >
     <template #no-option>
-      <q-item>
-        <q-item-section class="text-grey">
-          موردی یافت نشد
-        </q-item-section>
+      <q-item v-show="showNoOption">
+        <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
       </q-item>
     </template>
   </q-select>
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin'
+import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderSelect',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
       default: () => [],
-      type: [Array, String, Number, Boolean]
+      type: [Array, String, Number, Boolean],
     },
     options: {
       default: () => [],
-      type: Array
+      type: Array,
     },
     optionDisable: {
       default: 'disable',
-      type: String
-    }
+      type: String,
+    },
+    newValueMode: {
+      default: 'add-unique',
+      type: String,
+    },
+    hideDropdownIcon: {
+      default: false,
+      type: Boolean,
+    },
+    showNoOption: {
+      default: true,
+      type: Boolean,
+    },
+    filled: {
+      default: false,
+      type: Boolean,
+    },
+    rounded: {
+      default: false,
+      type: Boolean,
+    },
+    outlined: {
+      default: false,
+      type: Boolean,
+    },
   },
-  data () {
+  data() {
     return {
       model: null,
-      filteredOptions: this.options
-    }
+      filteredOptions: this.options,
+    };
   },
   methods: {
-    filterFn (val, update) {
-      const isObjectList = (this.options.length > 0 && typeof this.options[0] === 'object')
+    filterFn(val, update) {
+      const isObjectList =
+        this.options.length > 0 && typeof this.options[0] === 'object';
 
       if (val === '') {
         update(() => {
-          this.filteredOptions = this.options
-        })
-        return
+          this.filteredOptions = this.options;
+        });
+        return;
       }
 
       update(() => {
-        const needle = val.toLowerCase()
-        this.filteredOptions = this.options.filter(v => {
-          const itemLabel = (isObjectList) ? v[this.optionLabel] : v
-          return itemLabel.toString().toLowerCase().indexOf(needle) > -1
-        })
-      })
+        const needle = val.toLowerCase();
+        this.filteredOptions = this.options.filter((v) => {
+          const itemLabel = isObjectList ? v[this.optionLabel] : v;
+          return itemLabel.toString().toLowerCase().indexOf(needle) > -1;
+        });
+      });
     },
-    createValue (val, done) {
+    createValue(val, done) {
       if (!this.createNewValue) {
-        return
+        return;
       }
       // Calling done(var) when new-value-mode is not set or "add", or done(var, "add") adds "var" content to the model
       // and it resets the input textbox to empty string
@@ -95,18 +134,44 @@ export default {
       // If "var" content is undefined/null, then it doesn't tampers with the model
       // and only resets the input textbox to empty string
 
-      if (val.length > 0) {
-        if (!this.filteredOptions.includes(val)) {
-          this.filteredOptions.push(val)
-        }
-        done(val, 'toggle')
+      //mr kerasus : why im wrote this code?
+      // if (val.length > 0) {
+      //   if (!this.filteredOptions.includes(val)) {
+      //     this.filteredOptions.push(val);
+      //   }
+      //   done(val, 'toggle');
+      // }
+      done(val, this.newValueMode);
+    },
+    test() {
+      this.inputData = [];
+    },
+  },
+  computed: {
+    placeholderSetter() {
+      if (this.inputData === null) {
+        return this.placeholder;
       }
-    }
-  }
-
-}
+      // in single select after setting value,
+      // v-model type changes to string
+      if (typeof this.inputData === 'string') {
+        return '';
+      }
+      // in the multiple scenario, inputData type changes to Array!
+      if (this.multiple) {
+        if (this.inputData.length == 0) {
+          return this.placeholder;
+        }
+        return '';
+      }
+      // be an object
+      if (Object.keys(this.inputData).length === 0) {
+        return this.placeholder;
+      }
+      return '';
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

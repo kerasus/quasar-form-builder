@@ -1,37 +1,38 @@
 <template>
   <div>
-    <div>
-      {{ label }}: {{ inputData }} ({{ min }} تا {{ max }})
-    </div>
+    <div>{{ label }}: {{ inputData }} ({{ min }} تا {{ max }})</div>
     <q-slider
       v-model="inputData"
+      :name="name"
       :min="min"
       :max="max"
       :disable="disable"
+      :readonly="readonly"
       :class="customClass"
       :marker-labels-class="customClass"
-      @input="change($event)"
+      @update:model-value="change($event)"
+      @click="onClick"
     />
   </div>
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin'
+import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderSlider',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
       default: 0,
-      type: Number
-    }
+      type: Number,
+    },
   },
-  methods: {
-
-  }
-}
+  methods: {},
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
