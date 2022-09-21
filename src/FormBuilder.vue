@@ -358,6 +358,8 @@ export default {
           val.value = []
         else if (val.type === 'RangeSlider')
           val.value.min = val.value.max = 0
+        else if (val.type === 'Checkbox')
+          val.value = false
         else if (val.type === 'tiptapEditor')
           this.$refs.formBuildertiptapEditor[0].setNewContent(' ')
         else if (val.type.name === 'CustomComponent') {
