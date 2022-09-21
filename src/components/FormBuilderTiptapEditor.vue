@@ -55,6 +55,11 @@ export default {
       this.inputData = '';
     }
   },
+  methods: {
+    setNewContent(val) {
+      this.$refs.tiptap.setContent(val)
+    }
+  }
 };
 </script>
 
