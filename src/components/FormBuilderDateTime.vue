@@ -1,23 +1,24 @@
 <template>
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-  <div class="dateTime-input" :key="rendrKey">
-    <q-input v-show="show('date')"
-             v-model="dateTime.date"
-             :name="name"
-             class="form-calender"
-             readonly
-             mask="date"
-             dir="ltr"
-             :disable="disable"
-             :label="placeholder ? null : label"
-             :stack-label="!!placeholder"
-             :placeholder="placeholder"
-             :rules="rules"
-             :lazy-rules="lazyRules"
-             :outlined="outlined"
-             :class="customClass"
-             :input-class="customClass"
-             @click="showDateMenu"
+  <div class="dateTime-input">
+    <q-input
+        v-show="show('date')"
+        v-model="dateTime.date"
+        :name="name"
+        class="form-calender"
+        readonly
+        mask="date"
+        dir="ltr"
+        :disable="disable"
+        :label="placeholder ? null : label"
+        :stack-label="!!placeholder"
+        :placeholder="placeholder"
+        :rules="rules"
+        :lazy-rules="lazyRules"
+        :outlined="outlined"
+        :class="customClass"
+        :input-class="customClass"
+        @click="showDateMenu"
     >
       <template #prepend>
         <q-icon :name="calendarIcon" class="cursor-pointer" :class="customClass">
@@ -41,22 +42,23 @@
         </q-icon>
       </template>
     </q-input>
-    <q-input v-show="show('time')"
-             v-model="dateTime.time"
-             :name="name"
-             class="time-input-dateTime"
-             :clearable="true"
-             dir="ltr"
-             :disable="disable"
-             :stack-label="!!placeholder"
-             mask="time"
-             :rules="rules"
-             :lazy-rules="lazyRules"
-             readonly
-             :outlined="outlined"
-             :class="customClass"
-             :input-class="customClass"
-             @click="showTimeMenu"
+    <q-input
+        v-show="show('time')"
+        v-model="dateTime.time"
+        :name="name"
+        class="time-input-dateTime"
+        :clearable="true"
+        dir="ltr"
+        :disable="disable"
+        :stack-label="!!placeholder"
+        mask="time"
+        :rules="rules"
+        :lazy-rules="lazyRules"
+        readonly
+        :outlined="outlined"
+        :class="customClass"
+        :input-class="customClass"
+        @click="showTimeMenu"
     >
       <template #append>
         <q-menu v-if="!readonly" v-model="showTime" :class="customClass">
