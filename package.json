@@ -36,6 +36,7 @@
     "core-js": "^3.24.1",
     "moment-jalaali": "^0.9.6",
     "quasar": "^2.7.7",
+    "quasar-form-builder": "^0.1.40",
     "vue": "^3.2.37",
     "vue-json-pretty": "^2.2.0",
     "vue3-tiptap-katex": "^1.0.24"

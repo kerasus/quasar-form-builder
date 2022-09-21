@@ -3,15 +3,15 @@
     <q-header elevated>
       <q-toolbar>
         <q-btn
-          flat
-          dense
-          round
-          aria-label="Menu"
-          icon="menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
+            flat
+            dense
+            round
+            aria-label="Menu"
+            icon="menu"
+            @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title> Quasar Form Builder </q-toolbar-title>
+        <q-toolbar-title> Quasar Form Builder</q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -21,28 +21,30 @@
       <q-btn color="blue" class="q-my-md full-width" @click="getData">
         get data
       </q-btn>
+      <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
-      <br />
-      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly" />
-      <q-checkbox v-model="disable" :model-value="disable" label="disable" />
-      <br />
-      <br />
-      <br />
+      <br/>
+      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly"/>
+      <q-checkbox v-model="disable" :model-value="disable" label="disable"/>
+      <br/>
+      <br/>
+      <br/>
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly" :disable="disable" />
+      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly"
+                    :disable="disable"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import FormBuilder from './FormBuilder';
 import FormBuilderGenerator from './components/formBuilderGenerator';
 import CustomComponent from './CustomComponent';
 
 export default {
   name: 'LayoutDefault',
-  components: { FormBuilder,FormBuilderGenerator },
+  components: {FormBuilder, FormBuilderGenerator},
   data() {
     return {
       readonly: false,
@@ -56,8 +58,8 @@ export default {
           min: 0,
           max: 11,
           value: {
-            min:5,
-            max:7
+            min: 5,
+            max: 7
           }
         },
         {
@@ -110,10 +112,10 @@ export default {
           size: '20px',
         },
 
-        { type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-4' },
+        {type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-4'},
         {
           type: CustomComponent,
-          props: { name: 'ali' },
+          props: {name: 'ali'},
           name: 'ali',
           value: 123,
           label: 'شناسه',
@@ -121,7 +123,7 @@ export default {
         },
         {
           type: CustomComponent,
-          props: { name: 'mostafa' },
+          props: {name: 'mostafa'},
           name: 'mostafa',
           value: 456,
           label: 'شناسه',
@@ -268,7 +270,7 @@ export default {
           label: 'جدا کننده افقی',
           col: 'col-md-12',
         },
-        { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
+        {type: 'input', name: 'url', label: 'منبع', col: 'col-md-6'},
         {
           type: 'color',
           placeholder: 'وارد نمایید',
@@ -284,7 +286,7 @@ export default {
           label: 'جدا کننده افقی',
           col: 'col-md-12',
         },
-        { type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12' },
+        {type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12'},
         {
           type: 'inputEditor',
           name: 'inputEditor',
@@ -301,11 +303,11 @@ export default {
             poem: false,
             reading: false,
             persianKeyboard: true,
-            mathliveOptions: { smartFence: false },
+            mathliveOptions: {smartFence: false},
             uploadServer: {
               url: 'imageUrl',
               instantUpload: true,
-              headers: { Authorization: 'Bearer ' + '65465' },
+              headers: {Authorization: 'Bearer ' + '65465'},
             },
           },
           col: 'col-md-12',
@@ -416,7 +418,7 @@ export default {
     };
   },
   methods: {
-    onClick (data) {
+    onClick(data) {
       console.log('data', data)
     },
     getData() {
@@ -435,6 +437,9 @@ export default {
         test2: '12:25:00',
       });
     },
+    clearInputValues() {
+      this.$refs.formBuilder.clearFormBuilderInputValues()
+    },
   },
 };
 </script>
@@ -443,6 +448,7 @@ export default {
 .q-field__inner {
   .q-field__control {
     background-color: white;
+
     .q-field__append {
       .q-icon {
         color: black;
