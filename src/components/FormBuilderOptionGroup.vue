@@ -12,6 +12,7 @@
       :dense="dense"
       :type="typeOfInput"
       :disable="disable || readonly"
+      :class="customClass"
       @update:model-value="change($event)"
       @click="onClick"
     />

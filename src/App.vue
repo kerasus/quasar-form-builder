@@ -48,6 +48,11 @@ export default {
       readonly: false,
       disable: false,
       inputs: [
+        { type: 'select', dropdownIcon: 'add',class: 'testCustomClass',name: 'question_type', responseKey: 'data.question_type', options: [{ label: 'konkur', value: '6225f4828044517f52500c04' }, { label: 'psychometric', value: '6225f4828044517f52500c05' }, { label: 'descriptive', value: '6225f4828044517f52500c06' }], col: 'col-12' },
+        {
+          type: 'hidden',
+          col: 'col-md-6',
+        },
         {
           type: 'RangeSlider',
           name: 'ZoomRate',
@@ -133,6 +138,9 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-6',
           value: [
+            { type: 'input', name: 'id1', value: null, label: 'شناسه1', col: 'col-md-6' },
+            { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
+            { type: 'separator', size: '3px', separatorType: 'double', vertical: true, class: 'testCustomClass', label: 'جدا کننده عمودی' },
             {
               type: 'input',
               name: 'id1',
@@ -182,6 +190,14 @@ export default {
           ],
         },
 
+        { type: 'input', class: 'testCustomClass',name: 'id', value: 'hiiiiiiiiiiiiiiii', label: 'شناسه', col: 'col-md-6' },
+
+
+        { type: 'date', name: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
+        { type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4'},
+        { type: 'dateTime', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
+        { type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
+        { type: 'separator', color: 'primary', size: '5px', separatorType: 'dashed', label: 'جدا کننده افقی', col: 'col-md-12' },
         {
           type: 'input',
           name: 'id',
@@ -269,6 +285,8 @@ export default {
           col: 'col-md-12',
         },
         { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
+        { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
+        { type: 'separator', class: 'testCustomClass', size: '0', separatorType: 'double', label: 'tessssssssssssssssssst', col: 'col-md-12',vertical: true },
         {
           type: 'color',
           placeholder: 'وارد نمایید',
@@ -451,5 +469,11 @@ export default {
       }
     }
   }
+}
+</style>
+<style>
+.testCustomClass {
+  color: red;
+  background: blue;
 }
 </style>

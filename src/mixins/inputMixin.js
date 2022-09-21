@@ -148,6 +148,11 @@ export default {
       type: String
     },
   },
+  computed: {
+    customClass () {
+      return this.class
+    }
+  },
   watch: {
     value () {
       this.inputData = this.value

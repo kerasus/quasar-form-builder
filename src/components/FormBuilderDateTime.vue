@@ -2,35 +2,38 @@
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
   <div class="dateTime-input">
     <q-input
-      v-show="show('date')"
-      v-model="dateTime.date"
-      :name="name"
-      class="form-calender"
-      readonly
-      mask="date"
-      dir="ltr"
-      :disable="disable"
-      :label="placeholder ? null : label"
-      :stack-label="!!placeholder"
-      :placeholder="placeholder"
-      :rules="rules"
-      :lazy-rules="lazyRules"
-      :outlined="outlined"
-      @click="showDateMenu"
+        v-show="show('date')"
+        v-model="dateTime.date"
+        :name="name"
+        class="form-calender"
+        readonly
+        mask="date"
+        dir="ltr"
+        :disable="disable"
+        :label="label"
+        :stack-label="!!placeholder"
+        :placeholder="placeholder"
+        :rules="rules"
+        :lazy-rules="lazyRules"
+        :outlined="outlined"
+        :class="customClass"
+        :input-class="customClass"
+        @click="showDateMenu"
     >
       <template #prepend>
-        <q-icon :name="calendarIcon" class="cursor-pointer">
-          <q-menu v-if="!readonly" v-model="showDate">
+        <q-icon :name="calendarIcon" class="cursor-pointer" :class="customClass">
+          <q-menu v-if="!readonly" v-model="showDate" :class="customClass">
             <q-date
-              v-model="dateTime.date"
-              :calendar="calendar"
-              mask="YYYY-MM-DD"
-              :range="range"
-              :multiple="multiple"
-              :disable="disable"
-              :title="title ? title : label"
-              :today-btn="todayBtn"
-              @update:model-value="change($event)"
+                v-model="dateTime.date"
+                :calendar="calendar"
+                mask="YYYY-MM-DD"
+                :range="range"
+                :multiple="multiple"
+                :disable="disable"
+                :title="title ? title : label"
+                :today-btn="todayBtn"
+                :class="customClass"
+                @update:model-value="change($event)"
             >
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="بستن" color="primary" flat />
@@ -41,32 +44,35 @@
       </template>
     </q-input>
     <q-input
-      v-show="show('time')"
-      v-model="dateTime.time"
-      :name="name"
-      class="time-input-dateTime"
-      :clearable="true"
-      dir="ltr"
-      :disable="disable"
-      :label="placeholder ? null : label"
-      :stack-label="!!placeholder"
-      :placeholder="placeholder"
-      mask="time"
-      :rules="rules"
-      :lazy-rules="lazyRules"
-      readonly
-      :outlined="outlined"
-      @click="showTimeMenu"
+        v-show="show('time')"
+        v-model="dateTime.time"
+        :name="name"
+        class="time-input-dateTime"
+        :clearable="true"
+        dir="ltr"
+        :disable="disable"
+        :label="label"
+        :stack-label="!!placeholder"
+        :placeholder="placeholder"
+        mask="time"
+        :rules="rules"
+        :lazy-rules="lazyRules"
+        readonly
+        :outlined="outlined"
+        :class="customClass"
+        :input-class="customClass"
+        @click="showTimeMenu"
     >
       <template #append>
-        <q-menu v-if="!readonly" v-model="showTime">
+        <q-menu v-if="!readonly" v-model="showTime" :class="customClass">
           <q-time
-            v-model="dateTime.time"
-            mask="HH:mm:00"
-            format24h
-            :disable="disable"
-            :title="title ? title : label"
-            :now-btn="nowBtn"
+              v-model="dateTime.time"
+              mask="HH:mm:00"
+              format24h
+              :disable="disable"
+              :title="title ? title : label"
+              :now-btn="nowBtn"
+              :class="customClass"
           >
             <div class="row items-center justify-end">
               <q-btn v-close-popup label="بستن" color="primary" flat />
@@ -145,7 +151,7 @@ export default {
       handler(n) {
         if (this.type === 'dateTime') {
           this.tempValue =
-            this.shamsiToMiladiDate(n.date) + ' ' + this.formatTime(n.time);
+              this.shamsiToMiladiDate(n.date) + ' ' + this.formatTime(n.time);
         } else {
           if (this.type === 'date') {
             this.tempValue = this.shamsiToMiladiDate(n.date);

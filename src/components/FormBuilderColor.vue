@@ -10,6 +10,7 @@
     :placeholder="placeholder"
     :rules="rules"
     :lazy-rules="lazyRules"
+    :class="customClass"
     @click="showing = true"
   >
     <template v-slot:append>

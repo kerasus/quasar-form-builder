@@ -16,6 +16,7 @@
     :stack-label="!!placeholder"
     :placeholder="placeholderSetter"
     :rules="rules"
+    :icon="icon"
     :lazy-rules="lazyRules"
     :multiple="multiple"
     :use-chips="useChips"
@@ -23,8 +24,12 @@
     input-debounce="500"
     :disable="disable"
     :readonly="readonly"
+    :class="customClass"
+    :popup-content-class="customClass"
+    :input-class="customClass"
     emit-value
     :hide-dropdown-icon="hideDropdownIcon"
+    :dropdown-icon="dropdownIcon"
     map-options
     clearable
     @update:model-value="change($event)"
@@ -69,6 +74,10 @@ export default {
     hideDropdownIcon: {
       default: false,
       type: Boolean,
+    },
+    dropdownIcon: {
+      default: 'arrow_drop_down',
+      type: String,
     },
     showNoOption: {
       default: true,
