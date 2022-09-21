@@ -26,9 +26,9 @@
             class="q-ml-xs"
             color="red"
             @click="remove(inputIndex)"
+        >x
+        </q-btn
         >
-          x
-        </q-btn>
       </div>
       <component
           :is="getComponent(input)"

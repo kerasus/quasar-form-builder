@@ -23,12 +23,12 @@
       </q-btn>
       <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
-      <br/>
-      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly"/>
-      <q-checkbox v-model="disable" :model-value="disable" label="disable"/>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly" />
+      <q-checkbox v-model="disable" :model-value="disable" label="disable" />
+      <br />
+      <br />
+      <br />
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
       <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly"
                     :disable="disable"/>
