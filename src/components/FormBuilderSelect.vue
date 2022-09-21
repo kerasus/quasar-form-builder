@@ -76,8 +76,8 @@ export default {
       type: Boolean,
     },
     dropdownIcon: {
-      default: false,
-      type: Boolean,
+      default: 'arrow_drop_down',
+      type: String,
     },
     showNoOption: {
       default: true,
