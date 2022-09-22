@@ -3,15 +3,15 @@
     <q-header elevated>
       <q-toolbar>
         <q-btn
-          flat
-          dense
-          round
-          aria-label="Menu"
-          icon="menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
+            flat
+            dense
+            round
+            aria-label="Menu"
+            icon="menu"
+            @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title> Quasar Form Builder </q-toolbar-title>
+        <q-toolbar-title> Quasar Form Builder</q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -21,34 +21,47 @@
       <q-btn color="blue" class="q-my-md full-width" @click="getData">
         get data
       </q-btn>
+      <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
-      <br />
-      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly" />
-      <q-checkbox v-model="disable" :model-value="disable" label="disable" />
-      <br />
-      <br />
-      <br />
+      <br/>
+      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly"/>
+      <q-checkbox v-model="disable" :model-value="disable" label="disable"/>
+      <br/>
+      <br/>
+      <br/>
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly" :disable="disable" />
+      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly"
+                    :disable="disable"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import FormBuilder from './FormBuilder';
 import FormBuilderGenerator from './components/formBuilderGenerator';
 import CustomComponent from './CustomComponent';
 
 export default {
   name: 'LayoutDefault',
-  components: { FormBuilder,FormBuilderGenerator },
+  components: {FormBuilder, FormBuilderGenerator},
   data() {
     return {
       readonly: false,
       disable: false,
       inputs: [
-        { type: 'select', dropdownIcon: 'add',class: 'testCustomClass',name: 'question_type', responseKey: 'data.question_type', options: [{ label: 'konkur', value: '6225f4828044517f52500c04' }, { label: 'psychometric', value: '6225f4828044517f52500c05' }, { label: 'descriptive', value: '6225f4828044517f52500c06' }], col: 'col-12' },
+        {
+          type: 'select',
+          dropdownIcon: 'add',
+          class: 'testCustomClass',
+          name: 'question_type',
+          responseKey: 'data.question_type',
+          options: [{label: 'konkur', value: '6225f4828044517f52500c04'}, {
+            label: 'psychometric',
+            value: '6225f4828044517f52500c05'
+          }, {label: 'descriptive', value: '6225f4828044517f52500c06'}],
+          col: 'col-12'
+        },
         {
           type: 'hidden',
           col: 'col-md-6',
@@ -61,8 +74,8 @@ export default {
           min: 0,
           max: 11,
           value: {
-            min:5,
-            max:7
+            min: 5,
+            max: 7
           }
         },
         {
@@ -108,17 +121,43 @@ export default {
               value: '3',
             },
           ],
-          col: 'col-md-6',
+          col: 'col-md-3',
           color: 'green',
           typeOfInput: 'checkbox',
           textColor: 'black',
           size: '20px',
         },
 
-        { type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-4' },
+        {type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-4'},
+        {
+          type: 'optionGroup',
+          name: 'radioButton',
+          inline: false,
+          dense: true,
+          label: 'radioButton',
+          value: {},
+          options: [
+            {
+              label: 'tab1',
+              value: '1',
+            },
+            {
+              label: 'tab2',
+              value: '2',
+            },
+            {
+              label: 'tab3',
+              value: '3',
+            },
+          ],
+          col: 'col-md-3',
+          color: 'blue',
+          textColor: 'black',
+          size: '20px',
+        },
         {
           type: CustomComponent,
-          props: { name: 'ali' },
+          props: {name: 'ali'},
           name: 'ali',
           value: 123,
           label: 'شناسه',
@@ -126,7 +165,7 @@ export default {
         },
         {
           type: CustomComponent,
-          props: { name: 'mostafa' },
+          props: {name: 'mostafa'},
           name: 'mostafa',
           value: 456,
           label: 'شناسه',
@@ -138,9 +177,16 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-6',
           value: [
-            { type: 'input', name: 'id1', value: null, label: 'شناسه1', col: 'col-md-6' },
-            { type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6' },
-            { type: 'separator', size: '3px', separatorType: 'double', vertical: true, class: 'testCustomClass', label: 'جدا کننده عمودی' },
+            {type: 'input', name: 'id1', value: null, label: 'شناسه1', col: 'col-md-6'},
+            {type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6'},
+            {
+              type: 'separator',
+              size: '3px',
+              separatorType: 'double',
+              vertical: true,
+              class: 'testCustomClass',
+              label: 'جدا کننده عمودی'
+            },
             {
               type: 'input',
               name: 'id1',
@@ -155,6 +201,7 @@ export default {
               name: 'id2',
               value: null,
               label: 'شناسه2',
+              placeholder: ' ',
               col: 'col-md-6',
             },
             {
@@ -190,14 +237,59 @@ export default {
           ],
         },
 
-        { type: 'input', class: 'testCustomClass',name: 'id', value: 'hiiiiiiiiiiiiiiii', label: 'شناسه', col: 'col-md-6' },
+        {
+          type: 'input',
+          class: 'testCustomClass',
+          name: 'id',
+          value: 'hiiiiiiiiiiiiiiii',
+          label: 'شناسه',
+          col: 'col-md-6'
+        },
 
 
-        { type: 'date', name: 'last_modification_time', label: 'تاریخ آخرین تغییرات', calendar: 'persian', col: 'col-md-4'},
-        { type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4'},
-        { type: 'dateTime', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4', value: '' },
-        { type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4' },
-        { type: 'separator', color: 'primary', size: '5px', separatorType: 'dashed', label: 'جدا کننده افقی', col: 'col-md-12' },
+        {
+          type: 'date',
+          name: 'last_modification_time',
+          label: 'تاریخ آخرین تغییرات',
+          calendar: 'persian',
+          col: 'col-md-4'
+        },
+        {type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4'},
+        {
+          type: 'dateTime',
+          name: 'creation_time',
+          placeholder: ' تاریخ ایجاد ',
+          label: 'تاریخ ایجاد',
+          calendar: 'persian',
+          col: 'col-md-4',
+          value: ''
+        },
+        {
+          type: 'dateTime',
+          name: 'creation_time',
+          placeholder: ' ',
+          label: 'تاریخ ایجاد',
+          calendar: 'persian',
+          col: 'col-md-4',
+          value: ''
+        },
+        {
+          type: 'dateTime',
+          name: 'creation_time',
+          label: 'تاریخ ایجاد',
+          calendar: 'persian',
+          col: 'col-md-4',
+          value: ''
+        },
+        {type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4'},
+        {
+          type: 'separator',
+          color: 'primary',
+          size: '5px',
+          separatorType: 'dashed',
+          label: 'جدا کننده افقی',
+          col: 'col-md-12'
+        },
         {
           type: 'input',
           name: 'id',
@@ -284,9 +376,17 @@ export default {
           label: 'جدا کننده افقی',
           col: 'col-md-12',
         },
-        { type: 'input', name: 'url', label: 'منبع', col: 'col-md-6' },
-        { type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6' },
-        { type: 'separator', class: 'testCustomClass', size: '0', separatorType: 'double', label: 'tessssssssssssssssssst', col: 'col-md-12',vertical: true },
+        {type: 'input', name: 'url', label: 'منبع', col: 'col-md-6'},
+        {type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6'},
+        {
+          type: 'separator',
+          class: 'testCustomClass',
+          size: '0',
+          separatorType: 'double',
+          label: 'tessssssssssssssssssst',
+          col: 'col-md-12',
+          vertical: true
+        },
         {
           type: 'color',
           placeholder: 'وارد نمایید',
@@ -302,7 +402,7 @@ export default {
           label: 'جدا کننده افقی',
           col: 'col-md-12',
         },
-        { type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12' },
+        {type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12'},
         {
           type: 'inputEditor',
           name: 'inputEditor',
@@ -319,11 +419,11 @@ export default {
             poem: false,
             reading: false,
             persianKeyboard: true,
-            mathliveOptions: { smartFence: false },
+            mathliveOptions: {smartFence: false},
             uploadServer: {
               url: 'imageUrl',
               instantUpload: true,
-              headers: { Authorization: 'Bearer ' + '65465' },
+              headers: {Authorization: 'Bearer ' + '65465'},
             },
           },
           col: 'col-md-12',
@@ -434,7 +534,7 @@ export default {
     };
   },
   methods: {
-    onClick (data) {
+    onClick(data) {
       console.log('data', data)
     },
     getData() {
@@ -453,6 +553,9 @@ export default {
         test2: '12:25:00',
       });
     },
+    clearInputValues() {
+      this.$refs.formBuilder.clearFormBuilderInputValues()
+    },
   },
 };
 </script>
@@ -461,6 +564,7 @@ export default {
 .q-field__inner {
   .q-field__control {
     background-color: white;
+
     .q-field__append {
       .q-icon {
         color: black;

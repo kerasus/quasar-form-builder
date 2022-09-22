@@ -1,19 +1,20 @@
 <template>
   <div>
-    <p v-text="label" />
+    <p v-text="label"/>
     <vue-tiptap-katex
-      v-if="!disable && !readonly"
-      v-model="inputData"
-      :name="name"
-      :bubble-menu="false"
-      :floating-menu="false"
-      :options="options"
-      :class="customClass"
-      @update:model-value="change($event)"
-      @click="onClick"
+        ref="tiptap"
+        v-if="!disable && !readonly"
+        v-model="inputData"
+        :name="name"
+        :bubble-menu="false"
+        :floating-menu="false"
+        :options="options"
+        :class="customClass"
+        @update:model-value="change($event)"
+        @click="onClick"
     />
     <!--eslint-disable-next-line-->
-    <div v-else v-html="inputData" />
+    <div v-else v-html="inputData"/>
   </div>
 </template>
 
@@ -55,6 +56,11 @@ export default {
       this.inputData = '';
     }
   },
+  methods: {
+    setNewContent(val) {
+      this.$refs.tiptap.setContent(val)
+    }
+  }
 };
 </script>
 
