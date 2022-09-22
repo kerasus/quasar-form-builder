@@ -32,6 +32,7 @@
       </div>
       <component
           :is="getComponent(input)"
+          :ref="'formBuilder'+input.type"
           v-model:value="input.value"
           v-bind="input"
           :disable="disable"
@@ -271,6 +272,9 @@ export default {
           object[keysArray[0]] !== null
       );
     },
+    getRefs(input) {
+      return input.type
+    },
 
     getComponent(input) {
       if (typeof input.type === 'object') {
@@ -346,6 +350,23 @@ export default {
     },
     edit(i) {
       this.$emit('edit', i);
+    },
+    clearFormBuilderInputValues() {
+      const inputs = this.getValues()
+      inputs.forEach(val => {
+        if (val.type === 'optionGroup')
+          val.value = []
+        else if (val.type === 'RangeSlider')
+          val.value.min = val.value.max = 0
+        else if (val.type === 'Checkbox')
+          val.value = false
+        else if (val.type === 'tiptapEditor')
+          this.$refs.formBuildertiptapEditor[0].setNewContent(' ')
+        else if (val.type.name === 'CustomComponent') {
+          if (val.type.methods.clearFormBuilderValue) val.type.methods.clearFormBuilderValue()
+        } else
+          delete val.value
+      })
     },
   },
 };
