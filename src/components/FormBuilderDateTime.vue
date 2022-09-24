@@ -215,10 +215,10 @@ export default {
       return (/1[3,4][0-9][0-9]\/[0,1]{0,1}[0-9]\/[0-3]{0,1}[0-9]/gm).test(shamsiDate)
     },
     isValidMiladiTime(time) {
-      return (/[0,1,2]{0,1}[0,1,2]:[0-5]{0,1}[0-9]:[0-5]{0,1}[0-9]/gm).test(time)
+      return (/[0,1,2]{0,1}[0-9]:[0-5]{0,1}[0-9]:[0-5]{0,1}[0-9]/gm).test(time)
     },
     isValidShamsiTime(time) {
-      return (/[0,1,2]{0,1}[0,1,2]:[0-5]{0,1}[0-9]/gm).test(time)
+      return (/[0,1,2]{0,1}[0-9]:[0-5]{0,1}[0-9]/gm).test(time)
     },
     showDateMenu() {
       this.showDate = true;
