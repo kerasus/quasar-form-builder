@@ -3,7 +3,7 @@
     <div class="title">Generated Form</div>
     <div v-show="jsonShow" class="q-ma-md">
       <div class="sub-title">Generated Json:</div>
-<!--      <vue-json-pretty :data="inputs" />-->
+      <vue-json-pretty :data="inputs" />
     </div>
     <div v-show="gFormShow">
       <div class="sub-title q-pl-md">Generated Form:</div>
@@ -177,10 +177,10 @@
 
 <script>
 import FormBuilder from '../FormBuilder';
-// import VueJsonPretty from 'vue-json-pretty';
+import VueJsonPretty from 'vue-json-pretty';
 import CustomComponent from '../CustomComponent';
+import 'vue-json-pretty/lib/styles.css';
 
-// import 'vue-json-pretty/lib/styles.css';
 export default {
   name: 'FormBuilderGenerator',
   data() {
@@ -643,7 +643,7 @@ export default {
   },
   components: {
     FormBuilder,
-    // VueJsonPretty,
+    VueJsonPretty,
   },
   watch: {
     importJson(n) {
