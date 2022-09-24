@@ -1,12 +1,12 @@
 <template>
-  <div class="row">
+  <div class="row q-col-gutter-md">
     <div
         v-for="(input, inputIndex) in inputData"
         :key="inputIndex"
         :class="[
         input.col ? input.col : 'col',
         getComponent(input) !== 'form-builder'
-          ? 'q-pa-md'
+          ? ''
           : getComponent(input),
         // eslint-disable-next-line vue/comma-dangle
         getComponent(input) + '-col',
@@ -275,9 +275,13 @@ export default {
     getRefs(input) {
       return input.type
     },
+    getComponentName(){
+      // console.log(input)
+    },
 
     getComponent(input) {
       if (typeof input.type === 'object') {
+        // this.getComponentName(input)
         return {...input.type};
       }
       if (input.type === 'formBuilder') {
