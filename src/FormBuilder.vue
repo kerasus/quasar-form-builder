@@ -122,11 +122,6 @@ export default {
       dir: 'ltr'
     };
   },
-  created() {
-    setTimeout(() => {
-      console.log(this.inputData)
-    }, 500)
-  },
   methods: {
     onClick(event, input) {
       function getEvent(data) {
