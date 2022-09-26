@@ -177,7 +177,7 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-12',
           value: [
-            {type: 'input', name: 'id1', value: null, label: 'input 1', col: 'col-md-6'},
+            {type: 'input', name: 'id1', value: null, label: 'input 1', col: 'col-md-6', disable:true},
             {type: 'input', name: 'id2', value: null, label: 'input 2', col: 'col-md-6'},
             {
               type: 'separator',
@@ -526,6 +526,14 @@ export default {
         },
       ],
     };
+  },
+  watch:{
+    readonly(newValue){
+      this.$refs.formBuilder.readonlyAllInputs(newValue)
+    },
+    disable(newValue){
+      this.$refs.formBuilder.disableAllInputs(newValue)
+    }
   },
   setup() {
     return {
