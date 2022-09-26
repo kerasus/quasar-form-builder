@@ -25,8 +25,8 @@
       <q-btn color="green" class="q-my-md full-width" @click="changeScreenDirection">change direction</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
       <br />
-      <q-checkbox v-model="readonly" label="readonly" />
-      <q-checkbox v-model="disable" label="disable" />
+      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly" />
+      <q-checkbox v-model="disable" :model-value="disable" label="disable" />
       <br />
       <br />
       <br />
