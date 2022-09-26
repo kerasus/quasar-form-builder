@@ -1,15 +1,13 @@
 <template>
-  <div class="row q-col-gutter-md">
+  <div class="row q-col-gutter-md" :dir="dir">
     <div
         v-for="(input, inputIndex) in inputData"
         :key="inputIndex"
         :class="[
         input.col ? input.col : 'col',
-        getComponent(input) !== 'form-builder'
-          ? ''
-          : getComponent(input),
+        getComponentName(input),
         // eslint-disable-next-line vue/comma-dangle
-        getComponent(input) + '-col',
+        getComponentName(input) + '-col',
       ]"
     >
       <div v-if="showGeneratorButtons">
@@ -26,9 +24,9 @@
             class="q-ml-xs"
             color="red"
             @click="remove(inputIndex)"
-        >x
-        </q-btn
         >
+          x
+        </q-btn>
       </div>
       <component
           :is="getComponent(input)"
@@ -123,6 +121,7 @@ export default {
       dateTime_Range: null,
       dateTime_Multiple: null,
       dateTime_Time: null,
+      dir: 'ltr'
     };
   },
   methods: {
@@ -275,13 +274,15 @@ export default {
     getRefs(input) {
       return input.type
     },
-    getComponentName(){
-      // console.log(input)
+    getComponentName(input) {
+      if (typeof input.type === 'object') {
+        return 'formBuilder-' + input.type.name + '-' + input.name
+      }
+      return this.getComponent(input)
     },
 
     getComponent(input) {
       if (typeof input.type === 'object') {
-        // this.getComponentName(input)
         return {...input.type};
       }
       if (input.type === 'formBuilder') {
@@ -372,6 +373,9 @@ export default {
           delete val.value
       })
     },
+    changeDirection() {
+      this.dir = this.dir === 'rtl' ? 'ltr' : 'rtl'
+    }
   },
 };
 </script>

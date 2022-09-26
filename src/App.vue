@@ -22,6 +22,7 @@
         get data
       </q-btn>
       <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
+      <q-btn color="green" class="q-my-md full-width" @click="changeScreenDirection">change direction</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
       <br />
       <q-checkbox v-model="readonly" :model-value="readonly" label="readonly" />
@@ -30,8 +31,8 @@
       <br />
       <br />
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly"
-                    :disable="disable"/>
+      <form-builder ref="formBuilder" v-model:value="inputs" :readonly="readonly" :disable="disable"
+                    @onClick="onClick"/>
     </q-page-container>
   </q-layout>
 </template>
@@ -554,6 +555,9 @@ export default {
     clearInputValues() {
       this.$refs.formBuilder.clearFormBuilderInputValues()
     },
+    changeScreenDirection(){
+      this.$refs.formBuilder.changeDirection()
+    }
   },
 };
 </script>
