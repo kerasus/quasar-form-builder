@@ -167,39 +167,34 @@ export default {
     },
   },
   methods: {
-    updateDateTime(newValue) {
-      if (!newValue) {
-        this.dateTime = {
-          date: '',
-          time: ''
-        }
+    updateDateTime(newMiladi) {
+      this.dateTime = {
+        date: '',
+        time: ''
+      }
+
+      if (!newMiladi) {
         return
       }
 
       if (this.type === 'dateTime') {
-        const miladiData = newValue.split(' ')[0]
-        const time = newValue.split(' ')[1]
+        const miladiData = newMiladi.split(' ')[0]
+        const time = newMiladi.split(' ')[1]
         if (!this.isValidMiladiDate(miladiData) || !this.isValidMiladiTime(time)) {
-          this.dateTime = {
-            date: '',
-            time: ''
-          }
           return
         }
         this.dateTime.date = this.miladiToShamsiDate(miladiData);
         this.dateTime.time = this.getShamsiTime(time);
       } else if (this.type === 'time') {
-        if (!this.isValidMiladiTime(newValue)) {
-          this.dateTime.time = ''
+        if (!this.isValidMiladiTime(newMiladi)) {
           return
         }
-        this.dateTime.time = newValue;
+        this.dateTime.time = newMiladi;
       } else if (this.type === 'date') {
-        if (!this.isValidMiladiDate(newValue)) {
-          this.dateTime.date = ''
+        if (!this.isValidMiladiDate(newMiladi)) {
           return
         }
-        this.dateTime.date = newValue;
+        this.dateTime.date = this.miladiToShamsiDate(newMiladi);
       }
 
       this.rendrKey = Date.now()
