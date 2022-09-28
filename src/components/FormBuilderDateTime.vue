@@ -1,6 +1,6 @@
 <template>
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-  <div class="dateTime-input" :key="rendrKey">
+  <div :key="rendrKey" class="dateTime-input">
     <q-input v-show="show('date')"
              v-model="dateTime.date"
              :name="name"
@@ -49,6 +49,7 @@
              dir="ltr"
              :disable="disable"
              :stack-label="!!placeholder"
+             :placeholder="!show('date') ? placeholder:null"
              mask="time"
              :rules="rules"
              :lazy-rules="lazyRules"
