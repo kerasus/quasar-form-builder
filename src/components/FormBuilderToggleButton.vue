@@ -1,4 +1,5 @@
 <template>
+  <div v-if="label" class="outsideLabel">{{ label }}</div>
   <q-btn-toggle
     v-model="inputData"
     :name="name"
