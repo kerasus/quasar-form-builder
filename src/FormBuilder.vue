@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-col-gutter-md" :dir="dir">
+  <div class="row q-col-gutter-md">
     <div
         v-for="(input, inputIndex) in inputData"
         :key="inputIndex"
@@ -119,7 +119,6 @@ export default {
       dateTime_Range: null,
       dateTime_Multiple: null,
       dateTime_Time: null,
-      dir: 'ltr'
     };
   },
   methods: {
@@ -370,9 +369,6 @@ export default {
         } else
           delete val.value
       })
-    },
-    changeDirection() {
-      this.dir = this.dir === 'rtl' ? 'ltr' : 'rtl'
     },
     disableAllInputs(newValue) {
       this.getValues().forEach(input => {
