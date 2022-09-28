@@ -25,8 +25,8 @@
       <q-btn color="green" class="q-my-md full-width" @click="changeScreenDirection">change direction</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
       <br />
-      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly" />
-      <q-checkbox v-model="disable" :model-value="disable" label="disable" />
+      <q-checkbox v-model="readonly" label="readonly" />
+      <q-checkbox v-model="disable" label="disable" />
       <br />
       <br />
       <br />
@@ -177,7 +177,7 @@ export default {
           name: 'formBuilderCol',
           col: 'col-md-12',
           value: [
-            {type: 'input', name: 'id1', value: null, label: 'input 1', col: 'col-md-6'},
+            {type: 'input', name: 'id1', value: null, label: 'input 1', col: 'col-md-6', disable:true},
             {type: 'input', name: 'id2', value: null, label: 'input 2', col: 'col-md-6'},
             {
               type: 'separator',
@@ -526,6 +526,14 @@ export default {
         },
       ],
     };
+  },
+  watch:{
+    readonly(newValue){
+      this.$refs.formBuilder.readonlyAllInputs(newValue)
+    },
+    disable(newValue){
+      this.$refs.formBuilder.disableAllInputs(newValue)
+    }
   },
   setup() {
     return {
