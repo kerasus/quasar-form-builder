@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="label">
+    <div v-if="label" class="outsideLabel">
       {{ label }}
     </div>
     <q-option-group
