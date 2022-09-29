@@ -93,6 +93,7 @@ export default {
         {
           type: 'toggleButton',
           name: 'id',
+          label: 'toggleButton',
           options: [
             {
               label: 'tab1',
@@ -235,7 +236,6 @@ export default {
               label: 'input with placeholder(test)',
               inputType: 'number',
               placeholder: 'test',
-              dir: 'rtl',
               col: 'col-md-6',
             },
             {
