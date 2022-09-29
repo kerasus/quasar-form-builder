@@ -1,5 +1,4 @@
 <template>
-  <div v-if="label" class="outsideLabel">{{ label }}</div>
   <div>
     <q-checkbox
       v-model="inputData"
