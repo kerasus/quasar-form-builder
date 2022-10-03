@@ -1,15 +1,13 @@
 <template>
-  <div class="row">
+  <div class="row q-col-gutter-md">
     <div
         v-for="(input, inputIndex) in inputData"
         :key="inputIndex"
         :class="[
         input.col ? input.col : 'col',
-        getComponent(input) !== 'form-builder'
-          ? 'q-pa-md'
-          : getComponent(input),
+        getComponentName(input),
         // eslint-disable-next-line vue/comma-dangle
-        getComponent(input) + '-col',
+        getComponentName(input) + '-col',
       ]"
     >
       <div v-if="showGeneratorButtons">
@@ -35,8 +33,6 @@
           :ref="'formBuilder'+input.type"
           v-model:value="input.value"
           v-bind="input"
-          :disable="disable"
-          :readonly="readonly"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
@@ -275,6 +271,12 @@ export default {
     getRefs(input) {
       return input.type
     },
+    getComponentName(input) {
+      if (typeof input.type === 'object') {
+        return 'formBuilder-' + input.type.name + '-' + input.name
+      }
+      return this.getComponent(input)
+    },
 
     getComponent(input) {
       if (typeof input.type === 'object') {
@@ -368,6 +370,16 @@ export default {
           delete val.value
       })
     },
+    disableAllInputs(newValue) {
+      this.getValues().forEach(input => {
+        input.disable = newValue
+      })
+    },
+    readonlyAllInputs(newValue){
+      this.getValues().forEach(input => {
+        input.readonly = newValue
+      })
+    }
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" :dir="dir">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -22,16 +22,19 @@
         get data
       </q-btn>
       <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
+      <q-btn color="green" class="q-my-md full-width" @click="changeScreenDirection">change screen direction</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
       <br/>
-      <q-checkbox v-model="readonly" :model-value="readonly" label="readonly"/>
-      <q-checkbox v-model="disable" :model-value="disable" label="disable"/>
+      <q-checkbox v-model="readonly" label="readonly"/>
+      <q-checkbox v-model="disable" label="disable"/>
       <br/>
       <br/>
       <br/>
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
-      <form-builder ref="formBuilder" v-model:value="inputs" @onClick="onClick" :readonly="readonly"
-                    :disable="disable"/>
+      <div class="form-builder q-pa-md q-mx-sm">
+        <form-builder ref="formBuilder" v-model:value="inputs" class="q-mx-md" :readonly="readonly" :disable="disable"
+                      @onClick="onClick"/>
+      </div>
     </q-page-container>
   </q-layout>
 </template>
@@ -49,6 +52,7 @@ export default {
     return {
       readonly: false,
       disable: false,
+      dir: 'ltr',
       inputs: [
         {
           type: 'select',
@@ -56,10 +60,10 @@ export default {
           class: 'testCustomClass',
           name: 'question_type',
           responseKey: 'data.question_type',
-          options: [{label: 'konkur', value: '6225f4828044517f52500c04'}, {
+          options: [{label: 'konkur', value: 'konkur'}, {
             label: 'psychometric',
-            value: '6225f4828044517f52500c05'
-          }, {label: 'descriptive', value: '6225f4828044517f52500c06'}],
+            value: 'psychometric'
+          }, {label: 'descriptive', value: 'descriptive'}],
           col: 'col-12'
         },
         {
@@ -70,7 +74,7 @@ export default {
           type: 'RangeSlider',
           name: 'ZoomRate',
           col: 'col-md-6',
-          label: 'میزان زوم از',
+          label: 'zoom rate from:',
           min: 0,
           max: 11,
           value: {
@@ -79,23 +83,32 @@ export default {
           }
         },
         {
+          type: 'separator',
+          color: 'secondary  ',
+          size: '3px',
+          separatorType: 'solid',
+          label: 'toggleButton & optionGroup & checkbox',
+          col: 'col-md-12',
+        },
+        {
           type: 'toggleButton',
           name: 'id',
+          label: 'toggleButton',
           options: [
             {
-              label: 'tab111',
+              label: 'tab1',
               value: '1',
             },
             {
-              label: 'tab222',
+              label: 'tab2',
               value: '2',
             },
             {
-              label: 'tab333',
+              label: 'tab3',
               value: '3',
             },
           ],
-          col: 'col-md-6',
+          col: 'col-md-3',
           color: 'red',
           textColor: 'black',
           size: '20px',
@@ -127,8 +140,6 @@ export default {
           textColor: 'black',
           size: '20px',
         },
-
-        {type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-4'},
         {
           type: 'optionGroup',
           name: 'radioButton',
@@ -155,6 +166,22 @@ export default {
           textColor: 'black',
           size: '20px',
         },
+        {type: 'Checkbox', name: 'enable', label: 'فعال', col: 'col-md-3'},
+        {
+          type: 'separator',
+          color: 'secondary  ',
+          size: '3px',
+          separatorType: 'solid',
+          col: 'col-md-12',
+        },
+        {
+          type: 'separator',
+          color: 'accent ',
+          size: '3px',
+          separatorType: 'solid',
+          label: 'custom component',
+          col: 'col-md-12',
+        },
         {
           type: CustomComponent,
           props: {name: 'ali'},
@@ -171,36 +198,51 @@ export default {
           label: 'شناسه',
           col: 'col-md-6',
         },
-
+        {
+          type: 'separator',
+          color: 'accent ',
+          size: '3px',
+          separatorType: 'solid',
+          col: 'col-md-12',
+        },
+        {
+          type: 'separator',
+          color: 'negative',
+          size: '3px',
+          separatorType: 'solid',
+          label: 'form-builder inside a form-builder',
+          col: 'col-md-12',
+        },
         {
           type: 'formBuilder',
           name: 'formBuilderCol',
-          col: 'col-md-6',
+          col: 'col-md-12',
           value: [
-            {type: 'input', name: 'id1', value: null, label: 'شناسه1', col: 'col-md-6'},
-            {type: 'input', name: 'id2', value: null, label: 'شناسه2', col: 'col-md-6'},
+            {type: 'input', name: 'id1', value: null, label: 'disabled input', col: 'col-md-6', disable: true},
             {
-              type: 'separator',
-              size: '3px',
-              separatorType: 'double',
-              vertical: true,
-              class: 'testCustomClass',
-              label: 'جدا کننده عمودی'
+              type: 'input',
+              name: 'id2',
+              color:'positive',
+              value: 'readonly input',
+              label: 'input in read only mode',
+              col: 'col-md-6',
+              readonly: true,
+              filled: true
             },
             {
               type: 'input',
               name: 'id1',
               value: null,
-              label: 'شناسه1',
+              label: 'input with placeholder(test)',
               inputType: 'number',
-              placeholder: 'salam',
+              placeholder: 'test',
               col: 'col-md-6',
             },
             {
               type: 'input',
               name: 'id2',
               value: null,
-              label: 'شناسه2',
+              label: 'input with placeholder(space)',
               placeholder: ' ',
               col: 'col-md-6',
             },
@@ -209,210 +251,193 @@ export default {
               size: '3px',
               separatorType: 'double',
               vertical: true,
-              label: 'جدا کننده عمودی',
+              class: 'testCustomClass',
+              label: 'vertical separator',
+            },
+            {
+              type: 'input',
+              class: 'testCustomClass',
+              name: 'id',
+              value: 'value',
+              label: 'input with value(value)',
+              col: 'col-md-6'
+            },
+            {
+              type: 'separator',
+              color: 'primary',
+              size: '3px',
+              separatorType: 'solid',
+              label: 'form-builder inside a form-builder inside a form-builder',
+              col: 'col-md-12',
             },
             {
               type: 'formBuilder',
               name: 'formBuilderCol',
-              col: 'col-md-6',
+              col: 'col-md-12',
               value: [
                 {
                   type: 'input',
+                  name: 'id4',
+                  value: null,
+                  label: 'input without placeholder',
+                  col: 'col-md-6',
+                  customLabelStyle: 'color: yellow !important;',
+                },
+                {
+                  type: 'input',
                   name: 'id3',
-                  value: 1111111,
-                  label: 'شناسه3',
+                  value: 'value',
+                  label: 'input with placeholder(test) & value(value)',
                   placeholder: 'test',
                   col: 'col-md-6',
                 },
                 {
                   type: 'input',
-                  name: 'id4',
-                  value: null,
-                  label: 'شناسه4',
+                  name: 'id',
+                  label: 'required input',
+                  outlined: true,
                   col: 'col-md-6',
-                  customLabelStyle: 'color: yellow !important;',
+                  rules: [(val) => !!val || 'field is required'],
+                  lazyRules: true,
                 },
+                {type: 'input', name: 'url', label: 'source', col: 'col-md-6'},
               ],
             },
           ],
         },
-
         {
-          type: 'input',
-          class: 'testCustomClass',
-          name: 'id',
-          value: 'hiiiiiiiiiiiiiiii',
-          label: 'شناسه',
-          col: 'col-md-6'
+          type: 'separator',
+          color: 'primary',
+          size: '3px',
+          separatorType: 'solid',
+          col: 'col-md-12',
         },
-
-
         {
-          type: 'date',
-          name: 'last_modification_time',
-          label: 'تاریخ آخرین تغییرات',
-          calendar: 'persian',
-          col: 'col-md-4'
+          type: 'separator',
+          color: 'negative',
+          size: '3px',
+          separatorType: 'solid',
+          col: 'col-md-12',
         },
-        {type: 'date', name: 'creation_time', label: 'تاریخ ایجاد', calendar: 'persian', col: 'col-md-4'},
+        {
+          type: 'separator',
+          color: 'info',
+          size: '5px',
+          separatorType: 'solid',
+          label: 'Date & Time',
+          col: 'col-md-12'
+        },
         {
           type: 'dateTime',
           name: 'creation_time',
-          placeholder: ' تاریخ ایجاد ',
-          label: 'تاریخ ایجاد',
+          placeholder: ' creation time ',
+          label: 'date & time with label & placeholder',
           calendar: 'persian',
-          col: 'col-md-4',
+          col: 'col-md-6',
           value: ''
         },
         {
           type: 'dateTime',
           name: 'creation_time',
           placeholder: ' ',
-          label: 'تاریخ ایجاد',
+          label: 'date & time with label & placeholder(space)',
           calendar: 'persian',
-          col: 'col-md-4',
-          value: ''
-        },
-        {
-          type: 'dateTime',
-          name: 'creation_time',
-          label: 'تاریخ ایجاد',
-          calendar: 'persian',
-          col: 'col-md-4',
-          value: ''
-        },
-        {type: 'file', name: 'thumbnail', label: 'تصویر', col: 'col-md-4'},
-        {
-          type: 'separator',
-          color: 'primary',
-          size: '5px',
-          separatorType: 'dashed',
-          label: 'جدا کننده افقی',
-          col: 'col-md-12'
-        },
-        {
-          type: 'input',
-          name: 'id',
-          // value: 1233333,
-          label: 'شناسه ضروری',
-          // responseKey: 'sss',
-          // outlined: true,
           col: 'col-md-6',
-          // rules: [(val) => !!val || 'فیلد ضروری است'],
-          // lazyRules: true,
-          // placeholder: 'test',
+          value: ''
         },
         {
           type: 'date',
           name: 'last_modification_time',
-          label: 'تاریخ آخرین تغییرات',
-          responseKey: 'test',
-          placeholder: 'وارد کنید',
-          todayBtn: true,
-          title: 'عنوان فرعی',
+          label: 'required date with label',
           calendar: 'persian',
-          col: 'col-md-4',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
+          col: 'col-md-6',
+          rules: [(val) => !!val || 'field is required'],
+          // lazyRules: true,
         },
         {
           type: 'dateTime',
           name: 'creation_time',
-          range: false,
-          multiple: false,
-          todayBtn: true,
-          responseKey: 'test1',
-          label: 'تاریخ ایجاد',
+          label: 'date & time',
           calendar: 'persian',
-          col: 'col-md-4',
-          placeholder: 'وارد نمایید',
+          col: 'col-md-6',
+          todayBtn: true,
+          nowBtn: true,
+          value: ''
         },
         {
           type: 'time',
           name: 'creation_dateTime',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
-          label: 'تاریخ ایجاد',
+          rules: [(val) => !!val || 'field is required'],
+          // lazyRules: true,
+          label: 'time',
           multiple: false,
           responseKey: 'test2',
           outlined: true,
           calendar: 'persian',
-          col: 'col-md-4',
-          placeholder: 'وارد نمایید',
+          col: 'col-md-6',
+          placeholder: 'Enter',
           nowBtn: true,
         },
-        // {
-        //   type: 'dateTime',
-        //   name: 'creation_dateTime',
-        //   label: 'تاریخ امتحان',
-        //   responseKey: 'test1',
-        //   calendar: 'persian',
-        //   col: 'col-md-4',
-        //   placeholder: 'وارد نمایید',
-        // },
-        // {
-        //   type: 'time',
-        //   name: 'creation_time',
-        //   nowBtn: true,
-        //   rules: [(val) => !!val || 'فیلد ضروری است'],
-        //   outlined: true,
-        //   label: 'زمان ایجاد',
-        //   responseKey: 'test2',
-        //   calendar: 'persian',
-        //   col: 'col-md-4',
-        //   placeholder: 'وارد نمایید',
-        // },
         {
-          type: 'file',
-          name: 'thumbnail',
-          label: ' تصویر ضروری',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
-          lazyRules: true,
-          col: 'col-md-4',
+          type: 'separator',
+          color: 'info',
+          size: '5px',
+          separatorType: 'solid',
+          col: 'col-md-12'
         },
         {
           type: 'separator',
           color: 'primary',
           size: '5px',
           separatorType: 'dashed',
-          label: 'جدا کننده افقی',
+          label: 'file & color',
           col: 'col-md-12',
         },
-        {type: 'input', name: 'url', label: 'منبع', col: 'col-md-6'},
-        {type: 'color', name: 'url', label: 'رنگ', col: 'col-md-6'},
+        {type: 'file', name: 'thumbnail', label: 'picture', col: 'col-md-6'},
+        {
+          type: 'file',
+          name: 'thumbnail',
+          label: 'required picture',
+          rules: [(val) => !!val || 'field is required'],
+          lazyRules: true,
+          col: 'col-md-6',
+        },
+        {type: 'color', name: 'url', label: 'color', col: 'col-md-6'},
         {
           type: 'separator',
           class: 'testCustomClass',
           size: '0',
           separatorType: 'double',
-          label: 'tessssssssssssssssssst',
+          label: 'vertical separator with size 0',
           col: 'col-md-12',
           vertical: true
         },
         {
           type: 'color',
-          placeholder: 'وارد نمایید',
+          placeholder: 'Enter',
           name: 'url',
-          label: 'رنگ',
+          label: 'required color with placeholder(Enter)',
           col: 'col-md-6',
-          rules: [(val) => !!val || 'فیلد ضروری است'],
+          rules: [(val) => !!val || 'field is required'],
         },
         {
           type: 'separator',
           size: '0',
           separatorType: 'double',
-          label: 'جدا کننده افقی',
+          label: 'horizontal separator with size 0',
           col: 'col-md-12',
         },
-        {type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12'},
+        // {type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12'},
         {
           type: 'inputEditor',
           name: 'inputEditor',
-          label: 'ادیتور ساده',
+          label: 'simple editor',
           col: 'col-md-12',
         },
         {
           type: 'tiptapEditor',
           name: 'inputEditor',
-          label: 'ادیتور پیشرفته',
+          label: 'advanced editor',
           options: {
             bubbleMenu: false,
             floatingMenu: false,
@@ -431,8 +456,8 @@ export default {
         {
           type: 'select',
           name: 'NewValueEventSelect',
-          label: ' سلکت  چندتایی اینپوت غیر یونیک',
-          placeholder: 'تایپ کنین سپس اینتر را بزنین',
+          label: 'multiple selection non-unique',
+          placeholder: 'type then Enter',
           outlined: true,
           multiple: true,
           showNoOption: false,
@@ -446,87 +471,95 @@ export default {
         {
           type: 'select',
           name: 'inputMultipleSelect',
-          label: 'سلکت ضروری چند تایی',
-          placeholder: 'انتخاب نمایید',
+          label: 'multiple required selection',
+          placeholder: 'select',
           outlined: true,
           multiple: true,
           options: ['test1', 'test2', 'test3'],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
+          rules: [(val) => val.length !== 0 || 'field is required'],
           lazyRules: true,
         },
         {
           type: 'select',
           name: 'inputSingleSelect',
-          label: 'سلکت ضروری چندتایی',
-          placeholder: 'انتخاب نمایید',
+          label: 'multiple required selection',
+          placeholder: 'select',
           outlined: true,
           multiple: true,
           optionLabel: 'name',
           options: [
             {
               id: 1,
-              name: 'آقا',
-              title: 'آقا',
+              name: 'man',
+              title: 'man',
             },
             {
               id: 2,
-              name: 'خانم',
-              title: 'خانم',
+              name: 'woman',
+              title: 'woman',
             },
             {
               id: 3,
-              name: 'تست',
-              title: 'تست',
+              name: 'test',
+              title: 'test',
             },
           ],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
+          rules: [(val) => val.length !== 0 || 'field is required'],
           lazyRules: true,
         },
         {
           type: 'select',
           name: 'inputSingleSelect',
-          label: 'سلکت ضروری تکی',
-          placeholder: 'انتخاب نمایید',
+          label: 'single required selection',
+          placeholder: 'select',
           outlined: true,
           multiple: false,
           optionLabel: 'name',
           options: [
             {
               id: 1,
-              name: 'آقا',
-              title: 'آقا',
+              name: 'man',
+              title: 'man',
             },
             {
               id: 2,
-              name: 'خانم',
-              title: 'خانم',
+              name: 'woman',
+              title: 'woman',
             },
           ],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
+          rules: [(val) => val.length !== 0 || 'field is required'],
           lazyRules: true,
         },
         {
           type: 'select',
           name: 'inputSingleSelect',
-          label: 'سلکت ضروری تکی',
-          placeholder: 'انتخاب نمایید',
+          label: 'single required selection',
+          placeholder: 'select',
           outlined: true,
           multiple: false,
           optionLabel: 'name',
           options: ['test1', 'test2', 'test3', 'test4'],
           col: 'col-md-12',
           // keep in mind that since it's a select, val is an array by default, !!val is true. so check !!val.length
-          rules: [(val) => val.length !== 0 || 'فیلد ضروری است'],
+          rules: [(val) => val.length !== 0 || 'field is required'],
           lazyRules: true,
         },
       ],
     };
+  },
+  watch: {
+    readonly(newValue) {
+      this.$refs.formBuilder.readonlyAllInputs(newValue)
+    },
+    disable(newValue) {
+      this.$refs.formBuilder.disableAllInputs(newValue)
+    }
   },
   setup() {
     return {
@@ -556,6 +589,9 @@ export default {
     clearInputValues() {
       this.$refs.formBuilder.clearFormBuilderInputValues()
     },
+    changeScreenDirection() {
+      this.dir = this.dir === 'rtl' ? 'ltr' : 'rtl'
+    },
   },
 };
 </script>
@@ -574,10 +610,14 @@ export default {
     }
   }
 }
+.border{
+
+}
 </style>
 <style>
 .testCustomClass {
   color: red;
   background: blue;
 }
+
 </style>

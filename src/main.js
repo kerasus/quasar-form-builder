@@ -6,4 +6,3 @@ import quasarUserOptions from './quasar-user-options'
 
 // createApp(App).use(Quasar, quasarUserOptions).use(JsonViewer).mount('#app')
 createApp(App).use(Quasar, quasarUserOptions).mount('#app')
-
