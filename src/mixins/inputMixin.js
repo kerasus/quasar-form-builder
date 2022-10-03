@@ -147,6 +147,10 @@ export default {
       default: 'text',
       type: String
     },
+    gutterSize: {
+      default: 'md',
+      type: String
+    }
   },
   computed: {
     customClass () {

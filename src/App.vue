@@ -217,6 +217,7 @@ export default {
           type: 'formBuilder',
           name: 'formBuilderCol',
           col: 'col-md-12',
+          gutterSize:'lg',
           value: [
             {type: 'input', name: 'id1', value: null, label: 'disabled input', col: 'col-md-6', disable: true},
             {
