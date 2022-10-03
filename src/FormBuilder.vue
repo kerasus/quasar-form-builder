@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-col-gutter-md">
+  <div class="row" :class="['q-col-gutter-' + gutterSize]">
     <div
         v-for="(input, inputIndex) in inputData"
         :key="inputIndex"
@@ -119,6 +119,7 @@ export default {
       dateTime_Range: null,
       dateTime_Multiple: null,
       dateTime_Time: null,
+      // gutterSizes:['none', 'xs', 'sm', 'md', 'lg', 'xl']
     };
   },
   methods: {
