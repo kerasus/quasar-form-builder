@@ -49,6 +49,7 @@
              dir="ltr"
              :disable="disable"
              :stack-label="!!placeholder"
+             :label="show('date') || placeholder ? null:label"
              :placeholder="!show('date') ? placeholder:null"
              mask="time"
              :rules="rules"
