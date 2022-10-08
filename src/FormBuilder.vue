@@ -32,6 +32,7 @@
           :is="getComponent(input)"
           :ref="'formBuilder'+input.type"
           v-model:value="input.value"
+          :loading="loading"
           v-bind="input"
           @update:value="onValueUpdated"
           @input="change($event, inputIndex)"
@@ -102,6 +103,10 @@ export default {
       default: () => [],
       type: Array,
     },
+    gutterSize: {
+      default: 'md',
+      type: String
+    },
     disable: {
       default: false,
       type: Boolean,
@@ -110,6 +115,10 @@ export default {
       default: false,
       type: Boolean,
     },
+    loading: {
+      default: true,
+      type: Boolean,
+    }
   },
   emits: ['input', 'onClick'],
   data() {
@@ -119,7 +128,6 @@ export default {
       dateTime_Range: null,
       dateTime_Multiple: null,
       dateTime_Time: null,
-      // gutterSizes:['none', 'xs', 'sm', 'md', 'lg', 'xl']
     };
   },
   methods: {
@@ -376,17 +384,17 @@ export default {
         input.disable = newValue
       })
     },
-    readonlyAllInputs(newValue){
+    readonlyAllInputs(newValue) {
       this.getValues().forEach(input => {
         input.readonly = newValue
       })
-    }
+    },
   },
 };
 </script>
 
 <style scoped>
-.form-builder-hidden-col {
-  display: none;
-}
+/*.form-builder-hidden-col {*/
+/*  display: none;*/
+/*}*/
 </style>

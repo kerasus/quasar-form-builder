@@ -23,6 +23,7 @@
       </q-btn>
       <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
       <q-btn color="green" class="q-my-md full-width" @click="changeScreenDirection">change screen direction</q-btn>
+      <q-btn color="red" class="q-my-md full-width" @click="loading=!loading">loading</q-btn>
       <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
       <br/>
       <q-checkbox v-model="readonly" label="readonly"/>
@@ -33,7 +34,7 @@
       <div>test v-model data from first input: {{ inputs[0].value }}</div>
       <div class="form-builder q-pa-md q-mx-sm">
         <form-builder ref="formBuilder" v-model:value="inputs" class="q-mx-md" :readonly="readonly" :disable="disable"
-                      @onClick="onClick"/>
+                      :loading="loading" @onClick="onClick"/>
       </div>
     </q-page-container>
   </q-layout>
@@ -53,6 +54,7 @@ export default {
       readonly: false,
       disable: false,
       dir: 'ltr',
+      loading: false,
       inputs: [
         {
           type: 'select',
@@ -217,18 +219,18 @@ export default {
           type: 'formBuilder',
           name: 'formBuilderCol',
           col: 'col-md-12',
-          gutterSize:'lg',
+          gutterSize: 'lg',
           value: [
             {type: 'input', name: 'id1', value: null, label: 'disabled input', col: 'col-md-6', disable: true},
             {
               type: 'input',
               name: 'id2',
-              color:'positive',
+              color: 'positive',
               value: 'readonly input',
               label: 'input in read only mode',
               col: 'col-md-6',
               readonly: true,
-              filled: true
+              filled: true,
             },
             {
               type: 'input',
@@ -238,6 +240,7 @@ export default {
               inputType: 'number',
               placeholder: 'test',
               col: 'col-md-6',
+              clearable: true
             },
             {
               type: 'input',
@@ -446,6 +449,7 @@ export default {
           label: 'required color with placeholder(Enter)',
           col: 'col-md-6',
           rules: [(val) => !!val || 'field is required'],
+          clearable: true
         },
         {
           type: 'separator',
@@ -637,14 +641,15 @@ export default {
     }
   }
 }
-.border{
+
+.border {
 
 }
 </style>
 <style>
-.testCustomClass {
-  color: red;
-  background: blue;
-}
+/*.testCustomClass {*/
+/*  color: red;*/
+/*  background: blue;*/
+/*}*/
 
 </style>

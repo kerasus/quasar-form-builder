@@ -10,6 +10,8 @@
     :stack-label="!!placeholder"
     :type="inputType"
     :disable="disable"
+    :clearable="clearable"
+    :loading="loading"
     :readonly="readonly"
     :rounded="rounded"
     :outlined="outlined"

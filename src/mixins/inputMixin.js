@@ -147,9 +147,13 @@ export default {
       default: 'text',
       type: String
     },
-    gutterSize: {
-      default: 'md',
-      type: String
+    clearable:{
+      default: false,
+      type: Boolean
+    },
+    loading:{
+      default: false,
+      type: Boolean
     }
   },
   computed: {
