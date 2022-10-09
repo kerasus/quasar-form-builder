@@ -8,6 +8,8 @@
     :stack-label="!!placeholder"
     :outlined="outlined"
     :placeholder="placeholder"
+    :loading="loading"
+    :clearable="clearable"
     :rules="rules"
     :lazy-rules="lazyRules"
     :class="customClass"

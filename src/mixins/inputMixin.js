@@ -147,6 +147,14 @@ export default {
       default: 'text',
       type: String
     },
+    clearable:{
+      default: false,
+      type: Boolean
+    },
+    loading:{
+      default: false,
+      type: Boolean
+    }
   },
   computed: {
     customClass () {

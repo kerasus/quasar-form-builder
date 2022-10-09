@@ -6,7 +6,6 @@
     :push="push"
     :glossy="glossy"
     :options="options"
-    :clearable="clearable"
     :color="color"
     :inline="inline"
     :dense="dense"
