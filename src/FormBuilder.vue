@@ -116,7 +116,7 @@ export default {
       type: Boolean,
     },
     loading: {
-      default: true,
+      default: false,
       type: Boolean,
     }
   },
