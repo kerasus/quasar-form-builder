@@ -38,7 +38,7 @@
     "quasar": "^2.8.3",
     "vue": "^3.2.39",
     "vue-json-pretty": "^2.2.2",
-    "vue3-tiptap-katex": "^1.0.26"
+    "vue3-tiptap-katex": "^1.0.30"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
