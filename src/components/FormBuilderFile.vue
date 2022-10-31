@@ -10,16 +10,17 @@
       :placeholder="placeholder"
       :disable="disable"
       :readonly="readonly"
+      :loading="loading"
       clearable
       :model-value="file"
       :rules="rules"
       :lazy-rules="lazyRules"
+      :class="customClass"
+      :input-class="customClass"
       @update:model-value="change($event)"
-      @clear="onClearInputFile"
-      @click="onClick"
 
-        :class="customClass"
-        :input-class="customClass"
+        @clear="onClearInputFile"
+        @click="onClick"
 
 
     />

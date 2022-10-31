@@ -6,6 +6,7 @@
     transition-hide="jump-up"
     :name="name"
     :filled="filled"
+    :behavior="behavior"
     :rounded="rounded"
     :outlined="outlined"
     :option-value="optionValue"

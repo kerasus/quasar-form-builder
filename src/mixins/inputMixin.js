@@ -32,6 +32,10 @@ export default {
       default: 'primary',
       type: String
     },
+    behavior: {
+      default: 'default',
+      type: String
+    },
     type: {
       default: 'radio', // checkbox-toggle
       // Object type is for custom components
@@ -147,6 +151,14 @@ export default {
       default: 'text',
       type: String
     },
+    clearable:{
+      default: false,
+      type: Boolean
+    },
+    loading:{
+      default: false,
+      type: Boolean
+    }
   },
   computed: {
     customClass () {
