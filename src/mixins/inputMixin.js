@@ -12,6 +12,14 @@ export default {
       default: false,
       type: Boolean
     },
+    readonly: {
+      default: false,
+      type: Boolean,
+    },
+    filled: {
+      default: false,
+      type: Boolean
+    },
     min: {
       default: 0,
       type: Number
@@ -22,6 +30,10 @@ export default {
     },
     color: {
       default: 'primary',
+      type: String
+    },
+    behavior: {
+      default: 'default',
       type: String
     },
     type: {
@@ -45,6 +57,10 @@ export default {
       default: false,
       type: Boolean
     },
+    range: {
+      default: false,
+      type: Boolean
+    },
     useChips: {
       default: false,
       type: Boolean
@@ -61,7 +77,6 @@ export default {
       default: 'label',
       type: String
     },
-    
     size: {
       default: '50px',
       type: String
@@ -93,6 +108,12 @@ export default {
     src: {
       default: '',
       type: [String, Number, Boolean, Array, Boolean]
+    },
+    responseKey: {
+      default: () => {
+        return {}
+      },
+      type: [String, Number, Boolean, Array, Boolean, Object]
     },
     ripple: {
       default: false,
@@ -126,13 +147,30 @@ export default {
       default: '',
       type: String
     },
+    inputType: {
+      default: 'text',
+      type: String
+    },
+    clearable:{
+      default: false,
+      type: Boolean
+    },
+    loading:{
+      default: false,
+      type: Boolean
+    }
+  },
+  computed: {
+    customClass () {
+      return this.class
+    }
   },
   watch: {
     value () {
       this.inputData = this.value
     }
   },
-  emits: ['update:value', 'input', 'change'],
+  emits: ['update:value', 'input', 'change', 'onClick'],
   data () {
     return {
       inputData: null
@@ -142,6 +180,9 @@ export default {
     this.inputData = this.value
   },
   methods: {
+    onClick (data) {
+      this.$emit('onClick', data)
+    },
     change (val) {
       this.$emit('update:value', val)
     },
@@ -160,6 +201,7 @@ export default {
       }
 
       return getFlatInputs(this.inputData)
-    }
+    },
+
   }
 }

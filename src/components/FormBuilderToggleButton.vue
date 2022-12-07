@@ -1,95 +1,97 @@
 <template>
-  {{value}}
+  <div v-if="label" class="outsideLabel">{{ label }}</div>
   <q-btn-toggle
-      v-model="inputData"
-      :name="name"
-      :push="push"
-      :glossy="glossy"
-      :options="options"
-      :clearable="clearable"
-      :color="color"
-      :inline="inline"
-      :dense="dense"
-      :type="type"
-      :disable="disable"
-      :text-color="textColor"
-      :toggle-color="toggleColor"
-      :toggle-text-color="toggleTextColor"
-      :unelevated="unelevated"
-      :flat="flat"
-      :outlined="outlined"
-      :rounded="rounded"
-      :size="size"
-      :ripple="ripple"
-      :no-caps="noCaps"
-      :no-wrap="noWrap"
-      :spread="spread"
-      :stack="stack"
-      :stretch="stretch"
-      :class="col"
-      @update:model-value="change($event)"
-
+    v-model="inputData"
+    :name="name"
+    :push="push"
+    :glossy="glossy"
+    :options="options"
+    :color="color"
+    :inline="inline"
+    :dense="dense"
+    :type="type"
+    :disable="disable"
+    :readonly="readonly"
+    :text-color="textColor"
+    :toggle-color="toggleColor"
+    :toggle-text-color="toggleTextColor"
+    :unelevated="unelevated"
+    :flat="flat"
+    :outlined="outlined"
+    :rounded="rounded"
+    :size="size"
+    :ripple="ripple"
+    :no-caps="noCaps"
+    :no-wrap="noWrap"
+    :spread="spread"
+    :stack="stack"
+    :stretch="stretch"
+    :class="{customClass, col}"
+    @update:model-value="change($event)"
+    @click="onClick"
   />
 </template>
 
 <script>
-import {inputMixin} from '../../index'
+import { inputMixin } from '../../index';
 export default {
   name: 'FormBuilderToggleButton',
   mixins: [inputMixin],
   props: {
+    name: {
+      default: '',
+      type: String,
+    },
     value: {
-      default: ()=>{''},
-      type: [Object, String, Array, Number, Boolean]
+      default: '',
+      type: [Object, String, Array, Number, Boolean],
     },
     toggleTextColor: {
       default: 'black',
-      type: [String]
+      type: [String],
     },
     toggleColor: {
       default: 'primary',
-      type: [String]
+      type: [String],
     },
     push: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     glossy: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     clearable: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     unelevated: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     stretch: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     stack: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     spread: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     noWrap: {
       default: false,
-      type: [Boolean]
+      type: [Boolean],
     },
     noCaps: {
       default: false,
-      type: [Boolean]
-    }
-  }
-}
+      type: [Boolean],
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
