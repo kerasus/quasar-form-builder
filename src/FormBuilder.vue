@@ -1,47 +1,47 @@
 <template>
   <div class="row" :class="['q-col-gutter-' + gutterSize]">
     <div
-        v-for="(input, inputIndex) in inputData"
-        :key="inputIndex"
-        :class="[
+      v-for="(input, inputIndex) in inputData"
+      :key="inputIndex"
+      :class="[
         input.col ? input.col : 'col',
         getComponentName(input),
         // eslint-disable-next-line vue/comma-dangle
         getComponentName(input) + '-col',
       ]"
+    >
+      <div v-if="showGeneratorButtons">
+        <q-btn size="xs"
+               round
+               color="primary"
+               @click="edit(inputIndex)"
         >
-            <div v-if="showGeneratorButtons">
-                <q-btn size="xs"
-                       round
-                       color="primary"
-                       @click="edit(inputIndex)"
-                >
-                    edit
-                </q-btn>
-                <q-btn
-                    size="xs"
-                    round
-                    class="q-ml-xs"
-                    color="red"
-                    @click="remove(inputIndex)"
-                >
-                    x
-                </q-btn>
-            </div>
-            <component
-                :is="getComponent(input)"
-                :ref="'formBuilder'+input.type"
-                v-model:value="input.value"
-                :loading="loading"
-                v-bind="input"
-                @update:value="onValueUpdated"
-                @input="change($event, inputIndex)"
-                @change="change($event, inputIndex)"
-                @onClick="onClick($event, input)"
-                @onKeyPress="onKeyPress($event)"
-            />
-        </div>
+          edit
+        </q-btn>
+        <q-btn
+          size="xs"
+          round
+          class="q-ml-xs"
+          color="red"
+          @click="remove(inputIndex)"
+        >
+          x
+        </q-btn>
+      </div>
+      <component
+        :is="getComponent(input)"
+        :ref="'formBuilder'+input.type"
+        v-model:value="input.value"
+        :loading="loading"
+        v-bind="input"
+        @update:value="onValueUpdated"
+        @input="change($event, inputIndex)"
+        @change="change($event, inputIndex)"
+        @onClick="onClick($event, input)"
+        @onKeyPress="onKeyPress($event)"
+      />
     </div>
+  </div>
 </template>
 
 <script>

@@ -96,17 +96,6 @@ import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderDateTime',
   mixins: [inputMixin],
-  data() {
-    return {
-      dateTime: {
-        date: '',
-        time: '',
-      },
-      rendrKey: Date.now(),
-      showDate: false,
-      showTime: false,
-    };
-  },
   props: {
     name: {
       default: '',
@@ -144,6 +133,17 @@ export default {
       default: false,
       type: Boolean,
     },
+  },
+  data() {
+    return {
+      dateTime: {
+        date: '',
+        time: '',
+      },
+      rendrKey: Date.now(),
+      showDate: false,
+      showTime: false,
+    };
   },
   watch: {
     inputData(newValue) {

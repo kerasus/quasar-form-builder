@@ -23,11 +23,6 @@ import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderSeparator',
   mixins: [inputMixin],
-  data() {
-    return {
-      colorTypes: ['#', 'rgb', 'rgba'],
-    };
-  },
   props: {
     name: {
       default: '',
@@ -88,20 +83,10 @@ export default {
       },
     },
   },
-  methods: {
-    getBorderStyle(type) {
-      let style = '';
-      if (
-        ((type === 'top' && !this.vertical) ||
-          (type === 'left' && this.vertical)) &&
-        this.separatorType &&
-        this.size
-      ) {
-        style =
-          this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor;
-      }
-      return style;
-    },
+  data() {
+    return {
+      colorTypes: ['#', 'rgb', 'rgba'],
+    };
   },
   computed: {
     borderTopStyle() {
@@ -119,6 +104,21 @@ export default {
         return this.color;
       }
       return 'var(--q-' + this.color + ')';
+    },
+  },
+  methods: {
+    getBorderStyle(type) {
+      let style = '';
+      if (
+        ((type === 'top' && !this.vertical) ||
+          (type === 'left' && this.vertical)) &&
+        this.separatorType &&
+        this.size
+      ) {
+        style =
+          this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor;
+      }
+      return style;
     },
   },
 };

@@ -32,13 +32,12 @@
     "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "@quasar/extras": "^1.15.7",
+    "@quasar/extras": "^1.15.8",
     "core-js": "^3.26.1",
     "moment-jalaali": "^0.9.6",
-    "quasar": "^2.10.2",
+    "quasar": "^2.11.0",
     "vue": "^3.2.45",
-    "vue-json-pretty": "^2.2.3",
-    "vue3-tiptap-katex": "^1.0.40"
+    "vue3-tiptap-katex": "^1.0.41"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
@@ -52,7 +51,7 @@
     "eslint": "^8.18.0",
     "eslint-plugin-vue": "^9.1.1",
     "node-sass": "^7.0.1",
-    "postcss": "^8.4.16",
+    "postcss": "^8.4.20",
     "postcss-rtl": "^2.0.0",
     "sass": "1.56.1",
     "sass-graph": "^4.0.1",
@@ -74,7 +73,9 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vue/attributes-order": "warn",
+      "vue/attributes-order": "error",
+      "vue/order-in-components": "error",
+      "vue/html-indent": "error",
       "vue/this-in-template": "error",
       "vue/arrow-spacing": "error",
       "vue/block-spacing": "error",

@@ -1,45 +1,45 @@
 <template>
-    <q-layout view="lHh Lpr lFf" :dir="dir">
-        <q-header elevated>
-            <q-toolbar>
-                <q-btn
-                    flat
-                    dense
-                    round
-                    aria-label="Menu"
-                    icon="menu"
-                    @click="leftDrawerOpen = !leftDrawerOpen"
-                />
+  <q-layout view="lHh Lpr lFf" :dir="dir">
+    <q-header elevated>
+      <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          aria-label="Menu"
+          icon="menu"
+          @click="leftDrawerOpen = !leftDrawerOpen"
+        />
 
-                <q-toolbar-title> Quasar Form Builder</q-toolbar-title>
+        <q-toolbar-title> Quasar Form Builder</q-toolbar-title>
 
-                <div>Quasar v{{ $q.version }}</div>
-            </q-toolbar>
-        </q-header>
-        <q-page-container>
-            <form-builder-generator></form-builder-generator>
-            <q-btn color="blue" class="q-my-md full-width" @click="getData">
-                get data
-            </q-btn>
-            <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
-            <q-btn color="green" class="q-my-md full-width" @click="changeScreenDirection">change screen direction
-            </q-btn>
-            <q-btn color="red" class="q-my-md full-width" @click="loading=!loading">loading</q-btn>
-            <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
-            <br/>
-            <q-checkbox v-model="readonly" label="readonly"/>
-            <q-checkbox v-model="disable" label="disable"/>
-            <br/>
-            <br/>
-            <br/>
-            <div>test v-model data from first input: {{ inputs[0].value }}</div>
-            <div class="form-builder q-pa-md q-mx-sm">
-                <form-builder ref="formBuilder" v-model:value="inputs" class="q-mx-md" :readonly="readonly"
-                              :disable="disable"
-                              :loading="loading" @onClick="onClick" @keydown="onKePress"/>
-            </div>
-        </q-page-container>
-    </q-layout>
+        <div>Quasar v{{ $q.version }}</div>
+      </q-toolbar>
+    </q-header>
+    <q-page-container>
+      <form-builder-generator></form-builder-generator>
+      <q-btn color="blue" class="q-my-md full-width" @click="getData">
+        get data
+      </q-btn>
+      <q-btn color="orange" class="q-my-md full-width" @click="clearInputValues">clear inputs</q-btn>
+      <q-btn color="green" class="q-my-md full-width" @click="changeScreenDirection">change screen direction
+      </q-btn>
+      <q-btn color="red" class="q-my-md full-width" @click="loading=!loading">loading</q-btn>
+      <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
+      <br/>
+      <q-checkbox v-model="readonly" label="readonly"/>
+      <q-checkbox v-model="disable" label="disable"/>
+      <br/>
+      <br/>
+      <br/>
+      <div>test v-model data from first input: {{ inputs[0].value }}</div>
+      <div class="form-builder q-pa-md q-mx-sm">
+        <form-builder ref="formBuilder" v-model:value="inputs" class="q-mx-md" :readonly="readonly"
+                      :disable="disable"
+                      :loading="loading" @onClick="onClick" @keydown="onKePress"/>
+      </div>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
@@ -51,6 +51,11 @@ import CustomComponent from './CustomComponent';
 export default {
     name: 'LayoutDefault',
     components: {FormBuilder, FormBuilderGenerator},
+    setup() {
+        return {
+            leftDrawerOpen: ref(false),
+        };
+    },
     data() {
         return {
             readonly: false,
@@ -600,11 +605,6 @@ export default {
         disable(newValue) {
             this.$refs.formBuilder.disableAllInputs(newValue)
         }
-    },
-    setup() {
-        return {
-            leftDrawerOpen: ref(false),
-        };
     },
     created() {
         this.inputs[27].value = 'https://cdn.quasar.dev/img/parallax2.jpg'
