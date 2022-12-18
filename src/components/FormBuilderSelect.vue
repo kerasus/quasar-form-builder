@@ -58,7 +58,7 @@ export default {
     },
     value: {
       default: () => [],
-      type: [Array, String, Number, Boolean],
+      type: [Array, Object, String, Number, Boolean],
     },
     options: {
       default: () => [],
@@ -166,7 +166,7 @@ export default {
       }
       // in the multiple scenario, inputData type changes to Array!
       if (this.multiple) {
-        if (this.inputData.length == 0) {
+        if (this.inputData.length === 0) {
           return this.placeholder;
         }
         return '';

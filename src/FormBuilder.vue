@@ -223,22 +223,19 @@ export default {
     },
     getInputsByName(name) {
       let inputs = this.getValues();
-      let founded = inputs.filter((input) => {
+      return inputs.filter((input) => {
         if (input.name === name) {
           return input;
         }
       });
-      console.log(founded);
-      return founded;
     },
     setInputByName(name, value) {
       let inputs = this.getValues();
-      let founded = inputs.find((input) => {
+      return inputs.find((input) => {
         if (input.name === name) {
           input.value = value;
         }
       });
-      return founded;
     },
     getValidChainedObject(object, keys) {
       if (!Array.isArray(keys) && typeof keys !== 'string') {
@@ -289,7 +286,7 @@ export default {
 
     getComponent(input) {
       if (typeof input.type === 'object') {
-        return {...input.type};
+        return input.type;
       }
       if (input.type === 'formBuilder') {
         return 'form-builder';
