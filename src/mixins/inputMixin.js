@@ -170,7 +170,7 @@ export default {
       this.inputData = this.value
     }
   },
-  emits: ['update:value', 'input', 'change', 'onClick'],
+  emits: ['update:value', 'input', 'change', 'onClick', 'onKeyPress'],
   data () {
     return {
       inputData: null
@@ -182,6 +182,9 @@ export default {
   methods: {
     onClick (data) {
       this.$emit('onClick', data)
+    },
+    onKeyPress (data) {
+      this.$emit('onKeyPress', data)
     },
     change (val) {
       this.$emit('update:value', val)

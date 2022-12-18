@@ -19,6 +19,7 @@
     :class="customClass" :input-class="customClass"
     @update:model-value="change($event)"
     @click="onClick"
+    @keypress="onKeyPress"
   />
 </template>
 
