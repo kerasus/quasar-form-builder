@@ -1,4 +1,4 @@
-const path = require(`path`);
+const path = require('path');
 
 module.exports = {
   pluginOptions: {
@@ -11,7 +11,7 @@ module.exports = {
     resolve: {
       symlinks: false,
       alias: {
-        vue: path.resolve(`./node_modules/vue`)
+        vue: path.resolve('./node_modules/vue')
       }
     }
   },
