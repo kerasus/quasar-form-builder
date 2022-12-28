@@ -1,6 +1,9 @@
-'use strict';
+'use strict'
 
-import FormBuilder from './src/FormBuilder'
-import inputMixin from './src/mixins/inputMixin'
-import FormBuilderGenerator from './src/components/formBuilderGenerator'
-export {FormBuilder, inputMixin, FormBuilderGenerator}
+const FormBuilder = require('./src/FormBuilder')
+const inputMixin = require('./src/mixins/inputMixin')
+const FormBuilderGenerator = require('./src/components/formBuilderGenerator')
+const FormBuilderObject = {FormBuilder, inputMixin, FormBuilderGenerator}
+
+module.exports = FormBuilderObject
+module.exports.default = FormBuilderObject
