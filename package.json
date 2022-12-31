@@ -37,7 +37,7 @@
     "moment-jalaali": "^0.9.6",
     "quasar": "^2.11.0",
     "vue": "^3.2.45",
-    "vue3-tiptap-katex": "^1.0.44"
+    "vue3-tiptap-katex": "^1.0.40"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
