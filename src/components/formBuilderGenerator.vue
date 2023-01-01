@@ -3,15 +3,16 @@
     <div class="title">Generated Form</div>
     <div v-show="jsonShow" class="q-ma-md">
       <div class="sub-title">Generated Json:</div>
-      <vue-json-pretty :data="inputs"/>
+      {{JSON.stringify(inputs)}}
+      <!--      <vue-json-pretty :data="inputs"/>-->
     </div>
     <div v-show="gFormShow">
       <div class="sub-title q-pl-md">Generated Form:</div>
       <form-builder
-          ref="fb"
-          v-model:value="inputs"
-          :showGeneratorButtons="true"
-          @edit="edit"
+        ref="fb"
+        v-model:value="inputs"
+        :showGeneratorButtons="true"
+        @edit="edit"
       />
     </div>
     <div v-show="setGetValue" class="q-ma-lg">
@@ -21,14 +22,14 @@
       </p>
       <p>If you want to set, fill both inputs.</p>
       <q-select
-          v-model="searchName"
-          :options="searchOptions"
-          label="name of input of form to get"
-          placeholder="name of input of form to get"
+        v-model="searchName"
+        :options="searchOptions"
+        label="name of input of form to get"
+        placeholder="name of input of form to get"
       ></q-select>
       <q-input
-          v-model="setValue"
-          placeholder="value of input of form to set"
+        v-model="setValue"
+        placeholder="value of input of form to set"
       ></q-input>
       <q-btn class="q-mt-md" @click="getSetValue()">submit</q-btn>
     </div>
@@ -52,11 +53,11 @@
     <div class="top">
       <div class="title">Form Builder Generator</div>
       <q-btn
-          v-show="state !== ''"
-          class="back-btn"
-          size="12px"
-          rounded
-          @click="back()"
+        v-show="state !== ''"
+        class="back-btn"
+        size="12px"
+        rounded
+        @click="back()"
       >back
       </q-btn
       >
@@ -125,9 +126,9 @@
           generating new input: <br/>
           selected input: {{ type?.value }}
           <q-select
-              v-model="type"
-              :options="showConfigs()"
-              @update:model-value="newInputBuild()"
+            v-model="type"
+            :options="showConfigs()"
+            @update:model-value="newInputBuild()"
           ></q-select>
         </div>
       </div>
@@ -140,21 +141,21 @@
           <div class="q-mt-md">configs to tweak:</div>
           <div v-for="c in selectedConfig.value" :key="c">
             <q-input
-                v-if="c.type === 'text'"
-                v-model="config[c.value]"
-                :type="c.inputType"
-                :label="c.value"
+              v-if="c.type === 'text'"
+              v-model="config[c.value]"
+              :type="c.inputType"
+              :label="c.value"
             ></q-input>
             <q-toggle
-                v-if="c.type === 'boolean'"
-                v-model="config[c.value]"
-                :label="c.value"
+              v-if="c.type === 'boolean'"
+              v-model="config[c.value]"
+              :label="c.value"
             />
             <q-select
-                v-if="c.type === 'select'"
-                v-model="config[c.value]"
-                :label="c.value"
-                :options="c.options"
+              v-if="c.type === 'select'"
+              v-model="config[c.value]"
+              :label="c.value"
+              :options="c.options"
             ></q-select>
             <div v-if="c.type === 'options'" class="options-generator">
               <div class="option-json">
@@ -181,13 +182,17 @@
 </template>
 
 <script>
-import FormBuilder from '../FormBuilder';
-import VueJsonPretty from 'vue-json-pretty';
-import CustomComponent from '../CustomComponent';
-import 'vue-json-pretty/lib/styles.css';
+import FormBuilder from '../FormBuilder.vue'
+// import VueJsonPretty from 'vue-json-pretty';
+import CustomComponent from '../CustomComponent.vue'
+// import 'vue-json-pretty/lib/styles.css';
 
 export default {
   name: 'FormBuilderGenerator',
+  components: {
+    FormBuilder,
+    // VueJsonPretty,
+  },
   data() {
     return {
       inputs: [],
@@ -504,6 +509,24 @@ export default {
       setValue: '',
     };
   },
+  computed: {
+    searchOptions() {
+      return this.getValues()
+          .map((input) => {
+            return input.name;
+          })
+          .filter((i) => i !== undefined);
+    },
+  },
+  watch: {
+    importJson(n) {
+      this.inputs = eval(n);
+      alert('json imported successfully');
+      this.jsonShow = true;
+      this.gFormShow = true;
+      this.state = '';
+    },
+  },
   methods: {
     newInputBuild() {
       this.state = 'chooseConfig';
@@ -644,28 +667,6 @@ export default {
             }
           })
           .filter((c) => c !== undefined);
-    },
-  },
-  components: {
-    FormBuilder,
-    VueJsonPretty,
-  },
-  watch: {
-    importJson(n) {
-      this.inputs = eval(n);
-      alert('json imported successfully');
-      this.jsonShow = true;
-      this.gFormShow = true;
-      this.state = '';
-    },
-  },
-  computed: {
-    searchOptions() {
-      return this.getValues()
-          .map((input) => {
-            return input.name;
-          })
-          .filter((i) => i !== undefined);
     },
   },
 };

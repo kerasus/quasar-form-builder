@@ -85,7 +85,7 @@
 
 <script>
 import moment from 'moment-jalaali';
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 // NOTE: Value accepted from this component is based on Miladi format
 // you should pass to it Miladi date as string
 // output of this component (which name is 'value') is based on Miladi format.
@@ -96,17 +96,6 @@ import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderDateTime',
   mixins: [inputMixin],
-  data() {
-    return {
-      dateTime: {
-        date: '',
-        time: '',
-      },
-      rendrKey: Date.now(),
-      showDate: false,
-      showTime: false,
-    };
-  },
   props: {
     name: {
       default: '',
@@ -144,6 +133,17 @@ export default {
       default: false,
       type: Boolean,
     },
+  },
+  data() {
+    return {
+      dateTime: {
+        date: '',
+        time: '',
+      },
+      rendrKey: Date.now(),
+      showDate: false,
+      showTime: false,
+    };
   },
   watch: {
     inputData(newValue) {

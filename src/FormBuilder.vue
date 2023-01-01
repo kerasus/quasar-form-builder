@@ -38,63 +38,64 @@
           @input="change($event, inputIndex)"
           @change="change($event, inputIndex)"
           @onClick="onClick($event, input)"
+          @onKeyPress="onKeyPress($event)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import {defineAsyncComponent} from 'vue';
-import inputMixin from './mixins/inputMixin';
+import {defineAsyncComponent} from 'vue'
+import inputMixin from './mixins/inputMixin.js'
 
 export default {
   name: 'FormBuilder',
   components: {
     FormBuilder: defineAsyncComponent(() => import('./FormBuilder.vue')),
     FormBuilderFile: defineAsyncComponent(() =>
-        import('./components/FormBuilderFile')
+        import('./components/FormBuilderFile.vue')
     ),
     FormBuilderInput: defineAsyncComponent(() =>
-        import('./components/FormBuilderInput')
+        import('./components/FormBuilderInput.vue')
     ),
     FormBuilderInputEditor: defineAsyncComponent(() =>
-        import('./components/FormBuilderInputEditor')
+        import('./components/FormBuilderInputEditor.vue')
     ),
     FormBuilderTiptapEditor: defineAsyncComponent(() =>
-        import('./components/FormBuilderTiptapEditor')
+        import('./components/FormBuilderTiptapEditor.vue')
     ),
     FormBuilderAvatar: defineAsyncComponent(() =>
-        import('./components/FormBuilderAvatar')
+        import('./components/FormBuilderAvatar.vue')
     ),
     FormBuilderSelect: defineAsyncComponent(() =>
-        import('./components/FormBuilderSelect')
+        import('./components/FormBuilderSelect.vue')
     ),
     FormBuilderOptionGroup: defineAsyncComponent(() =>
-        import('./components/FormBuilderOptionGroup')
+        import('./components/FormBuilderOptionGroup.vue')
     ),
     FormBuilderCheckbox: defineAsyncComponent(() =>
-        import('./components/FormBuilderCheckbox')
+        import('./components/FormBuilderCheckbox.vue')
     ),
     FormBuilderSlider: defineAsyncComponent(() =>
-        import('./components/FormBuilderSlider')
+        import('./components/FormBuilderSlider.vue')
     ),
     FormBuilderRangeSlider: defineAsyncComponent(() =>
-        import('./components/FormBuilderRangeSlider')
+        import('./components/FormBuilderRangeSlider.vue')
     ),
     FormBuilderSpace: defineAsyncComponent(() =>
-        import('./components/FormBuilderSpace')
+        import('./components/FormBuilderSpace.vue')
     ),
     FormBuilderSeparator: defineAsyncComponent(() =>
-        import('./components/FormBuilderSeparator')
+        import('./components/FormBuilderSeparator.vue')
     ),
     FormBuilderDateTime: defineAsyncComponent(() =>
-        import('./components/FormBuilderDateTime')
+        import('./components/FormBuilderDateTime.vue')
     ),
     FormBuilderColor: defineAsyncComponent(() =>
         import('./components/FormBuilderColor.vue')
     ),
     FormBuilderToggleButton: defineAsyncComponent(() =>
-        import('./components/FormBuilderToggleButton')
+        import('./components/FormBuilderToggleButton.vue')
     ),
   },
   mixins: [inputMixin],
@@ -142,6 +143,9 @@ export default {
 
       const absEvent = getEvent(event);
       this.$emit('onClick', {event: absEvent, input});
+    },
+    onKeyPress(event) {
+      this.$emit('onKeyPress', event)
     },
     getFormData() {
       const formHasFileInput = this.formHasFileInput();
@@ -389,9 +393,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/*.form-builder-hidden-col {*/
-/*  display: none;*/
-/*}*/
-</style>

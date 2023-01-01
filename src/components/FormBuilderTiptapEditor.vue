@@ -2,16 +2,16 @@
   <div>
     <p v-text="label"/>
     <vue-tiptap-katex
-        ref="tiptap"
-        v-if="!disable && !readonly"
-        v-model="inputData"
-        :name="name"
-        :bubble-menu="false"
-        :floating-menu="false"
-        :options="options"
-        :class="customClass"
-        @update:model-value="change($event)"
-        @click="onClick"
+      v-if="!disable && !readonly"
+      ref="tiptap"
+      v-model="inputData"
+      :name="name"
+      :bubble-menu="false"
+      :floating-menu="false"
+      :options="options"
+      :class="customClass"
+      @update:model-value="change($event)"
+      @click="onClick"
     />
     <!--eslint-disable-next-line-->
     <div v-else v-html="inputData"/>
@@ -20,14 +20,14 @@
 
 <script>
 import VueTiptapKatex from 'vue3-tiptap-katex';
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 
 export default {
   name: 'FormBuilderInputEditor',
-  mixins: [inputMixin],
   components: {
     VueTiptapKatex,
   },
+  mixins: [inputMixin],
   props: {
     name: {
       default: '',
