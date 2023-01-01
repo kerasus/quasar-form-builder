@@ -51,7 +51,7 @@
 
 <script>
 import {uid} from 'quasar';
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 
 export default {
     name: 'FormBuilderFile',

@@ -20,7 +20,7 @@
 
 <script>
 import VueTiptapKatex from 'vue3-tiptap-katex';
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 
 export default {
   name: 'FormBuilderInputEditor',

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { inputMixin } from '../index'
+import { inputMixin } from '../index.js'
 export default {
   name: 'CustomComponent',
   mixins: [inputMixin],

@@ -182,9 +182,9 @@
 </template>
 
 <script>
-import FormBuilder from '../FormBuilder';
+import FormBuilder from '../FormBuilder.vue'
 // import VueJsonPretty from 'vue-json-pretty';
-import CustomComponent from '../CustomComponent';
+import CustomComponent from '../CustomComponent.vue'
 // import 'vue-json-pretty/lib/styles.css';
 
 export default {
