@@ -3,6 +3,7 @@
   "version": "0.1.64",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
+  "type": "module",
   "keywords": [
     "vue",
     "quasar",

@@ -1,7 +1,11 @@
-const FormBuilder = require('./src/FormBuilder.vue').default
-const inputMixin = require('./src/mixins/inputMixin.js').default
-const FormBuilderGenerator = require('./src/components/formBuilderGenerator.vue').default
+import FormBuilder from './src/FormBuilder.vue'
+import inputMixin from './src/mixins/inputMixin.js'
+import FormBuilderGenerator from './src/components/formBuilderGenerator.vue'
 const FormBuilderObject = {FormBuilder, inputMixin, FormBuilderGenerator}
 
-module.exports = FormBuilderObject
-module.exports.default = FormBuilderObject
+export {
+    FormBuilderObject as default,
+    FormBuilder,
+    inputMixin,
+    FormBuilderGenerator
+}
