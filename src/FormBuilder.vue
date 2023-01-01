@@ -121,7 +121,7 @@ export default {
             type: Boolean,
         }
     },
-    emits: ['input', 'onClick'],
+    emits: ['input', 'onClick', 'onKeyPress'],
     data() {
         return {
             currentInput: null,
