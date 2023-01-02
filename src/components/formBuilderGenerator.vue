@@ -481,20 +481,20 @@ export default {
             {type: 'text', value: 'col'},
           ],
         },
-        {
-          type: CustomComponent,
-          isCustomComponent: true,
-          value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'col'},
-            {type: 'text', value: 'value'},
-            {
-              type: 'options',
-              value: 'props',
-            },
-          ],
-        },
+        // {
+        //   type: CustomComponent,
+        //   isCustomComponent: true,
+        //   value: [
+        //     {type: 'text', value: 'name'},
+        //     {type: 'text', value: 'label'},
+        //     {type: 'text', value: 'col'},
+        //     {type: 'text', value: 'value'},
+        //     {
+        //       type: 'options',
+        //       value: 'props',
+        //     },
+        //   ],
+        // },
       ],
       optionLabel: '',
       optionValue: '',

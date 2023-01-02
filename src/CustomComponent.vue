@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { inputMixin } from '../index.js'
+import inputMixin from './mixins/inputMixin.js'
 export default {
   name: 'CustomComponent',
   mixins: [inputMixin],
@@ -27,7 +27,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

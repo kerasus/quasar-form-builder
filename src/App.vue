@@ -44,9 +44,9 @@
 
 <script>
 import {ref} from 'vue';
-import FormBuilder from './FormBuilder';
-import FormBuilderGenerator from './components/formBuilderGenerator';
-import CustomComponent from './CustomComponent';
+import FormBuilder from './FormBuilder.vue'
+import CustomComponent from './CustomComponent.vue'
+import FormBuilderGenerator from './components/formBuilderGenerator.vue'
 
 export default {
     name: 'LayoutDefault',
@@ -661,10 +661,10 @@ export default {
 
 }
 </style>
+
 <style>
 /*.testCustomClass {*/
 /*  color: red;*/
 /*  background: blue;*/
 /*}*/
-
 </style>
