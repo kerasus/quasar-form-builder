@@ -1,9 +1,9 @@
 <template>
   <div class="row" :class="['q-col-gutter-' + gutterSize]">
     <div
-      v-for="(input, inputIndex) in inputData"
-      :key="inputIndex"
-      :class="[
+        v-for="(input, inputIndex) in inputData"
+        :key="inputIndex"
+        :class="[
         input.col ? input.col : 'col',
         getComponentName(input),
         // eslint-disable-next-line vue/comma-dangle
@@ -19,26 +19,26 @@
           edit
         </q-btn>
         <q-btn
-          size="xs"
-          round
-          class="q-ml-xs"
-          color="red"
-          @click="remove(inputIndex)"
+            size="xs"
+            round
+            class="q-ml-xs"
+            color="red"
+            @click="remove(inputIndex)"
         >
           x
         </q-btn>
       </div>
       <component
-        :is="getComponent(input)"
-        :ref="'formBuilder'+input.type"
-        v-model:value="input.value"
-        :loading="loading"
-        v-bind="input"
-        @update:value="onValueUpdated"
-        @input="change($event, inputIndex)"
-        @change="change($event, inputIndex)"
-        @onClick="onClick($event, input)"
-        @onKeyPress="onKeyPress($event)"
+          :is="getComponent(input)"
+          :ref="'formBuilder'+input.type"
+          v-model:value="input.value"
+          :loading="loading"
+          v-bind="input"
+          @update:value="onValueUpdated"
+          @input="change($event, inputIndex)"
+          @change="change($event, inputIndex)"
+          @onClick="onClick($event, input)"
+          @onKeyPress="onKeyPress($event)"
       />
     </div>
   </div>
@@ -49,176 +49,176 @@ import {defineAsyncComponent} from 'vue';
 import inputMixin from './mixins/inputMixin';
 
 export default {
-    name: 'FormBuilder',
-    components: {
-        FormBuilder: defineAsyncComponent(() => import('./FormBuilder.vue')),
-        FormBuilderFile: defineAsyncComponent(() =>
-            import('./components/FormBuilderFile')
-        ),
-        FormBuilderInput: defineAsyncComponent(() =>
-            import('./components/FormBuilderInput')
-        ),
-        FormBuilderInputEditor: defineAsyncComponent(() =>
-            import('./components/FormBuilderInputEditor')
-        ),
-        FormBuilderTiptapEditor: defineAsyncComponent(() =>
-            import('./components/FormBuilderTiptapEditor')
-        ),
-        FormBuilderAvatar: defineAsyncComponent(() =>
-            import('./components/FormBuilderAvatar')
-        ),
-        FormBuilderSelect: defineAsyncComponent(() =>
-            import('./components/FormBuilderSelect')
-        ),
-        FormBuilderOptionGroup: defineAsyncComponent(() =>
-            import('./components/FormBuilderOptionGroup')
-        ),
-        FormBuilderCheckbox: defineAsyncComponent(() =>
-            import('./components/FormBuilderCheckbox')
-        ),
-        FormBuilderSlider: defineAsyncComponent(() =>
-            import('./components/FormBuilderSlider')
-        ),
-        FormBuilderRangeSlider: defineAsyncComponent(() =>
-            import('./components/FormBuilderRangeSlider')
-        ),
-        FormBuilderSpace: defineAsyncComponent(() =>
-            import('./components/FormBuilderSpace')
-        ),
-        FormBuilderSeparator: defineAsyncComponent(() =>
-            import('./components/FormBuilderSeparator')
-        ),
-        FormBuilderDateTime: defineAsyncComponent(() =>
-            import('./components/FormBuilderDateTime')
-        ),
-        FormBuilderColor: defineAsyncComponent(() =>
-            import('./components/FormBuilderColor.vue')
-        ),
-        FormBuilderToggleButton: defineAsyncComponent(() =>
-            import('./components/FormBuilderToggleButton')
-        ),
+  name: 'FormBuilder',
+  components: {
+    FormBuilder: defineAsyncComponent(() => import('./FormBuilder.vue')),
+    FormBuilderFile: defineAsyncComponent(() =>
+        import('./components/FormBuilderFile.vue')
+    ),
+    FormBuilderInput: defineAsyncComponent(() =>
+        import('./components/FormBuilderInput.vue')
+    ),
+    FormBuilderInputEditor: defineAsyncComponent(() =>
+        import('./components/FormBuilderInputEditor.vue')
+    ),
+    FormBuilderTiptapEditor: defineAsyncComponent(() =>
+        import('./components/FormBuilderTiptapEditor.vue')
+    ),
+    FormBuilderAvatar: defineAsyncComponent(() =>
+        import('./components/FormBuilderAvatar.vue')
+    ),
+    FormBuilderSelect: defineAsyncComponent(() =>
+        import('./components/FormBuilderSelect.vue')
+    ),
+    FormBuilderOptionGroup: defineAsyncComponent(() =>
+        import('./components/FormBuilderOptionGroup.vue')
+    ),
+    FormBuilderCheckbox: defineAsyncComponent(() =>
+        import('./components/FormBuilderCheckbox.vue')
+    ),
+    FormBuilderSlider: defineAsyncComponent(() =>
+        import('./components/FormBuilderSlider.vue')
+    ),
+    FormBuilderRangeSlider: defineAsyncComponent(() =>
+        import('./components/FormBuilderRangeSlider.vue')
+    ),
+    FormBuilderSpace: defineAsyncComponent(() =>
+        import('./components/FormBuilderSpace.vue')
+    ),
+    FormBuilderSeparator: defineAsyncComponent(() =>
+        import('./components/FormBuilderSeparator.vue')
+    ),
+    FormBuilderDateTime: defineAsyncComponent(() =>
+        import('./components/FormBuilderDateTime.vue')
+    ),
+    FormBuilderColor: defineAsyncComponent(() =>
+        import('./components/FormBuilderColor.vue')
+    ),
+    FormBuilderToggleButton: defineAsyncComponent(() =>
+        import('./components/FormBuilderToggleButton.vue')
+    ),
+  },
+  mixins: [inputMixin],
+  props: {
+    value: {
+      default: () => [],
+      type: Array,
     },
-    mixins: [inputMixin],
-    props: {
-        value: {
-            default: () => [],
-            type: Array,
-        },
-        gutterSize: {
-            default: 'md',
-            type: String
-        },
-        disable: {
-            default: false,
-            type: Boolean,
-        },
-        showGeneratorButtons: {
-            default: false,
-            type: Boolean,
-        },
-        loading: {
-            default: false,
-            type: Boolean,
+    gutterSize: {
+      default: 'md',
+      type: String
+    },
+    disable: {
+      default: false,
+      type: Boolean,
+    },
+    showGeneratorButtons: {
+      default: false,
+      type: Boolean,
+    },
+    loading: {
+      default: false,
+      type: Boolean,
+    }
+  },
+  emits: ['input', 'onClick', 'onKeyPress'],
+  data() {
+    return {
+      currentInput: null,
+      optionGroupType: null,
+      dateTime_Range: null,
+      dateTime_Multiple: null,
+      dateTime_Time: null,
+    };
+  },
+  methods: {
+    onClick(event, input) {
+      function getEvent(data) {
+        if (data.event) {
+          return getEvent(data.event);
         }
+
+        return data;
+      }
+
+      const absEvent = getEvent(event);
+      this.$emit('onClick', {event: absEvent, input});
     },
-    emits: ['input', 'onClick', 'onKeyPress'],
-    data() {
-        return {
-            currentInput: null,
-            optionGroupType: null,
-            dateTime_Range: null,
-            dateTime_Multiple: null,
-            dateTime_Time: null,
-        };
+    onKeyPress(event) {
+      this.$emit('onKeyPress', event)
     },
-    methods: {
-        onClick(event, input) {
-            function getEvent(data) {
-                if (data.event) {
-                    return getEvent(data.event);
-                }
+    getFormData() {
+      const formHasFileInput = this.formHasFileInput();
+      const formData = formHasFileInput ? new FormData() : {};
+      const inputs = this.getValues();
+      inputs.forEach((item) => {
+        if (
+            item.disable ||
+            typeof item.value === 'undefined' ||
+            item.value === null
+        ) {
+          return;
+        }
 
-                return data;
-            }
+        if (item.type === 'file' && !this.isFile(item.value)) {
+          return;
+        }
 
-            const absEvent = getEvent(event);
-            this.$emit('onClick', {event: absEvent, input});
-        },
-        onKeyPress(event) {
-            this.$emit('onKeyPress', event)
-        },
-        getFormData() {
-            const formHasFileInput = this.formHasFileInput();
-            const formData = formHasFileInput ? new FormData() : {};
-            const inputs = this.getValues();
-            inputs.forEach((item) => {
-                if (
-                    item.disable ||
-                    typeof item.value === 'undefined' ||
-                    item.value === null
-                ) {
-                    return;
-                }
+        if (formHasFileInput) {
+          formData.append(item.name, item.value);
+        } else {
+          this.createChainedObject(formData, item.name, item.value);
+        }
+      });
 
-                if (item.type === 'file' && !this.isFile(item.value)) {
-                    return;
-                }
+      return formData;
+    },
+    formHasFileInput() {
+      const inputs = this.getValues();
+      const target = inputs.find((item) => item.type === 'file');
+      return !!target;
+    },
+    isFile(file) {
+      return file instanceof File;
+    },
+    createChainedObject(formData, chainedName, value) {
+      let keysArray = chainedName;
+      if (typeof chainedName === 'string') {
+        keysArray = chainedName.split('.');
+      }
+      if (keysArray.length === 1) {
+        formData[keysArray[0]] = value;
+      } else {
+        if (typeof formData[keysArray[0]] === 'undefined') {
+          formData[keysArray[0]] = {};
+        }
+        const newKeysArray = keysArray.filter((item, index) => index !== 0);
+        this.createChainedObject(formData[keysArray[0]], newKeysArray, value);
+      }
+    },
 
-                if (formHasFileInput) {
-                    formData.append(item.name, item.value);
-                } else {
-                    this.createChainedObject(formData, item.name, item.value);
-                }
-            });
+    setInputValues(responseData, inputs) {
+      const that = this;
 
-            return formData;
-        },
-        formHasFileInput() {
-            const inputs = this.getValues();
-            const target = inputs.find((item) => item.type === 'file');
-            return !!target;
-        },
-        isFile(file) {
-            return file instanceof File;
-        },
-        createChainedObject(formData, chainedName, value) {
-            let keysArray = chainedName;
-            if (typeof chainedName === 'string') {
-                keysArray = chainedName.split('.');
-            }
-            if (keysArray.length === 1) {
-                formData[keysArray[0]] = value;
-            } else {
-                if (typeof formData[keysArray[0]] === 'undefined') {
-                    formData[keysArray[0]] = {};
-                }
-                const newKeysArray = keysArray.filter((item, index) => index !== 0);
-                this.createChainedObject(formData[keysArray[0]], newKeysArray, value);
-            }
-        },
-
-        setInputValues(responseData, inputs) {
-            const that = this;
-
-            function setValueOfNestedInputData(responseData, inputs) {
-                inputs.forEach((input) => {
-                    if (
-                        typeof input.responseKey === 'undefined' ||
-                        input.responseKey === null
-                    ) {
-                        return;
-                    }
-                    if (input.type === 'formBuilder') {
-                        setValueOfNestedInputData(responseData, input.value);
-                        return;
-                    }
-                    const validChainedObject = that.getValidChainedObject(
-                        responseData,
-                        input.responseKey
-                    );
-                    input.value = validChainedObject;
-                });
-            }
+      function setValueOfNestedInputData(responseData, inputs) {
+        inputs.forEach((input) => {
+          if (
+              typeof input.responseKey === 'undefined' ||
+              input.responseKey === null
+          ) {
+            return;
+          }
+          if (input.type === 'formBuilder') {
+            setValueOfNestedInputData(responseData, input.value);
+            return;
+          }
+          const validChainedObject = that.getValidChainedObject(
+              responseData,
+              input.responseKey
+          );
+          input.value = validChainedObject;
+        });
+      }
 
       if (!inputs) {
         inputs = this.inputData;
@@ -247,46 +247,46 @@ export default {
         return false;
       }
 
-            if (keys === '') {
-                return object;
-            }
+      if (keys === '') {
+        return object;
+      }
 
-            let keysArray = keys;
-            if (typeof keys === 'string') {
-                keysArray = keys.split('.');
-            }
+      let keysArray = keys;
+      if (typeof keys === 'string') {
+        keysArray = keys.split('.');
+      }
 
-            if (keysArray.length === 1) {
-                if (!object || typeof object[keysArray[0]] === 'undefined') {
-                    return null;
-                }
-                return object[keysArray[0]];
-            }
+      if (keysArray.length === 1) {
+        if (!object || typeof object[keysArray[0]] === 'undefined') {
+          return null;
+        }
+        return object[keysArray[0]];
+      }
 
-            if (
-                typeof object[keysArray[0]] !== 'undefined' &&
-                object[keysArray[0]] !== null
-            ) {
-                return this.getValidChainedObject(
-                    object[keysArray[0]],
-                    keysArray.splice(1)
-                );
-            }
+      if (
+          typeof object[keysArray[0]] !== 'undefined' &&
+          object[keysArray[0]] !== null
+      ) {
+        return this.getValidChainedObject(
+            object[keysArray[0]],
+            keysArray.splice(1)
+        );
+      }
 
-            return (
-                typeof object[keysArray[0]] !== 'undefined' &&
-                object[keysArray[0]] !== null
-            );
-        },
-        getRefs(input) {
-            return input.type
-        },
-        getComponentName(input) {
-            if (typeof input.type === 'object') {
-                return 'formBuilder-' + input.type.name + '-' + input.name
-            }
-            return this.getComponent(input)
-        },
+      return (
+          typeof object[keysArray[0]] !== 'undefined' &&
+          object[keysArray[0]] !== null
+      );
+    },
+    getRefs(input) {
+      return input.type
+    },
+    getComponentName(input) {
+      if (typeof input.type === 'object') {
+        return 'formBuilder-' + input.type.name + '-' + input.name
+      }
+      return this.getComponent(input)
+    },
 
     getComponent(input) {
       if (typeof input.type === 'object') {
