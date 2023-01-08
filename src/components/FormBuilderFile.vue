@@ -63,7 +63,7 @@ export default {
         },
         value: {
             default: '',
-            type: [String, File],
+            type: [String, Object],
         },
     },
     data() {
@@ -162,7 +162,7 @@ export default {
             }
         },
         isFile(file) {
-            return file instanceof File && typeof file.type === 'string';
+            return typeof File !== 'undefined' && file instanceof File && typeof file.type === 'string'
         },
         isValidURL(str) {
             if (!str || typeof str !== 'string' || this.isFile(str)) {
