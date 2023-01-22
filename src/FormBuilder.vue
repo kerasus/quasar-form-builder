@@ -1,48 +1,51 @@
 <template>
-  <div class="row">
+  <div class="row" :class="['q-col-gutter-' + gutterSize]">
     <div
-      v-for="(input, inputIndex) in inputData"
-      :key="inputIndex"
-      :class="[
+        v-for="(input, inputIndex) in inputData"
+        :key="inputIndex"
+        :class="[
         input.col ? input.col : 'col',
-        getComponent(input) !== 'form-builder'
-          ? 'q-pa-md'
-          : getComponent(input),
+        getComponentName(input),
         // eslint-disable-next-line vue/comma-dangle
-        getComponent(input) + '-col',
+        getComponentName(input) + '-col',
       ]"
     >
       <div v-if="showGeneratorButtons">
-        <q-btn size="xs" round color="primary" @click="edit(inputIndex)"
-          >edit</q-btn
+        <q-btn size="xs"
+               round
+               color="primary"
+               @click="edit(inputIndex)"
         >
+          edit
+        </q-btn>
         <q-btn
-          size="xs"
-          round
-          class="q-ml-xs"
-          color="red"
-          @click="remove(inputIndex)"
-          >x</q-btn
+            size="xs"
+            round
+            class="q-ml-xs"
+            color="red"
+            @click="remove(inputIndex)"
         >
+          x
+        </q-btn>
       </div>
-
       <component
-        :is="getComponent(input)"
-        v-model:value="input.value"
-        v-bind="input"
-        :disable="disable"
-        :readonly="readonly"
-        @update:value="onValueUpdated"
-        @input="change($event, inputIndex)"
-        @change="change($event, inputIndex)"
-        @onClick="onClick($event, input)"
+          :is="getComponent(input)"
+          :ref="'formBuilder'+input.type"
+          v-model:value="input.value"
+          :loading="loading"
+          v-bind="input"
+          @update:value="onValueUpdated"
+          @input="change($event, inputIndex)"
+          @change="change($event, inputIndex)"
+          @onClick="onClick($event, input)"
+          @onKeyPress="onKeyPress($event)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+import {defineAsyncComponent} from 'vue';
 import inputMixin from './mixins/inputMixin';
 
 export default {
@@ -50,49 +53,49 @@ export default {
   components: {
     FormBuilder: defineAsyncComponent(() => import('./FormBuilder.vue')),
     FormBuilderFile: defineAsyncComponent(() =>
-      import('./components/FormBuilderFile')
+        import('./components/FormBuilderFile.vue')
     ),
     FormBuilderInput: defineAsyncComponent(() =>
-      import('./components/FormBuilderInput')
+        import('./components/FormBuilderInput.vue')
     ),
     FormBuilderInputEditor: defineAsyncComponent(() =>
-      import('./components/FormBuilderInputEditor')
+        import('./components/FormBuilderInputEditor.vue')
     ),
     FormBuilderTiptapEditor: defineAsyncComponent(() =>
-      import('./components/FormBuilderTiptapEditor')
+        import('./components/FormBuilderTiptapEditor.vue')
     ),
     FormBuilderAvatar: defineAsyncComponent(() =>
-      import('./components/FormBuilderAvatar')
+        import('./components/FormBuilderAvatar.vue')
     ),
     FormBuilderSelect: defineAsyncComponent(() =>
-      import('./components/FormBuilderSelect')
+        import('./components/FormBuilderSelect.vue')
     ),
     FormBuilderOptionGroup: defineAsyncComponent(() =>
-      import('./components/FormBuilderOptionGroup')
+        import('./components/FormBuilderOptionGroup.vue')
     ),
     FormBuilderCheckbox: defineAsyncComponent(() =>
-      import('./components/FormBuilderCheckbox')
+        import('./components/FormBuilderCheckbox.vue')
     ),
     FormBuilderSlider: defineAsyncComponent(() =>
-      import('./components/FormBuilderSlider')
+        import('./components/FormBuilderSlider.vue')
     ),
     FormBuilderRangeSlider: defineAsyncComponent(() =>
-      import('./components/FormBuilderRangeSlider')
+        import('./components/FormBuilderRangeSlider.vue')
     ),
     FormBuilderSpace: defineAsyncComponent(() =>
-      import('./components/FormBuilderSpace')
+        import('./components/FormBuilderSpace.vue')
     ),
     FormBuilderSeparator: defineAsyncComponent(() =>
-      import('./components/FormBuilderSeparator')
+        import('./components/FormBuilderSeparator.vue')
     ),
     FormBuilderDateTime: defineAsyncComponent(() =>
-      import('./components/FormBuilderDateTime')
+        import('./components/FormBuilderDateTime.vue')
     ),
     FormBuilderColor: defineAsyncComponent(() =>
-      import('./components/FormBuilderColor.vue')
+        import('./components/FormBuilderColor.vue')
     ),
     FormBuilderToggleButton: defineAsyncComponent(() =>
-      import('./components/FormBuilderToggleButton')
+        import('./components/FormBuilderToggleButton.vue')
     ),
   },
   mixins: [inputMixin],
@@ -100,6 +103,10 @@ export default {
     value: {
       default: () => [],
       type: Array,
+    },
+    gutterSize: {
+      default: 'md',
+      type: String
     },
     disable: {
       default: false,
@@ -109,8 +116,12 @@ export default {
       default: false,
       type: Boolean,
     },
+    loading: {
+      default: false,
+      type: Boolean,
+    }
   },
-  emits: ['input', 'onClick'],
+  emits: ['input', 'onClick', 'onKeyPress'],
   data() {
     return {
       currentInput: null,
@@ -131,7 +142,10 @@ export default {
       }
 
       const absEvent = getEvent(event);
-      this.$emit('onClick', { event: absEvent, input });
+      this.$emit('onClick', {event: absEvent, input});
+    },
+    onKeyPress(event) {
+      this.$emit('onKeyPress', event)
     },
     getFormData() {
       const formHasFileInput = this.formHasFileInput();
@@ -139,9 +153,9 @@ export default {
       const inputs = this.getValues();
       inputs.forEach((item) => {
         if (
-          item.disable ||
-          typeof item.value === 'undefined' ||
-          item.value === null
+            item.disable ||
+            typeof item.value === 'undefined' ||
+            item.value === null
         ) {
           return;
         }
@@ -185,11 +199,12 @@ export default {
 
     setInputValues(responseData, inputs) {
       const that = this;
+
       function setValueOfNestedInputData(responseData, inputs) {
         inputs.forEach((input) => {
           if (
-            typeof input.responseKey === 'undefined' ||
-            input.responseKey === null
+              typeof input.responseKey === 'undefined' ||
+              input.responseKey === null
           ) {
             return;
           }
@@ -198,8 +213,8 @@ export default {
             return;
           }
           const validChainedObject = that.getValidChainedObject(
-            responseData,
-            input.responseKey
+              responseData,
+              input.responseKey
           );
           input.value = validChainedObject;
         });
@@ -212,22 +227,19 @@ export default {
     },
     getInputsByName(name) {
       let inputs = this.getValues();
-      let founded = inputs.filter((input) => {
+      return inputs.filter((input) => {
         if (input.name === name) {
           return input;
         }
       });
-      console.log(founded);
-      return founded;
     },
     setInputByName(name, value) {
       let inputs = this.getValues();
-      let founded = inputs.find((input) => {
+      return inputs.find((input) => {
         if (input.name === name) {
           input.value = value;
         }
       });
-      return founded;
     },
     getValidChainedObject(object, keys) {
       if (!Array.isArray(keys) && typeof keys !== 'string') {
@@ -252,41 +264,50 @@ export default {
       }
 
       if (
-        typeof object[keysArray[0]] !== 'undefined' &&
-        object[keysArray[0]] !== null
+          typeof object[keysArray[0]] !== 'undefined' &&
+          object[keysArray[0]] !== null
       ) {
         return this.getValidChainedObject(
-          object[keysArray[0]],
-          keysArray.splice(1)
+            object[keysArray[0]],
+            keysArray.splice(1)
         );
       }
 
       return (
-        typeof object[keysArray[0]] !== 'undefined' &&
-        object[keysArray[0]] !== null
+          typeof object[keysArray[0]] !== 'undefined' &&
+          object[keysArray[0]] !== null
       );
+    },
+    getRefs(input) {
+      return input.type
+    },
+    getComponentName(input) {
+      if (typeof input.type === 'object') {
+        return 'formBuilder-' + input.type.name + '-' + input.name
+      }
+      return this.getComponent(input)
     },
 
     getComponent(input) {
       if (typeof input.type === 'object') {
-        return { ...input.type };
+        return input.type;
       }
       if (input.type === 'formBuilder') {
         return 'form-builder';
       }
       if (
-        input.type === 'optionGroupRadio' ||
-        input.type === 'optionGroupCheckbox' ||
-        input.type === 'optionGroupToggle'
+          input.type === 'optionGroupRadio' ||
+          input.type === 'optionGroupCheckbox' ||
+          input.type === 'optionGroupToggle'
       ) {
         return 'form-builder-option-group';
       }
       if (
-        input.type === 'dateMultipleRange' ||
-        input.type === 'dateRange' ||
-        input.type === 'date' ||
-        input.type === 'dateTime' ||
-        input.type === 'time'
+          input.type === 'dateMultipleRange' ||
+          input.type === 'dateRange' ||
+          input.type === 'date' ||
+          input.type === 'dateTime' ||
+          input.type === 'time'
       ) {
         return 'form-builder-date-time';
       }
@@ -320,9 +341,9 @@ export default {
     },
     change(event, inputIndex) {
       if (
-        typeof event.target !== 'undefined' &&
-        typeof event.target.files !== 'undefined' &&
-        event.target.files[0]
+          typeof event.target !== 'undefined' &&
+          typeof event.target.files !== 'undefined' &&
+          event.target.files[0]
       ) {
         this.inputData[inputIndex].value = event.target.files[0];
       } else {
@@ -342,8 +363,39 @@ export default {
     edit(i) {
       this.$emit('edit', i);
     },
+    clearFormBuilderInputValues() {
+      const inputs = this.getValues()
+      inputs.forEach(val => {
+        if (val.type === 'optionGroup')
+          val.value = []
+        else if (val.type === 'RangeSlider')
+          val.value.min = val.value.max = 0
+        else if (val.type === 'Checkbox')
+          val.value = false
+        else if (val.type === 'tiptapEditor')
+          this.$refs.formBuildertiptapEditor[0].setNewContent(' ')
+        else if (val.type.name === 'CustomComponent') {
+          if (val.type.methods.clearFormBuilderValue) val.type.methods.clearFormBuilderValue()
+        } else
+          delete val.value
+      })
+    },
+    disableAllInputs(newValue) {
+      this.getValues().forEach(input => {
+        input.disable = newValue
+      })
+    },
+    readonlyAllInputs(newValue) {
+      this.getValues().forEach(input => {
+        input.readonly = newValue
+      })
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/*.form-builder-hidden-col {*/
+/*  display: none;*/
+/*}*/
+</style>

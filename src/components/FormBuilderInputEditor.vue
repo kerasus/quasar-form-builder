@@ -5,6 +5,8 @@
     <q-editor
       v-if="!disable && !readonly"
       v-model="inputData"
+      :class="customClass"
+      :content-class="customClass"
       :name="name"
       :dense="$q.screen.lt.md"
       :toolbar="[
@@ -86,7 +88,7 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 
 export default {
   name: 'FormBuilderInputEditor',

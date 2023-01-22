@@ -11,6 +11,8 @@
       :max="max"
       :disable="disable"
       :readonly="readonly"
+      :class="customClass"
+      :marker-labels-class="customClass"
       @update:model-value="change($event)"
       @click="onClick"
     />
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 export default {
   name: 'FormBuilderRangeSlider',
   mixins: [inputMixin],

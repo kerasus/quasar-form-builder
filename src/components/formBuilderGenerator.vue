@@ -3,7 +3,8 @@
     <div class="title">Generated Form</div>
     <div v-show="jsonShow" class="q-ma-md">
       <div class="sub-title">Generated Json:</div>
-      <vue-json-pretty :data="inputs" />
+      {{JSON.stringify(inputs)}}
+      <!--      <vue-json-pretty :data="inputs"/>-->
     </div>
     <div v-show="gFormShow">
       <div class="sub-title q-pl-md">Generated Form:</div>
@@ -35,13 +36,16 @@
     <q-card-actions>
       <q-btn flat color="purple" @click="copyJson()">Copy JSON</q-btn>
       <q-btn flat color="primary" @click="jsonShow = !jsonShow"
-        >{{ jsonShow ? 'Hide' : 'Show' }} JSON</q-btn
+      >{{ jsonShow ? 'Hide' : 'Show' }} JSON
+      </q-btn
       >
       <q-btn flat color="secondary" @click="gFormShow = !gFormShow"
-        >{{ gFormShow ? 'Hide' : 'Show' }} Generated Form</q-btn
+      >{{ gFormShow ? 'Hide' : 'Show' }} Generated Form
+      </q-btn
       >
       <q-btn flat color="green" @click="setGetValue = !setGetValue"
-        >{{ setGetValue ? 'Hide' : 'Show' }} get/set value</q-btn
+      >{{ setGetValue ? 'Hide' : 'Show' }} get/set value
+      </q-btn
       >
     </q-card-actions>
   </q-card>
@@ -54,7 +58,8 @@
         size="12px"
         rounded
         @click="back()"
-        >back</q-btn
+      >back
+      </q-btn
       >
     </div>
     <q-card-section>
@@ -112,12 +117,13 @@
         </div>
         <q-btn @click="state = 'chooseType'">add new input</q-btn>
         <q-btn class="q-ml-md" @click="state = 'addJson'"
-          >import json to work on</q-btn
+        >import json to work on
+        </q-btn
         >
       </div>
       <div v-if="state === 'chooseType'" class="controls">
         <div>
-          generating new input: <br />
+          generating new input: <br/>
           selected input: {{ type?.value }}
           <q-select
             v-model="type"
@@ -130,7 +136,7 @@
         <div>
           demo for {{ type.value }}:
           <div class="generated-element">
-            <form-builder ref="formBuilder" v-model:value="newInput" />
+            <form-builder ref="formBuilder" v-model:value="newInput"/>
           </div>
           <div class="q-mt-md">configs to tweak:</div>
           <div v-for="c in selectedConfig.value" :key="c">
@@ -167,7 +173,7 @@
         </div>
       </div>
       <div v-if="state === 'addJson'">
-        here you can import your formbuilder json to work on it. <br />
+        here you can import your formbuilder json to work on it. <br/>
         Try to copy paste, not type in here.
         <q-input v-model="importJson"></q-input>
       </div>
@@ -176,13 +182,17 @@
 </template>
 
 <script>
-import FormBuilder from '../FormBuilder';
-import VueJsonPretty from 'vue-json-pretty';
-import CustomComponent from '../CustomComponent';
+import FormBuilder from '../FormBuilder.vue'
+// import VueJsonPretty from 'vue-json-pretty';
+import CustomComponent from '../CustomComponent.vue'
+// import 'vue-json-pretty/lib/styles.css';
 
-import 'vue-json-pretty/lib/styles.css';
 export default {
   name: 'FormBuilderGenerator',
+  components: {
+    FormBuilder,
+    // VueJsonPretty,
+  },
   data() {
     return {
       inputs: [],
@@ -200,10 +210,10 @@ export default {
         {
           type: 'input',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'text', value: 'col'},
             {
               type: 'select',
               value: 'inputType',
@@ -217,25 +227,25 @@ export default {
                 'url',
               ],
             },
-            { type: 'boolean', value: 'filled' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'boolean', value: 'rounded' },
+            {type: 'boolean', value: 'filled'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'boolean', value: 'outlined'},
+            {type: 'boolean', value: 'rounded'},
           ],
         },
         {
           type: 'select',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'boolean', value: 'filled' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'boolean', value: 'rounded' },
-            { type: 'boolean', value: 'multiple' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'useChips' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'boolean', value: 'filled'},
+            {type: 'boolean', value: 'outlined'},
+            {type: 'boolean', value: 'rounded'},
+            {type: 'boolean', value: 'multiple'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'boolean', value: 'useChips'},
+            {type: 'text', value: 'col'},
 
             {
               type: 'options',
@@ -246,48 +256,48 @@ export default {
         {
           type: 'checkbox',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'text', value: 'color' },
-            { type: 'text', value: 'trueValue' },
-            { type: 'text', value: 'falseValue' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'text', value: 'color'},
+            {type: 'text', value: 'trueValue'},
+            {type: 'text', value: 'falseValue'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'rangeSlider',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', inputType: 'number', value: 'min' },
-            { type: 'text', inputType: 'number', value: 'max' },
-            { type: 'text', value: 'col' },
-            { type: 'boolean', value: 'disable' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', inputType: 'number', value: 'min'},
+            {type: 'text', inputType: 'number', value: 'max'},
+            {type: 'text', value: 'col'},
+            {type: 'boolean', value: 'disable'},
           ],
         },
         {
           type: 'slider',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', inputType: 'number', value: 'min' },
-            { type: 'text', inputType: 'number', value: 'max' },
-            { type: 'text', value: 'col' },
-            { type: 'boolean', value: 'disable' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', inputType: 'number', value: 'min'},
+            {type: 'text', inputType: 'number', value: 'max'},
+            {type: 'text', value: 'col'},
+            {type: 'boolean', value: 'disable'},
           ],
         },
         {
           type: 'color',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'boolean', value: 'rounded' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'boolean', value: 'outlined'},
+            {type: 'boolean', value: 'rounded'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
@@ -298,16 +308,16 @@ export default {
               value: 'type',
               options: ['date', 'time', 'dateTime'],
             },
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'text', value: 'calendarIcon' },
-            { type: 'text', value: 'clockIcon' },
-            { type: 'boolean', value: 'nowBtn' },
-            { type: 'boolean', value: 'todayBtn' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'boolean', value: 'outlined'},
+            {type: 'text', value: 'calendarIcon'},
+            {type: 'text', value: 'clockIcon'},
+            {type: 'boolean', value: 'nowBtn'},
+            {type: 'boolean', value: 'todayBtn'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
@@ -318,16 +328,16 @@ export default {
               value: 'type',
               options: ['date', 'time', 'dateTime'],
             },
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'text', value: 'calendarIcon' },
-            { type: 'text', value: 'clockIcon' },
-            { type: 'boolean', value: 'nowBtn' },
-            { type: 'boolean', value: 'todayBtn' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'boolean', value: 'outlined'},
+            {type: 'text', value: 'calendarIcon'},
+            {type: 'text', value: 'clockIcon'},
+            {type: 'boolean', value: 'nowBtn'},
+            {type: 'boolean', value: 'todayBtn'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
@@ -338,67 +348,67 @@ export default {
               value: 'type',
               options: ['date', 'time', 'dateTime'],
             },
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'text', value: 'calendarIcon' },
-            { type: 'text', value: 'clockIcon' },
-            { type: 'boolean', value: 'nowBtn' },
-            { type: 'boolean', value: 'todayBtn' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'boolean', value: 'outlined'},
+            {type: 'text', value: 'calendarIcon'},
+            {type: 'text', value: 'clockIcon'},
+            {type: 'boolean', value: 'nowBtn'},
+            {type: 'boolean', value: 'todayBtn'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'inputEditor',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'tiptapEditor',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'options' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'options'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'file',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'placeholder' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'placeholder'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'avatar',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'size' },
-            { type: 'text', value: 'fontSize' },
-            { type: 'text', value: 'color' },
-            { type: 'text', value: 'textColor' },
-            { type: 'text', value: 'src' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'size'},
+            {type: 'text', value: 'fontSize'},
+            {type: 'text', value: 'color'},
+            {type: 'text', value: 'textColor'},
+            {type: 'text', value: 'src'},
 
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'optionGroup',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'color' },
-            { type: 'boolean', value: 'inline' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'color'},
+            {type: 'boolean', value: 'inline'},
             {
               type: 'options',
               value: 'options',
@@ -408,83 +418,83 @@ export default {
               value: 'typeOfInput',
               options: ['radio', 'checkbox', 'toggle'],
             },
-            { type: 'boolean', value: 'disable' },
-            { type: 'text', value: 'col' },
+            {type: 'boolean', value: 'disable'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'separator',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'borderTopStyle' },
-            { type: 'text', value: 'borderLeftStyle' },
-            { type: 'boolean', value: 'inset' },
-            { type: 'boolean', value: 'darkMode' },
-            { type: 'boolean', value: 'vertical' },
-            { type: 'boolean', value: 'spaced' },
-            { type: 'text', value: 'size' },
-            { type: 'text', value: 'color' },
+            {type: 'text', value: 'name'},
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'borderTopStyle'},
+            {type: 'text', value: 'borderLeftStyle'},
+            {type: 'boolean', value: 'inset'},
+            {type: 'boolean', value: 'darkMode'},
+            {type: 'boolean', value: 'vertical'},
+            {type: 'boolean', value: 'spaced'},
+            {type: 'text', value: 'size'},
+            {type: 'text', value: 'color'},
             {
               type: 'select',
               value: 'separatorType',
               options: ['dashed', 'double', 'solid'],
             },
-            { type: 'text', value: 'borderSize' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'borderSize'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'space',
           value: [
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'label'},
+            {type: 'text', value: 'col'},
           ],
         },
         {
           type: 'toggleButton',
           value: [
-            { type: 'text', value: 'name' },
-            { type: 'options', value: 'options' },
-            { type: 'text', value: 'color' },
-            { type: 'text', value: 'type' },
-            { type: 'text', value: 'textColor' },
-            { type: 'text', value: 'toggleColor' },
-            { type: 'text', value: 'toggleTextColor' },
-            { type: 'text', value: 'size' },
-            { type: 'boolean', value: 'push' },
-            { type: 'boolean', value: 'glossy' },
-            { type: 'boolean', value: 'clearable' },
-            { type: 'boolean', value: 'inline' },
-            { type: 'boolean', value: 'dense' },
-            { type: 'boolean', value: 'disable' },
-            { type: 'boolean', value: 'unelevated' },
-            { type: 'boolean', value: 'flat' },
-            { type: 'boolean', value: 'outlined' },
-            { type: 'boolean', value: 'rounded' },
-            { type: 'boolean', value: 'ripple' },
-            { type: 'boolean', value: 'noCaps' },
-            { type: 'boolean', value: 'noWrap' },
-            { type: 'boolean', value: 'spread' },
-            { type: 'boolean', value: 'stack' },
-            { type: 'boolean', value: 'stretch' },
-            { type: 'text', value: 'col' },
+            {type: 'text', value: 'name'},
+            {type: 'options', value: 'options'},
+            {type: 'text', value: 'color'},
+            {type: 'text', value: 'type'},
+            {type: 'text', value: 'textColor'},
+            {type: 'text', value: 'toggleColor'},
+            {type: 'text', value: 'toggleTextColor'},
+            {type: 'text', value: 'size'},
+            {type: 'boolean', value: 'push'},
+            {type: 'boolean', value: 'glossy'},
+            {type: 'boolean', value: 'clearable'},
+            {type: 'boolean', value: 'inline'},
+            {type: 'boolean', value: 'dense'},
+            {type: 'boolean', value: 'disable'},
+            {type: 'boolean', value: 'unelevated'},
+            {type: 'boolean', value: 'flat'},
+            {type: 'boolean', value: 'outlined'},
+            {type: 'boolean', value: 'rounded'},
+            {type: 'boolean', value: 'ripple'},
+            {type: 'boolean', value: 'noCaps'},
+            {type: 'boolean', value: 'noWrap'},
+            {type: 'boolean', value: 'spread'},
+            {type: 'boolean', value: 'stack'},
+            {type: 'boolean', value: 'stretch'},
+            {type: 'text', value: 'col'},
           ],
         },
-        {
-          type: CustomComponent,
-          isCustomComponent: true,
-          value: [
-            { type: 'text', value: 'name' },
-            { type: 'text', value: 'label' },
-            { type: 'text', value: 'col' },
-            { type: 'text', value: 'value' },
-            {
-              type: 'options',
-              value: 'props',
-            },
-          ],
-        },
+        // {
+        //   type: CustomComponent,
+        //   isCustomComponent: true,
+        //   value: [
+        //     {type: 'text', value: 'name'},
+        //     {type: 'text', value: 'label'},
+        //     {type: 'text', value: 'col'},
+        //     {type: 'text', value: 'value'},
+        //     {
+        //       type: 'options',
+        //       value: 'props',
+        //     },
+        //   ],
+        // },
       ],
       optionLabel: '',
       optionValue: '',
@@ -498,6 +508,24 @@ export default {
       searchName: '',
       setValue: '',
     };
+  },
+  computed: {
+    searchOptions() {
+      return this.getValues()
+          .map((input) => {
+            return input.name;
+          })
+          .filter((i) => i !== undefined);
+    },
+  },
+  watch: {
+    importJson(n) {
+      this.inputs = eval(n);
+      alert('json imported successfully');
+      this.jsonShow = true;
+      this.gFormShow = true;
+      this.state = '';
+    },
   },
   methods: {
     newInputBuild() {
@@ -631,36 +659,14 @@ export default {
     },
     showConfigs() {
       return this.configs
-        .map((c) => {
-          if (typeof c.type === 'string') {
-            return c.type;
-          } else {
-            return c.type.name;
-          }
-        })
-        .filter((c) => c !== undefined);
-    },
-  },
-  components: {
-    FormBuilder,
-    VueJsonPretty,
-  },
-  watch: {
-    importJson(n) {
-      this.inputs = eval(n);
-      alert('json imported successfully');
-      this.jsonShow = true;
-      this.gFormShow = true;
-      this.state = '';
-    },
-  },
-  computed: {
-    searchOptions() {
-      return this.getValues()
-        .map((input) => {
-          return input.name;
-        })
-        .filter((i) => i !== undefined);
+          .map((c) => {
+            if (typeof c.type === 'string') {
+              return c.type;
+            } else {
+              return c.type.name;
+            }
+          })
+          .filter((c) => c !== undefined);
     },
   },
 };
@@ -671,25 +677,31 @@ export default {
   font-size: 18px;
   padding: 20px;
 }
+
 .sub-title {
   font-size: 16px;
 }
+
 .generated-element {
   margin: 20px;
   border: 1px dashed;
   border-radius: 8px;
 }
+
 .back-btn {
   font-size: 12px;
   margin: 10px;
 }
+
 .top {
   display: flex;
   justify-content: space-between;
 }
+
 .options-inputs {
   display: flex;
   justify-content: space-between;
+
   label {
     width: 100%;
     margin-right: 20px;

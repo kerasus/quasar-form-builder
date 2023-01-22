@@ -10,17 +10,21 @@
     :stack-label="!!placeholder"
     :type="inputType"
     :disable="disable"
+    :clearable="clearable"
+    :loading="loading"
     :readonly="readonly"
     :rounded="rounded"
     :outlined="outlined"
     :placeholder="placeholder"
+    :class="customClass" :input-class="customClass"
     @update:model-value="change($event)"
     @click="onClick"
+    @keypress="onKeyPress"
   />
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 export default {
   name: 'FormBuilderInput',
   mixins: [inputMixin],

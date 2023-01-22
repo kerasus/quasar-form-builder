@@ -6,6 +6,7 @@
     transition-hide="jump-up"
     :name="name"
     :filled="filled"
+    :behavior="behavior"
     :rounded="rounded"
     :outlined="outlined"
     :option-value="optionValue"
@@ -16,6 +17,7 @@
     :stack-label="!!placeholder"
     :placeholder="placeholderSetter"
     :rules="rules"
+    :icon="icon"
     :lazy-rules="lazyRules"
     :multiple="multiple"
     :use-chips="useChips"
@@ -23,8 +25,12 @@
     input-debounce="500"
     :disable="disable"
     :readonly="readonly"
+    :class="customClass"
+    :popup-content-class="customClass"
+    :input-class="customClass"
     emit-value
     :hide-dropdown-icon="hideDropdownIcon"
+    :dropdown-icon="dropdownIcon"
     map-options
     clearable
     @update:model-value="change($event)"
@@ -41,7 +47,7 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 export default {
   name: 'FormBuilderSelect',
   mixins: [inputMixin],
@@ -52,7 +58,7 @@ export default {
     },
     value: {
       default: () => [],
-      type: [Array, String, Number, Boolean],
+      type: [Array, Object, String, Number, Boolean],
     },
     options: {
       default: () => [],
@@ -69,6 +75,10 @@ export default {
     hideDropdownIcon: {
       default: false,
       type: Boolean,
+    },
+    dropdownIcon: {
+      default: 'arrow_drop_down',
+      type: String,
     },
     showNoOption: {
       default: true,
@@ -92,6 +102,30 @@ export default {
       model: null,
       filteredOptions: this.options,
     };
+  },
+  computed: {
+    placeholderSetter() {
+      if (this.inputData === null) {
+        return this.placeholder;
+      }
+      // in single select after setting value,
+      // v-model type changes to string
+      if (typeof this.inputData === 'string') {
+        return '';
+      }
+      // in the multiple scenario, inputData type changes to Array!
+      if (this.multiple) {
+        if (this.inputData.length === 0) {
+          return this.placeholder;
+        }
+        return '';
+      }
+      // be an object
+      if (Object.keys(this.inputData).length === 0) {
+        return this.placeholder;
+      }
+      return '';
+    },
   },
   methods: {
     filterFn(val, update) {
@@ -142,30 +176,6 @@ export default {
     },
     test() {
       this.inputData = [];
-    },
-  },
-  computed: {
-    placeholderSetter() {
-      if (this.inputData === null) {
-        return this.placeholder;
-      }
-      // in single select after setting value,
-      // v-model type changes to string
-      if (typeof this.inputData === 'string') {
-        return '';
-      }
-      // in the multiple scenario, inputData type changes to Array!
-      if (this.multiple) {
-        if (this.inputData.length == 0) {
-          return this.placeholder;
-        }
-        return '';
-      }
-      // be an object
-      if (Object.keys(this.inputData).length === 0) {
-        return this.placeholder;
-      }
-      return '';
     },
   },
 };

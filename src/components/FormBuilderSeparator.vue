@@ -7,7 +7,7 @@
       class="separator-default-style"
       :name="name"
       :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
-      :class="[vertical ? 'separator-vertical' : 'separator-horizontal']"
+      :class="[customClass ,[(vertical) ? 'separator-vertical' : 'separator-horizontal']]"
       :vertical="vertical"
       :inset="inset"
       :spaced="spaced"
@@ -18,16 +18,11 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 
 export default {
   name: 'FormBuilderSeparator',
   mixins: [inputMixin],
-  data() {
-    return {
-      colorTypes: ['#', 'rgb', 'rgba'],
-    };
-  },
   props: {
     name: {
       default: '',
@@ -88,20 +83,10 @@ export default {
       },
     },
   },
-  methods: {
-    getBorderStyle(type) {
-      let style = '';
-      if (
-        ((type === 'top' && !this.vertical) ||
-          (type === 'left' && this.vertical)) &&
-        this.separatorType &&
-        this.size
-      ) {
-        style =
-          this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor;
-      }
-      return style;
-    },
+  data() {
+    return {
+      colorTypes: ['#', 'rgb', 'rgba'],
+    };
   },
   computed: {
     borderTopStyle() {
@@ -119,6 +104,21 @@ export default {
         return this.color;
       }
       return 'var(--q-' + this.color + ')';
+    },
+  },
+  methods: {
+    getBorderStyle(type) {
+      let style = '';
+      if (
+        ((type === 'top' && !this.vertical) ||
+          (type === 'left' && this.vertical)) &&
+        this.separatorType &&
+        this.size
+      ) {
+        style =
+          this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor;
+      }
+      return style;
     },
   },
 };

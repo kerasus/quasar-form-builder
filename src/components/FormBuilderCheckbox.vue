@@ -8,6 +8,7 @@
       :true-value="trueValue"
       :false-value="falseValue"
       :disable="disable || readonly"
+      :class="customClass"
       @update:model-value="change($event)"
       @click="onClick"
     />
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 export default {
   name: 'FormBuilderCheckbox',
   mixins: [inputMixin],

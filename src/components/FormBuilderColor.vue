@@ -8,8 +8,11 @@
     :stack-label="!!placeholder"
     :outlined="outlined"
     :placeholder="placeholder"
+    :loading="loading"
+    :clearable="clearable"
     :rules="rules"
     :lazy-rules="lazyRules"
+    :class="customClass"
     @click="showing = true"
   >
     <template v-slot:append>
@@ -31,7 +34,7 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 export default {
   name: 'FormBuilderColor',
   mixins: [inputMixin],

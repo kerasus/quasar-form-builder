@@ -1,12 +1,11 @@
 <template>
-  {{ value }}
+  <div v-if="label" class="outsideLabel">{{ label }}</div>
   <q-btn-toggle
     v-model="inputData"
     :name="name"
     :push="push"
     :glossy="glossy"
     :options="options"
-    :clearable="clearable"
     :color="color"
     :inline="inline"
     :dense="dense"
@@ -27,14 +26,14 @@
     :spread="spread"
     :stack="stack"
     :stretch="stretch"
-    :class="col"
+    :class="{customClass, col}"
     @update:model-value="change($event)"
     @click="onClick"
   />
 </template>
 
 <script>
-import { inputMixin } from '../../index';
+import { inputMixin } from '../../index.js';
 export default {
   name: 'FormBuilderToggleButton',
   mixins: [inputMixin],
@@ -44,9 +43,7 @@ export default {
       type: String,
     },
     value: {
-      default: () => {
-        '';
-      },
+      default: '',
       type: [Object, String, Array, Number, Boolean],
     },
     toggleTextColor: {

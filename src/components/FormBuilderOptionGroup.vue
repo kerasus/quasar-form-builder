@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="label">
+    <div v-if="label" class="outsideLabel">
       {{ label }}
     </div>
     <q-option-group
@@ -12,6 +12,7 @@
       :dense="dense"
       :type="typeOfInput"
       :disable="disable || readonly"
+      :class="customClass"
       @update:model-value="change($event)"
       @click="onClick"
     />
@@ -19,7 +20,7 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin.js'
 export default {
   name: 'FormBuilderOptionGroup',
   mixins: [inputMixin],
