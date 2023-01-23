@@ -42,6 +42,8 @@
               name="table_view"
               :class="customClass" />
     </label>
+    <div v-if="caption"
+         class="caption text-grey-8">{{ caption }}</div>
   </div>
 </template>
 
@@ -60,6 +62,10 @@ export default {
     value: {
       default: '',
       type: [String, Object]
+    },
+    caption: {
+      default: null,
+      type: String
     }
   },
   data() {

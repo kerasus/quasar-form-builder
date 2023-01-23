@@ -151,15 +151,23 @@ export default {
           options: [
             {
               label: 'tab1',
-              value: '1'
+              value: '1',
+              icon: 'img:https://cdn.quasar.dev/logo-v2/svg/logo.svg',
+              caption: 'caption'
             },
             {
               label: 'tab2',
+              icon: 'img:https://cdn.quasar.dev/logo-v2/svg/logo.svg',
               value: '2'
             },
             {
               label: 'tab3',
+              caption: 'caption',
               value: '3'
+            },
+            {
+              label: 'tab4',
+              value: '4'
             }
           ],
           col: 'col-md-3',
@@ -463,6 +471,13 @@ export default {
           label: 'required picture',
           rules: [(val) => !!val || 'field is required'],
           lazyRules: true,
+          col: 'col-md-6'
+        },
+        {
+          type: 'file',
+          name: 'thumbnail',
+          label: 'required picture',
+          caption: 'with caption',
           col: 'col-md-6'
         },
         { type: 'color', name: 'url', label: 'color', col: 'col-md-6' },

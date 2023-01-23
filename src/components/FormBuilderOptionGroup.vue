@@ -14,7 +14,20 @@
                     :disable="disable || readonly"
                     :class="customClass"
                     @update:model-value="change($event)"
-                    @click="onClick" />
+                    @click="onClick">
+      <template v-slot:label="opt">
+        <q-icon v-if="opt.icon"
+                :name="opt.icon"
+                color="teal"
+                size="1.5em"
+                class="q-ml-sm" />
+        <span v-if="opt.label">{{ opt.label }}</span>
+        <div v-if="opt.caption"
+             class="caption text-grey-8">
+          {{ opt.caption }}
+        </div>
+      </template>
+    </q-option-group>
   </div>
 </template>
 
