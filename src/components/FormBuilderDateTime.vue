@@ -1,6 +1,7 @@
 <template>
   <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-  <div :key="rendrKey" class="dateTime-input">
+  <div :key="rendrKey"
+       class="dateTime-input">
     <q-input v-show="show('date')"
              v-model="dateTime.date"
              :name="name"
@@ -19,11 +20,14 @@
              :outlined="outlined"
              :class="customClass"
              :input-class="customClass"
-             @click="showDateMenu"
-    >
+             @click="showDateMenu">
       <template #prepend>
-        <q-icon :name="calendarIcon" class="cursor-pointer" :class="customClass">
-          <q-menu v-if="!readonly" v-model="showDate" :class="customClass">
+        <q-icon :name="calendarIcon"
+                class="cursor-pointer"
+                :class="customClass">
+          <q-menu v-if="!readonly"
+                  v-model="showDate"
+                  :class="customClass">
             <q-date v-model="dateTime.date"
                     :calendar="calendar"
                     mask="YYYY/MM/DD"
@@ -33,10 +37,12 @@
                     :title="title ? title : label"
                     :today-btn="todayBtn"
                     :class="customClass"
-                    @update:model-value="change($event)"
-            >
+                    @update:model-value="change($event)">
               <div class="row items-center justify-end">
-                <q-btn v-close-popup label="بستن" color="primary" flat/>
+                <q-btn v-close-popup
+                       label="بستن"
+                       color="primary"
+                       flat />
               </div>
             </q-date>
           </q-menu>
@@ -60,31 +66,35 @@
              :outlined="outlined"
              :class="customClass"
              :input-class="customClass"
-             @click="showTimeMenu"
-    >
+             @click="showTimeMenu">
       <template #append>
-        <q-menu v-if="!readonly" v-model="showTime" :class="customClass">
+        <q-menu v-if="!readonly"
+                v-model="showTime"
+                :class="customClass">
           <q-time v-model="dateTime.time"
                   mask="HH:mm:00"
                   format24h
                   :disable="disable"
                   :title="title ? title : label"
                   :now-btn="nowBtn"
-                  :class="customClass"
-          >
+                  :class="customClass">
             <div class="row items-center justify-end">
-              <q-btn v-close-popup label="بستن" color="primary" flat/>
+              <q-btn v-close-popup
+                     label="بستن"
+                     color="primary"
+                     flat />
             </div>
           </q-time>
         </q-menu>
-        <q-icon :name="clockIcon" class="cursor-pointer"></q-icon>
+        <q-icon :name="clockIcon"
+                class="cursor-pointer" />
       </template>
     </q-input>
   </div>
 </template>
 
 <script>
-import moment from 'moment-jalaali';
+import moment from 'moment-jalaali'
 import inputMixin from '../mixins/inputMixin.js'
 // NOTE: Value accepted from this component is based on Miladi format
 // you should pass to it Miladi date as string
@@ -99,51 +109,51 @@ export default {
   props: {
     name: {
       default: '',
-      type: String,
+      type: String
     },
     calendar: {
       default: 'persian',
-      type: String,
+      type: String
     },
     calendarIcon: {
       default: 'event',
-      type: String,
+      type: String
     },
     clockIcon: {
       default: 'access_time',
-      type: String,
+      type: String
     },
     title: {
       default: '',
-      type: String,
+      type: String
     },
     placeholder: {
       default: '',
-      type: String,
+      type: String
     },
     value: {
       default: '',
-      type: String,
+      type: String
     },
     nowBtn: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     todayBtn: {
       default: false,
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   data() {
     return {
       dateTime: {
         date: '',
-        time: '',
+        time: ''
       },
       rendrKey: Date.now(),
       showDate: false,
-      showTime: false,
-    };
+      showTime: false
+    }
   },
   watch: {
     inputData(newValue) {
@@ -154,21 +164,21 @@ export default {
         const newDate = newValue.date
         const newTime = newValue.time
         if (this.type === 'dateTime' && this.isValidShamsiDate(newDate) && this.isValidShamsiTime(newTime)) {
-          this.inputData = this.shamsiToMiladiDate(newDate) + ' ' + this.getMiladiTime(newTime);
-          this.change(this.inputData);
+          this.inputData = this.shamsiToMiladiDate(newDate) + ' ' + this.getMiladiTime(newTime)
+          this.change(this.inputData)
         } else if (this.type === 'date' && this.isValidShamsiDate(newDate)) {
-          this.inputData = this.shamsiToMiladiDate(newDate);
-          this.change(this.inputData);
+          this.inputData = this.shamsiToMiladiDate(newDate)
+          this.change(this.inputData)
         } else if (this.type === 'time' && this.isValidShamsiTime(newTime)) {
-          this.inputData = this.formatTime(newTime);
-          this.change(this.inputData);
+          this.inputData = this.formatTime(newTime)
+          this.change(this.inputData)
         }
       },
-      deep: true,
+      deep: true
     },
     value(newValue) {
       this.updateDateTime(newValue)
-    },
+    }
   },
   methods: {
     updateDateTime(newMiladi) {
@@ -187,18 +197,18 @@ export default {
         if (!this.isValidMiladiDate(miladiData) || !this.isValidMiladiTime(time)) {
           return
         }
-        this.dateTime.date = this.miladiToShamsiDate(miladiData);
-        this.dateTime.time = this.getShamsiTime(time);
+        this.dateTime.date = this.miladiToShamsiDate(miladiData)
+        this.dateTime.time = this.getShamsiTime(time)
       } else if (this.type === 'time') {
         if (!this.isValidMiladiTime(newMiladi)) {
           return
         }
-        this.dateTime.time = newMiladi;
+        this.dateTime.time = newMiladi
       } else if (this.type === 'date') {
         if (!this.isValidMiladiDate(newMiladi)) {
           return
         }
-        this.dateTime.date = this.miladiToShamsiDate(newMiladi);
+        this.dateTime.date = this.miladiToShamsiDate(newMiladi)
       }
 
       this.rendrKey = Date.now()
@@ -220,31 +230,31 @@ export default {
       return (/[0,1,2]{0,1}[0-9]:[0-5]{0,1}[0-9]/gm).test(time)
     },
     showDateMenu() {
-      this.showDate = true;
+      this.showDate = true
     },
     showTimeMenu() {
-      this.showTime = true;
+      this.showTime = true
     },
     show(t) {
-      return this.type === 'dateTime' || this.type === t;
+      return this.type === 'dateTime' || this.type === t
     },
     shamsiToMiladiDate(date) {
-      return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
+      return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
     },
     miladiToShamsiDate(date) {
-      return moment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD');
+      return moment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
     },
     formatTime(time) {
-      return moment(time, 'HH:mm').format('HH:mm:00');
+      return moment(time, 'HH:mm').format('HH:mm:00')
     },
     getShamsiTime(time) {
-      return moment(time, 'HH:mm:ss').format('HH:mm');
+      return moment(time, 'HH:mm:ss').format('HH:mm')
     },
     getMiladiTime(time) {
-      return moment(time, 'HH:mm').format('HH:mm:00');
-    },
-  },
-};
+      return moment(time, 'HH:mm').format('HH:mm:00')
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

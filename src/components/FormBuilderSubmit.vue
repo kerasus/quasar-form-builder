@@ -63,7 +63,10 @@ export default {
     },
     align: {
       default: undefined,
-      type: ['left' | 'right' | 'center' | 'around' | 'between' | 'evenly' | undefined]
+      type: String,
+      validator(value) {
+        return ['left' | 'right' | 'center' | 'around' | 'between' | 'evenly' | undefined].includes(value)
+      }
     },
     dense: {
       default: false,

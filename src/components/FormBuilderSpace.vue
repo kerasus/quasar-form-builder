@@ -3,7 +3,7 @@
     <b v-if="label">
       {{ label }}
     </b>
-    <hr />
+    <hr>
   </div>
 </template>
 

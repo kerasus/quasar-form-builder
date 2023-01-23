@@ -27,7 +27,7 @@
   ],
   "homepage": "https://github.com/kerasus/quasar-form-builder",
   "scripts": {
-    "lint": "vue-cli-service lint --fix",
+    "lint": "eslint --fix --ext .js,.vue ./",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"

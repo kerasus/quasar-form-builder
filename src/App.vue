@@ -630,12 +630,15 @@ export default {
   },
   methods: {
     onClick(data) {
+      // eslint-disable-next-line
       console.log('data', data)
     },
     onKePress(data) {
+      // eslint-disable-next-line
       console.log('key press', data)
     },
     getData() {
+      // eslint-disable-next-line
       console.log('flat values: ', this.$refs.formBuilder.getValues())
     },
     myRule(val) {

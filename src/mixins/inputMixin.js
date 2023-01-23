@@ -14,7 +14,7 @@ export default {
     },
     readonly: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     filled: {
       default: false,
@@ -135,7 +135,7 @@ export default {
       default: () => [],
       type: [Array]
     },
-    lazyRules:{
+    lazyRules: {
       default: false,
       type: [Boolean]
     },
@@ -151,11 +151,11 @@ export default {
       default: 'text',
       type: String
     },
-    clearable:{
+    clearable: {
       default: false,
       type: Boolean
     },
-    loading:{
+    loading: {
       default: false,
       type: Boolean
     }
@@ -192,19 +192,19 @@ export default {
     getValues () {
       function getFlatInputs (inputs) {
         let values = []
-        inputs.forEach( input => {
+        inputs.forEach(input => {
           if (input.type !== 'formBuilder') {
             values.push(input)
           } else {
             const formBuilderInputs = getFlatInputs(input.value)
-            values = values.concat(formBuilderInputs);
+            values = values.concat(formBuilderInputs)
           }
         })
         return values
       }
 
       return getFlatInputs(this.inputData)
-    },
+    }
 
   }
 }

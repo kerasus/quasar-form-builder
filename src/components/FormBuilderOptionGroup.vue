@@ -1,21 +1,20 @@
 <template>
   <div>
-    <div v-if="label" class="outsideLabel">
+    <div v-if="label"
+         class="outsideLabel">
       {{ label }}
     </div>
-    <q-option-group
-      v-model="inputData"
-      :name="name"
-      :options="options"
-      :color="color"
-      :inline="inline"
-      :dense="dense"
-      :type="typeOfInput"
-      :disable="disable || readonly"
-      :class="customClass"
-      @update:model-value="change($event)"
-      @click="onClick"
-    />
+    <q-option-group v-model="inputData"
+                    :name="name"
+                    :options="options"
+                    :color="color"
+                    :inline="inline"
+                    :dense="dense"
+                    :type="typeOfInput"
+                    :disable="disable || readonly"
+                    :class="customClass"
+                    @update:model-value="change($event)"
+                    @click="onClick" />
   </div>
 </template>
 
@@ -27,24 +26,24 @@ export default {
   props: {
     name: {
       default: '',
-      type: String,
+      type: String
     },
     value: {
       default: null,
-      type: [Object, String, Array, Number, Boolean],
+      type: [Object, String, Array, Number, Boolean]
     },
     options: {
       default: () => [], // { label: 'Option 1', value: 'op1' }
-      type: Array,
+      type: Array
     },
     typeOfInput: {
       default: 'radio', // radio checkbox toggle
-      type: String,
-    },
+      type: String
+    }
   },
   created() {},
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style scoped></style>

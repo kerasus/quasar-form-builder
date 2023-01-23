@@ -3,17 +3,15 @@
     <b v-if="label">
       {{ label }}
     </b>
-    <q-separator
-      class="separator-default-style"
-      :name="name"
-      :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
-      :class="[customClass ,[(vertical) ? 'separator-vertical' : 'separator-horizontal']]"
-      :vertical="vertical"
-      :inset="inset"
-      :spaced="spaced"
-      :size="size"
-      :dark="darkMode"
-    />
+    <q-separator class="separator-default-style"
+                 :name="name"
+                 :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
+                 :class="[customClass ,[(vertical) ? 'separator-vertical' : 'separator-horizontal']]"
+                 :vertical="vertical"
+                 :inset="inset"
+                 :spaced="spaced"
+                 :size="size"
+                 :dark="darkMode" />
   </div>
 </template>
 
@@ -26,74 +24,74 @@ export default {
   props: {
     name: {
       default: '',
-      type: String,
+      type: String
     },
     color: {
       type: String,
       default() {
-        return 'dark';
-      },
+        return 'dark'
+      }
     },
     size: {
       type: String,
       default() {
-        return '1px';
-      },
+        return '1px'
+      }
     },
     darkMode: {
       type: Boolean,
       default() {
-        return false;
-      },
+        return false
+      }
     },
     vertical: {
       type: Boolean,
       default() {
-        return false;
-      },
+        return false
+      }
     },
     label: {
       type: String,
       default() {
-        return '';
-      },
+        return ''
+      }
     },
     spaced: {
       type: [String, Boolean],
       default() {
-        return false;
-      },
+        return false
+      }
     },
     separatorType: {
       type: String,
       default() {
-        return 'solid';
-      },
+        return 'solid'
+      }
     },
     borderSize: {
       type: String,
       default() {
-        return '';
-      },
+        return ''
+      }
     },
     inset: {
       type: [String, Boolean],
       default() {
-        return false;
-      },
-    },
+        return false
+      }
+    }
   },
   data() {
     return {
-      colorTypes: ['#', 'rgb', 'rgba'],
-    };
+      colorTypes: ['#', 'rgb', 'rgba']
+    }
   },
   computed: {
     borderTopStyle() {
-      return this.getBorderStyle('top');
+      return this.getBorderStyle('top')
     },
     borderLeftStyle() {
-      return this.getBorderStyle('left');
+      return this.getBorderStyle('left')
     },
     getSeparatorColor() {
       if (
@@ -101,14 +99,14 @@ export default {
           .map((item) => this.color.includes(item))
           .filter((item) => !!item).length > 0
       ) {
-        return this.color;
+        return this.color
       }
-      return 'var(--q-' + this.color + ')';
-    },
+      return 'var(--q-' + this.color + ')'
+    }
   },
   methods: {
     getBorderStyle(type) {
-      let style = '';
+      let style = ''
       if (
         ((type === 'top' && !this.vertical) ||
           (type === 'left' && this.vertical)) &&
@@ -116,12 +114,12 @@ export default {
         this.size
       ) {
         style =
-          this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor;
+          this.size + ' ' + this.separatorType + ' ' + this.getSeparatorColor
       }
-      return style;
-    },
-  },
-};
+      return style
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

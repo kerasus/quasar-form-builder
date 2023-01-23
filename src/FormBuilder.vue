@@ -235,6 +235,7 @@ export default {
     },
     getValidChainedObject(object, keys) {
       if (!Array.isArray(keys) && typeof keys !== 'string') {
+        // eslint-disable-next-line
         console.warn('keys must be array or string')
         return false
       }
