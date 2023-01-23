@@ -27,74 +27,33 @@
   ],
   "homepage": "https://github.com/kerasus/quasar-form-builder",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint --fix"
+    "lint": "vue-cli-service lint --fix",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.10",
     "core-js": "^3.27.2",
     "moment-jalaali": "^0.9.6",
     "quasar": "^2.11.5",
-    "vue": "^3.2.45",
-    "vue3-tiptap-katex": "^1.0.49"
+    "vue": "^3.2.45"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.19.1",
-    "@vue/cli-plugin-babel": "~5.0.8",
-    "@vue/cli-plugin-eslint": "~5.0.8",
-    "@vue/cli-service": "^4.0.5",
-    "@vue/compiler-sfc": "^3.2.45",
-    "autoprefixer": "10.4.7",
-    "babel-eslint": "^10.1.0",
-    "compressorjs": "^1.1.1",
-    "eslint": "^8.18.0",
-    "eslint-plugin-vue": "^9.1.1",
-    "node-sass": "^7.0.1",
-    "postcss": "^8.4.20",
-    "postcss-rtl": "^2.0.0",
-    "sass": "1.56.1",
-    "sass-graph": "^4.0.1",
-    "sass-loader": "^13.2.0",
-    "scss-tokenizer": "0.4.3",
-    "uuid": "^3.4.0",
-    "vue-cli-plugin-quasar": "~5.0.1"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {
-      "vue/attributes-order": "error",
-      "vue/order-in-components": "error",
-      "vue/html-indent": "error",
-      "vue/this-in-template": "error",
-      "vue/arrow-spacing": "error",
-      "vue/block-spacing": "error",
-      "vue/comma-dangle": "error",
-      "vue/eqeqeq": "warn",
-      "vue/multi-word-component-names": "off",
-      "vue/key-spacing": "error",
-      "vue/keyword-spacing": "error",
-      "vue/no-deprecated-scope-attribute": "warn",
-      "vue/no-deprecated-slot-attribute": "warn",
-      "vue/no-deprecated-slot-scope-attribute": "warn",
-      "vue/no-irregular-whitespace": "error",
-      "vue/no-reserved-component-names": "error",
-      "vue/valid-v-slot": "error",
-      "quotes": [
-        2,
-        "single"
-      ]
-    }
+    "@intlify/vite-plugin-vue-i18n": "^7.0.0",
+    "@quasar/app-vite": "^1.2.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "8.22.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.9.0",
+    "postcss": "^8.4.21",
+    "postcss-rtlcss": "^4.0.1",
+    "vite": "^4.0.4",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "vite-plugin-eslint": "^1.8.1"
   },
   "browserslist": [
     "> 1%",

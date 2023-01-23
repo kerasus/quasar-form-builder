@@ -24,8 +24,7 @@
          :class="customClass"
          :input-class="customClass"
          @click="onClick"
-         @keypress="onKeyPress"
-  />
+         @keypress="onKeyPress" />
 </template>
 
 <script>
@@ -36,84 +35,84 @@ export default {
   props: {
     name: {
       default: '',
-      type: String,
+      type: String
     },
     size: {
       default: '',
-      type: String,
+      type: String
     },
     padding: {
       default: '',
-      type: String,
+      type: String
     },
     color: {
       default: 'primary',
-      type: String,
+      type: String
     },
     textColor: {
-      default: 'primary',
-      type: String,
+      default: undefined,
+      type: String
     },
     icon: {
       default: '',
-      type: String,
+      type: String
     },
     iconRight: {
       default: '',
-      type: String,
+      type: String
     },
     align: {
       default: undefined,
-      type: ['left' | 'right' | 'center' | 'around' | 'between' | 'evenly' | undefined],
+      type: ['left' | 'right' | 'center' | 'around' | 'between' | 'evenly' | undefined]
     },
     dense: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     outline: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     flat: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     unelevated: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     rounded: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     push: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     square: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     glossy: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     noWrap: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     stack: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     stretch: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     percentage: {
       default: 0,
-      type: Number,
-    },
-  },
-};
+      type: Number
+    }
+  }
+}
 </script>
