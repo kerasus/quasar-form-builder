@@ -30,19 +30,15 @@
 <script>
 import inputMixin from '../mixins/inputMixin.js'
 export default {
-  name: 'FormBuilderSubmit',
+  name: 'FormBuilderButton',
   mixins: [inputMixin],
   props: {
-    name: {
-      default: '',
-      type: String
-    },
     size: {
-      default: '',
+      default: undefined,
       type: String
     },
     padding: {
-      default: '',
+      default: undefined,
       type: String
     },
     color: {
@@ -54,11 +50,11 @@ export default {
       type: String
     },
     icon: {
-      default: '',
+      default: undefined,
       type: String
     },
     iconRight: {
-      default: '',
+      default: undefined,
       type: String
     },
     align: {
