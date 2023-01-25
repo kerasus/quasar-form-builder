@@ -98,8 +98,8 @@ export default {
     FormBuilderToggleButton: defineAsyncComponent(() =>
       import('./components/FormBuilderToggleButton.vue')
     ),
-    FormBuilderSubmit: defineAsyncComponent(() =>
-      import('./components/FormBuilderSubmit.vue')
+    FormBuilderButton: defineAsyncComponent(() =>
+      import('./components/FormBuilderButton.vue')
     )
   },
   mixins: [inputMixin],
