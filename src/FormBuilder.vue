@@ -1,6 +1,6 @@
 <template>
   <div class="row"
-       :class="['q-col-gutter-' + gutterSize]">
+       :class="['q-col-gutter-' + gutterSize, customClass]">
     <div v-for="(input, inputIndex) in inputData"
          :key="inputIndex"
          :class="[
