@@ -33,7 +33,14 @@
                  @input="change($event, inputIndex)"
                  @change="change($event, inputIndex)"
                  @onClick="onClick($event, input)"
-                 @onKeyPress="onKeyPress($event)" />
+                 @onKeyPress="onKeyPress($event)">
+        <!--        <template v-for="(_, name) in $slots" #[name]="slotProps">-->
+        <template v-for="name in getComponentSlots(input)"
+                  #[name]="slotProps">
+          <slot :name="name"
+                v-bind="slotProps || {}" />
+        </template>
+      </component>
     </div>
   </div>
 </template>
@@ -91,8 +98,8 @@ export default {
     FormBuilderToggleButton: defineAsyncComponent(() =>
       import('./components/FormBuilderToggleButton.vue')
     ),
-    FormBuilderButton: defineAsyncComponent(() =>
-      import('./components/FormBuilderButton.vue')
+    FormBuilderSubmit: defineAsyncComponent(() =>
+      import('./components/FormBuilderSubmit.vue')
     )
   },
   mixins: [inputMixin],
@@ -193,7 +200,6 @@ export default {
         this.createChainedObject(formData[keysArray[0]], newKeysArray, value)
       }
     },
-
     setInputValues(responseData, inputs) {
       const that = this
 
@@ -274,15 +280,12 @@ export default {
     getRefs(input) {
       return input.type
     },
-    getComponentName(input) {
-      if (typeof input.type === 'object') {
-        return 'formBuilder-' + input.type.name + '-' + input.name
-      }
-      return this.getComponent(input)
-    },
-
     getComponent(input) {
       if (typeof input.type === 'object') {
+        // console.log('input.type', input.type)
+        // console.log('input.type.setup()', input.type.setup())
+        // console.log('input.type.data()', input.type.data())
+        // console.log('input.type.computed.slots()', input.type.computed.slots())
         return input.type
       }
       if (input.type === 'formBuilder') {
@@ -307,6 +310,20 @@ export default {
         return 'form-builder-toggle-button'
       }
       return 'form-builder-' + input.type
+    },
+    getComponentName(input) {
+      if (typeof input.type === 'object') {
+        return 'formBuilder-' + input.type.name + '-' + input.name
+      }
+      return this.getComponent(input)
+    },
+    getComponentSlots (input) {
+      const slots = []
+      if (typeof input.type !== 'object') {
+        return slots
+      }
+
+      return (input.type?.data()?.slots && Array.isArray(input.type?.data()?.slots)) ? input.type?.data()?.slots : []
     },
     getOptionGroupType(input) {
       if (input.type === 'optionGroupRadio') {
@@ -386,9 +403,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-/*.form-builder-hidden-col {*/
-/*  display: none;*/
-/*}*/
-</style>
