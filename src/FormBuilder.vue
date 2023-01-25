@@ -323,7 +323,8 @@ export default {
         return slots
       }
 
-      return (input.type?.data()?.slots && Array.isArray(input.type?.data()?.slots)) ? input.type?.data()?.slots : []
+      const data = (typeof input.type?.data === 'function') ? input.type?.data() : input.type?.data
+      return data ? Array.isArray(data.slots) ? data.slots : [] : []
     },
     getOptionGroupType(input) {
       if (input.type === 'optionGroupRadio') {
