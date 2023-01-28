@@ -17,6 +17,7 @@
            :placeholder="placeholder"
            :class="customClass"
            :input-class="customClass"
+           :autogrow="autogrow"
            @update:model-value="change($event)"
            @click="onClick"
            @keypress="onKeyPress" />

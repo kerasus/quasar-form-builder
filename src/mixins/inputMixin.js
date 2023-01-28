@@ -4,6 +4,10 @@ export default {
       default: '',
       type: String
     },
+    autogrow: {
+      default: Boolean,
+      type: false
+    },
     label: {
       default: '',
       type: String
