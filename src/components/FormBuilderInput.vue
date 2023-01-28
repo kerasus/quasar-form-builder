@@ -24,21 +24,21 @@
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin';
+import inputMixin from '../mixins/inputMixin'
 export default {
   name: 'FormBuilderInput',
   mixins: [inputMixin],
   props: {
     name: {
       default: '',
-      type: String,
+      type: String
     },
     value: {
       default: '',
-      type: [String, Number, Boolean],
-    },
-  },
-};
+      type: [String, Number, Boolean]
+    }
+  }
+}
 </script>
 
 <style scoped></style>
