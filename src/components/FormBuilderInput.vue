@@ -33,6 +33,10 @@ export default {
       default: '',
       type: String
     },
+    autogrow: {
+      type: Boolean,
+      default: false
+    },
     value: {
       default: '',
       type: [String, Number, Boolean]
