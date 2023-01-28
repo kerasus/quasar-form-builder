@@ -4,6 +4,10 @@ export default {
       default: '',
       type: String
     },
+    autogrow: {
+      default: Boolean,
+      type: false
+    },
     label: {
       default: '',
       type: String
@@ -14,7 +18,7 @@ export default {
     },
     readonly: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     filled: {
       default: false,
