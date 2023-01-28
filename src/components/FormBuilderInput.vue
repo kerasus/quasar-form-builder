@@ -17,27 +17,28 @@
            :placeholder="placeholder"
            :class="customClass"
            :input-class="customClass"
+           :autogrow="autogrow"
            @update:model-value="change($event)"
            @click="onClick"
            @keypress="onKeyPress" />
 </template>
 
 <script>
-import inputMixin from '../mixins/inputMixin.js'
+import inputMixin from '../mixins/inputMixin';
 export default {
   name: 'FormBuilderInput',
   mixins: [inputMixin],
   props: {
     name: {
       default: '',
-      type: String
+      type: String,
     },
     value: {
       default: '',
-      type: [String, Number, Boolean]
-    }
-  }
-}
+      type: [String, Number, Boolean],
+    },
+  },
+};
 </script>
 
 <style scoped></style>
