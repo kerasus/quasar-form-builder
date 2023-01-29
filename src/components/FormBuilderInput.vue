@@ -17,6 +17,7 @@
            :placeholder="placeholder"
            :class="customClass"
            :input-class="customClass"
+           :autogrow="autogrow"
            @update:model-value="change($event)"
            @click="onClick"
            @keypress="onKeyPress" />
@@ -31,6 +32,10 @@ export default {
     name: {
       default: '',
       type: String
+    },
+    autogrow: {
+      type: Boolean,
+      default: false
     },
     value: {
       default: '',
