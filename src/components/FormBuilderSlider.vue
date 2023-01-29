@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="form-builder-slider"
+       :class="customClass">
     <div>{{ label }}: {{ inputData }} ({{ min }} تا {{ max }})</div>
     <q-slider v-model="inputData"
               :name="name"

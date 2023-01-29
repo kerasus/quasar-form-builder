@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="form-builder-checkbox"
+       :class="customClass">
     <q-checkbox v-model="inputData"
                 :name="name"
                 :color="color"

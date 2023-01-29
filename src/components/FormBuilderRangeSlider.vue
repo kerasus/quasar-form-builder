@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="form-builder-rangeSlider"
+       :class="customClass">
     <q-badge color="secondary">
       {{ label }}: از {{ inputData.min }} تا {{ inputData.max }} ({{ min }} تا
       {{ max }})

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="form-builder-vueTiptaKatex"
+       :class="customClass">
     <p v-text="label" />
     <!--    <vue-tiptap-katex-->
     <!--      v-if="!disable && !readonly"-->

@@ -1,34 +1,37 @@
 <template>
-  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-  <q-input v-model="inputData"
-           :name="name"
-           :disable="disable"
-           :label="placeholder ? null : label"
-           :stack-label="!!placeholder"
-           :outlined="outlined"
-           :placeholder="placeholder"
-           :loading="loading"
-           :clearable="clearable"
-           :rules="rules"
-           :lazy-rules="lazyRules"
-           :class="customClass"
-           @click="showing = true">
-    <template v-slot:append>
-      <q-icon name="colorize"
-              class="cursor-pointer">
-        <q-menu v-if="!readonly"
-                v-model="showing">
-          <q-color v-model="inputData"
-                   square
-                   flat
-                   default-value="#4b9c70ff"
-                   :palette="palette"
-                   @update:model-value="change($event)"
-                   @click="onClick" />
-        </q-menu>
-      </q-icon>
-    </template>
-  </q-input>
+  <div class="form-builder-color"
+       :class="customClass">
+    <div class="outsideLabel">{{ placeholder ? label : null }}</div>
+    <q-input v-model="inputData"
+             :name="name"
+             :disable="disable"
+             :label="placeholder ? null : label"
+             :stack-label="!!placeholder"
+             :outlined="outlined"
+             :placeholder="placeholder"
+             :loading="loading"
+             :clearable="clearable"
+             :rules="rules"
+             :lazy-rules="lazyRules"
+             :class="customClass"
+             @click="showing = true">
+      <template v-slot:append>
+        <q-icon name="colorize"
+                class="cursor-pointer">
+          <q-menu v-if="!readonly"
+                  v-model="showing">
+            <q-color v-model="inputData"
+                     square
+                     flat
+                     default-value="#4b9c70ff"
+                     :palette="palette"
+                     @update:model-value="change($event)"
+                     @click="onClick" />
+          </q-menu>
+        </q-icon>
+      </template>
+    </q-input>
+  </div>
 </template>
 
 <script>
