@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="form-builder-separator"
+       :class="customClass">
     <b v-if="label">
       {{ label }}
     </b>

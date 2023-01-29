@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/comma-dangle -->
 <template>
-  <div>
+  <div class="form-builder-editor"
+       :class="customClass">
     <p v-text="label" />
     <q-editor v-if="!disable && !readonly"
               v-model="inputData"

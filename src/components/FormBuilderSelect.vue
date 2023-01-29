@@ -1,47 +1,50 @@
 <template>
-  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-  <q-select v-model="inputData"
-            transition-show="jump-down"
-            transition-hide="jump-up"
-            :name="name"
-            :filled="filled"
-            :behavior="behavior"
-            :rounded="rounded"
-            :outlined="outlined"
-            :option-value="optionValue"
-            :option-label="optionLabel"
-            :option-disable="optionDisable"
-            :options="filteredOptions"
-            :label="placeholder ? null : label"
-            :stack-label="!!placeholder"
-            :placeholder="placeholderSetter"
-            :rules="rules"
-            :icon="icon"
-            :lazy-rules="lazyRules"
-            :multiple="multiple"
-            :use-chips="useChips"
-            use-input
-            input-debounce="500"
-            :disable="disable"
-            :readonly="readonly"
-            :class="customClass"
-            :popup-content-class="customClass"
-            :input-class="customClass"
-            emit-value
-            :hide-dropdown-icon="hideDropdownIcon"
-            :dropdown-icon="dropdownIcon"
-            map-options
-            clearable
-            @update:model-value="change($event)"
-            @new-value="createValue"
-            @filter="filterFn"
-            @click="onClick">
-    <template #no-option>
-      <q-item v-show="showNoOption">
-        <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
-      </q-item>
-    </template>
-  </q-select>
+  <div class="form-builder-select"
+       :class="customClass">
+    <div class="outsideLabel">{{ placeholder ? label : null }}</div>
+    <q-select v-model="inputData"
+              transition-show="jump-down"
+              transition-hide="jump-up"
+              :name="name"
+              :filled="filled"
+              :behavior="behavior"
+              :rounded="rounded"
+              :outlined="outlined"
+              :option-value="optionValue"
+              :option-label="optionLabel"
+              :option-disable="optionDisable"
+              :options="filteredOptions"
+              :label="placeholder ? null : label"
+              :stack-label="!!placeholder"
+              :placeholder="placeholderSetter"
+              :rules="rules"
+              :icon="icon"
+              :lazy-rules="lazyRules"
+              :multiple="multiple"
+              :use-chips="useChips"
+              use-input
+              input-debounce="500"
+              :disable="disable"
+              :readonly="readonly"
+              :class="customClass"
+              :popup-content-class="customClass"
+              :input-class="customClass"
+              emit-value
+              :hide-dropdown-icon="hideDropdownIcon"
+              :dropdown-icon="dropdownIcon"
+              map-options
+              clearable
+              @update:model-value="change($event)"
+              @new-value="createValue"
+              @filter="filterFn"
+              @click="onClick">
+      <template #no-option>
+        <q-item v-show="showNoOption">
+          <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
+        </q-item>
+      </template>
+    </q-select>
+  </div>
 </template>
 
 <script>

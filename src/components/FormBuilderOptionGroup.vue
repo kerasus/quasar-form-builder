@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="form-builder-optionGroup"
+       :class="customClass">
     <div v-if="label"
          class="outsideLabel">
       {{ label }}

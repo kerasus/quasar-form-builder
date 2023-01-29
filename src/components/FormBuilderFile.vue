@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="form-builder-file"
+       :class="customClass">
     <div class="outsideLabel">{{ placeholder ? label : null }}</div>
     <q-file :id="inputUid"
             v-model="file"

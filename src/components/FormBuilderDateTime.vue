@@ -1,95 +1,98 @@
 <template>
-  <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-  <div :key="rendrKey"
-       class="dateTime-input">
-    <q-input v-show="show('date')"
-             v-model="dateTime.date"
-             :name="name"
-             class="form-calender"
-             :clearable="clearable"
-             :loading="loading"
-             readonly
-             mask="date"
-             dir="ltr"
-             :disable="disable"
-             :label="placeholder ? null : label"
-             :stack-label="!!placeholder"
-             :placeholder="placeholder"
-             :rules="rules"
-             :lazy-rules="lazyRules"
-             :outlined="outlined"
-             :class="customClass"
-             :input-class="customClass"
-             @click="showDateMenu">
-      <template #prepend>
-        <q-icon :name="calendarIcon"
-                class="cursor-pointer"
-                :class="customClass">
-          <q-menu v-if="!readonly"
-                  v-model="showDate"
+  <div class="form-builder-dateTime"
+       :class="customClass">
+    <div class="outsideLabel">{{ placeholder ? label : null }}</div>
+    <div :key="rendrKey"
+         class="dateTime-input">
+      <q-input v-show="show('date')"
+               v-model="dateTime.date"
+               :name="name"
+               class="form-calender"
+               :clearable="clearable"
+               :loading="loading"
+               readonly
+               mask="date"
+               dir="ltr"
+               :disable="disable"
+               :label="placeholder ? null : label"
+               :stack-label="!!placeholder"
+               :placeholder="placeholder"
+               :rules="rules"
+               :lazy-rules="lazyRules"
+               :outlined="outlined"
+               :class="customClass"
+               :input-class="customClass"
+               @click="showDateMenu">
+        <template #prepend>
+          <q-icon :name="calendarIcon"
+                  class="cursor-pointer"
                   :class="customClass">
-            <q-date v-model="dateTime.date"
-                    :calendar="calendar"
-                    mask="YYYY/MM/DD"
-                    :range="range"
-                    :multiple="multiple"
+            <q-menu v-if="!readonly"
+                    v-model="showDate"
+                    :class="customClass">
+              <q-date v-model="dateTime.date"
+                      :calendar="calendar"
+                      mask="YYYY/MM/DD"
+                      :range="range"
+                      :multiple="multiple"
+                      :disable="disable"
+                      :title="title ? title : label"
+                      :today-btn="todayBtn"
+                      :class="customClass"
+                      @update:model-value="change($event)">
+                <div class="row items-center justify-end">
+                  <q-btn v-close-popup
+                         label="بستن"
+                         color="primary"
+                         flat />
+                </div>
+              </q-date>
+            </q-menu>
+          </q-icon>
+        </template>
+      </q-input>
+      <q-input v-show="show('time')"
+               v-model="dateTime.time"
+               :name="name"
+               class="time-input-dateTime"
+               :clearable="clearable"
+               dir="ltr"
+               :disable="disable"
+               :stack-label="!!placeholder"
+               :label="show('date') || placeholder ? null:label"
+               :placeholder="!show('date') ? placeholder:null"
+               mask="time"
+               :rules="rules"
+               :lazy-rules="lazyRules"
+               readonly
+               :outlined="outlined"
+               :class="customClass"
+               :input-class="customClass"
+               @click="showTimeMenu">
+        <template #append>
+          <q-menu v-if="!readonly"
+                  v-model="showTime"
+                  :class="customClass">
+            <q-time v-model="dateTime.time"
+                    mask="HH:mm:00"
+                    format24h
                     :disable="disable"
                     :title="title ? title : label"
-                    :today-btn="todayBtn"
-                    :class="customClass"
-                    @update:model-value="change($event)">
+                    :now-btn="nowBtn"
+                    :class="customClass">
               <div class="row items-center justify-end">
                 <q-btn v-close-popup
                        label="بستن"
                        color="primary"
                        flat />
               </div>
-            </q-date>
+            </q-time>
           </q-menu>
-        </q-icon>
-      </template>
-    </q-input>
-    <q-input v-show="show('time')"
-             v-model="dateTime.time"
-             :name="name"
-             class="time-input-dateTime"
-             :clearable="clearable"
-             dir="ltr"
-             :disable="disable"
-             :stack-label="!!placeholder"
-             :label="show('date') || placeholder ? null:label"
-             :placeholder="!show('date') ? placeholder:null"
-             mask="time"
-             :rules="rules"
-             :lazy-rules="lazyRules"
-             readonly
-             :outlined="outlined"
-             :class="customClass"
-             :input-class="customClass"
-             @click="showTimeMenu">
-      <template #append>
-        <q-menu v-if="!readonly"
-                v-model="showTime"
-                :class="customClass">
-          <q-time v-model="dateTime.time"
-                  mask="HH:mm:00"
-                  format24h
-                  :disable="disable"
-                  :title="title ? title : label"
-                  :now-btn="nowBtn"
-                  :class="customClass">
-            <div class="row items-center justify-end">
-              <q-btn v-close-popup
-                     label="بستن"
-                     color="primary"
-                     flat />
-            </div>
-          </q-time>
-        </q-menu>
-        <q-icon :name="clockIcon"
-                class="cursor-pointer" />
-      </template>
-    </q-input>
+          <q-icon :name="clockIcon"
+                  class="cursor-pointer" />
+        </template>
+      </q-input>
+    </div>
   </div>
 </template>
 
