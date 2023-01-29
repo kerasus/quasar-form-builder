@@ -5,7 +5,7 @@
       <div v-for="(input, inputIndex) in inputData"
            :key="inputIndex"
            :class="[
-             input.col ? input.col : 'col',
+             getComponentCol(input),
              getComponentName(input),
              // eslint-disable-next-line vue/comma-dangle
              getComponentName(input) + '-col',
@@ -314,6 +314,12 @@ export default {
         return 'formBuilder-' + input.type.name + '-' + input.name
       }
       return this.getComponent(input)
+    },
+    getComponentCol(input) {
+      if ((input.type === 'hidden') && (!input.col)) {
+        return ''
+      }
+      return input.col ? input.col : 'col'
     },
     getComponentSlots (input) {
       const slots = []
