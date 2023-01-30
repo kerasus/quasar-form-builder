@@ -4,7 +4,7 @@
     <b v-if="label">
       {{ label }}
     </b>
-    <hr>
+    <hr v-if="showLine">
   </div>
 </template>
 
@@ -12,7 +12,13 @@
 import inputMixin from '../mixins/inputMixin.js'
 export default {
   name: 'FormBuilderSpace',
-  mixins: [inputMixin]
+  mixins: [inputMixin],
+  props: {
+    showLine: {
+      type: Boolean,
+      default: true
+    }
+  }
 }
 </script>
 

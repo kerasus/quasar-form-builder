@@ -5,11 +5,12 @@
       <div v-for="(input, inputIndex) in inputData"
            :key="inputIndex"
            :class="[
-             input.col ? input.col : 'col',
+             getComponentCol(input),
              getComponentName(input),
              // eslint-disable-next-line vue/comma-dangle
              getComponentName(input) + '-col',
-           ]">
+           ]"
+           :style="getComponentStyle(input)">
         <div v-if="showGeneratorButtons">
           <q-btn size="xs"
                  round
@@ -314,6 +315,21 @@ export default {
         return 'formBuilder-' + input.type.name + '-' + input.name
       }
       return this.getComponent(input)
+    },
+    getComponentCol(input) {
+      if (input.type === 'hidden') {
+        return ''
+      }
+      return input.col ? input.col : 'col'
+    },
+    getComponentStyle(input) {
+      if (input.type !== 'hidden') {
+        return ''
+      }
+      return {
+        padding: 0,
+        margin: 0
+      }
     },
     getComponentSlots (input) {
       const slots = []
