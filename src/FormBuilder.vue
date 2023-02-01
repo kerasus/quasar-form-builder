@@ -86,9 +86,6 @@ export default {
     FormBuilderRangeSlider: defineAsyncComponent(() =>
       import('./components/FormBuilderRangeSlider.vue')
     ),
-    FormBuilderSpace: defineAsyncComponent(() =>
-      import('./components/FormBuilderSpace.vue')
-    ),
     FormBuilderSeparator: defineAsyncComponent(() =>
       import('./components/FormBuilderSeparator.vue')
     ),
