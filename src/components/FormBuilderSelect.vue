@@ -22,6 +22,7 @@
               :lazy-rules="lazyRules"
               :multiple="multiple"
               :use-chips="useChips"
+              :new-value-mode="createNewValue ? newValueMode : ''"
               use-input
               input-debounce="500"
               :disable="disable"
@@ -94,6 +95,10 @@ export default {
       type: Boolean
     },
     outlined: {
+      default: false,
+      type: Boolean
+    },
+    createNewValue: {
       default: false,
       type: Boolean
     }
