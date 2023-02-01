@@ -191,10 +191,23 @@ export default {
     change (val) {
       this.$emit('update:value', val)
     },
+    normalizeInput (input) {
+      const ignoreValueTypes = [
+        'separator',
+        'formBuilder',
+        'button'
+      ]
+      if (ignoreValueTypes.includes(input.type) && typeof input.ignoreValue === 'undefined') {
+        input.ignoreValue = true
+      }
+      return input
+    },
     getValues () {
+      const that = this
       function getFlatInputs (inputs) {
         let values = []
         inputs.forEach(input => {
+          input = that.normalizeInput(input)
           if (input.type !== 'formBuilder') {
             values.push(input)
           } else {
