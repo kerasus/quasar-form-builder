@@ -72,7 +72,10 @@ export default {
     },
     newValueMode: {
       default: undefined,
-      type: String
+      type: String,
+      validator(value) {
+        return ['add' | 'add-unique' | 'toggle' | undefined].includes(value)
+      }
     },
     hideDropdownIcon: {
       default: false,
