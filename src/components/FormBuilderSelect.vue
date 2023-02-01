@@ -22,7 +22,7 @@
               :lazy-rules="lazyRules"
               :multiple="multiple"
               :use-chips="useChips"
-              :new-value-mode="createNewValue ? newValueMode : ''"
+              :new-value-mode="newValueMode"
               use-input
               input-debounce="500"
               :disable="disable"
@@ -71,7 +71,7 @@ export default {
       type: String
     },
     newValueMode: {
-      default: 'add-unique',
+      default: undefined,
       type: String
     },
     hideDropdownIcon: {
@@ -95,10 +95,6 @@ export default {
       type: Boolean
     },
     outlined: {
-      default: false,
-      type: Boolean
-    },
-    createNewValue: {
       default: false,
       type: Boolean
     }
