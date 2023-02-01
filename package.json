@@ -37,11 +37,13 @@
     "core-js": "^3.27.2",
     "moment-jalaali": "^0.9.6",
     "quasar": "^2.11.5",
+    "shvl": "^3.0.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^7.0.0",
     "@quasar/app-vite": "^1.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
     "autoprefixer": "^10.4.13",
     "eslint": "8.22.0",
     "eslint-config-standard": "^17.0.0",
@@ -52,7 +54,6 @@
     "postcss": "^8.4.21",
     "postcss-rtlcss": "^4.0.1",
     "vite": "^4.0.4",
-    "@vitejs/plugin-vue": "^4.0.0",
     "vite-plugin-eslint": "^1.8.1"
   },
   "browserslist": [

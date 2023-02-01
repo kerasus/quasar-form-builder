@@ -95,6 +95,14 @@ export default {
           col: 'col-12'
         },
         {
+          type: 'separator',
+          color: 'secondary ',
+          size: '0px',
+          separatorType: 'solid',
+          label: 'this is hidden separator',
+          col: 'col-md-12'
+        },
+        {
           type: 'hidden',
           col: 'col-md-6'
         },

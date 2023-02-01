@@ -4,7 +4,8 @@
     <b v-if="label">
       {{ label }}
     </b>
-    <q-separator class="separator-default-style"
+    <q-separator v-if="hasSize"
+                 class="separator-default-style"
                  :name="name"
                  :style="{ 'border-top': borderTopStyle, 'border-left': borderLeftStyle }"
                  :class="[customClass ,[(vertical) ? 'separator-vertical' : 'separator-horizontal']]"
@@ -88,6 +89,9 @@ export default {
     }
   },
   computed: {
+    hasSize() {
+      return this.size && (this.size !== '0') && (this.size !== '0px')
+    },
     borderTopStyle() {
       return this.getBorderStyle('top')
     },

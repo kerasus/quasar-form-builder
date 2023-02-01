@@ -1,3 +1,5 @@
+import * as shvl from 'shvl'
+
 export default {
   props: {
     name: {
@@ -189,10 +191,23 @@ export default {
     change (val) {
       this.$emit('update:value', val)
     },
+    normalizeInput (input) {
+      const ignoreValueTypes = [
+        'separator',
+        'formBuilder',
+        'button'
+      ]
+      if (ignoreValueTypes.includes(input.type) && typeof input.ignoreValue === 'undefined') {
+        input.ignoreValue = true
+      }
+      return input
+    },
     getValues () {
+      const that = this
       function getFlatInputs (inputs) {
         let values = []
         inputs.forEach(input => {
+          input = that.normalizeInput(input)
           if (input.type !== 'formBuilder') {
             values.push(input)
           } else {
@@ -204,7 +219,40 @@ export default {
       }
 
       return getFlatInputs(this.inputData)
-    }
+    },
+    getFormData() {
+      const formHasFileInput = this.formHasFileInput()
+      const formData = formHasFileInput ? new FormData() : {}
+      const inputs = this.getValues()
+      inputs.forEach((item) => {
+        if (item.disable ||
+            item.ignoreValue ||
+            typeof item.value === 'undefined' ||
+            item.value === null
+        ) {
+          return
+        }
 
+        if (item.type === 'file' && !this.isFile(item.value)) {
+          return
+        }
+
+        if (formHasFileInput) {
+          formData.append(item.name, item.value)
+        } else {
+          shvl.set(formData, item.name, item.value)
+        }
+      })
+
+      return formData
+    },
+    formHasFileInput() {
+      const inputs = this.getValues()
+      const target = inputs.find((item) => item.type === 'file')
+      return !!target
+    },
+    isFile(file) {
+      return file instanceof File
+    }
   }
 }

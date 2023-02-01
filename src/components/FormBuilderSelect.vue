@@ -22,6 +22,7 @@
               :lazy-rules="lazyRules"
               :multiple="multiple"
               :use-chips="useChips"
+              :new-value-mode="newValueMode"
               use-input
               input-debounce="500"
               :disable="disable"
@@ -70,8 +71,11 @@ export default {
       type: String
     },
     newValueMode: {
-      default: 'add-unique',
-      type: String
+      default: undefined,
+      type: String,
+      validator(value) {
+        return ['add' | 'add-unique' | 'toggle' | undefined].includes(value)
+      }
     },
     hideDropdownIcon: {
       default: false,

@@ -86,9 +86,6 @@ export default {
     FormBuilderRangeSlider: defineAsyncComponent(() =>
       import('./components/FormBuilderRangeSlider.vue')
     ),
-    FormBuilderSpace: defineAsyncComponent(() =>
-      import('./components/FormBuilderSpace.vue')
-    ),
     FormBuilderSeparator: defineAsyncComponent(() =>
       import('./components/FormBuilderSeparator.vue')
     ),
@@ -153,55 +150,6 @@ export default {
     },
     onKeyPress(event) {
       this.$emit('onKeyPress', event)
-    },
-    getFormData() {
-      const formHasFileInput = this.formHasFileInput()
-      const formData = formHasFileInput ? new FormData() : {}
-      const inputs = this.getValues()
-      inputs.forEach((item) => {
-        if (
-          item.disable ||
-            typeof item.value === 'undefined' ||
-            item.value === null
-        ) {
-          return
-        }
-
-        if (item.type === 'file' && !this.isFile(item.value)) {
-          return
-        }
-
-        if (formHasFileInput) {
-          formData.append(item.name, item.value)
-        } else {
-          this.createChainedObject(formData, item.name, item.value)
-        }
-      })
-
-      return formData
-    },
-    formHasFileInput() {
-      const inputs = this.getValues()
-      const target = inputs.find((item) => item.type === 'file')
-      return !!target
-    },
-    isFile(file) {
-      return file instanceof File
-    },
-    createChainedObject(formData, chainedName, value) {
-      let keysArray = chainedName
-      if (typeof chainedName === 'string') {
-        keysArray = chainedName.split('.')
-      }
-      if (keysArray.length === 1) {
-        formData[keysArray[0]] = value
-      } else {
-        if (typeof formData[keysArray[0]] === 'undefined') {
-          formData[keysArray[0]] = {}
-        }
-        const newKeysArray = keysArray.filter((item, index) => index !== 0)
-        this.createChainedObject(formData[keysArray[0]], newKeysArray, value)
-      }
     },
     setInputValues(responseData, inputs) {
       const that = this
