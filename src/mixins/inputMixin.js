@@ -1,3 +1,5 @@
+import * as shvl from 'shvl'
+
 export default {
   props: {
     name: {
@@ -14,7 +16,7 @@ export default {
     },
     readonly: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     filled: {
       default: false,
@@ -135,7 +137,7 @@ export default {
       default: () => [],
       type: [Array]
     },
-    lazyRules:{
+    lazyRules: {
       default: false,
       type: [Boolean]
     },
@@ -151,11 +153,11 @@ export default {
       default: 'text',
       type: String
     },
-    clearable:{
+    clearable: {
       default: false,
       type: Boolean
     },
-    loading:{
+    loading: {
       default: false,
       type: Boolean
     }
@@ -189,15 +191,28 @@ export default {
     change (val) {
       this.$emit('update:value', val)
     },
+    normalizeInput (input) {
+      const ignoreValueTypes = [
+        'separator',
+        'formBuilder',
+        'button'
+      ]
+      if (ignoreValueTypes.includes(input.type) && typeof input.ignoreValue === 'undefined') {
+        input.ignoreValue = true
+      }
+      return input
+    },
     getValues () {
+      const that = this
       function getFlatInputs (inputs) {
         let values = []
-        inputs.forEach( input => {
+        inputs.forEach(input => {
+          input = that.normalizeInput(input)
           if (input.type !== 'formBuilder') {
             values.push(input)
           } else {
             const formBuilderInputs = getFlatInputs(input.value)
-            values = values.concat(formBuilderInputs);
+            values = values.concat(formBuilderInputs)
           }
         })
         return values
@@ -205,6 +220,39 @@ export default {
 
       return getFlatInputs(this.inputData)
     },
+    getFormData() {
+      const formHasFileInput = this.formHasFileInput()
+      const formData = formHasFileInput ? new FormData() : {}
+      const inputs = this.getValues()
+      inputs.forEach((item) => {
+        if (item.disable ||
+            item.ignoreValue ||
+            typeof item.value === 'undefined' ||
+            item.value === null
+        ) {
+          return
+        }
 
+        if (item.type === 'file' && !this.isFile(item.value)) {
+          return
+        }
+
+        if (formHasFileInput) {
+          formData.append(item.name, item.value)
+        } else {
+          shvl.set(formData, item.name, item.value)
+        }
+      })
+
+      return formData
+    },
+    formHasFileInput() {
+      const inputs = this.getValues()
+      const target = inputs.find((item) => item.type === 'file')
+      return !!target
+    },
+    isFile(file) {
+      return file instanceof File
+    }
   }
 }

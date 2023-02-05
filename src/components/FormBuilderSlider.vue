@@ -1,18 +1,17 @@
 <template>
-  <div>
+  <div class="form-builder-slider"
+       :class="customClass">
     <div>{{ label }}: {{ inputData }} ({{ min }} تا {{ max }})</div>
-    <q-slider
-      v-model="inputData"
-      :name="name"
-      :min="min"
-      :max="max"
-      :disable="disable"
-      :readonly="readonly"
-      :class="customClass"
-      :marker-labels-class="customClass"
-      @update:model-value="change($event)"
-      @click="onClick"
-    />
+    <q-slider v-model="inputData"
+              :name="name"
+              :min="min"
+              :max="max"
+              :disable="disable"
+              :readonly="readonly"
+              :class="customClass"
+              :marker-labels-class="customClass"
+              @update:model-value="change($event)"
+              @click="onClick" />
   </div>
 </template>
 
@@ -24,15 +23,15 @@ export default {
   props: {
     name: {
       default: '',
-      type: String,
+      type: String
     },
     value: {
       default: 0,
-      type: Number,
-    },
+      type: Number
+    }
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style scoped></style>

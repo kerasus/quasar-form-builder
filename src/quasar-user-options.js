@@ -8,5 +8,5 @@ export default {
   config: {},
   plugins: {
   },
-  lang: lang
+  lang
 }

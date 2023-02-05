@@ -1,66 +1,62 @@
 <template>
   <q-card class="q-ma-lg">
     <div class="title">Generated Form</div>
-    <div v-show="jsonShow" class="q-ma-md">
+    <div v-show="jsonShow"
+         class="q-ma-md">
       <div class="sub-title">Generated Json:</div>
       {{JSON.stringify(inputs)}}
       <!--      <vue-json-pretty :data="inputs"/>-->
     </div>
     <div v-show="gFormShow">
       <div class="sub-title q-pl-md">Generated Form:</div>
-      <form-builder
-        ref="fb"
-        v-model:value="inputs"
-        :showGeneratorButtons="true"
-        @edit="edit"
-      />
+      <form-builder ref="fb"
+                    v-model:value="inputs"
+                    :showGeneratorButtons="true"
+                    @edit="edit" />
     </div>
-    <div v-show="setGetValue" class="q-ma-lg">
+    <div v-show="setGetValue"
+         class="q-ma-lg">
       <p>
         Here you can provide your name of input, and will get the value to the
         second input.
       </p>
       <p>If you want to set, fill both inputs.</p>
-      <q-select
-        v-model="searchName"
-        :options="searchOptions"
-        label="name of input of form to get"
-        placeholder="name of input of form to get"
-      ></q-select>
-      <q-input
-        v-model="setValue"
-        placeholder="value of input of form to set"
-      ></q-input>
-      <q-btn class="q-mt-md" @click="getSetValue()">submit</q-btn>
+      <q-select v-model="searchName"
+                :options="searchOptions"
+                label="name of input of form to get"
+                placeholder="name of input of form to get" />
+      <q-input v-model="setValue"
+               placeholder="value of input of form to set" />
+      <q-btn class="q-mt-md"
+             @click="getSetValue()">submit</q-btn>
     </div>
     <q-card-actions>
-      <q-btn flat color="purple" @click="copyJson()">Copy JSON</q-btn>
-      <q-btn flat color="primary" @click="jsonShow = !jsonShow"
-      >{{ jsonShow ? 'Hide' : 'Show' }} JSON
-      </q-btn
-      >
-      <q-btn flat color="secondary" @click="gFormShow = !gFormShow"
-      >{{ gFormShow ? 'Hide' : 'Show' }} Generated Form
-      </q-btn
-      >
-      <q-btn flat color="green" @click="setGetValue = !setGetValue"
-      >{{ setGetValue ? 'Hide' : 'Show' }} get/set value
-      </q-btn
-      >
+      <q-btn flat
+             color="purple"
+             @click="copyJson()">Copy JSON</q-btn>
+      <q-btn flat
+             color="primary"
+             @click="jsonShow = !jsonShow">{{ jsonShow ? 'Hide' : 'Show' }} JSON
+      </q-btn>
+      <q-btn flat
+             color="secondary"
+             @click="gFormShow = !gFormShow">{{ gFormShow ? 'Hide' : 'Show' }} Generated Form
+      </q-btn>
+      <q-btn flat
+             color="green"
+             @click="setGetValue = !setGetValue">{{ setGetValue ? 'Hide' : 'Show' }} get/set value
+      </q-btn>
     </q-card-actions>
   </q-card>
   <q-card class="q-ma-lg">
     <div class="top">
       <div class="title">Form Builder Generator</div>
-      <q-btn
-        v-show="state !== ''"
-        class="back-btn"
-        size="12px"
-        rounded
-        @click="back()"
-      >back
-      </q-btn
-      >
+      <q-btn v-show="state !== ''"
+             class="back-btn"
+             size="12px"
+             rounded
+             @click="back()">back
+      </q-btn>
     </div>
     <q-card-section>
       <div v-if="state === ''">
@@ -116,66 +112,64 @@
           </ul>
         </div>
         <q-btn @click="state = 'chooseType'">add new input</q-btn>
-        <q-btn class="q-ml-md" @click="state = 'addJson'"
-        >import json to work on
-        </q-btn
-        >
+        <q-btn class="q-ml-md"
+               @click="state = 'addJson'">import json to work on
+        </q-btn>
       </div>
-      <div v-if="state === 'chooseType'" class="controls">
+      <div v-if="state === 'chooseType'"
+           class="controls">
         <div>
-          generating new input: <br/>
+          generating new input: <br>
           selected input: {{ type?.value }}
-          <q-select
-            v-model="type"
-            :options="showConfigs()"
-            @update:model-value="newInputBuild()"
-          ></q-select>
+          <q-select v-model="type"
+                    :options="showConfigs()"
+                    @update:model-value="newInputBuild()" />
         </div>
       </div>
       <div v-if="state === 'chooseConfig'">
         <div>
           demo for {{ type.value }}:
           <div class="generated-element">
-            <form-builder ref="formBuilder" v-model:value="newInput"/>
+            <form-builder ref="formBuilder"
+                          v-model:value="newInput" />
           </div>
           <div class="q-mt-md">configs to tweak:</div>
-          <div v-for="c in selectedConfig.value" :key="c">
-            <q-input
-              v-if="c.type === 'text'"
-              v-model="config[c.value]"
-              :type="c.inputType"
-              :label="c.value"
-            ></q-input>
-            <q-toggle
-              v-if="c.type === 'boolean'"
-              v-model="config[c.value]"
-              :label="c.value"
-            />
-            <q-select
-              v-if="c.type === 'select'"
-              v-model="config[c.value]"
-              :label="c.value"
-              :options="c.options"
-            ></q-select>
-            <div v-if="c.type === 'options'" class="options-generator">
+          <div v-for="c in selectedConfig.value"
+               :key="c">
+            <q-input v-if="c.type === 'text'"
+                     v-model="config[c.value]"
+                     :type="c.inputType"
+                     :label="c.value" />
+            <q-toggle v-if="c.type === 'boolean'"
+                      v-model="config[c.value]"
+                      :label="c.value" />
+            <q-select v-if="c.type === 'select'"
+                      v-model="config[c.value]"
+                      :label="c.value"
+                      :options="c.options" />
+            <div v-if="c.type === 'options'"
+                 class="options-generator">
               <div class="option-json">
                 Option Generator:
                 {{ generatedOptions }}
               </div>
               <div class="options-inputs">
-                <q-input v-model="optionLabel" label="label"></q-input>
-                <q-input v-model="optionValue" label="value"></q-input>
+                <q-input v-model="optionLabel"
+                         label="label" />
+                <q-input v-model="optionValue"
+                         label="value" />
                 <q-btn @click="addToOptions()">add</q-btn>
               </div>
             </div>
           </div>
-          <q-btn class="q-mt-md" @click="submitConfig()">submit</q-btn>
+          <q-btn class="q-mt-md"
+                 @click="submitConfig()">submit</q-btn>
         </div>
       </div>
       <div v-if="state === 'addJson'">
-        here you can import your formbuilder json to work on it. <br/>
+        here you can import your formbuilder json to work on it. <br>
         Try to copy paste, not type in here.
-        <q-input v-model="importJson"></q-input>
+        <q-input v-model="importJson" />
       </div>
     </q-card-section>
   </q-card>
@@ -184,13 +178,13 @@
 <script>
 import FormBuilder from '../FormBuilder.vue'
 // import VueJsonPretty from 'vue-json-pretty';
-import CustomComponent from '../CustomComponent.vue'
+// import CustomComponent from '../CustomComponent.vue'
 // import 'vue-json-pretty/lib/styles.css';
 
 export default {
   name: 'FormBuilderGenerator',
   components: {
-    FormBuilder,
+    FormBuilder
     // VueJsonPretty,
   },
   data() {
@@ -204,16 +198,16 @@ export default {
         label: 'label',
         placeholder: 'placeholder',
         col: 'col-md-12',
-        inputType: 'text',
+        inputType: 'text'
       },
       configs: [
         {
           type: 'input',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'text', value: 'col'},
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'text', value: 'col' },
             {
               type: 'select',
               value: 'inputType',
@@ -224,81 +218,81 @@ export default {
                 'password',
                 'email',
                 'tel',
-                'url',
-              ],
+                'url'
+              ]
             },
-            {type: 'boolean', value: 'filled'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'boolean', value: 'outlined'},
-            {type: 'boolean', value: 'rounded'},
-          ],
+            { type: 'boolean', value: 'filled' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' }
+          ]
         },
         {
           type: 'select',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'boolean', value: 'filled'},
-            {type: 'boolean', value: 'outlined'},
-            {type: 'boolean', value: 'rounded'},
-            {type: 'boolean', value: 'multiple'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'boolean', value: 'useChips'},
-            {type: 'text', value: 'col'},
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'filled' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
+            { type: 'boolean', value: 'multiple' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'useChips' },
+            { type: 'text', value: 'col' },
 
             {
               type: 'options',
-              value: 'options',
-            },
-          ],
+              value: 'options'
+            }
+          ]
         },
         {
           type: 'checkbox',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'text', value: 'color'},
-            {type: 'text', value: 'trueValue'},
-            {type: 'text', value: 'falseValue'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'text', value: 'color' },
+            { type: 'text', value: 'trueValue' },
+            { type: 'text', value: 'falseValue' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'rangeSlider',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', inputType: 'number', value: 'min'},
-            {type: 'text', inputType: 'number', value: 'max'},
-            {type: 'text', value: 'col'},
-            {type: 'boolean', value: 'disable'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', inputType: 'number', value: 'min' },
+            { type: 'text', inputType: 'number', value: 'max' },
+            { type: 'text', value: 'col' },
+            { type: 'boolean', value: 'disable' }
+          ]
         },
         {
           type: 'slider',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', inputType: 'number', value: 'min'},
-            {type: 'text', inputType: 'number', value: 'max'},
-            {type: 'text', value: 'col'},
-            {type: 'boolean', value: 'disable'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', inputType: 'number', value: 'min' },
+            { type: 'text', inputType: 'number', value: 'max' },
+            { type: 'text', value: 'col' },
+            { type: 'boolean', value: 'disable' }
+          ]
         },
         {
           type: 'color',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'boolean', value: 'outlined'},
-            {type: 'boolean', value: 'rounded'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'dateTime',
@@ -306,19 +300,19 @@ export default {
             {
               type: 'select',
               value: 'type',
-              options: ['date', 'time', 'dateTime'],
+              options: ['date', 'time', 'dateTime']
             },
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'boolean', value: 'outlined'},
-            {type: 'text', value: 'calendarIcon'},
-            {type: 'text', value: 'clockIcon'},
-            {type: 'boolean', value: 'nowBtn'},
-            {type: 'boolean', value: 'todayBtn'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'text', value: 'calendarIcon' },
+            { type: 'text', value: 'clockIcon' },
+            { type: 'boolean', value: 'nowBtn' },
+            { type: 'boolean', value: 'todayBtn' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'date',
@@ -326,19 +320,19 @@ export default {
             {
               type: 'select',
               value: 'type',
-              options: ['date', 'time', 'dateTime'],
+              options: ['date', 'time', 'dateTime']
             },
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'boolean', value: 'outlined'},
-            {type: 'text', value: 'calendarIcon'},
-            {type: 'text', value: 'clockIcon'},
-            {type: 'boolean', value: 'nowBtn'},
-            {type: 'boolean', value: 'todayBtn'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'text', value: 'calendarIcon' },
+            { type: 'text', value: 'clockIcon' },
+            { type: 'boolean', value: 'nowBtn' },
+            { type: 'boolean', value: 'todayBtn' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'time',
@@ -346,155 +340,155 @@ export default {
             {
               type: 'select',
               value: 'type',
-              options: ['date', 'time', 'dateTime'],
+              options: ['date', 'time', 'dateTime']
             },
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'boolean', value: 'outlined'},
-            {type: 'text', value: 'calendarIcon'},
-            {type: 'text', value: 'clockIcon'},
-            {type: 'boolean', value: 'nowBtn'},
-            {type: 'boolean', value: 'todayBtn'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'text', value: 'calendarIcon' },
+            { type: 'text', value: 'clockIcon' },
+            { type: 'boolean', value: 'nowBtn' },
+            { type: 'boolean', value: 'todayBtn' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'inputEditor',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'tiptapEditor',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'options'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'options' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'file',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'placeholder'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'placeholder' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'avatar',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'size'},
-            {type: 'text', value: 'fontSize'},
-            {type: 'text', value: 'color'},
-            {type: 'text', value: 'textColor'},
-            {type: 'text', value: 'src'},
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'size' },
+            { type: 'text', value: 'fontSize' },
+            { type: 'text', value: 'color' },
+            { type: 'text', value: 'textColor' },
+            { type: 'text', value: 'src' },
 
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'optionGroup',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'color'},
-            {type: 'boolean', value: 'inline'},
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'color' },
+            { type: 'boolean', value: 'inline' },
             {
               type: 'options',
-              value: 'options',
+              value: 'options'
             },
             {
               type: 'select',
               value: 'typeOfInput',
-              options: ['radio', 'checkbox', 'toggle'],
+              options: ['radio', 'checkbox', 'toggle']
             },
-            {type: 'boolean', value: 'disable'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'boolean', value: 'disable' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'separator',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'borderTopStyle'},
-            {type: 'text', value: 'borderLeftStyle'},
-            {type: 'boolean', value: 'inset'},
-            {type: 'boolean', value: 'darkMode'},
-            {type: 'boolean', value: 'vertical'},
-            {type: 'boolean', value: 'spaced'},
-            {type: 'text', value: 'size'},
-            {type: 'text', value: 'color'},
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'borderTopStyle' },
+            { type: 'text', value: 'borderLeftStyle' },
+            { type: 'boolean', value: 'inset' },
+            { type: 'boolean', value: 'darkMode' },
+            { type: 'boolean', value: 'vertical' },
+            { type: 'boolean', value: 'spaced' },
+            { type: 'text', value: 'size' },
+            { type: 'text', value: 'color' },
             {
               type: 'select',
               value: 'separatorType',
-              options: ['dashed', 'double', 'solid'],
+              options: ['dashed', 'double', 'solid']
             },
-            {type: 'text', value: 'borderSize'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'borderSize' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'space',
           value: [
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'col'},
-          ],
+            { type: 'text', value: 'label' },
+            { type: 'text', value: 'col' }
+          ]
         },
         {
           type: 'toggleButton',
           value: [
-            {type: 'text', value: 'name'},
-            {type: 'options', value: 'options'},
-            {type: 'text', value: 'color'},
-            {type: 'text', value: 'type'},
-            {type: 'text', value: 'textColor'},
-            {type: 'text', value: 'toggleColor'},
-            {type: 'text', value: 'toggleTextColor'},
-            {type: 'text', value: 'size'},
-            {type: 'boolean', value: 'push'},
-            {type: 'boolean', value: 'glossy'},
-            {type: 'boolean', value: 'clearable'},
-            {type: 'boolean', value: 'inline'},
-            {type: 'boolean', value: 'dense'},
-            {type: 'boolean', value: 'disable'},
-            {type: 'boolean', value: 'unelevated'},
-            {type: 'boolean', value: 'flat'},
-            {type: 'boolean', value: 'outlined'},
-            {type: 'boolean', value: 'rounded'},
-            {type: 'boolean', value: 'ripple'},
-            {type: 'boolean', value: 'noCaps'},
-            {type: 'boolean', value: 'noWrap'},
-            {type: 'boolean', value: 'spread'},
-            {type: 'boolean', value: 'stack'},
-            {type: 'boolean', value: 'stretch'},
-            {type: 'text', value: 'col'},
-          ],
-        },
-        {
-          type: CustomComponent,
-          isCustomComponent: true,
-          value: [
-            {type: 'text', value: 'name'},
-            {type: 'text', value: 'label'},
-            {type: 'text', value: 'col'},
-            {type: 'text', value: 'value'},
-            {
-              type: 'options',
-              value: 'props',
-            },
-          ],
-        },
+            { type: 'text', value: 'name' },
+            { type: 'options', value: 'options' },
+            { type: 'text', value: 'color' },
+            { type: 'text', value: 'type' },
+            { type: 'text', value: 'textColor' },
+            { type: 'text', value: 'toggleColor' },
+            { type: 'text', value: 'toggleTextColor' },
+            { type: 'text', value: 'size' },
+            { type: 'boolean', value: 'push' },
+            { type: 'boolean', value: 'glossy' },
+            { type: 'boolean', value: 'clearable' },
+            { type: 'boolean', value: 'inline' },
+            { type: 'boolean', value: 'dense' },
+            { type: 'boolean', value: 'disable' },
+            { type: 'boolean', value: 'unelevated' },
+            { type: 'boolean', value: 'flat' },
+            { type: 'boolean', value: 'outlined' },
+            { type: 'boolean', value: 'rounded' },
+            { type: 'boolean', value: 'ripple' },
+            { type: 'boolean', value: 'noCaps' },
+            { type: 'boolean', value: 'noWrap' },
+            { type: 'boolean', value: 'spread' },
+            { type: 'boolean', value: 'stack' },
+            { type: 'boolean', value: 'stretch' },
+            { type: 'text', value: 'col' }
+          ]
+        }
+        // {
+        //   type: CustomComponent,
+        //   isCustomComponent: true,
+        //   value: [
+        //     {type: 'text', value: 'name'},
+        //     {type: 'text', value: 'label'},
+        //     {type: 'text', value: 'col'},
+        //     {type: 'text', value: 'value'},
+        //     {
+        //       type: 'options',
+        //       value: 'props',
+        //     },
+        //   ],
+        // },
       ],
       optionLabel: '',
       optionValue: '',
@@ -506,170 +500,169 @@ export default {
       editMode: false,
       editIndex: -1,
       searchName: '',
-      setValue: '',
-    };
+      setValue: ''
+    }
   },
   computed: {
     searchOptions() {
       return this.getValues()
-          .map((input) => {
-            return input.name;
-          })
-          .filter((i) => i !== undefined);
-    },
+        .map((input) => {
+          return input.name
+        })
+        .filter((i) => i !== undefined)
+    }
   },
   watch: {
-    importJson(n) {
-      this.inputs = eval(n);
-      alert('json imported successfully');
-      this.jsonShow = true;
-      this.gFormShow = true;
-      this.state = '';
-    },
+    importJson(/* n */) {
+      // this.inputs = eval(n)
+      alert('json imported successfully')
+      this.jsonShow = true
+      this.gFormShow = true
+      this.state = ''
+    }
   },
   methods: {
     newInputBuild() {
-      this.state = 'chooseConfig';
-      this.generatedOptions = [];
+      this.state = 'chooseConfig'
+      this.generatedOptions = []
       if (!this.editMode) {
-        this.newInput = [];
-        this.prepareConfig();
-        this.newInput.push(this.config);
+        this.newInput = []
+        this.prepareConfig()
+        this.newInput.push(this.config)
       }
     },
     prepareConfig() {
       // finding appropriate config and set it.
       this.selectedConfig = this.configs.find((c) => {
         if (c.isCustomComponent) {
-          if (c.type.name == this.type) {
-            return c;
+          if (c.type.name.toString() === this.type.toString()) {
+            return c
           }
         }
-        if (c.type == this.type) {
-          return c;
+        if (c.type === this.type) {
+          return c
         }
-      });
+
+        return false
+      })
       // manully set type to config to load it.
-      this.config.type = this.selectedConfig.type;
+      this.config.type = this.selectedConfig.type
       // removing indeterminate condition to false values.
       this.selectedConfig.value.forEach((v) => {
-        if (v.type === 'boolean') this.config[v.value] = false;
-      });
+        if (v.type === 'boolean') this.config[v.value] = false
+      })
       // this will use for select copmonent to make options dynamic.
-      this.config.options = this.generatedOptions;
+      this.config.options = this.generatedOptions
     },
     submitConfig() {
       if (!this.editMode) {
-        this.inputs.push(...this.newInput);
+        this.inputs.push(...this.newInput)
       } else {
-        this.inputs[this.editIndex] = this.newInput[0];
+        this.inputs[this.editIndex] = this.newInput[0]
       }
-      this.state = '';
-      this.type = null;
+      this.state = ''
+      this.type = null
       this.config = {
         name: 'name',
         label: 'label',
         placeholder: 'placeholder',
-        col: 'col-md-12',
-      };
-      this.newInput = [];
-      this.editIndex = -1;
-      this.editMode = false;
+        col: 'col-md-12'
+      }
+      this.newInput = []
+      this.editIndex = -1
+      this.editMode = false
     },
     addToOptions() {
       this.generatedOptions.push({
         label: this.optionLabel,
-        value: this.optionValue,
-      });
-      this.optionLabel = '';
-      this.optionValue = '';
+        value: this.optionValue
+      })
+      this.optionLabel = ''
+      this.optionValue = ''
     },
     back() {
-      this.state = '';
-      this.type = null;
-      this.newInput = [];
-      this.generatedOptions = [];
+      this.state = ''
+      this.type = null
+      this.newInput = []
+      this.generatedOptions = []
       this.config = {
         name: 'name',
         label: 'label',
         placeholder: 'placeholder',
-        col: 'col-md-12',
-      };
+        col: 'col-md-12'
+      }
     },
     copyJson() {
-      navigator.clipboard.writeText(JSON.stringify(this.inputs));
-      alert('json copied to clipboard');
+      navigator.clipboard.writeText(JSON.stringify(this.inputs))
+      alert('json copied to clipboard')
     },
     edit(i) {
-      this.editMode = true;
-      this.editIndex = i;
-      this.type = this.options.find((o) => o.value === this.inputs[i].type);
-      this.selectedConfig = this.configs.find((c) => c.type == this.type.value);
-      this.config = this.inputs[i];
-      this.generatedOptions = this.inputs[i].options;
-      this.newInput = [];
-      this.newInput.push(this.config);
+      this.editMode = true
+      this.editIndex = i
+      this.type = this.options.find((o) => o.value === this.inputs[i].type)
+      this.selectedConfig = this.configs.find((c) => c.type === this.type.value)
+      this.config = this.inputs[i]
+      this.generatedOptions = this.inputs[i].options
+      this.newInput = []
+      this.newInput.push(this.config)
 
-      this.state = 'chooseConfig';
+      this.state = 'chooseConfig'
     },
     getSetValue() {
       if (this.searchName === '') {
-        alert('you have to specify the name of input');
-        return;
+        alert('you have to specify the name of input')
+        return
       }
-      let founded = this.$refs.fb.getInputsByName(this.searchName);
+      const founded = this.$refs.fb.getInputsByName(this.searchName)
       if (founded) {
         founded.forEach((f) => {
-          this.setValueOne(f);
-        });
+          this.setValueOne(f)
+        })
       } else {
-        alert('no such name existed on this form');
+        alert('no such name existed on this form')
       }
     },
     getValues() {
       function getFlatInputs(inputs) {
-        let values = [];
+        let values = []
         inputs.forEach((input) => {
           if (input.type !== 'formBuilder') {
-            values.push(input);
+            values.push(input)
           } else {
-            const formBuilderInputs = getFlatInputs(input.value);
-            values = values.concat(formBuilderInputs);
+            const formBuilderInputs = getFlatInputs(input.value)
+            values = values.concat(formBuilderInputs)
           }
-        });
-        return values;
+        })
+        return values
       }
 
-      return getFlatInputs(this.inputs);
+      return getFlatInputs(this.inputs)
     },
     setValueOne(founded) {
-      // GET value
-      if (this.setValue === '') {
+      if (this.setValue === '') { // GET value
         if (founded.value) {
-          this.setValue = founded.value;
+          this.setValue = founded.value
         } else {
           // input is present but has no value
-          alert('input is present but has no value');
+          alert('input is present but has no value')
         }
-      }
-      // SET Value
-      else {
-        this.$refs.fb.setInputByName(this.searchName, this.setValue);
+      } else { // SET Value
+        this.$refs.fb.setInputByName(this.searchName, this.setValue)
       }
     },
     showConfigs() {
       return this.configs
-          .map((c) => {
-            if (typeof c.type === 'string') {
-              return c.type;
-            } else {
-              return c.type.name;
-            }
-          })
-          .filter((c) => c !== undefined);
-    },
-  },
-};
+        .map((c) => {
+          if (typeof c.type === 'string') {
+            return c.type
+          } else {
+            return c.type.name
+          }
+        })
+        .filter((c) => c !== undefined)
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
