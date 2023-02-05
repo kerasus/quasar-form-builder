@@ -1,6 +1,6 @@
 <template>
   <div class="row"
-       :class="['q-col-gutter-' + gutterSize, customClass]">
+       :class="['q-col-gutter-' + gutterSize: isColGutter, customClass]">
     <q-no-ssr>
       <div v-for="(input, inputIndex) in inputData"
            :key="inputIndex"
@@ -111,6 +111,10 @@ export default {
     gutterSize: {
       default: 'md',
       type: String
+    },
+    isColGutter: {
+      default: true,
+      type: Boolean
     },
     disable: {
       default: false,
