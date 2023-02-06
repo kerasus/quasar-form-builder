@@ -1,6 +1,6 @@
 <template>
   <div class="row"
-       :class="['q-col-gutter-' + gutterSize: isColGutter, customClass]">
+       :class="[getColGutter(), customClass]">
     <q-no-ssr>
       <div v-for="(input, inputIndex) in inputData"
            :key="inputIndex"
@@ -132,6 +132,7 @@ export default {
   emits: ['input', 'onClick', 'onKeyPress'],
   data() {
     return {
+      colGutter: 'q-col-gutter-md',
       currentInput: null,
       optionGroupType: null,
       dateTime_Range: null,
@@ -139,6 +140,9 @@ export default {
       dateTime_Time: null
     }
   },
+  // mounted() {
+  //   this.colGutter += this.gutterSize
+  // },
   methods: {
     onClick(event, input) {
       function getEvent(data) {
@@ -234,6 +238,11 @@ export default {
     },
     getRefs(input) {
       return input.type
+    },
+    getColGutter() {
+      if (this.isColGutter) {
+        return 'q-col-gutter-' + this.gutterSize
+      }
     },
     getComponent(input) {
       if (typeof input.type === 'object') {
@@ -370,3 +379,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.col-gutter{
+
+}
+</style>
