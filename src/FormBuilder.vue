@@ -315,8 +315,7 @@ export default {
       return input.type === 'date' || input.type === 'dateTime'
     },
     change(event, inputIndex) {
-      if (
-        typeof event.target !== 'undefined' &&
+      if (typeof event.target !== 'undefined' &&
           typeof event.target.files !== 'undefined' &&
           event.target.files[0]
       ) {
