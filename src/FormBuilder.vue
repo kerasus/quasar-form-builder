@@ -182,13 +182,16 @@ export default {
       const inputs = this.getValues()
       return inputs.find((input) => input.name === name)
     },
-    setInputByName(name, value) {
+    setInputAttributeByName(name, attribute, value) {
       const inputs = this.getValues()
       inputs.forEach((input) => {
         if (input.name === name) {
-          input.value = value
+          input[attribute] = value
         }
       })
+    },
+    setInputByName(name, value) {
+      this.setInputAttributeByName(name, 'value', value)
     },
     getValidChainedObject(object, keys) {
       if (!Array.isArray(keys) && typeof keys !== 'string') {
@@ -312,8 +315,7 @@ export default {
       return input.type === 'date' || input.type === 'dateTime'
     },
     change(event, inputIndex) {
-      if (
-        typeof event.target !== 'undefined' &&
+      if (typeof event.target !== 'undefined' &&
           typeof event.target.files !== 'undefined' &&
           event.target.files[0]
       ) {
