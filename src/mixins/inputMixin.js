@@ -223,7 +223,7 @@ export default {
     getFormData() {
       const formHasFileInput = this.formHasFileInput()
       const formData = formHasFileInput ? new FormData() : {}
-      const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
+      const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined')
       inputs.forEach((item) => {
         if (item.type === 'file' && !this.isFile(item.value)) {
           return
