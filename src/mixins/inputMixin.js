@@ -230,7 +230,13 @@ export default {
         }
 
         if (formHasFileInput) {
-          formData.append(item.name, item.value)
+          if (Array.isArray(item.value)) {
+            item.value.forEach(arrayValue => {
+              formData.append(item.name + '[]', arrayValue)
+            })
+          } else {
+            formData.append(item.name, item.value)
+          }
         } else {
           shvl.set(formData, item.name, item.value)
         }
