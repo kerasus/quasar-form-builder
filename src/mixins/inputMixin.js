@@ -223,14 +223,20 @@ export default {
     getFormData() {
       const formHasFileInput = this.formHasFileInput()
       const formData = formHasFileInput ? new FormData() : {}
-      const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
+      const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined')
       inputs.forEach((item) => {
-        if (item.type === 'file' && !this.isFile(item.value)) {
+        if (item.type.toString().toLowerCase() === 'file' && !this.isFile(item.value)) {
           return
         }
 
         if (formHasFileInput) {
-          formData.append(item.name, item.value)
+          if (Array.isArray(item.value)) {
+            item.value.forEach(arrayValue => {
+              formData.append(item.name + '[]', arrayValue)
+            })
+          } else {
+            formData.append(item.name, item.value)
+          }
         } else {
           shvl.set(formData, item.name, item.value)
         }
@@ -240,7 +246,7 @@ export default {
     },
     formHasFileInput() {
       const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
-      const target = inputs.find((item) => item.type === 'file')
+      const target = inputs.find((item) => item.type === 'file' && this.isFile(item.value))
       return !!target
     },
     isFile(file) {

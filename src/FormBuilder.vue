@@ -35,6 +35,7 @@
                    @input="change($event, inputIndex)"
                    @change="change($event, inputIndex)"
                    @onClick="onClick($event, input)"
+                   @onInputClick="onInputClick($event)"
                    @onKeyPress="onKeyPress($event)">
           <!--        <template v-for="(_, name) in $slots" #[name]="slotProps">-->
           <template v-for="name in getComponentSlots(input)"
@@ -125,7 +126,7 @@ export default {
       type: Boolean
     }
   },
-  emits: ['input', 'onClick', 'onKeyPress'],
+  emits: ['input', 'onClick', 'onKeyPress', 'onInputClick'],
   data() {
     return {
       currentInput: null,
@@ -136,6 +137,9 @@ export default {
     }
   },
   methods: {
+    onInputClick(event) {
+      this.$emit('onInputClick', event)
+    },
     onClick(event, input) {
       function getEvent(data) {
         if (data.event) {
