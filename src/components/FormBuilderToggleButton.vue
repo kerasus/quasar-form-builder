@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { inputMixin } from '../../index.js'
+import { inputMixin } from '../../index.mjs'
 export default {
   name: 'FormBuilderToggleButton',
   mixins: [inputMixin],
