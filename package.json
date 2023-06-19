@@ -2,7 +2,16 @@
   "name": "quasar-form-builder",
   "version": "0.1.93",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
-  "main": "index.js",
+  "files": ["*","dist"],
+  "main": "./dist/quasar-form-builder.umd.cjs",
+  "module": "./index.js",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./dist/quasar-form-builder.umd.cjs"
+    },
+    "./src/components/": "./src/components/"
+  },
   "keywords": [
     "vue",
     "quasar",
