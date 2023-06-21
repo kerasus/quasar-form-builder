@@ -14,6 +14,7 @@
                mask="date"
                dir="ltr"
                :disable="disable"
+               :filled="filled"
                :label="placeholder ? null : label"
                :stack-label="!!placeholder"
                :placeholder="placeholder"

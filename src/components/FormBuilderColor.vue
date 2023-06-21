@@ -5,6 +5,7 @@
     <q-input v-model="inputData"
              :name="name"
              :disable="disable"
+             :filled="filled"
              :label="placeholder ? null : label"
              :stack-label="!!placeholder"
              :outlined="outlined"
