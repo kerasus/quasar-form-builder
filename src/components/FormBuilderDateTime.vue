@@ -10,6 +10,7 @@
                class="form-calender"
                :clearable="clearable"
                :loading="loading"
+               :filled="filled"
                readonly
                mask="date"
                dir="ltr"
@@ -58,6 +59,7 @@
                :clearable="clearable"
                dir="ltr"
                :disable="disable"
+               :filled="filled"
                :stack-label="!!placeholder"
                :label="show('date') || placeholder ? null:label"
                :placeholder="!show('date') ? placeholder:null"
