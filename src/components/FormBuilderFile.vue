@@ -9,6 +9,7 @@
             :stack-label="!!placeholder"
             :placeholder="placeholder"
             :disable="disable"
+            :filled="filled"
             :readonly="readonly"
             :loading="loading"
             clearable

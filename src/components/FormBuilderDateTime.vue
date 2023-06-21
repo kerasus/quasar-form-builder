@@ -58,6 +58,7 @@
                :clearable="clearable"
                dir="ltr"
                :disable="disable"
+               :filled="filled"
                :stack-label="!!placeholder"
                :label="show('date') || placeholder ? null:label"
                :placeholder="!show('date') ? placeholder:null"
