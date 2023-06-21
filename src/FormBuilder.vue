@@ -1,51 +1,49 @@
 <template>
   <div class="row"
        :class="['q-col-gutter-' + gutterSize, customClass]">
-    <q-no-ssr>
-      <div v-for="(input, inputIndex) in inputData"
-           :key="inputIndex"
-           :class="[
-             getComponentCol(input),
-             getComponentName(input),
-             // eslint-disable-next-line vue/comma-dangle
-             getComponentName(input) + '-col',
-           ]"
-           :style="getComponentStyle(input)">
-        <div v-if="showGeneratorButtons">
-          <q-btn size="xs"
-                 round
-                 color="primary"
-                 @click="edit(inputIndex)">
-            edit
-          </q-btn>
-          <q-btn size="xs"
-                 round
-                 class="q-ml-xs"
-                 color="red"
-                 @click="remove(inputIndex)">
-            x
-          </q-btn>
-        </div>
-        <component :is="getComponent(input)"
-                   :ref="'formBuilder'+input.type"
-                   v-model:value="input.value"
-                   :loading="loading"
-                   v-bind="input"
-                   @update:value="onValueUpdated"
-                   @input="change($event, inputIndex)"
-                   @change="change($event, inputIndex)"
-                   @onClick="onClick($event, input)"
-                   @onInputClick="onInputClick($event)"
-                   @onKeyPress="onKeyPress($event)">
-          <!--        <template v-for="(_, name) in $slots" #[name]="slotProps">-->
-          <template v-for="name in getComponentSlots(input)"
-                    #[name]="slotProps">
-            <slot :name="name"
-                  v-bind="slotProps || {}" />
-          </template>
-        </component>
+    <div v-for="(input, inputIndex) in inputData"
+         :key="inputIndex"
+         :class="[
+           getComponentCol(input),
+           getComponentName(input),
+           // eslint-disable-next-line vue/comma-dangle
+           getComponentName(input) + '-col',
+         ]"
+         :style="getComponentStyle(input)">
+      <div v-if="showGeneratorButtons">
+        <q-btn size="xs"
+               round
+               color="primary"
+               @click="edit(inputIndex)">
+          edit
+        </q-btn>
+        <q-btn size="xs"
+               round
+               class="q-ml-xs"
+               color="red"
+               @click="remove(inputIndex)">
+          x
+        </q-btn>
       </div>
-    </q-no-ssr>
+      <component :is="getComponent(input)"
+                 :ref="'formBuilder'+input.type"
+                 v-model:value="input.value"
+                 :loading="loading"
+                 v-bind="input"
+                 @update:value="onValueUpdated"
+                 @input="change($event, inputIndex)"
+                 @change="change($event, inputIndex)"
+                 @onClick="onClick($event, input)"
+                 @onInputClick="onInputClick($event)"
+                 @onKeyPress="onKeyPress($event)">
+        <!--        <template v-for="(_, name) in $slots" #[name]="slotProps">-->
+        <template v-for="name in getComponentSlots(input)"
+                  #[name]="slotProps">
+          <slot :name="name"
+                v-bind="slotProps || {}" />
+        </template>
+      </component>
+    </div>
   </div>
 </template>
 
