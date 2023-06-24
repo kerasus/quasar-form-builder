@@ -230,7 +230,9 @@ export default {
         }
 
         if (formHasFileInput) {
-          if (Array.isArray(item.value)) {
+          if (typeof item.value === 'object' && item.value.id) {
+            formData.append(item.name, item.value.id)
+          } else if (Array.isArray(item.value)) {
             item.value.forEach(arrayValue => {
               formData.append(item.name + '[]', arrayValue)
             })

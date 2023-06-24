@@ -10,6 +10,7 @@
             :placeholder="placeholder"
             :disable="disable"
             :readonly="readonly"
+            :filled="filled"
             :loading="loading"
             clearable
             :model-value="file"
