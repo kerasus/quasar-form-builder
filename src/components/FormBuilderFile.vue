@@ -11,7 +11,6 @@
             :disable="disable"
             :filled="filled"
             :readonly="readonly"
-            :filled="filled"
             :loading="loading"
             clearable
             :model-value="file"
