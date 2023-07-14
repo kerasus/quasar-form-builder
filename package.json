@@ -1,6 +1,6 @@
 {
   "name": "quasar-form-builder",
-  "version": "0.1.98",
+  "version": "0.1.99",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "keywords": [
@@ -38,7 +38,8 @@
     "moment-jalaali": "^0.10.0",
     "quasar": "^2.12.0",
     "shvl": "^3.0.0",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue3-tiptap-katex": "^1.1.2"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^7.0.0",
