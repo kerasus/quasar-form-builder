@@ -96,14 +96,14 @@
 </template>
 
 <script>
-import { VueTiptapKatex } from 'vue3-tiptap-katex'
+// import { VueTiptapKatex } from 'vue3-tiptap-katex'
 import inputMixin from '../mixins/inputMixin.js'
 
 export default {
   name: 'FormBuilderTiptapEditor',
-  components: {
-    VueTiptapKatex
-  },
+  // components: {
+  //   VueTiptapKatex
+  // },
   mixins: [inputMixin],
   props: {
     name: {
