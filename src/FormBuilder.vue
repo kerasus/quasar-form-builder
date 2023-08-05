@@ -50,6 +50,7 @@
 <script>
 import { defineAsyncComponent } from 'vue'
 import inputMixin from './mixins/inputMixin'
+import { setAttributeByName } from 'src/assist.js'
 
 export default {
   name: 'FormBuilder',
@@ -185,24 +186,8 @@ export default {
       return inputs.find((input) => input.name === name)
     },
     setInputAttributeByName(name, attribute, value) {
-      this.setAttributeByName(this.inputData, name, attribute, value)
+      setAttributeByName(this.inputData, name, attribute, value)
       this.onValueUpdated()
-    },
-    setAttributeByName(inputData, name, attribute, value) {
-      function setInputAttrByName (inputs) {
-        inputs.forEach(input => {
-          input = this.normalizeInput(input)
-          if (input.type === 'formBuilder') {
-            setInputAttrByName(input.value)
-          } else {
-            if (input.name === name) {
-              input[attribute] = value
-            }
-          }
-        })
-      }
-
-      setInputAttrByName(inputData)
     },
     setInputByName(name, value) {
       this.setInputAttributeByName(name, 'value', value)
