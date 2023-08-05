@@ -50,7 +50,7 @@
 <script>
 import { defineAsyncComponent } from 'vue'
 import inputMixin from './mixins/inputMixin'
-import { setAttributeByName } from 'src/assist.js'
+import { setAttributeByName } from './assist.js'
 
 export default {
   name: 'FormBuilder',
