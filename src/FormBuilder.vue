@@ -185,12 +185,15 @@ export default {
       return inputs.find((input) => input.name === name)
     },
     setInputAttributeByName(name, attribute, value) {
-      const that = this
+      this.setAttributeByName(this.inputData, name, attribute, value)
+      this.onValueUpdated()
+    },
+    setAttributeByName(inputData, name, attribute, value) {
       function setInputAttrByName (inputs) {
         inputs.forEach(input => {
-          input = that.normalizeInput(input)
+          input = this.normalizeInput(input)
           if (input.type === 'formBuilder') {
-            const formBuilderInputs = setInputAttrByName(input.value)
+            setInputAttrByName(input.value)
           } else {
             if (input.name === name) {
               input[attribute] = value
@@ -199,8 +202,7 @@ export default {
         })
       }
 
-      setInputAttrByName(this.inputData)
-      this.onValueUpdated()
+      setInputAttrByName(inputData)
     },
     setInputByName(name, value) {
       this.setInputAttributeByName(name, 'value', value)
