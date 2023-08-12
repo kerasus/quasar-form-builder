@@ -186,6 +186,14 @@ export default {
     }
   },
   methods: {
+    getNormalizedTimeString (dateObject) {
+      const newMiladiDateObject = new Date(dateObject)
+      return newMiladiDateObject.getHours().toString().padStart(2, '0') + ':' + newMiladiDateObject.getMinutes().toString().padStart(2, '0') + ':' + newMiladiDateObject.getSeconds().toString().padStart(2, '0')
+    },
+    getNormalizedDateString (dateObject) {
+      const newMiladiDateObject = new Date(dateObject)
+      return newMiladiDateObject.getFullYear().toString().padStart(4, '0') + '-' + (newMiladiDateObject.getMonth() + 1).toString().padStart(2, '0') + '-' + newMiladiDateObject.getDate().toString().padStart(2, '0')
+    },
     updateDateTime(newMiladi) {
       this.dateTime = {
         date: '',
@@ -196,9 +204,11 @@ export default {
         return
       }
 
+      const newMiladiDateObject = new Date(newMiladi)
+
       if (this.type === 'dateTime') {
-        const miladiData = newMiladi.split(' ')[0]
-        const time = newMiladi.split(' ')[1]
+        const miladiData = this.getNormalizedDateString(newMiladiDateObject)
+        const time = this.getNormalizedTimeString(newMiladiDateObject)
         if (!this.isValidMiladiDate(miladiData) || !this.isValidMiladiTime(time)) {
           return
         }
