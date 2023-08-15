@@ -223,7 +223,7 @@ export default {
     getFormData() {
       const formHasFileInput = this.formHasFileInput()
       const formData = formHasFileInput ? new FormData() : {}
-      const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined')
+      const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue)
       inputs.forEach((item) => {
         if (item.type.toString().toLowerCase() === 'file' && !this.isFile(item.value)) {
           return
@@ -232,10 +232,14 @@ export default {
         if (formHasFileInput) {
           if (Array.isArray(item.value)) {
             item.value.forEach(arrayValue => {
-              formData.append(item.name + '[]', arrayValue)
+              if (arrayValue !== null && typeof arrayValue !== 'undefined') {
+                formData.append(item.name + '[]', arrayValue)
+              }
             })
           } else {
-            formData.append(item.name, item.value)
+            if (item.value !== null && typeof item.value !== 'undefined') {
+              formData.append(item.name, item.value)
+            }
           }
         } else {
           shvl.set(formData, item.name, item.value)
