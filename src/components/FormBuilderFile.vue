@@ -26,23 +26,28 @@
       <q-img v-if="previewMode === 'photo'"
              :src="imageSource"
              placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpaqqqq3t7fFxcW+vr6xsbGjo6OcnJyLKnDGAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRoge3SMW+DMBiE4YsxJqMJtHOTITPeOsLQnaodGImEUMZEkZhRUqn92f0MaTubtfeMh/QGHANEREREREREREREtIJJ0xbH299kp8l8FaGtLdTQ19HjofxZlJ0m1+eBKZcikd9PWtXC5DoDotRO04B9YOvFIXmXLy2jEbiqE6Df7DTleA5socLqvEFVxtJyrpZFWz/pHM2CVte0lS8g2eDe6prOyqPglhzROL+Xye4tmT4WvRcQ2/m81p+/rdguOi8Hc5L/8Qk4vhZzy08DduGt9eVQyP2qoTM1zi0/uf4hvBWf5c77e69Gf798y08L7j0RERERERERERH9P99ZpSVRivB/rgAAAABJRU5ErkJggg=="
-             :class="customClass" />
+             :class="customClass"
+             @click="downloadFile()" />
       <q-icon v-if="previewMode === 'audio'"
               size="2rem"
               name="audiotrack"
-              :class="customClass" />
+              :class="customClass"
+              @click="downloadFile()" />
       <q-icon v-if="previewMode === 'pdf'"
               size="100px"
               name="picture_as_pdf"
-              :class="customClass" />
+              :class="customClass"
+              @click="downloadFile()" />
       <q-icon v-if="previewMode === 'office/word'"
               size="100px"
               name="description"
-              :class="customClass" />
+              :class="customClass"
+              @click="downloadFile()" />
       <q-icon v-if="previewMode === 'office/excel'"
               size="100px"
               name="table_view"
-              :class="customClass" />
+              :class="customClass"
+              @click="downloadFile()" />
     </label>
     <div v-if="caption"
          class="caption text-grey-8">{{ caption }}</div>
@@ -124,6 +129,9 @@ export default {
     this.inputUid = this.getUid()
   },
   methods: {
+    downloadFile () {
+      window.open(this.url, '_blank')
+    },
     onClearInputFile() {
       // this.inputData = this.url
     },
