@@ -34,7 +34,7 @@
               :hide-dropdown-icon="hideDropdownIcon"
               :dropdown-icon="dropdownIcon"
               map-options
-              clearable
+              :clearable="clearable"
               @update:model-value="change($event)"
               @new-value="createValue"
               @filter="filterFn"
@@ -76,6 +76,10 @@ export default {
       validator(value) {
         return ['add' | 'add-unique' | 'toggle' | undefined].includes(value)
       }
+    },
+    clearable: {
+      default: true,
+      type: Boolean
     },
     hideDropdownIcon: {
       default: false,
