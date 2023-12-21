@@ -315,6 +315,13 @@ export default {
           ]
         },
         {
+          type: 'imageCapture',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'col' }
+          ]
+        },
+        {
           type: 'date',
           value: [
             {

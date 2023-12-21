@@ -100,7 +100,10 @@ export default {
     ),
     FormBuilderButton: defineAsyncComponent(() =>
       import('./components/FormBuilderButton.vue')
-    )
+    ),
+    FormBuilderImageCapture: defineAsyncComponent(() =>
+      import('./components/FormBuilderImageCapture.vue')
+    ),
   },
   mixins: [inputMixin],
   props: {
