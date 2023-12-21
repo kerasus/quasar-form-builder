@@ -54,6 +54,8 @@
       </div>
       <FormBuilderImageCapture 
       name="helloworld"></FormBuilderImageCapture>
+
+      <form-builder  v-model:value="inp"></form-builder>
     </q-page-container>
   </q-layout>
 </template>
@@ -75,6 +77,7 @@ export default {
   },
   data() {
     return {
+      inp: [{"name":"name","label":"label","placeholder":"placeholder","col":"col-md-12","inputType":"text","type":"imageCapture","options":[]},{"name":"name","label":"label","placeholder":"placeholder","col":"col-md-12","type":"date","disable":false,"outlined":false,"nowBtn":false,"todayBtn":false,"options":[]}],
       readonly: false,
       disable: false,
       dir: 'ltr',
