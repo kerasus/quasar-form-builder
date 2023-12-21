@@ -52,6 +52,8 @@
                       @onClick="onClick"
                       @keydown="onKePress" />
       </div>
+      <FormBuilderImageCapture 
+      name="helloworld"></FormBuilderImageCapture>
     </q-page-container>
   </q-layout>
 </template>
@@ -61,10 +63,11 @@ import { ref } from 'vue'
 import FormBuilder from './FormBuilder.vue'
 import CustomComponent from './CustomComponent.vue'
 import FormBuilderGenerator from './components/formBuilderGenerator.vue'
+import FormBuilderImageCapture from './components/FormBuilderImageCapture.vue'
 
 export default {
   name: 'LayoutDefault',
-  components: { FormBuilder, FormBuilderGenerator },
+  components: { FormBuilderImageCapture, FormBuilder, FormBuilderGenerator, FormBuilderImageCapture },
   setup() {
     return {
       leftDrawerOpen: ref(false)
