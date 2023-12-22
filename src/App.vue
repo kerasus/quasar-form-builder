@@ -83,6 +83,11 @@ export default {
           col: 'col-12'
         },
         {
+          type: 'ImageCapture',
+          label: 'submit btn',
+          col: 'col-12'
+        },
+        {
           type: 'select',
           dropdownIcon: 'add',
           class: 'testCustomClass',
@@ -702,9 +707,6 @@ export default {
     }
 }
 
-.border {
-
-}
 </style>
 
 <style>
