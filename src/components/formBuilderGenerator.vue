@@ -318,6 +318,8 @@ export default {
           type: 'imageCapture',
           value: [
             { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text',inputType: 'number', value: 'amount' },
             { type: 'text', value: 'col' }
           ]
         },
