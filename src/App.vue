@@ -57,10 +57,12 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import FormBuilder from './FormBuilder.vue'
 import CustomComponent from './CustomComponent.vue'
 import FormBuilderGenerator from './components/formBuilderGenerator.vue'
+
+const CustomComponentInput = shallowRef(CustomComponent)
 
 export default {
   name: 'LayoutDefault',
@@ -227,7 +229,7 @@ export default {
           col: 'col-md-12'
         },
         {
-          type: CustomComponent,
+          type: CustomComponentInput,
           props: { name: 'ali' },
           name: 'ali',
           value: 123,
@@ -235,7 +237,7 @@ export default {
           col: 'col-md-6'
         },
         {
-          type: CustomComponent,
+          type: CustomComponentInput,
           props: { name: 'mostafa' },
           name: 'mostafa',
           value: 456,
