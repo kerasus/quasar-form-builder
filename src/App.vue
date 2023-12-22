@@ -52,10 +52,6 @@
                       @onClick="onClick"
                       @keydown="onKePress" />
       </div>
-      <FormBuilderImageCapture 
-      name="helloworld"></FormBuilderImageCapture>
-
-      <form-builder  v-model:value="inp"></form-builder>
     </q-page-container>
   </q-layout>
 </template>
@@ -65,11 +61,10 @@ import { ref } from 'vue'
 import FormBuilder from './FormBuilder.vue'
 import CustomComponent from './CustomComponent.vue'
 import FormBuilderGenerator from './components/formBuilderGenerator.vue'
-import FormBuilderImageCapture from './components/FormBuilderImageCapture.vue'
 
 export default {
   name: 'LayoutDefault',
-  components: { FormBuilderImageCapture, FormBuilder, FormBuilderGenerator, FormBuilderImageCapture },
+  components: {  FormBuilder, FormBuilderGenerator },
   setup() {
     return {
       leftDrawerOpen: ref(false)
@@ -77,7 +72,6 @@ export default {
   },
   data() {
     return {
-      inp: [{"name":"name","label":"label","placeholder":"placeholder","col":"col-md-12","inputType":"text","type":"imageCapture","options":[]},{"name":"name","label":"label","placeholder":"placeholder","col":"col-md-12","type":"date","disable":false,"outlined":false,"nowBtn":false,"todayBtn":false,"options":[]}],
       readonly: false,
       disable: false,
       dir: 'ltr',
