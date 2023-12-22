@@ -64,7 +64,7 @@ import FormBuilderGenerator from './components/formBuilderGenerator.vue'
 
 export default {
   name: 'LayoutDefault',
-  components: { FormBuilder, FormBuilderGenerator },
+  components: {  FormBuilder, FormBuilderGenerator },
   setup() {
     return {
       leftDrawerOpen: ref(false)
@@ -702,9 +702,6 @@ export default {
     }
 }
 
-.border {
-
-}
 </style>
 
 <style>

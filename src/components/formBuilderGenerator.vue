@@ -115,6 +115,10 @@
         <q-btn class="q-ml-md"
                @click="state = 'addJson'">import json to work on
         </q-btn>
+        
+        <q-btn @click="()=>{sendDataToParent()}">
+          Save form
+        </q-btn>
       </div>
       <div v-if="state === 'chooseType'"
            class="controls">
@@ -171,6 +175,7 @@
         Try to copy paste, not type in here.
         <q-input v-model="importJson" />
       </div>
+      
     </q-card-section>
   </q-card>
 </template>
@@ -311,6 +316,15 @@ export default {
             { type: 'text', value: 'clockIcon' },
             { type: 'boolean', value: 'nowBtn' },
             { type: 'boolean', value: 'todayBtn' },
+            { type: 'text', value: 'col' }
+          ]
+        },
+        {
+          type: 'imageCapture',
+          value: [
+            { type: 'text', value: 'name' },
+            { type: 'text', value: 'label' },
+            { type: 'text',inputType: 'number', value: 'amount' },
             { type: 'text', value: 'col' }
           ]
         },
@@ -522,6 +536,10 @@ export default {
     }
   },
   methods: {
+    
+    sendDataToParent(event){
+      this.$emit('sendDataToParent', JSON.stringify(this.inputs))
+    },
     newInputBuild() {
       this.state = 'chooseConfig'
       this.generatedOptions = []
