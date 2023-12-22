@@ -1,8 +1,8 @@
 
 <template>
 
-  <div class="q-pa-md" :class="customClass">
-    <div class="text-body2">{{ name }} {{ imageSrcs.length + "/" +  amount }}</div>
+  <div class="q-pa-md" :class="customClass" >
+    <div class="text-body2">{{ label }} {{ imageSrcs.length + "/" +  amount }}</div>
   <q-btn-group>
 
       <q-btn 
@@ -17,7 +17,7 @@
   <q-dialog v-model="openModal" maximized>
       <q-card class="q-pa-md">
         <q-card-section>
-          <q-btn icon="close" @click="()=>{openModal = !openModal}">KAPAT</q-btn>
+          <q-btn icon="close" @click="()=>{openModal = !openModal}">CLOSE</q-btn>
         </q-card-section>
         <q-card-section  v-for="i in imageSrcs">
 
@@ -25,7 +25,7 @@
           <img class="setImgWidthHeight" v-show="imageSrcs.length > 0" :src="i" />
         </q-card-section>
         
-        <div class="text-h5" v-show="imageSrcs.length == 0">Fotoğraf çekilmemiş</div>
+        <div class="text-h5" v-show="imageSrcs.length == 0">No pictures are taken</div>
       </q-card>
   </q-dialog>
 </div>
@@ -44,6 +44,10 @@ export default {
 
   props: {
   name: {
+    default: '',
+    type: String
+  },
+  label: {
     default: '',
     type: String
   },

@@ -702,9 +702,6 @@ export default {
     }
 }
 
-.border {
-
-}
 </style>
 
 <style>
