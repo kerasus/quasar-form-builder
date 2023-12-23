@@ -104,13 +104,13 @@ export default {
   },
   watch: {
     value(newValue) {
-      if (newValue === false) {
+      if (!newValue) {
         this.inputData = ''
       }
     }
   },
   created() {
-    if (this.inputData === false) {
+    if (!this.inputData) {
       this.inputData = ''
     }
   }
