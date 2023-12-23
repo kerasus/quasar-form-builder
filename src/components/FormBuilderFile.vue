@@ -10,6 +10,8 @@
             :placeholder="placeholder"
             :disable="disable"
             :filled="filled"
+            :capture="capture"
+            :accept="accept"
             :readonly="readonly"
             :loading="loading"
             clearable
@@ -74,6 +76,14 @@ export default {
     },
     caption: {
       default: null,
+      type: String
+    },
+    capture: {
+      default: undefined,
+      type: String
+    },
+    accept: {
+      default: undefined,
       type: String
     }
   },

@@ -80,6 +80,13 @@ export default {
       loading: false,
       inputs: [
         {
+          type: 'file',
+          capture: 'user',
+          accept: 'image/*',
+          label: 'just capture',
+          col: 'col-12'
+        },
+        {
           type: 'submit',
           label: 'submit btn',
           col: 'col-12'
