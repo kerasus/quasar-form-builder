@@ -317,7 +317,7 @@ export default {
       if (event?.target?.files && event.target.files[0]) {
         this.inputData[inputIndex].value = event.target.files[0]
       } else {
-        this.inputData[inputIndex].value = event
+        this.inputData[inputIndex].value = event.data || event
       }
 
       // this.inputData.value = inputValue
