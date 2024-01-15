@@ -314,10 +314,7 @@ export default {
       return input.type === 'date' || input.type === 'dateTime'
     },
     change(event, inputIndex) {
-      if (typeof event.target !== 'undefined' &&
-          typeof event.target.files !== 'undefined' &&
-          event.target.files[0]
-      ) {
+      if (event?.target?.files && event.target.files[0]) {
         this.inputData[inputIndex].value = event.target.files[0]
       } else {
         this.inputData[inputIndex].value = event
