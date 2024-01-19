@@ -82,6 +82,10 @@ export default {
       default: undefined,
       type: String
     },
+    sendNull: {
+      default: false,
+      type: Boolean
+    },
     accept: {
       default: undefined,
       type: String
@@ -123,6 +127,10 @@ export default {
       if (this.isFile(newValue)) {
         this.file = newValue
       }
+      if (newValue === null && this.sendNull) {
+        this.url = null
+        this.file = newValue
+      }
     },
     inputData(newValue) {
       if (this.isValidURL(newValue) && this.getSourceExtension(newValue) === 'photo') {
@@ -161,10 +169,10 @@ export default {
         return false
       }
       const photoExtensions = /\.(jpeg|jpg|gif|png)$/,
-        audioExtensions = /\.(mp3|ogg)$/,
-        officeWordExtensions = /\.(doc|docx)$/,
-        officeExcelExtensions = /\.(xls|xlsx)$/,
-        pdfExtensions = /\.(pdf)$/
+          audioExtensions = /\.(mp3|ogg)$/,
+          officeWordExtensions = /\.(doc|docx)$/,
+          officeExcelExtensions = /\.(xls|xlsx)$/,
+          pdfExtensions = /\.(pdf)$/
 
       if (filePath.match(photoExtensions) != null) {
         return 'photo'
