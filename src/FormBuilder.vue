@@ -316,9 +316,10 @@ export default {
     change(event, inputIndex) {
       if (event?.target?.files && event.target.files[0]) {
         this.inputData[inputIndex].value = event.target.files[0]
-      } else {
-        this.inputData[inputIndex].value = event.data || event
       }
+      // else {
+      //   this.inputData[inputIndex].value = event.data || event
+      // }
 
       // this.inputData.value = inputValue
       this.$emit('input', this.inputData)
