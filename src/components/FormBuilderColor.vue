@@ -32,8 +32,8 @@
         </q-icon>
       </template>
     </q-input>
-    <component is="style">
-      .q-field[{{colorPickerElCode}}] .q-field__inner .q-field__control {
+    <component :is="'style'">
+      .q-field[uid-code="{{colorPickerElCode}}"] .q-field__inner .q-field__control {
       background: {{ inputData }};
       }
     </component>
@@ -41,7 +41,9 @@
 </template>
 
 <script>
+import { uid } from 'quasar'
 import inputMixin from '../mixins/inputMixin.js'
+
 export default {
   name: 'FormBuilderColor',
   mixins: [inputMixin],
@@ -66,14 +68,16 @@ export default {
     }
   },
   mounted() {
-    this.colorPickerElCode = Array.from(this.$refs.colorPicker.$el.attributes).map(item => item.name).find(item => item.indexOf('data-v-') === 0)
+    this.colorPickerElCode = uid()
+    this.$refs.colorPicker.$el.setAttribute('uid-code', this.colorPickerElCode)
+    // this.colorPickerElCode = Array.from(this.$refs.colorPicker.$el.attributes).map(item => item.name).find(item => item.indexOf('data-v-') === 0)
   },
   methods: {}
 }
 </script>
 
 <style scoped>
-.outsideLabel {
+.form-builder-color {
   background: red;
 }
 </style>
