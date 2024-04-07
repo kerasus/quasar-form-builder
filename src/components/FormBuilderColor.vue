@@ -70,7 +70,6 @@ export default {
   mounted() {
     this.colorPickerElCode = uid()
     this.$refs.colorPicker.$el.setAttribute('uid-code', this.colorPickerElCode)
-    // this.colorPickerElCode = Array.from(this.$refs.colorPicker.$el.attributes).map(item => item.name).find(item => item.indexOf('data-v-') === 0)
   },
   methods: {}
 }

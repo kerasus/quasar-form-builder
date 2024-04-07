@@ -1,9 +1,11 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
+import ColorList from '../../../assets/colorList.js'
 import FormBuilderToggleButton from '../../FormBuilderToggleButton.vue'
 
 const config = defineModel('config')
+const colorList = ref(ColorList.ColorList)
 const newOptionLabel = ref(null)
 const newOptionValue = ref(null)
 const sizeTypes = ref([
@@ -30,6 +32,10 @@ const defaultConfig = {
   flat: false,
   unelevated: false,
   size: 'md',
+  color: 'primary',
+  textColor: 'white',
+  toggleColor: 'primary',
+  toggleTextColor: 'black',
   options: [],
   label: null
 }
@@ -59,6 +65,70 @@ onMounted(() => {
                   :options="sizeTypes"
                   label="size"
                   dense />
+        <q-select v-model="config.color"
+                  label="color"
+                  :options="colorList"
+                  dense>
+          <template #prepend>
+            <div style="width: 50px; height: 100%;"
+                 :class="'bg-' + config.color" />
+          </template>
+          <template #option="scope">
+            <q-item :class="'bg-' + scope.opt"
+                    v-bind="scope.itemProps"
+                    v-on="scope.itemEvents">
+              {{ scope.opt }}
+            </q-item>
+          </template>
+        </q-select>
+        <q-select v-model="config.textColor"
+                  label="textColor"
+                  :options="colorList"
+                  dense>
+          <template #prepend>
+            <div style="width: 50px; height: 100%;"
+                 :class="'bg-' + config.textColor" />
+          </template>
+          <template #option="scope">
+            <q-item :class="'bg-' + scope.opt"
+                    v-bind="scope.itemProps"
+                    v-on="scope.itemEvents">
+              {{ scope.opt }}
+            </q-item>
+          </template>
+        </q-select>
+        <q-select v-model="config.toggleColor"
+                  label="toggleColor"
+                  :options="colorList"
+                  dense>
+          <template #prepend>
+            <div style="width: 50px; height: 100%;"
+                 :class="'bg-' + config.toggleColor" />
+          </template>
+          <template #option="scope">
+            <q-item :class="'bg-' + scope.opt"
+                    v-bind="scope.itemProps"
+                    v-on="scope.itemEvents">
+              {{ scope.opt }}
+            </q-item>
+          </template>
+        </q-select>
+        <q-select v-model="config.toggleTextColor"
+                  label="toggleTextColor"
+                  :options="colorList"
+                  dense>
+          <template #prepend>
+            <div style="width: 50px; height: 100%;"
+                 :class="'bg-' + config.toggleTextColor" />
+          </template>
+          <template #option="scope">
+            <q-item :class="'bg-' + scope.opt"
+                    v-bind="scope.itemProps"
+                    v-on="scope.itemEvents">
+              {{ scope.opt }}
+            </q-item>
+          </template>
+        </q-select>
         <div class="col-md-9 col-12">
           <q-checkbox v-model="config.push"
                       label="push"
