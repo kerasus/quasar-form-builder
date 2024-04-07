@@ -1,5 +1,5 @@
 <template>
-  <div class="form-builder-date-time"
+  <div class="form-builder-date"
        :class="customClass">
     <q-input v-model="displayDateTime"
              :name="name"
@@ -44,28 +44,6 @@
         </q-icon>
       </template>
       <template v-slot:append>
-        <q-icon name="access_time"
-                class="cursor-pointer">
-          <q-popup-proxy v-model="popupTime"
-                         cover
-                         transition-show="scale"
-                         transition-hide="scale">
-            <q-time v-model="dateTime.time"
-                    mask="HH:mm:00"
-                    format24h
-                    :disable="disable"
-                    :title="title ? title : label"
-                    :now-btn="nowBtn"
-                    @update:model-value="onChangeTime">
-              <div class="row items-center justify-end">
-                <q-btn v-close-popup
-                       label="بستن"
-                       color="primary"
-                       flat />
-              </div>
-            </q-time>
-          </q-popup-proxy>
-        </q-icon>
         <q-btn v-if="clearable"
                icon="close"
                flat
@@ -88,7 +66,7 @@ import inputMixin from '../mixins/inputMixin.js'
 // SHOWING IN CALENDAR: JALALI (STRING)
 // OUTPUT: MILADI (STRING)
 export default {
-  name: 'FormBuilderDateTime',
+  name: 'FormBuilderDate',
   mixins: [inputMixin],
   props: {
     name: {
@@ -132,7 +110,6 @@ export default {
     return {
       displayDateTime: '',
       popupDate: false,
-      popupTime: false,
       dateTime: {
         date: '',
         time: ''
@@ -143,69 +120,29 @@ export default {
     }
   },
   methods: {
-    onClickInput (event) {
-      // Get input element
-      const input = event.target
-
-      // Get input element's bounding box
-      const inputRect = input.getBoundingClientRect()
-
-      // Calculate click position relative to input element
-      const clickX = event.clientX - inputRect.left
-
-      // Calculate halfway point
-      const halfwayPoint = inputRect.width / 2
-
-      // Determine which side was clicked
-      if (clickX < halfwayPoint) {
-        this.popupDate = true
-      } else {
-        this.popupTime = true
-      }
+    onClickInput () {
+      this.popupDate = true
     },
     onClear () {
       this.displayDateTime = ''
       this.inputData = null
     },
     onChangeDate (newValue) {
-      this.updateDateTime(newValue, 'date')
+      this.updateDateTime(newValue)
     },
-    onChangeTime (newValue) {
-      this.updateDateTime(newValue, 'time')
-    },
-    updateDateTime (newValue, updateType = 'date') {
-      const defaultDate = moment(Date.now()).format('YYYY-MM-DD')
-      const defaultTime = moment(Date.now()).format('HH:mm:00')
-      const inputData = this.inputData ? this.inputData : defaultDate + ' ' + defaultTime
-      const arrValue = inputData.toString().trim().split(' ')
-      let arrDisplay = new Array(arrValue)
-      if (updateType === 'date') {
-        arrDisplay = [newValue.toString(), arrValue[1]]
-        if (this.calendar === 'persian') {
-          arrValue[0] = this.shamsiToMiladiDate(newValue.toString())
-        } else {
-          arrValue[0] = newValue.toString()
-        }
-      } else if (updateType === 'time') {
-        const timeWithoutSecond = arrValue[1].split(':').splice(0, 2).join(':')
-        if (this.calendar === 'persian') {
-          arrDisplay = [this.miladiToShamsiDate(arrValue[0]), timeWithoutSecond]
-        } else {
-          arrDisplay = [arrValue[0], timeWithoutSecond]
-        }
-        arrValue[1] = newValue.toString()
+    updateDateTime (newValue) {
+      this.displayDateTime = newValue.toString()
+      if (this.calendar === 'persian') {
+        this.inputData = this.shamsiToMiladiDate(newValue.toString())
+      } else {
+        this.inputData = newValue.toString()
       }
 
-      this.displayDateTime = arrDisplay.join(' ').replace(',', ' ')
-      this.inputData = arrValue.join(' ').replace(',', ' ')
       this.change(this.inputData)
     },
 
     shamsiToMiladiDate(date) {
       return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
-    },
-    miladiToShamsiDate(date) {
-      return moment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
     }
   }
 }
