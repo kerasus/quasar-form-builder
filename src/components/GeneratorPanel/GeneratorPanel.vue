@@ -35,6 +35,7 @@ const customConfigsComponent = computed(() => {
   if (!selectedType.value) {
     return null
   }
+
   return defineAsyncComponent(() => import(`./CustomConfigComponents/${selectedType.value}Component.vue`))
 })
 
@@ -62,7 +63,6 @@ const addInput = () => {
 
   formBuilderKey.value = Date.now()
 }
-
 const editInput = () => {
   const updateInput = (inputs, uid) => {
     const inputsLength = inputs.length
@@ -90,7 +90,6 @@ const editInput = () => {
 
   formBuilderKey.value = Date.now()
 }
-
 const onEditInput = (uid) => {
   const getInput = (inputs, uid) => {
     const inputsLength = inputs.length

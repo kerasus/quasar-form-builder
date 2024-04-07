@@ -72,10 +72,10 @@ export default {
     },
     newValueMode: {
       default: undefined,
-      type: String,
-      validator(value) {
-        return ['add' | 'add-unique' | 'toggle' | undefined].includes(value)
-      }
+      type: String
+      // validator(value) {
+      //   return ['add' | 'add-unique' | 'toggle' | undefined].includes(value)
+      // }
     },
     clearable: {
       default: true,

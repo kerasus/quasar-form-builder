@@ -164,7 +164,3 @@ onMounted(() => {
     </input-preview>
   </div>
 </template>
-
-<style scoped>
-
-</style>
