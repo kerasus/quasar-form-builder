@@ -16,32 +16,44 @@
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <form-builder-generator />
-      <q-btn color="blue"
-             class="q-my-md full-width"
-             @click="getData">
-        get data
-      </q-btn>
-      <q-btn color="orange"
-             class="q-my-md full-width"
-             @click="clearInputValues">clear inputs</q-btn>
-      <q-btn color="green"
-             class="q-my-md full-width"
-             @click="changeScreenDirection">change screen direction
-      </q-btn>
-      <q-btn color="red"
-             class="q-my-md full-width"
-             @click="loading=!loading">loading</q-btn>
-      <q-btn @click="mockDataDatePickers()">mock value for date pickers</q-btn>
-      <br>
-      <q-checkbox v-model="readonly"
-                  label="readonly" />
-      <q-checkbox v-model="disable"
-                  label="disable" />
-      <br>
-      <br>
-      <br>
-      <div>test v-model data from first input: {{ inputs[0].value }}</div>
+      <generator-panel />
+      <div class="row">
+        <div class="col-md-3 col-12">
+          <q-btn color="blue"
+                 class="full-width"
+                 @click="getData">
+            get data
+          </q-btn>
+        </div>
+        <div class="col-md-3 col-12">
+          <q-btn color="orange"
+                 class="full-width"
+                 @click="clearInputValues">clear inputs</q-btn>
+        </div>
+        <div class="col-md-3 col-12">
+          <q-btn color="green"
+                 class="full-width"
+                 @click="changeScreenDirection">change screen direction
+          </q-btn>
+        </div>
+        <div class="col-md-3 col-12">
+          <q-btn color="red"
+                 class="full-width"
+                 @click="loading=!loading">loading</q-btn>
+        </div>
+        <div class="col-md-3 col-12">
+          <q-btn class="full-width"
+                 @click="mockDataDatePickers()">mock value for date pickers</q-btn>
+        </div>
+        <div class="col-md-3 col-12">
+          <q-checkbox v-model="readonly"
+                      label="readonly" />
+        </div>
+        <div class="col-md-3 col-12">
+          <q-checkbox v-model="disable"
+                      label="disable" />
+        </div>
+      </div>
       <div class="form-builder q-pa-md q-mx-sm">
         <form-builder ref="formBuilder"
                       v-model:value="inputs"
@@ -60,13 +72,16 @@
 import { ref, shallowRef } from 'vue'
 import FormBuilder from './FormBuilder.vue'
 import CustomComponent from './CustomComponent.vue'
-import FormBuilderGenerator from './components/formBuilderGenerator.vue'
+import GeneratorPanel from './components/GeneratorPanel/GeneratorPanel.vue'
 
 const CustomComponentInput = shallowRef(CustomComponent)
 
 export default {
   name: 'LayoutDefault',
-  components: { FormBuilder, FormBuilderGenerator },
+  components: {
+    FormBuilder,
+    GeneratorPanel
+  },
   setup() {
     return {
       leftDrawerOpen: ref(false)

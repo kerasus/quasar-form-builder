@@ -226,9 +226,9 @@ export default {
       const inputs = this.getValues().filter(item => !item.disable && !item.ignoreValue)
       inputs.forEach((item) => {
         if (
-            item.type.toString().toLowerCase() === 'file' &&
+          item.type.toString().toLowerCase() === 'file' &&
             (
-                (!this.isFile(item.value) && !item.sendNull) ||
+              (!this.isFile(item.value) && !item.sendNull) ||
                 (!this.isFile(item.value) && item.sendNull && item.value !== null)
             )
         ) {

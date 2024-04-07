@@ -14,14 +14,14 @@
         <q-btn size="xs"
                round
                color="primary"
-               @click="edit(inputIndex)">
+               @click="edit(input.uid)">
           edit
         </q-btn>
         <q-btn size="xs"
                round
                class="q-ml-xs"
                color="red"
-               @click="remove(inputIndex)">
+               @click="remove(input.uid)">
           x
         </q-btn>
       </div>
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { uid } from 'quasar'
 import { defineAsyncComponent } from 'vue'
 import inputMixin from './mixins/inputMixin'
 import { setAttributeByName } from './assist.js'
@@ -89,6 +90,12 @@ export default {
     FormBuilderSeparator: defineAsyncComponent(() =>
       import('./components/FormBuilderSeparator.vue')
     ),
+    FormBuilderDate: defineAsyncComponent(() =>
+      import('./components/FormBuilderDate.vue')
+    ),
+    FormBuilderTime: defineAsyncComponent(() =>
+      import('./components/FormBuilderTime.vue')
+    ),
     FormBuilderDateTime: defineAsyncComponent(() =>
       import('./components/FormBuilderDateTime.vue')
     ),
@@ -125,7 +132,7 @@ export default {
       type: Boolean
     }
   },
-  emits: ['input', 'onClick', 'onKeyPress', 'onInputClick'],
+  emits: ['input', 'onClick', 'onKeyPress', 'onInputClick', 'editInput'],
   data() {
     return {
       currentInput: null,
@@ -134,6 +141,13 @@ export default {
       dateTime_Multiple: null,
       dateTime_Time: null
     }
+  },
+  created () {
+    this.inputData = this.value.map(item => {
+      item.uid = uid()
+
+      return item
+    })
   },
   methods: {
     onInputClick(event) {
@@ -247,14 +261,6 @@ export default {
         return 'form-builder-option-group'
       }
 
-      if (input.type === 'dateMultipleRange' ||
-          input.type === 'dateRange' ||
-          input.type === 'date' ||
-          input.type === 'dateTime' ||
-          input.type === 'time'
-      ) {
-        return 'form-builder-date-time'
-      }
       if (input.type === 'toggleButton') {
         return 'form-builder-toggle-button'
       }
@@ -327,12 +333,22 @@ export default {
     onValueUpdated() {
       this.$emit('update:value', this.inputData)
     },
-    remove(i) {
-      this.inputData.splice(i, 1)
+    remove(uid) {
+      const removeInput = (inputs, uid) => {
+        inputs.forEach((input, inputIndex) => {
+          if (input.type === 'formBuilder') {
+            removeInput(input.value, uid)
+          } else if (input.uid === uid) {
+            inputs.splice(inputIndex, 1)
+          }
+        })
+      }
+      removeInput(this.inputData, uid)
+      // this.inputData.splice(i, 1)
       this.onValueUpdated()
     },
-    edit(i) {
-      this.$emit('edit', i)
+    edit(uid) {
+      this.$emit('editInput', uid)
     },
     clearFormBuilderInputValues() {
       const inputs = this.getValues()
