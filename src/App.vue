@@ -150,30 +150,29 @@ export default {
           label: 'toggleButton & optionGroup & checkbox',
           col: 'col-md-12'
         },
-
-        // {
-        //   type: 'ToggleButton',
-        //   name: 'sample-toggle-button',
-        //   label: 'ToggleButton',
-        //   options: [
-        //     {
-        //       label: 'tab1',
-        //       value: '1'
-        //     },
-        //     {
-        //       label: 'tab2',
-        //       value: '2'
-        //     },
-        //     {
-        //       label: 'tab3',
-        //       value: '3'
-        //     }
-        //   ],
-        //   col: 'col-md-3',
-        //   color: 'red',
-        //   textColor: 'black'
-        // },
-
+        {
+          type: 'ToggleButton',
+          name: 'sample-toggle-button',
+          label: 'ToggleButton',
+          options: [
+            {
+              label: 'tab1',
+              value: '1'
+            },
+            {
+              label: 'tab2',
+              value: '2'
+            },
+            {
+              label: 'tab3',
+              value: '3'
+            }
+          ],
+          col: 'col-md-3 col-12',
+          size: 'md',
+          color: 'red',
+          textColor: 'black'
+        },
         {
           type: 'optionGroup',
           name: 'id',

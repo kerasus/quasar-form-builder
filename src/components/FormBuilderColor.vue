@@ -1,8 +1,8 @@
 <template>
   <div class="form-builder-color"
        :class="customClass">
-    <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-    <q-input v-model="inputData"
+    <q-input ref="colorPicker"
+             v-model="inputData"
              :name="name"
              :disable="disable"
              :filled="filled"
@@ -32,6 +32,11 @@
         </q-icon>
       </template>
     </q-input>
+    <component is="style">
+      .q-field[{{colorPickerElCode}}] .q-field__inner .q-field__control {
+      background: {{ inputData }};
+      }
+    </component>
   </div>
 </template>
 
@@ -56,11 +61,19 @@ export default {
   },
   data() {
     return {
+      colorPickerElCode: null,
       showing: false
     }
+  },
+  mounted() {
+    this.colorPickerElCode = Array.from(this.$refs.colorPicker.$el.attributes).map(item => item.name).find(item => item.indexOf('data-v-') === 0)
   },
   methods: {}
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.outsideLabel {
+  background: red;
+}
+</style>
