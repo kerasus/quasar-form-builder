@@ -11,6 +11,8 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['moment-jalaali']
+    include: ['moment-jalaali', 'jalaali-js'], // Include specific dependencies
+    // Forcing to use `module.exports` for specific packages
+    allowNodeBuiltins: ['moment-jalaali']
   }
 })

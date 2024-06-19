@@ -1,6 +1,6 @@
 {
   "name": "quasar-form-builder",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -36,6 +36,8 @@
   "dependencies": {
     "@quasar/extras": "^1.16.9",
     "core-js": "^3.34.0",
+    "jalaali-js": "^1.2.6",
+    "moment": "^2.30.1",
     "moment-jalaali": "^0.10.0",
     "quasar": "^2.14.2",
     "shvl": "^3.0.0",

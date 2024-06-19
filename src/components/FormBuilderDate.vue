@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import * as moment from 'moment-jalaali'
 import inputMixin from '../mixins/inputMixin.js'
+import jMoment from '../assets/moment-jalaali-es.js'
 // NOTE: Value accepted from this component is based on Miladi format
 // you should pass to it Miladi date as string
 // output of this component (which name is 'value') is based on Miladi format.
@@ -142,7 +142,7 @@ export default {
     },
 
     shamsiToMiladiDate(date) {
-      return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
+      return jMoment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
     }
   }
 }

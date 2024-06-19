@@ -78,8 +78,8 @@
 </template>
 
 <script>
-import * as moment from 'moment-jalaali'
 import inputMixin from '../mixins/inputMixin.js'
+import jMoment from '../assets/moment-jalaali-es.js'
 // NOTE: Value accepted from this component is based on Miladi format
 // you should pass to it Miladi date as string
 // output of this component (which name is 'value') is based on Miladi format.
@@ -174,8 +174,8 @@ export default {
       this.updateDateTime(newValue, 'time')
     },
     updateDateTime (newValue, updateType = 'date') {
-      const defaultDate = moment(Date.now()).format('YYYY-MM-DD')
-      const defaultTime = moment(Date.now()).format('HH:mm:00')
+      const defaultDate = jMoment(Date.now()).format('YYYY-MM-DD')
+      const defaultTime = jMoment(Date.now()).format('HH:mm:00')
       const inputData = this.inputData ? this.inputData : defaultDate + ' ' + defaultTime
       const arrValue = inputData.toString().trim().split(' ')
       let arrDisplay = new Array(arrValue)
@@ -202,10 +202,10 @@ export default {
     },
 
     shamsiToMiladiDate(date) {
-      return moment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
+      return jMoment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
     },
     miladiToShamsiDate(date) {
-      return moment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
+      return jMoment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
     }
   }
 }
