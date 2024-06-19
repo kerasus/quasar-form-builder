@@ -1,5 +1,5 @@
 import moment from 'moment'
-import jalaali from 'jalaali-js'
+import * as jalaali from './jalaali.js'
 
 const localFormattingTokens = /(\[[^[]*\])|(\\)?(LTS?|LL?L?L?|l{1,4})/g
 const unitAliases = {
