@@ -1,6 +1,6 @@
 {
   "name": "quasar-form-builder",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Form Builder. Uses Quasar Framework and Vue.",
   "main": "index.js",
   "keywords": [
@@ -24,6 +24,9 @@
       "email": "bahrami.ehssan@gmail.com",
       "url": "https://github.com/Archer-Thane/quasar-form-builder"
     }
+  ],
+  "include": [
+    "types"
   ],
   "homepage": "https://github.com/kerasus/quasar-form-builder",
   "scripts": {
