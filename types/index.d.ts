@@ -1,5 +1,5 @@
 declare module 'quasar-form-builder' {
-    import { Component, DefineComponent } from 'vue';
+    import { Component } from 'vue';
 
     // Define the FormBuilder component
     export const FormBuilder: Component;
