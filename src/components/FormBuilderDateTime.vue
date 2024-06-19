@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import moment from 'moment-jalaali'
+import * as moment from 'moment-jalaali'
 import inputMixin from '../mixins/inputMixin.js'
 // NOTE: Value accepted from this component is based on Miladi format
 // you should pass to it Miladi date as string
