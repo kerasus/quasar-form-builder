@@ -142,6 +142,20 @@ export default {
       showTime: false
     }
   },
+  watch: {
+    value: {
+      handler(newValue) {
+        if (!newValue) {
+          return
+        }
+        const newDate = jMoment(newValue.toString()).format('YYYY-MM-DD')
+        const newTime = jMoment(newValue.toString()).format('HH:mm:00')
+        this.updateDateTime(newDate, 'date')
+        this.updateDateTime(newTime, 'time')
+      },
+      immediate: true
+    }
+  },
   methods: {
     onClickInput (event) {
       // Get input element

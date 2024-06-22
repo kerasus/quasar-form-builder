@@ -1,3 +1,5 @@
+import * as shvl from 'shvl'
+
 export const normalizeInput = (input) => {
   const ignoreValueTypes = [
     'separator',
@@ -47,4 +49,27 @@ export const getFlatInputs = (inputData) => {
 
 export const getInputsByName = (inputs, name) => {
   return getFlatInputs(inputs).find((input) => input.name === name)
+}
+
+export const setInputValues = (responseData, inputs) => {
+  function setValueOfNestedInputData(responseData, inputs) {
+    inputs.forEach((input) => {
+      if (
+        typeof input.responseKey === 'undefined' ||
+          input.responseKey === null
+      ) {
+        return
+      }
+      if (input.type === 'formBuilder') {
+        setValueOfNestedInputData(responseData, input.value)
+        return
+      }
+      input.value = shvl.get(responseData, input.responseKey)
+    })
+  }
+
+  if (!inputs) {
+    inputs = this.inputData
+  }
+  setValueOfNestedInputData(responseData, inputs)
 }

@@ -114,6 +114,17 @@ export default {
       showTime: false
     }
   },
+  watch: {
+    value: {
+      handler(newValue) {
+        if (!newValue) {
+          return
+        }
+        this.updateDateTime(newValue)
+      },
+      immediate: true
+    }
+  },
   methods: {
     onClickInput () {
       this.popupTime = true

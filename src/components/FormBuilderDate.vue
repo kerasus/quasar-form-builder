@@ -119,6 +119,18 @@ export default {
       showTime: false
     }
   },
+  watch: {
+    value: {
+      handler(newValue) {
+        if (!newValue) {
+          return
+        }
+        this.inputData = newValue
+        this.displayDateTime = this.miladiToShamsiDate(newValue.toString())
+      },
+      immediate: true
+    }
+  },
   methods: {
     onClickInput () {
       this.popupDate = true
@@ -143,6 +155,9 @@ export default {
 
     shamsiToMiladiDate(date) {
       return jMoment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
+    },
+    miladiToShamsiDate(date) {
+      return jMoment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
     }
   }
 }
