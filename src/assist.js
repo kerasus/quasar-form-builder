@@ -72,9 +72,47 @@ export const setInputValues = (responseData, inputs) => {
 }
 
 export const getFormData = (inputData) => {
-  const formHasFileInput = formHasFileInput(inputData)
-  const formData = formHasFileInput ? new FormData() : {}
+  const formHasFileInputConst = formHasFileInput(inputData)
+  const formData = formHasFileInputConst ? new FormData() : {}
   const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue)
+
+  const formHasFileInput = (inputData) => {
+    const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
+    const target = inputs.find((item) => item.type === 'file' && isFile(item.value))
+    return !!target
+  }
+  const getValues = (inputData) => {
+    function getFlatInputs (inputs) {
+      let values = []
+      inputs.forEach(input => {
+        input = normalizeInput(input)
+        if (input.type !== 'formBuilder') {
+          values.push(input)
+        } else {
+          const formBuilderInputs = getFlatInputs(input.value)
+          values = values.concat(formBuilderInputs)
+        }
+      })
+      return values
+    }
+
+    return getFlatInputs(inputData)
+  }
+  const normalizeInput = (input) => {
+    const ignoreValueTypes = [
+      'separator',
+      'formBuilder',
+      'button'
+    ]
+    if (ignoreValueTypes.includes(input.type) && typeof input.ignoreValue === 'undefined') {
+      input.ignoreValue = true
+    }
+    return input
+  }
+  const isFile = (file) => {
+    return file instanceof File
+  }
+
   inputs.forEach((item) => {
     if (
       item.type.toString().toLowerCase() === 'file' &&
@@ -86,7 +124,7 @@ export const getFormData = (inputData) => {
       return
     }
 
-    if (formHasFileInput) {
+    if (formHasFileInputConst) {
       if (Array.isArray(item.value)) {
         item.value.forEach(arrayValue => {
           if (arrayValue !== null && typeof arrayValue !== 'undefined') {
@@ -104,41 +142,4 @@ export const getFormData = (inputData) => {
   })
 
   return formData
-}
-
-const formHasFileInput = (inputData) => {
-  const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
-  const target = inputs.find((item) => item.type === 'file' && isFile(item.value))
-  return !!target
-}
-const getValues = (inputData) => {
-  function getFlatInputs (inputs) {
-    let values = []
-    inputs.forEach(input => {
-      input = normalizeInput(input)
-      if (input.type !== 'formBuilder') {
-        values.push(input)
-      } else {
-        const formBuilderInputs = getFlatInputs(input.value)
-        values = values.concat(formBuilderInputs)
-      }
-    })
-    return values
-  }
-
-  return getFlatInputs(inputData)
-}
-const normalizeInput = (input) => {
-  const ignoreValueTypes = [
-    'separator',
-    'formBuilder',
-    'button'
-  ]
-  if (ignoreValueTypes.includes(input.type) && typeof input.ignoreValue === 'undefined') {
-    input.ignoreValue = true
-  }
-  return input
-}
-const isFile = (file) => {
-  return file instanceof File
 }
