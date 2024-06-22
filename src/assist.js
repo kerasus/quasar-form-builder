@@ -72,14 +72,19 @@ export const setInputValues = (responseData, inputs) => {
 }
 
 export const getFormData = (inputData) => {
-  const formHasFileInputConst = formHasFileInput(inputData)
-  const formData = formHasFileInputConst ? new FormData() : {}
-  const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue)
-
-  const formHasFileInput = (inputData) => {
-    const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
-    const target = inputs.find((item) => item.type === 'file' && isFile(item.value))
-    return !!target
+  const isFile = (file) => {
+    return file instanceof File
+  }
+  const normalizeInput = (input) => {
+    const ignoreValueTypes = [
+      'separator',
+      'formBuilder',
+      'button'
+    ]
+    if (ignoreValueTypes.includes(input.type) && typeof input.ignoreValue === 'undefined') {
+      input.ignoreValue = true
+    }
+    return input
   }
   const getValues = (inputData) => {
     function getFlatInputs (inputs) {
@@ -98,20 +103,14 @@ export const getFormData = (inputData) => {
 
     return getFlatInputs(inputData)
   }
-  const normalizeInput = (input) => {
-    const ignoreValueTypes = [
-      'separator',
-      'formBuilder',
-      'button'
-    ]
-    if (ignoreValueTypes.includes(input.type) && typeof input.ignoreValue === 'undefined') {
-      input.ignoreValue = true
-    }
-    return input
+  const formHasFileInput = (inputData) => {
+    const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
+    const target = inputs.find((item) => item.type === 'file' && isFile(item.value))
+    return !!target
   }
-  const isFile = (file) => {
-    return file instanceof File
-  }
+  const formHasFileInputConst = formHasFileInput(inputData)
+  const formData = formHasFileInputConst ? new FormData() : {}
+  const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue)
 
   inputs.forEach((item) => {
     if (
