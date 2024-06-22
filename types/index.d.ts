@@ -68,20 +68,21 @@ declare module 'quasar-form-builder' {
         }
     };
 
-    // Define the FormBuilderAssist functions and types
-    export const normalizeInput: (input: any) => any;
-    export const setAttributeByName: (
-        inputData: any[],
-        name: string,
-        attribute: string,
-        value: any
-    ) => void;
-    export const getFlatInputs: (inputData: any[]) => any[];
-    export const getInputsByName: (inputs: any[], name: string) => any;
-    export const setInputValues: (
-        responseData: any,
-        inputs: any[]
-    ) => void;
+    export const FormBuilderAssist: {
+        normalizeInput: (input: any) => any,
+        setAttributeByName: (
+            inputData: any[],
+            name: string,
+            attribute: string,
+            value: any
+        ) => void,
+        getFlatInputs: (inputData: any[]) => any[],
+        getInputsByName: (inputs: any[], name: string) => any,
+        setInputValues: (
+            responseData: any,
+            inputs: any[]
+        ) => void
+    };
 
     // Define the FormBuilderGenerator component
     export const FormBuilderGenerator: Component;
@@ -91,13 +92,7 @@ declare module 'quasar-form-builder' {
         FormBuilder: Component;
         inputMixin: typeof inputMixin;
         FormBuilderGenerator: Component;
-        FormBuilderAssist: {
-            normalizeInput: typeof normalizeInput;
-            setAttributeByName: typeof setAttributeByName;
-            getFlatInputs: typeof getFlatInputs;
-            getInputsByName: typeof getInputsByName;
-            setInputValues: typeof setInputValues;
-        };
+        FormBuilderAssist: typeof FormBuilderAssist;
     };
 
     export default FormBuilderObject;
