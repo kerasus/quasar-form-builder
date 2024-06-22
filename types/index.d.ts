@@ -1,3 +1,5 @@
+import {getFormData} from "../src/assist";
+
 declare module 'quasar-form-builder' {
     import { Component } from 'vue';
 
@@ -76,6 +78,7 @@ declare module 'quasar-form-builder' {
             attribute: string,
             value: any
         ) => void,
+        getFormData: (inputData: any[]) => object,
         getFlatInputs: (inputData: any[]) => any[],
         getInputsByName: (inputs: any[], name: string) => any,
         setInputValues: (
