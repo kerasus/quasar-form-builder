@@ -26,7 +26,7 @@
         </q-btn>
       </div>
       <component :is="getComponent(input)"
-                 :ref="'formBuilder'+input.type"
+                 :ref="'formBuilder-'+input.name"
                  v-model:value="input.value"
                  :loading="loading"
                  v-bind="input"

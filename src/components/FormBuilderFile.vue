@@ -3,6 +3,7 @@
        :class="customClass">
     <div class="outsideLabel">{{ placeholder ? label : null }}</div>
     <q-file :id="inputUid"
+            ref="input"
             v-model="file"
             :name="name"
             :label="placeholder ? null : label"
@@ -169,10 +170,10 @@ export default {
         return false
       }
       const photoExtensions = /\.(jpeg|jpg|gif|png)$/,
-          audioExtensions = /\.(mp3|ogg)$/,
-          officeWordExtensions = /\.(doc|docx)$/,
-          officeExcelExtensions = /\.(xls|xlsx)$/,
-          pdfExtensions = /\.(pdf)$/
+        audioExtensions = /\.(mp3|ogg)$/,
+        officeWordExtensions = /\.(doc|docx)$/,
+        officeExcelExtensions = /\.(xls|xlsx)$/,
+        pdfExtensions = /\.(pdf)$/
 
       if (filePath.match(photoExtensions) != null) {
         return 'photo'

@@ -2,7 +2,8 @@
   <div class="form-builder-select"
        :class="customClass">
     <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-    <q-select v-model="inputData"
+    <q-select ref="input"
+              v-model="inputData"
               transition-show="jump-down"
               transition-hide="jump-up"
               :name="name"

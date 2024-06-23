@@ -1,7 +1,8 @@
 <template>
   <div class="form-builder-date"
        :class="customClass">
-    <q-input v-model="displayDateTime"
+    <q-input ref="input"
+             v-model="displayDateTime"
              :name="name"
              :loading="loading"
              :filled="filled"
@@ -16,6 +17,7 @@
              :outlined="outlined"
              :class="customClass"
              :input-class="customClass"
+             @clear="onClear"
              @click="onClickInput">
       <template v-slot:prepend>
         <q-icon name="event"
@@ -27,6 +29,7 @@
             <q-date v-model="dateTime.date"
                     :calendar="calendar"
                     mask="YYYY/MM/DD"
+                    today-btn
                     :range="range"
                     :multiple="multiple"
                     :disable="disable"
@@ -138,6 +141,7 @@ export default {
     onClear () {
       this.displayDateTime = ''
       this.inputData = null
+      this.change(this.inputData)
     },
     onChangeDate (newValue) {
       this.updateDateTime(newValue)

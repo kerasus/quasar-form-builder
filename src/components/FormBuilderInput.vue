@@ -2,7 +2,8 @@
   <div class="form-builder-input"
        :class="customClass">
     <div class="outsideLabel">{{ placeholder ? label : null }}</div>
-    <q-input v-model="inputData"
+    <q-input ref="input"
+             v-model="inputData"
              :name="name"
              :filled="filled"
              :rules="rules"
