@@ -126,6 +126,8 @@ export default {
     value: {
       handler(newValue) {
         if (!newValue) {
+          this.inputData = null
+          this.displayDateTime = ''
           return
         }
         this.inputData = newValue

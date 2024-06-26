@@ -148,6 +148,8 @@ export default {
     value: {
       handler(newValue) {
         if (!newValue) {
+          this.inputData = null
+          this.displayDateTime = ''
           return
         }
         const newDate = jMoment(newValue.toString()).format('YYYY-MM-DD')
