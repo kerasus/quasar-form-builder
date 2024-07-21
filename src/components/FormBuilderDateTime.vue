@@ -28,7 +28,6 @@
             <q-date v-model="dateTime.date"
                     :calendar="calendar"
                     mask="YYYY/MM/DD"
-                    today-btn
                     :range="range"
                     :multiple="multiple"
                     :disable="disable"
@@ -81,7 +80,7 @@
 
 <script>
 import inputMixin from '../mixins/inputMixin.js'
-import jMoment from '../assets/moment-jalaali-es.js'
+import jMoment from '../assets/jalali-moment.browser.js'
 // NOTE: Value accepted from this component is based on Miladi format
 // you should pass to it Miladi date as string
 // output of this component (which name is 'value') is based on Miladi format.

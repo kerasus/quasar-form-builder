@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
 import FormBuilderSelect from '../../FormBuilderSelect.vue'
 

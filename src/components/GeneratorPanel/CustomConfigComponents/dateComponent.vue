@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
 import FormBuilderDate from '../../FormBuilderDate.vue'
 
@@ -61,7 +61,3 @@ onMounted(() => {
     </input-preview>
   </div>
 </template>
-
-<style scoped>
-
-</style>

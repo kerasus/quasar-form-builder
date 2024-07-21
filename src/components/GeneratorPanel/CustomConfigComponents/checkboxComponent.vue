@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
 import FormBuilderCheckbox from '../../FormBuilderCheckbox.vue'
 
