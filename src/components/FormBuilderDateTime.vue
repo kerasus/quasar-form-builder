@@ -200,11 +200,12 @@ export default {
       let arrDisplay = new Array(arrValue)
       if (updateType === 'date') {
         arrDisplay = [newValue.toString(), arrValue[1]]
-        if (this.calendar === 'persian') {
-          arrValue[0] = this.shamsiToMiladiDate(newValue.toString())
-        } else {
-          arrValue[0] = newValue.toString()
-        }
+        // if (this.calendar === 'persian') {
+        //   arrValue[0] = this.shamsiToMiladiDate(newValue.toString())
+        // } else {
+        //   arrValue[0] = newValue.toString()
+        // }
+        arrValue[0] = newValue.toString()
       } else if (updateType === 'time') {
         const timeWithoutSecond = arrValue[1].split(':').splice(0, 2).join(':')
         if (this.calendar === 'persian') {
