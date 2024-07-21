@@ -195,6 +195,7 @@ export default {
     updateDateTime (newValue, updateType = 'date') {
       const defaultDate = jMoment(Date.now()).format('YYYY-MM-DD')
       const defaultTime = jMoment(Date.now()).format('HH:mm:00')
+      this.inputData = this.inputData.replace('T', ' ')
       const inputData = this.inputData ? this.inputData : defaultDate + ' ' + defaultTime
       const arrValue = inputData.toString().trim().split(' ')
       let arrDisplay = new Array(arrValue)
