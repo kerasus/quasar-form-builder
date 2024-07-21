@@ -1,6 +1,10 @@
 <template>
   <div class="form-builder-date"
        :class="customClass">
+    <div v-if="outsideLabel"
+         class="outside-label">
+      {{ outsideLabel }}
+    </div>
     <q-input ref="input"
              v-model="displayDateTime"
              :name="name"
@@ -73,6 +77,10 @@ export default {
   props: {
     name: {
       default: '',
+      type: String
+    },
+    outsideLabel: {
+      default: null,
       type: String
     },
     calendar: {

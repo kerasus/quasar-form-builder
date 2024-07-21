@@ -1,6 +1,10 @@
 <template>
   <div class="form-builder-date-time"
        :class="customClass">
+    <div v-if="outsideLabel"
+         class="outside-label">
+      {{ outsideLabel }}
+    </div>
     <q-input ref="input"
              v-model="displayDateTime"
              :name="name"
@@ -94,6 +98,10 @@ export default {
   props: {
     name: {
       default: '',
+      type: String
+    },
+    outsideLabel: {
+      default: null,
       type: String
     },
     calendar: {
@@ -198,8 +206,7 @@ export default {
     updateDateTime (newValue, updateType = 'date') {
       const defaultDate = jMoment(Date.now()).format('YYYY-MM-DD')
       const defaultTime = jMoment(Date.now()).format('HH:mm:00')
-      this.inputData = this.inputData.replace('T', ' ')
-      const inputData = this.inputData ? this.inputData : defaultDate + ' ' + defaultTime
+      const inputData = this.inputData ? this.inputData.replace('T', ' ') : defaultDate + ' ' + defaultTime
       const arrValue = inputData.toString().trim().split(' ')
       let arrDisplay = new Array(arrValue)
       if (updateType === 'date') {
