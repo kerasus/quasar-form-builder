@@ -145,7 +145,11 @@ export default {
       this.change(this.inputData)
     },
     onChangeDate (newValue) {
-      this.updateDateTime(newValue)
+      let gregorianDate = newValue
+      if (this.calendar === 'persian') {
+        gregorianDate = this.shamsiToMiladiDate(newValue.toString())
+      }
+      this.updateDateTime(gregorianDate, 'date')
     },
     updateDateTime (newValue) {
       this.displayDateTime = newValue.toString()
