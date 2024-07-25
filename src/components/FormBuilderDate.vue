@@ -161,11 +161,12 @@ export default {
     },
     updateDateTime (newValue) {
       this.displayDateTime = newValue.toString()
-      if (this.calendar === 'persian') {
-        this.inputData = this.shamsiToMiladiDate(newValue.toString())
-      } else {
-        this.inputData = newValue.toString()
-      }
+      this.inputData = newValue.toString()
+      // if (this.calendar === 'persian') {
+      //   this.inputData = this.shamsiToMiladiDate(newValue.toString())
+      // } else {
+      //   this.inputData = newValue.toString()
+      // }
 
       this.change(this.inputData)
     },
