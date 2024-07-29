@@ -105,6 +105,10 @@ export default {
     outlined: {
       default: false,
       type: Boolean
+    },
+    onChange: {
+      default: (newValue, oldValue) => {},
+      type: Function
     }
   },
   data() {
@@ -135,6 +139,11 @@ export default {
         return this.placeholder
       }
       return ''
+    }
+  },
+  watch: {
+    inputData (newValue, oldValue) {
+      this.onChange(newValue, oldValue)
     }
   },
   methods: {
