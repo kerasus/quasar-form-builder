@@ -106,7 +106,7 @@ export default {
       default: false,
       type: Boolean
     },
-    onChangeSelected: {
+    onChangeValue: {
       default: (newValue, oldValue) => {
       },
       type: Function
@@ -144,7 +144,7 @@ export default {
   },
   watch: {
     inputData(newValue, oldValue) {
-      this.onChangeSelected(newValue, oldValue)
+      this.onChangeValue(newValue, oldValue)
     }
   },
   methods: {
