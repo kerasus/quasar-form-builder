@@ -1,0 +1,1 @@
+import{_ as t,o as s,c as n,A as o}from"./index-BtSYbSW8.js";const r={},c={class:"input-preview"};function a(e,_){return s(),n("div",c,[o(e.$slots,"default",{},void 0,!0)])}const i=t(r,[["render",a],["__scopeId","data-v-4b2bd4ae"]]);export{i as I};
