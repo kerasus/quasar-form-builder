@@ -105,6 +105,11 @@ export default {
     outlined: {
       default: false,
       type: Boolean
+    },
+    onChangeValue: {
+      default: (newValue, oldValue) => {
+      },
+      type: Function
     }
   },
   data() {
@@ -137,10 +142,15 @@ export default {
       return ''
     }
   },
+  watch: {
+    inputData(newValue, oldValue) {
+      this.onChangeValue(newValue, oldValue)
+    }
+  },
   methods: {
     filterFn(val, update) {
       const isObjectList =
-        this.options.length > 0 && typeof this.options[0] === 'object'
+          this.options.length > 0 && typeof this.options[0] === 'object'
 
       if (val === '') {
         update(() => {
