@@ -1,10 +1,11 @@
-import {getFormData} from "../src/assist";
-
 declare module 'quasar-form-builder' {
-    import { Component } from 'vue';
+    import { DefineComponent } from 'vue';
+
+    // Import the FormBuilder component from src/FormBuilder.vue
+    import FormBuilderComponent from '../src/FormBuilder.vue';
 
     // Define the FormBuilder component
-    export const FormBuilder: Component;
+    export const FormBuilder: DefineComponent<{}, {}, any> = FormBuilderComponent;
 
     // Define the inputMixin with a more detailed type based on the provided inputMixin.js file
     export const inputMixin: {
@@ -88,13 +89,13 @@ declare module 'quasar-form-builder' {
     };
 
     // Define the FormBuilderGenerator component
-    export const FormBuilderGenerator: Component;
+    export const FormBuilderGenerator: DefineComponent<{}, {}, any>;
 
     // Define the default export which is an object containing the above exports
     const FormBuilderObject: {
-        FormBuilder: Component;
+        FormBuilder: DefineComponent<{}, {}, any>;
         inputMixin: typeof inputMixin;
-        FormBuilderGenerator: Component;
+        FormBuilderGenerator: DefineComponent<{}, {}, any>;
         FormBuilderAssist: typeof FormBuilderAssist;
     };
 
