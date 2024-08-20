@@ -145,6 +145,13 @@ export default {
   watch: {
     inputData(newValue, oldValue) {
       this.onChangeValue(newValue, oldValue)
+    },
+    options: {
+      handler(newValue) {
+        this.filteredOptions = newValue
+      },
+      immediate: true,
+      deep: true
     }
   },
   methods: {

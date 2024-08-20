@@ -1,7 +1,7 @@
 <template>
   <div class="form-builder-color"
        :class="customClass">
-    <q-input ref="colorPicker"
+    <q-input ref="input"
              v-model="inputData"
              :name="name"
              :disable="disable"
@@ -69,7 +69,7 @@ export default {
   },
   mounted() {
     this.colorPickerElCode = uid()
-    this.$refs.colorPicker.$el.setAttribute('uid-code', this.colorPickerElCode)
+    this.$refs.input.$el.setAttribute('uid-code', this.colorPickerElCode)
   },
   methods: {}
 }

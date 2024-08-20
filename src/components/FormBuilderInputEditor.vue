@@ -4,6 +4,7 @@
        :class="customClass">
     <p v-text="label" />
     <q-editor v-if="!disable && !readonly"
+              ref="input"
               v-model="inputData"
               :class="customClass"
               :content-class="customClass"

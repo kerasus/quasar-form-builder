@@ -1,5 +1,6 @@
 <template>
-  <q-btn :label="label"
+  <q-btn ref="input"
+         :label="label"
          :align="align"
          :flat="flat"
          :color="color"

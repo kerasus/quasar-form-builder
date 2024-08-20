@@ -5,7 +5,8 @@
          class="outsideLabel">
       {{ label }}
     </div>
-    <q-option-group v-model="inputData"
+    <q-option-group ref="input"
+                    v-model="inputData"
                     :name="name"
                     :options="options"
                     :color="color"

@@ -1,7 +1,8 @@
 <template>
   <div class="form-builder-time"
        :class="customClass">
-    <q-input v-model="displayDateTime"
+    <q-input ref="input"
+             v-model="displayDateTime"
              :name="name"
              :loading="loading"
              :filled="filled"

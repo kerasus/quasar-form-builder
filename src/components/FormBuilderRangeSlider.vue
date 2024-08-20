@@ -5,7 +5,8 @@
       {{ label }}: از {{ inputData.min }} تا {{ inputData.max }} ({{ min }} تا
       {{ max }})
     </q-badge>
-    <q-range v-model="inputData"
+    <q-range ref="input"
+             v-model="inputData"
              :name="name"
              :min="min"
              :max="max"

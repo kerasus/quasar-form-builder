@@ -26,7 +26,7 @@
         </q-btn>
       </div>
       <component :is="getComponent(input)"
-                 :ref="'formBuilder-'+input.name"
+                 :ref="'formBuilder-'+input.name+'-'+input.uid"
                  v-model:value="input.value"
                  :loading="loading"
                  v-bind="input"
@@ -142,14 +142,56 @@ export default {
       dateTime_Time: null
     }
   },
-  created () {
-    this.inputData = this.value.map(item => {
-      item.uid = uid()
-
-      return item
-    })
+  created() {
+    this.inputData = this.value
+  },
+  mounted() {
+    this.setUidForInputs()
   },
   methods: {
+    focus() {
+      const firstInput = this.getFirstInput()
+      if (
+        this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid] &&
+          this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid][0] &&
+          this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid][0].$refs?.input
+      ) {
+        const inputRef = this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid][0].$refs.input
+        inputRef.focus()
+      }
+    },
+    getFirstInput() {
+      function checkInputs(inputs) {
+        const inputLength = inputs.length
+        for (let i = 0; i < inputLength; i++) {
+          const input = inputs[i]
+          if (input.type === 'formBuilder') {
+            const targetInput = checkInputs(input.value)
+            if (targetInput) {
+              return targetInput
+            }
+          } else {
+            return input
+          }
+        }
+      }
+
+      return checkInputs(this.inputData)
+    },
+    setUidForInputs() {
+      function checkInputs(inputs) {
+        inputs.forEach((input) => {
+          if (input.type === 'formBuilder') {
+            checkInputs(input.value)
+          } else {
+            input.uid = uid()
+          }
+        })
+      }
+
+      checkInputs(this.inputData)
+      this.onValueUpdated()
+    },
     onInputClick(event) {
       this.$emit('onInputClick', event)
     },
@@ -287,7 +329,7 @@ export default {
         margin: 0
       }
     },
-    getComponentSlots (input) {
+    getComponentSlots(input) {
       const slots = []
       if (typeof input.type !== 'object') {
         return slots

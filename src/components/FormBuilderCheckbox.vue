@@ -1,7 +1,8 @@
 <template>
   <div class="form-builder-checkbox"
        :class="customClass">
-    <q-checkbox v-model="inputData"
+    <q-checkbox ref="input"
+                v-model="inputData"
                 :name="name"
                 :color="color"
                 :label="label"
