@@ -26,7 +26,7 @@
         </q-btn>
       </div>
       <component :is="getComponent(input)"
-                 :ref="'formBuilder-'+input.name+'-'+input.uid"
+                 :ref="(input.type === 'formBuilder' ? 'formBuilder-' : 'input-') +input.name+'-'+input.uid"
                  v-model:value="input.value"
                  :loading="loading"
                  v-bind="input"
@@ -150,15 +150,36 @@ export default {
   },
   methods: {
     focus() {
-      const firstInput = this.getFirstInput()
-      if (
-        this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid] &&
-          this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid][0] &&
-          this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid][0].$refs?.input
-      ) {
-        const inputRef = this.$refs['formBuilder-' + firstInput.name + '-' + firstInput.uid][0].$refs.input
-        inputRef.focus()
+      const firstInputData = this.getFirstInput()
+      const targetKey = 'input-' + firstInputData.name + '-' + firstInputData.uid
+      function checkRefs (refs) {
+        if (!refs) {
+          return
+        }
+        const keys = Object.keys(refs)
+        const keysLength = keys.length
+        for (let i = 0; i < keysLength; i++) {
+          const key = keys[i]
+          if (key.startsWith('formBuilder-')) {
+            if (refs[key] && refs[key][0] && refs[key][0].$refs) {
+              checkRefs(refs[key][0].$refs)
+            }
+          }
+          if (key === targetKey) {
+            const ref = refs[key]
+            if (
+              ref &&
+                ref[0] &&
+                ref[0].$refs?.input
+            ) {
+              const inputRef = ref[0].$refs.input
+              inputRef.focus()
+            }
+          }
+        }
       }
+
+      checkRefs(this.$refs)
     },
     getFirstInput() {
       function checkInputs(inputs) {
@@ -181,10 +202,9 @@ export default {
     setUidForInputs() {
       function checkInputs(inputs) {
         inputs.forEach((input) => {
+          input.uid = uid()
           if (input.type === 'formBuilder') {
             checkInputs(input.value)
-          } else {
-            input.uid = uid()
           }
         })
       }
