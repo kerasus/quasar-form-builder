@@ -132,6 +132,10 @@ export default {
       default: false,
       type: Boolean
     },
+    iso8601: {
+      default: false,
+      type: Boolean
+    },
     todayBtn: {
       default: false,
       type: Boolean
@@ -227,8 +231,9 @@ export default {
         arrValue[1] = newValue.toString()
       }
 
-      this.displayDateTime = arrDisplay.join(' ').replace(',', ' ')
-      this.inputData = arrValue.join(' ').replace(',', ' ')
+      const delimiter = this.iso8601 ? 'T' : ' '
+      this.displayDateTime = arrDisplay.join(delimiter).replace(',', ' ')
+      this.inputData = arrValue.join(delimiter).replace(',', ' ')
       this.change(this.inputData)
     },
 
