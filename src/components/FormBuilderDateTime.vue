@@ -133,7 +133,7 @@ export default {
       type: Boolean
     },
     iso8601: {
-      default: false,
+      default: true,
       type: Boolean
     },
     todayBtn: {
