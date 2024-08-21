@@ -232,7 +232,7 @@ export default {
       }
 
       const delimiter = this.iso8601 ? 'T' : ' '
-      this.displayDateTime = arrDisplay.join(delimiter).replace(',', ' ')
+      this.displayDateTime = arrDisplay.join(' ').replace(',', ' ')
       this.inputData = arrValue.join(delimiter).replace(',', ' ')
       this.change(this.inputData)
     },
