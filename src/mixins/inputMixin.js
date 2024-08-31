@@ -10,6 +10,14 @@ export default {
       default: '',
       type: String
     },
+    error: {
+      default: false,
+      type: Boolean
+    },
+    errorMessage: {
+      default: '',
+      type: String
+    },
     disable: {
       default: false,
       type: Boolean

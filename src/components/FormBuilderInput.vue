@@ -11,6 +11,8 @@
              :label="placeholder ? null : label"
              :stack-label="!!placeholder"
              :type="inputType"
+             :error="error"
+             :error-message="errorMessage"
              :disable="disable"
              :clearable="clearable"
              :loading="loading"

@@ -14,6 +14,8 @@
              dir="ltr"
              :disable="disable"
              :label="placeholder ? null : label"
+             :error="error"
+             :error-message="errorMessage"
              :stack-label="!!placeholder"
              :placeholder="placeholder"
              :rules="rules"

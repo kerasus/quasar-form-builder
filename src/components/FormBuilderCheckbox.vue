@@ -6,6 +6,8 @@
                 :name="name"
                 :color="color"
                 :label="label"
+                :error="error"
+                :error-message="errorMessage"
                 :true-value="trueValue"
                 :false-value="falseValue"
                 :disable="disable || readonly"

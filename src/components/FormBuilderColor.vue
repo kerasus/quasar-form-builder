@@ -7,6 +7,8 @@
              :disable="disable"
              :filled="filled"
              :label="placeholder ? null : label"
+             :error="error"
+             :error-message="errorMessage"
              :stack-label="!!placeholder"
              :outlined="outlined"
              :placeholder="placeholder"

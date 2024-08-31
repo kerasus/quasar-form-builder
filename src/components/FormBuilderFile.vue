@@ -12,6 +12,8 @@
             :disable="disable"
             :filled="filled"
             :capture="capture"
+            :error="error"
+            :error-message="errorMessage"
             :accept="accept"
             :readonly="readonly"
             :loading="loading"

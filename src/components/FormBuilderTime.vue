@@ -6,6 +6,8 @@
              :name="name"
              :loading="loading"
              :filled="filled"
+             :error="error"
+             :error-message="errorMessage"
              readonly
              dir="ltr"
              :disable="disable"

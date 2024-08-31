@@ -11,6 +11,8 @@
               :behavior="behavior"
               :rounded="rounded"
               :outlined="outlined"
+              :error="error"
+              :error-message="errorMessage"
               :option-value="optionValue"
               :option-label="optionLabel"
               :option-disable="optionDisable"
