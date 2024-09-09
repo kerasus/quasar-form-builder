@@ -43,7 +43,7 @@
               @filter="filterFn"
               @click="onClick">
       <template #no-option>
-        <q-item v-if="createNewValue"
+        <q-item v-if="!createNewValue"
                 v-show="showNoOption">
           <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
         </q-item>
