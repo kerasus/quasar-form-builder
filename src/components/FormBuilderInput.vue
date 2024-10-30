@@ -12,6 +12,7 @@
              :stack-label="!!placeholder"
              :type="inputType"
              :error="error"
+             :hint="hint"
              :error-message="errorMessage"
              :disable="disable"
              :clearable="clearable"
@@ -42,6 +43,10 @@ export default {
     autogrow: {
       type: Boolean,
       default: false
+    },
+    hint: {
+      type: String,
+      default: undefined
     },
     value: {
       default: '',
