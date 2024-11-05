@@ -15,6 +15,9 @@
              :hint="hint"
              :error-message="errorMessage"
              :disable="disable"
+             :mask="mask"
+             :fill-mask="fillMask"
+             :reverse-fill-mask="reverseFillMask"
              :clearable="clearable"
              :loading="loading"
              :readonly="readonly"
@@ -33,6 +36,7 @@
 
 <script>
 import inputMixin from '../mixins/inputMixin.js'
+
 export default {
   name: 'FormBuilderInput',
   mixins: [inputMixin],
@@ -56,6 +60,18 @@ export default {
     justNumber: {
       type: Boolean,
       default: false
+    },
+    mask: {
+      type: String,
+      default: undefined
+    },
+    fillMask: {
+      type: String,
+      default: undefined
+    },
+    reverseFillMask: {
+      type: Boolean,
+      default: undefined
     },
     inputType: {
       type: String,
