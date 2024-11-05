@@ -62,7 +62,7 @@
                       :disable="disable"
                       :loading="loading"
                       @onClick="onClick"
-                      @keydown="onKePress" />
+                      @keydown="onKeyPress" />
       </div>
     </q-page-container>
   </q-layout>
@@ -680,7 +680,7 @@ export default {
       // eslint-disable-next-line
       console.log('data', data)
     },
-    onKePress(data) {
+    onKeyPress(data) {
       // eslint-disable-next-line
       console.log('key press', data)
     },

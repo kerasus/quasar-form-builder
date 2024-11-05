@@ -24,6 +24,7 @@
              :class="customClass"
              :input-class="customClass"
              :autogrow="autogrow"
+             :maxlength="maxlength"
              @update:model-value="change($event)"
              @click="onClick"
              @keypress="onKeyPress" />
@@ -43,6 +44,33 @@ export default {
     autogrow: {
       type: Boolean,
       default: false
+    },
+    preventPersian: {
+      type: Boolean,
+      default: false
+    },
+    preventEnglish: {
+      type: Boolean,
+      default: false
+    },
+    justNumber: {
+      type: Boolean,
+      default: false
+    },
+    inputType: {
+      type: String,
+      default: 'text',
+      validator: (value) => {
+        return [
+          'text', 'password', 'textarea', 'email',
+          'search', 'tel', 'file', 'number',
+          'url', 'time', 'date', 'datetime-local'
+        ].includes(value)
+      }
+    },
+    maxlength: {
+      type: [String, Number],
+      default: undefined
     },
     hint: {
       type: String,

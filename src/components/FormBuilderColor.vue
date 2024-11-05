@@ -71,7 +71,9 @@ export default {
   },
   mounted() {
     this.colorPickerElCode = uid()
-    this.$refs.input.$el.setAttribute('uid-code', this.colorPickerElCode)
+    if (this.$refs.input.$el) {
+      this.$refs.input.$el.setAttribute('uid-code', this.colorPickerElCode)
+    }
   },
   methods: {}
 }
