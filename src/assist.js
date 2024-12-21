@@ -110,7 +110,7 @@ export const getFormData = (inputData) => {
   }
   const formHasFileInputConst = formHasFileInput(inputData)
   const formData = formHasFileInputConst ? new FormData() : {}
-  const inputs = getValues(inputData).filter(item => !item.disable && !item.ignoreValue)
+  const inputs = getValues(inputData).filter(item => !item.ignoreValue)
 
   inputs.forEach((item) => {
     if (
