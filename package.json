@@ -1,9 +1,21 @@
 {
   "name": "quasar-form-builder",
   "version": "3.5.1",
-  "description": "Form Builder. Uses Quasar Framework and Vue.",
-  "main": "index.js",
-  "types": "types/index.d.ts",
+  "license": "MIT",
+  "description": "A form builder for Quasar Framework",
+  "main": "./dist/quasar-form-builder.cjs.js",
+  "module": "./dist/quasar-form-builder.es.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kerasus/quasar-form-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kerasus/quasar-form-builder/issues"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "vue",
     "quasar",
@@ -31,19 +43,20 @@
     "lint": "eslint --fix --ext .js,.vue ./",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.9",
+    "@quasar/extras": "^1.16.16",
     "core-js": "^3.34.0",
-    "quasar": "^2.14.2",
+    "quasar": "^2.17.7",
     "shvl": "^3.0.0",
-    "vue": "^3.4.21"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^7.0.0",
-    "@quasar/app-vite": "^1.8.0",
-    "@vitejs/plugin-vue": "^5.0.4",
+    "@quasar/app-vite": "^1.11.0",
+    "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.16",
     "eslint": "8.22.0",
     "eslint-config-standard": "^17.0.0",
@@ -53,12 +66,18 @@
     "eslint-plugin-vue": "^9.9.0",
     "postcss": "^8.4.32",
     "postcss-rtlcss": "^4.0.9",
-    "vite": "^5.2.6",
-    "vite-plugin-eslint": "^1.8.1"
+    "typescript": "^4.9.5",
+    "vite": "^6.0.11",
+    "vite-plugin-eslint": "^1.8.1",
+    "vue-tsc": "^1.2.0"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  }
 }

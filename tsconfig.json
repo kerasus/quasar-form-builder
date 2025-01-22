@@ -3,18 +3,19 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
-    "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    },
-    "types": ["vite/client"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
