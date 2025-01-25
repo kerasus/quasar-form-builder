@@ -2,6 +2,9 @@ import * as shvl from 'shvl'
 
 export default {
   props: {
+    value: {
+      default: null
+    },
     name: {
       default: '',
       type: String
@@ -211,11 +214,10 @@ export default {
       return input
     },
     getValues () {
-      const that = this
-      function getFlatInputs (inputs) {
+      const getFlatInputs = (inputs) => {
         let values = []
         inputs.forEach(input => {
-          input = that.normalizeInput(input)
+          input = this.normalizeInput(input)
           if (input.type !== 'formBuilder') {
             values.push(input)
           } else {

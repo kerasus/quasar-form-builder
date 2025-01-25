@@ -16,7 +16,7 @@
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <generator-panel />
+      <!--      <generator-panel />-->
       <div class="row">
         <div class="col-md-3 col-12">
           <q-btn color="blue"
@@ -28,22 +28,29 @@
         <div class="col-md-3 col-12">
           <q-btn color="orange"
                  class="full-width"
-                 @click="clearInputValues">clear inputs</q-btn>
+                 @click="clearInputValues">
+            clear inputs
+          </q-btn>
         </div>
         <div class="col-md-3 col-12">
           <q-btn color="green"
                  class="full-width"
-                 @click="changeScreenDirection">change screen direction
+                 @click="changeScreenDirection">
+            change screen direction
           </q-btn>
         </div>
         <div class="col-md-3 col-12">
           <q-btn color="red"
                  class="full-width"
-                 @click="loading=!loading">loading</q-btn>
+                 @click="loading=!loading">
+            loading
+          </q-btn>
         </div>
         <div class="col-md-3 col-12">
           <q-btn class="full-width"
-                 @click="mockDataDatePickers()">mock value for date pickers</q-btn>
+                 @click="mockDataDatePickers()">
+            mock value for date pickers
+          </q-btn>
         </div>
         <div class="col-md-3 col-12">
           <q-checkbox v-model="readonly"
@@ -72,15 +79,15 @@
 import { ref, shallowRef } from 'vue'
 import FormBuilder from './FormBuilder.vue'
 import CustomComponent from './CustomComponent.vue'
-import GeneratorPanel from './components/GeneratorPanel/GeneratorPanel.vue'
+// import GeneratorPanel from './components/GeneratorPanel/GeneratorPanel.vue'
 
 const CustomComponentInput = shallowRef(CustomComponent)
 
 export default {
   name: 'LayoutDefault',
   components: {
-    FormBuilder,
-    GeneratorPanel
+    FormBuilder
+    // GeneratorPanel
   },
   setup() {
     return {
@@ -539,31 +546,31 @@ export default {
           col: 'col-md-12'
         },
         // {type: 'separator', size: '0', label: 'لیبل', col: 'col-md-12'},
-        {
-          type: 'inputEditor',
-          name: 'inputEditor',
-          label: 'simple editor',
-          col: 'col-md-12'
-        },
-        {
-          type: 'tiptapEditor',
-          name: 'inputEditor',
-          label: 'advanced editor',
-          options: {
-            bubbleMenu: false,
-            floatingMenu: false,
-            poem: false,
-            reading: false,
-            persianKeyboard: true,
-            mathliveOptions: { smartFence: false },
-            uploadServer: {
-              url: 'imageUrl',
-              instantUpload: true,
-              headers: { Authorization: 'Bearer ' + '65465' }
-            }
-          },
-          col: 'col-md-12'
-        },
+        // {
+        //   type: 'inputEditor',
+        //   name: 'inputEditor',
+        //   label: 'simple editor',
+        //   col: 'col-md-12'
+        // },
+        // {
+        //   type: 'tiptapEditor',
+        //   name: 'inputEditor',
+        //   label: 'advanced editor',
+        //   options: {
+        //     bubbleMenu: false,
+        //     floatingMenu: false,
+        //     poem: false,
+        //     reading: false,
+        //     persianKeyboard: true,
+        //     mathliveOptions: { smartFence: false },
+        //     uploadServer: {
+        //       url: 'imageUrl',
+        //       instantUpload: true,
+        //       headers: { Authorization: 'Bearer ' + '65465' }
+        //     }
+        //   },
+        //   col: 'col-md-12'
+        // },
         {
           type: 'select',
           name: 'NewValueEventSelect',

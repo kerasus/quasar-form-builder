@@ -5,7 +5,9 @@ module.exports = {
   root: true,
 
   parserOptions: {
-    ecmaVersion: '2021' // Allows for the parsing of modern ECMAScript features
+    parser: require.resolve('@typescript-eslint/parser'),
+    project: './tsconfig.json',
+    extraFileExtensions: ['.vue']
   },
 
   env: {
@@ -16,25 +18,17 @@ module.exports = {
 
   // Rules order is important, please avoid shuffling them
   extends: [
-    // Base ESLint recommended rules
-    // 'eslint:recommended',
-
-    // Uncomment any of the lines below to choose desired strictness,
-    // but leave only one uncommented!
-    // See https://eslint.vuejs.org/rules/#available-rules
-    'plugin:vue/vue3-essential', // Priority A: Essential (Error Prevention)
-    // 'plugin:vue/vue3-strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
-    // 'plugin:vue/vue3-recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
-
-    'standard'
-
+    'eslint:recommended', // Base ESLint recommended rules
+    'plugin:@typescript-eslint/recommended', // Use recommended TypeScript rules
+    'plugin:vue/vue3-recommended', // Use recommended Vue 3 rules
+    'standard' // Standard ESLint rules
   ],
 
   plugins: [
+    '@typescript-eslint',
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-files
     // required to lint *.vue files
     'vue'
-
   ],
 
   globals: {
@@ -125,5 +119,13 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'space-before-function-paren': 0
 
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        // Use the path to your tsconfig.json
+        project: './tsconfig.json',
+      },
+    }
   }
 }

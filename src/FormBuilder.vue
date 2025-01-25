@@ -51,7 +51,6 @@
 import { uid } from 'quasar'
 import { defineAsyncComponent } from 'vue'
 import inputMixin from './mixins/inputMixin'
-import { setAttributeByName } from './assist.js'
 
 export default {
   name: 'FormBuilder',
@@ -132,7 +131,7 @@ export default {
       type: Boolean
     }
   },
-  emits: ['input', 'onClick', 'onKeyPress', 'onInputClick', 'editInput'],
+  emits: ['input', 'onClick', 'onKeyPress', 'onInputClick', 'editInput', 'update:value'],
   data() {
     return {
       currentInput: null,
@@ -231,9 +230,7 @@ export default {
       this.$emit('onKeyPress', event)
     },
     setInputValues(responseData, inputs) {
-      const that = this
-
-      function setValueOfNestedInputData(responseData, inputs) {
+      const setValueOfNestedInputData = (responseData, inputs) => {
         inputs.forEach((input) => {
           if (
             typeof input.responseKey === 'undefined' ||
@@ -245,7 +242,7 @@ export default {
             setValueOfNestedInputData(responseData, input.value)
             return
           }
-          input.value = that.getValidChainedObject(
+          input.value = this.getValidChainedObject(
             responseData,
             input.responseKey
           )
@@ -256,17 +253,6 @@ export default {
         inputs = this.inputData
       }
       setValueOfNestedInputData(responseData, inputs)
-    },
-    getInputsByName(name) {
-      const inputs = this.getValues()
-      return inputs.find((input) => input.name === name)
-    },
-    setInputAttributeByName(name, attribute, value) {
-      setAttributeByName(this.inputData, name, attribute, value)
-      this.onValueUpdated()
-    },
-    setInputByName(name, value) {
-      this.setInputAttributeByName(name, 'value', value)
     },
     getValidChainedObject(object, keys) {
       if (!Array.isArray(keys) && typeof keys !== 'string') {
@@ -305,9 +291,6 @@ export default {
         typeof object[keysArray[0]] !== 'undefined' &&
           object[keysArray[0]] !== null
       )
-    },
-    getRefs(input) {
-      return input.type
     },
     getComponent(input) {
       if (typeof input.type === 'object') {
@@ -357,29 +340,6 @@ export default {
 
       const data = (typeof input.type?.data === 'function') ? input.type?.data() : input.type?.data
       return data ? Array.isArray(data.slots) ? data.slots : [] : []
-    },
-    getOptionGroupType(input) {
-      if (input.type === 'optionGroupRadio') {
-        return 'radio'
-      } else if (input.type === 'optionGroupCheckbox') {
-        return 'checkbox'
-      } else if (input.type === 'optionGroupToggle') {
-        return 'toggle'
-      }
-
-      return null
-    },
-    isMultiple(input) {
-      return input.multiple || input.type === 'dateMultipleRange'
-    },
-    isRange(input) {
-      return input.type === 'dateMultipleRange' || input.type === 'dateRange'
-    },
-    isTime(input) {
-      return input.type === 'time' || input.type === 'dateTime'
-    },
-    isDate(input) {
-      return input.type === 'date' || input.type === 'dateTime'
     },
     change(event, inputIndex) {
       if (event?.target?.files && event.target.files[0]) {

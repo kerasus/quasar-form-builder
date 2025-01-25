@@ -1,22 +1,24 @@
-// Import components
 import FormBuilder from './FormBuilder.vue'
 import FormBuilderGenerator from './components/GeneratorPanel/GeneratorPanel.vue'
 
-// Import mixins
+// Mixins
 import inputMixin from './mixins/inputMixin.js'
 
-// Import utilities
+// Utilities
 import * as FormBuilderAssist from './assist.js'
 
-// Export individual components, mixins, and utilities
-export { FormBuilder, FormBuilderGenerator, inputMixin, FormBuilderAssist }
-
-// Export a default object for backward compatibility
-const FormBuilderObject = {
-  FormBuilder,
+// Export components, mixins, and utilities
+export {
   inputMixin,
-  FormBuilderGenerator,
-  FormBuilderAssist
+  FormBuilder,
+  FormBuilderAssist,
+  FormBuilderGenerator
 }
 
-export default FormBuilderObject
+// Default export for backward compatibility
+export default {
+  inputMixin,
+  FormBuilder,
+  FormBuilderAssist,
+  FormBuilderGenerator
+}

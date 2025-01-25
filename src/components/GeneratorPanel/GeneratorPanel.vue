@@ -17,8 +17,8 @@ const typeOptions = ref([
   'rangeSlider',
   'file',
   'inputEditor',
-  'tiptapEditor',
-  'avatar',
+  // 'tiptapEditor',
+  // 'avatar',
   'separator',
   'space'
 ])
@@ -32,8 +32,8 @@ const selectedResponseKey = ref(null)
 const inputs = ref([])
 
 const customConfigsComponent = computed(() => {
-  if (!selectedType.value) {
-    return null
+  if (!selectedType.value || !selectedType.value.length) {
+    return null // or provide a fallback component
   }
 
   return defineAsyncComponent(() => import(`./CustomConfigComponents/${selectedType.value}Component.vue`))
@@ -70,8 +70,7 @@ const editInput = () => {
       const input = inputs[inputIndex]
       if (input.type === 'formBuilder') {
         updateInput(input.value, uid)
-      } else if (input.uid === uid) {
-        debugger
+      } else if (input.uid === uid && selectedType.value) {
         const editData = {
           ...selectedCustomConfig.value,
           type: selectedType.value,
@@ -200,6 +199,7 @@ const onEditInput = (uid) => {
           </q-banner>
           <div class="GeneratorPanel__cusotm-configs">
             <component :is="customConfigsComponent"
+                       v-if="selectedType"
                        v-model:config="selectedCustomConfig" />
           </div>
         </div>

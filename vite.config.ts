@@ -12,7 +12,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src') // Alias for src directory
-    }
+      // '@': '/src'
+    },
+    extensions: ['.ts', '.js', '.vue', '.json'] // Add .ts to the list of extensions
   },
   build: {
     lib: {

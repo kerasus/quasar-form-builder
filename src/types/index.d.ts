@@ -1,7 +1,7 @@
-import { DefineComponent } from 'vue';
+import { DefineComponent } from 'vue'
 
 // Define the FormBuilder component
-export const FormBuilder: DefineComponent<{}, {}, any>;
+export const FormBuilder: DefineComponent<Record<string, never>, Record<string, never>, unknown>
 
 // Define the inputMixin type
 export interface InputMixin {
@@ -30,21 +30,21 @@ export interface InputMixin {
         textColor: { default: string; type: StringConstructor };
         icon: { default: string; type: StringConstructor };
         class: { default: string; type: StringConstructor };
-        options: { default: () => any[]; type: ArrayConstructor };
+        options: { default: () => unknown[]; type: ArrayConstructor };
         hidden: { default: boolean; type: BooleanConstructor };
         src: {
-            default: string | number | boolean | any[];
+            default: string | number | boolean | unknown[];
             type: [StringConstructor, NumberConstructor, BooleanConstructor, ArrayConstructor];
         };
         responseKey: {
-            default: () => any;
+            default: () => unknown;
             type: [StringConstructor, NumberConstructor, BooleanConstructor, ObjectConstructor, ArrayConstructor];
         };
         ripple: { default: boolean | object; type: [BooleanConstructor, ObjectConstructor] };
         outlined: { default: boolean; type: BooleanConstructor };
         flat: { default: boolean; type: BooleanConstructor };
         placeholder: { default: string; type: StringConstructor };
-        rules: { default: () => any[]; type: ArrayConstructor };
+        rules: { default: () => unknown[]; type: ArrayConstructor };
         lazyRules: { default: boolean; type: BooleanConstructor };
         col: { default: string; type: StringConstructor };
         customLabelStyle: { default: string; type: StringConstructor };
@@ -59,37 +59,37 @@ export interface InputMixin {
         value(): void;
     };
     emits: ['update:value', 'input', 'change', 'onClick', 'onKeyPress'];
-    data(): { inputData: any };
+    data(): { inputData: unknown };
     created(): void;
     methods: {
-        onClick(data: any): void;
-        onKeyPress(data: any): void;
-        change(val: any): void;
-        normalizeInput(input: any): any;
-        getValues(): any[];
-        getFormData(): FormData | Record<string, any>;
+        onClick(data: unknown): void;
+        onKeyPress(data: unknown): void;
+        change(val: unknown): void;
+        normalizeInput(input: unknown): unknown;
+        getValues(): unknown[];
+        getFormData(): FormData | Record<string, unknown>;
         formHasFileInput(): boolean;
-        isFile(file: any): boolean;
+        isFile(file: unknown): boolean;
     };
 }
 
 // Define the FormBuilderAssist type
 export interface FormBuilderAssist {
-    normalizeInput: (input: any) => any;
+    normalizeInput: (input: unknown) => unknown;
     setAttributeByName: (
-        inputData: any[],
+        inputData: unknown[],
         name: string,
         attribute: string,
-        value: any
+        value: unknown
     ) => void;
-    getFormData: (inputData: any[]) => object;
-    getFlatInputs: (inputData: any[]) => any[];
-    getInputsByName: (inputs: any[], name: string) => any;
-    setInputValues: (responseData: any, inputs: any[]) => void;
+    getFormData: (inputData: unknown[]) => object;
+    getFlatInputs: (inputData: unknown[]) => unknown[];
+    getInputsByName: (inputs: unknown[], name: string) => unknown;
+    setInputValues: (responseData: unknown, inputs: unknown[]) => void;
 }
 
 // Define the FormBuilderGenerator component
-export const FormBuilderGenerator: DefineComponent<{}, {}, any>;
+export const FormBuilderGenerator: DefineComponent<Record<string, never>, Record<string, never>, unknown>
 
 // Define the default export which is an object containing the above exports
 declare const FormBuilderObject: {
@@ -97,6 +97,6 @@ declare const FormBuilderObject: {
     inputMixin: InputMixin;
     FormBuilderGenerator: typeof FormBuilderGenerator;
     FormBuilderAssist: FormBuilderAssist;
-};
+}
 
-export default FormBuilderObject;
+export default FormBuilderObject
