@@ -12,6 +12,8 @@
             :disable="disable"
             :filled="filled"
             :capture="capture"
+            :error="error"
+            :error-message="errorMessage"
             :accept="accept"
             :readonly="readonly"
             :loading="loading"
@@ -61,7 +63,7 @@
 
 <script>
 import { uid } from 'quasar'
-import inputMixin from '../mixins/inputMixin.js'
+import { inputMixin } from 'quasar-form-builder'
 
 export default {
   name: 'FormBuilderFile',
@@ -170,10 +172,10 @@ export default {
         return false
       }
       const photoExtensions = /\.(jpeg|jpg|gif|png)$/,
-        audioExtensions = /\.(mp3|ogg)$/,
-        officeWordExtensions = /\.(doc|docx)$/,
-        officeExcelExtensions = /\.(xls|xlsx)$/,
-        pdfExtensions = /\.(pdf)$/
+          audioExtensions = /\.(mp3|ogg)$/,
+          officeWordExtensions = /\.(doc|docx)$/,
+          officeExcelExtensions = /\.(xls|xlsx)$/,
+          pdfExtensions = /\.(pdf|PDF)$/
 
       if (filePath.match(photoExtensions) != null) {
         return 'photo'
