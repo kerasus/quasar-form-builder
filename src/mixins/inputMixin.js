@@ -264,7 +264,7 @@ export default {
     },
     formHasFileInput() {
       const inputs = this.getValues().filter(item => !item.ignoreValue && typeof item.value !== 'undefined' && item.value !== null)
-      const target = inputs.find((item) => item.type === 'file' && this.isFile(item.value))
+      const target = inputs.find((item) => item.type === 'file' || this.isFile(item.value))
       return !!target
     },
     isFile(file) {
