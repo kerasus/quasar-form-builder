@@ -37,9 +37,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, onMounted, defineProps } from 'vue'
-import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
 import { useInputComposable } from '@/composables/useInputComposable'
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+import {
+  ref,
+  watch,
+  onMounted,
+  defineProps
+} from 'vue'
 
 // Define the extended type with additional properties.
 export type FormBuilderInputType = FormBuilderGenericInputType & {
