@@ -36,24 +36,17 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { useInputComposable } from '@/composables/useInputComposable'
+<script lang="ts">
 import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
-import {
-  ref,
-  watch,
-  onMounted,
-  defineProps
-} from 'vue'
 
 // Define the extended type with additional properties.
 export type FormBuilderInputType = FormBuilderGenericInputType & {
   value: string | number | null;
-  autogrow: boolean;
+  autogrow?: boolean;
   mask?: string;
   fillMask?: string;
   reverseFillMask?: boolean;
-  inputType: 'text' | 'password' | 'textarea' | 'email' | 'search' | 'tel' | 'file' | 'number' | 'url' | 'time' | 'date' | 'datetime-local';
+  inputType?: 'text' | 'password' | 'textarea' | 'email' | 'search' | 'tel' | 'file' | 'number' | 'url' | 'time' | 'date' | 'datetime-local';
   maxlength?: string | number;
   hint?: string;
   placeholder?: string;
@@ -82,6 +75,15 @@ const FormBuilderInputDefaults: FormBuilderInputType = {
   rounded: false,
   outlined: false
 }
+</script>
+
+<script lang="ts" setup>
+import { useInputComposable } from '@/composables/useInputComposable'
+import {
+  ref,
+  watch,
+  onMounted
+} from 'vue'
 
 const props = withDefaults(
   defineProps<FormBuilderInputType>(),
@@ -115,5 +117,6 @@ function onKeyPress(data: Event) {
 
 onMounted(() => {
   inputData.value = props.value
+  console.log('hiiiiiiiiiii input')
 })
 </script>

@@ -16,23 +16,59 @@
   </div>
 </template>
 
-<script>
-import inputMixin from '../mixins/inputMixin.js'
-export default {
-  name: 'FormBuilderSlider',
-  mixins: [inputMixin],
-  props: {
-    name: {
-      default: '',
-      type: String
-    },
-    value: {
-      default: 0,
-      type: Number
-    }
-  },
-  methods: {}
+<script lang="ts">
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+
+// Define the extended type with additional properties.
+export type FormBuilderSliderType = FormBuilderGenericInputType & {
+  value: number;
+  min: number;
+  max: number;
+}
+
+export const FormBuilderSliderDefaults: FormBuilderSliderType = {
+  value: 0,
+  min: 0,
+  max: 100
 }
 </script>
 
-<style scoped></style>
+<script lang="ts" setup>
+import { useInputComposable } from '@/composables/useInputComposable'
+import {
+  ref,
+  watch,
+  onMounted
+} from 'vue'
+
+const props = withDefaults(
+  defineProps<FormBuilderSliderType>(),
+  {
+    ...FormBuilderGenericInputDefaults,
+    ...FormBuilderSliderDefaults
+  }
+)
+
+const emit = defineEmits(['update:value', 'input', 'change', 'onClick'])
+
+const inputData = ref(props.value)
+
+const { customClass } = useInputComposable(props)
+
+watch(() => props.value, (newValue) => {
+  inputData.value = newValue
+})
+
+function change(val: number) {
+  emit('update:value', val)
+  emit('change', val)
+}
+
+function onClick(data: Event) {
+  emit('onClick', data)
+}
+
+onMounted(() => {
+  inputData.value = props.value
+})
+</script>

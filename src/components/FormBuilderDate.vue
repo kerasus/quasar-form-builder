@@ -25,8 +25,8 @@
              :input-class="customClass"
              @clear="onClear"
              @click="onClickInput">
-      <template v-slot:prepend>
-        <q-icon name="event"
+      <template #prepend>
+        <q-icon :name="calendarIcon"
                 class="cursor-pointer">
           <q-popup-proxy v-model="popupDate"
                          cover
@@ -38,7 +38,7 @@
                     :range="range"
                     :multiple="multiple"
                     :disable="disable"
-                    :title="title ? title : label"
+                    :title="title || label"
                     :today-btn="todayBtn"
                     @update:model-value="onChangeDate">
               <div class="row items-center justify-end">
@@ -51,7 +51,7 @@
           </q-popup-proxy>
         </q-icon>
       </template>
-      <template v-slot:append>
+      <template #append>
         <q-btn v-if="clearable"
                icon="close"
                flat
@@ -63,122 +63,82 @@
   </div>
 </template>
 
-<script>
-import inputMixin from '../mixins/inputMixin.js'
-import jMoment from '../assets/jalali-moment.browser.js'
-// NOTE: Value accepted from this component is based on Miladi format
-// you should pass to it Miladi date as string
-// output of this component (which name is 'value') is based on Miladi format.
-// SO:
-// INPUT: MILADI (STRING)
-// SHOWING IN CALENDAR: JALALI (STRING)
-// OUTPUT: MILADI (STRING)
-export default {
-  name: 'FormBuilderDate',
-  mixins: [inputMixin],
-  props: {
-    name: {
-      default: '',
-      type: String
-    },
-    outsideLabel: {
-      default: null,
-      type: String
-    },
-    calendar: {
-      default: 'persian',
-      type: String
-    },
-    calendarIcon: {
-      default: 'event',
-      type: String
-    },
-    clockIcon: {
-      default: 'access_time',
-      type: String
-    },
-    title: {
-      default: '',
-      type: String
-    },
-    placeholder: {
-      default: '',
-      type: String
-    },
-    value: {
-      default: '',
-      type: String
-    },
-    nowBtn: {
-      default: false,
-      type: Boolean
-    },
-    todayBtn: {
-      default: false,
-      type: Boolean
-    }
-  },
-  data() {
-    return {
-      displayDateTime: '',
-      popupDate: false,
-      dateTime: {
-        date: '',
-        time: ''
-      },
-      rendrKey: Date.now(),
-      showDate: false,
-      showTime: false
-    }
-  },
-  watch: {
-    value: {
-      handler(newValue) {
-        if (!newValue) {
-          this.inputData = null
-          this.displayDateTime = ''
-          return
-        }
-        this.inputData = newValue
-        this.displayDateTime = this.miladiToShamsiDate(newValue.toString())
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    onClickInput () {
-      this.popupDate = true
-    },
-    onClear () {
-      this.displayDateTime = ''
-      this.inputData = null
-      this.change(this.inputData)
-    },
-    onChangeDate (newValue) {
-      let gregorianDate = newValue
-      if (this.calendar === 'persian') {
-        gregorianDate = this.shamsiToMiladiDate(newValue.toString())
-      }
-      this.updateDateTime(gregorianDate, 'date')
-    },
-    updateDateTime (newValue) {
-      this.displayDateTime = newValue.toString()
-      this.inputData = newValue.toString()
-      // if (this.calendar === 'persian') {
-      //   this.inputData = this.shamsiToMiladiDate(newValue.toString())
-      // } else {
-      //   this.inputData = newValue.toString()
-      // }
+<script lang="ts">
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
 
-      this.change(this.inputData)
-    },
+export type FormBuilderDateType = FormBuilderGenericInputType & {
+  value: string;
+  outsideLabel?: string;
+  calendar?: 'persian' | 'gregorian';
+  calendarIcon?: string;
+  title?: string;
+  todayBtn?: boolean;
+};
 
-    shamsiToMiladiDate(date) {
-      return jMoment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
-    },
-    miladiToShamsiDate(date) {
-      return jMoment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
-    }
-  }
+export const FormBuilderDateDefaults: FormBuilderDateType = {
+  ...FormBuilderGenericInputDefaults, // Include generic defaults
+  value: '',
+  outsideLabel: '',
+  calendar: 'persian',
+  calendarIcon: 'event',
+  todayBtn: false
 }
+</script>
+
+<script lang="ts" setup>
+import jMoment from '../assets/jalali-moment.browser.js'
+import { useInputComposable } from '@/composables/useInputComposable'
+import {
+  ref,
+  watch,
+  onMounted
+} from 'vue'
+
+const props = withDefaults(defineProps<FormBuilderDateType>(), FormBuilderDateDefaults)
+
+const emit = defineEmits(['update:value', 'input', 'change', 'clear'])
+
+const displayDateTime = ref('')
+const popupDate = ref(false)
+const dateTime = ref({ date: '' })
+const { customClass } = useInputComposable(props)
+
+watch(() => props.value, (newValue) => {
+  if (!newValue) {
+    displayDateTime.value = ''
+    return
+  }
+  displayDateTime.value = miladiToShamsiDate(newValue)
+}, { immediate: true })
+
+function onClickInput() {
+  popupDate.value = true
+}
+
+function onClear() {
+  displayDateTime.value = ''
+  emit('update:value', '')
+}
+
+function onChangeDate(newValue: string) {
+  const gregorianDate = props.calendar === 'persian' ? shamsiToMiladiDate(newValue) : newValue
+  updateDateTime(gregorianDate)
+}
+
+function updateDateTime(newValue: string) {
+  displayDateTime.value = newValue
+  emit('update:value', newValue)
+}
+
+function shamsiToMiladiDate(date: string) {
+  return jMoment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
+}
+
+function miladiToShamsiDate(date: string) {
+  return jMoment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
+}
+
+onMounted(() => {
+  displayDateTime.value = props.value ? miladiToShamsiDate(props.value) : ''
+})
 </script>

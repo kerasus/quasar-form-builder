@@ -2,7 +2,9 @@
   <div class="form-builder-ToggleButton"
        :class="customClass">
     <div v-if="label"
-         class="outsideLabel">{{ label }}</div>
+         class="outsideLabel">
+      {{ label }}
+    </div>
     <q-btn-toggle v-model="inputData"
                   :name="name"
                   :push="push"
@@ -33,66 +35,95 @@
   </div>
 </template>
 
-<script>
-import inputMixin from '../mixins/inputMixin.js'
-export default {
-  name: 'FormBuilderToggleButton',
-  mixins: [inputMixin],
-  props: {
-    name: {
-      default: '',
-      type: String
-    },
-    value: {
-      default: '',
-      type: [Object, String, Array, Number, Boolean]
-    },
-    toggleTextColor: {
-      default: 'black',
-      type: [String]
-    },
-    toggleColor: {
-      default: 'primary',
-      type: [String]
-    },
-    push: {
-      default: false,
-      type: [Boolean]
-    },
-    glossy: {
-      default: false,
-      type: [Boolean]
-    },
-    clearable: {
-      default: false,
-      type: [Boolean]
-    },
-    unelevated: {
-      default: false,
-      type: [Boolean]
-    },
-    stretch: {
-      default: false,
-      type: [Boolean]
-    },
-    stack: {
-      default: false,
-      type: [Boolean]
-    },
-    spread: {
-      default: false,
-      type: [Boolean]
-    },
-    noWrap: {
-      default: false,
-      type: [Boolean]
-    },
-    noCaps: {
-      default: false,
-      type: [Boolean]
-    }
-  }
+<script lang="ts">
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+
+// Define the extended type with additional properties.
+export type FormBuilderToggleButtonType = FormBuilderGenericInputType & {
+  value: string | number | boolean | object | Array<unknown>;
+  toggleTextColor?: string;
+  toggleColor?: string;
+  push?: boolean;
+  glossy?: boolean;
+  clearable?: boolean;
+  unelevated?: boolean;
+  stretch?: boolean;
+  stack?: boolean;
+  spread?: boolean;
+  noWrap?: boolean;
+  noCaps?: boolean;
+  options?: Array<{ label: string; value: unknown }>;
+  color?: string;
+  inline?: boolean;
+  dense?: boolean;
+  type?: string;
+  textColor?: string;
+  flat?: boolean;
+  outlined?: boolean;
+  rounded?: boolean;
+  size?: string;
+  ripple?: boolean;
+}
+
+export const FormBuilderToggleButtonDefaults: FormBuilderToggleButtonType = {
+  value: '',
+  toggleTextColor: 'black',
+  toggleColor: 'primary',
+  push: false,
+  glossy: false,
+  clearable: false,
+  unelevated: false,
+  stretch: false,
+  stack: false,
+  spread: false,
+  noWrap: false,
+  noCaps: false,
+  options: [],
+  color: '',
+  inline: false,
+  dense: false,
+  type: '',
+  textColor: '',
+  flat: false,
+  outlined: false,
+  rounded: false,
+  size: '',
+  ripple: false
 }
 </script>
 
-<style scoped></style>
+<script lang="ts" setup>
+import { ref, watch, onMounted } from 'vue'
+import { useInputComposable } from '@/composables/useInputComposable'
+
+const props = withDefaults(
+  defineProps<FormBuilderToggleButtonType>(),
+  {
+    ...FormBuilderGenericInputDefaults,
+    ...FormBuilderToggleButtonDefaults
+  }
+)
+
+const emit = defineEmits(['update:value', 'input', 'change', 'onClick'])
+
+const inputData = ref(props.value)
+
+const { customClass } = useInputComposable(props)
+
+watch(() => props.value, (newValue) => {
+  inputData.value = newValue
+})
+
+function change(val: unknown) {
+  emit('update:value', val)
+  emit('change', val)
+}
+
+function onClick(data: Event) {
+  emit('onClick', data)
+}
+
+onMounted(() => {
+  inputData.value = props.value
+})
+</script>

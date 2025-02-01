@@ -15,9 +15,9 @@
                     :type="typeOfInput"
                     :disable="disable || readonly"
                     :class="customClass"
-                    @update:model-value="change($event)"
+                    @update:model-value="change"
                     @click="onClick">
-      <template v-slot:label="opt">
+      <template #label="opt">
         <q-icon v-if="opt.icon"
                 :name="opt.icon"
                 color="teal"
@@ -33,31 +33,50 @@
   </div>
 </template>
 
-<script>
-import inputMixin from '../mixins/inputMixin.js'
-export default {
-  name: 'FormBuilderOptionGroup',
-  mixins: [inputMixin],
-  props: {
-    name: {
-      default: '',
-      type: String
-    },
-    value: {
-      default: null,
-      type: [Object, String, Array, Number, Boolean]
-    },
-    options: {
-      default: () => [], // { label: 'Option 1', value: 'op1' }
-      type: Array
-    },
-    typeOfInput: {
-      default: 'radio', // radio checkbox toggle
-      type: String
-    }
-  },
-  created() {},
-  methods: {}
+<script lang="ts">
+export interface Option {
+  label?: string;
+  value: string | number | boolean;
+  icon?: string;
+  caption?: string;
+}
+
+export interface FormBuilderOptionGroupProps {
+  name?: string;
+  value?: string | number | boolean | object | Array<unknown>;
+  options: Option[];
+  typeOfInput?: 'radio' | 'checkbox' | 'toggle';
+  color?: string;
+  inline?: boolean;
+  dense?: boolean;
+  disable?: boolean;
+  readonly?: boolean;
+  label?: string;
+}
+</script>
+
+<script setup lang="ts">
+import { useInputComposable } from '@/composables/useInputComposable'
+import {
+  ref,
+  watch
+} from 'vue'
+
+const props = defineProps<FormBuilderOptionGroupProps>()
+const emit = defineEmits(['update:value', 'onClick'])
+const inputData = ref(props.value)
+const { customClass } = useInputComposable(props)
+
+watch(() => props.value, (newValue) => {
+  inputData.value = newValue
+})
+
+const change = (val: string | number | boolean | object | Array<unknown>) => {
+  emit('update:value', val)
+}
+
+const onClick = (data: Event) => {
+  emit('onClick', data)
 }
 </script>
 

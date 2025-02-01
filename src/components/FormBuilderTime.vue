@@ -20,7 +20,7 @@
              :class="customClass"
              :input-class="customClass"
              @click="onClickInput">
-      <template v-slot:append>
+      <template #append>
         <q-icon name="access_time"
                 class="cursor-pointer">
           <q-popup-proxy v-model="popupTime"
@@ -54,99 +54,86 @@
   </div>
 </template>
 
-<script>
-import inputMixin from '../mixins/inputMixin.js'
-// NOTE: Value accepted from this component is based on Miladi format
-// you should pass to it Miladi date as string
-// output of this component (which name is 'value') is based on Miladi format.
-// SO:
-// INPUT: MILADI (STRING)
-// SHOWING IN CALENDAR: JALALI (STRING)
-// OUTPUT: MILADI (STRING)
-export default {
-  name: 'FormBuilderTime',
-  mixins: [inputMixin],
-  props: {
-    name: {
-      default: '',
-      type: String
-    },
-    calendar: {
-      default: 'persian',
-      type: String
-    },
-    calendarIcon: {
-      default: 'event',
-      type: String
-    },
-    clockIcon: {
-      default: 'access_time',
-      type: String
-    },
-    title: {
-      default: '',
-      type: String
-    },
-    placeholder: {
-      default: '',
-      type: String
-    },
-    value: {
-      default: '',
-      type: String
-    },
-    nowBtn: {
-      default: false,
-      type: Boolean
-    },
-    todayBtn: {
-      default: false,
-      type: Boolean
-    }
-  },
-  data() {
-    return {
-      displayDateTime: '',
-      popupTime: false,
-      dateTime: {
-        date: '',
-        time: ''
-      },
-      rendrKey: Date.now(),
-      showDate: false,
-      showTime: false
-    }
-  },
-  watch: {
-    value: {
-      handler(newValue) {
-        if (!newValue) {
-          this.inputData = null
-          this.displayDateTime = ''
-          return
-        }
-        this.updateDateTime(newValue)
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    onClickInput () {
-      this.popupTime = true
-    },
-    onClear () {
-      this.displayDateTime = ''
-      this.inputData = null
-    },
-    onChangeTime (newValue) {
-      this.updateDateTime(newValue)
-    },
-    updateDateTime (newValue) {
-      const timeWithoutSecond = newValue ? newValue.split(':').splice(0, 2).join(':') : null
-      this.displayDateTime = timeWithoutSecond
-      this.inputData = newValue ? newValue.toString() : newValue
-      this.change(this.inputData)
-    }
+<script lang="ts">
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+
+// Define the extended type with additional properties.
+export type FormBuilderTimeType = FormBuilderGenericInputType & {
+  value: string;
+  calendar: string;
+  calendarIcon: string;
+  clockIcon: string;
+  title: string;
+  placeholder: string;
+  nowBtn: boolean;
+  todayBtn: boolean;
+}
+
+export const FormBuilderTimeDefaults: FormBuilderTimeType = {
+  value: '',
+  calendar: 'persian',
+  calendarIcon: 'event',
+  clockIcon: 'access_time',
+  title: '',
+  placeholder: '',
+  nowBtn: false,
+  todayBtn: false
+}
+</script>
+
+<script lang="ts" setup>
+import { ref, watch } from 'vue'
+import { useInputComposable } from '@/composables/useInputComposable'
+
+const props = withDefaults(
+  defineProps<FormBuilderTimeType>(),
+  {
+    ...FormBuilderGenericInputDefaults,
+    ...FormBuilderTimeDefaults
   }
+)
+
+const emit = defineEmits(['update:value', 'input', 'change', 'onClick'])
+
+const displayDateTime = ref('')
+const popupTime = ref(false)
+const dateTime = ref({
+  date: '',
+  time: ''
+})
+const inputData = ref(props.value)
+
+const { customClass } = useInputComposable(props)
+
+watch(() => props.value, (newValue) => {
+  if (!newValue) {
+    inputData.value = null
+    displayDateTime.value = ''
+    return
+  }
+  updateDateTime(newValue)
+}, { immediate: true })
+
+function onClickInput() {
+  popupTime.value = true
+}
+
+function onClear() {
+  displayDateTime.value = ''
+  inputData.value = null
+  emit('update:value', null)
+  emit('change', null)
+}
+
+function onChangeTime(newValue: string) {
+  updateDateTime(newValue)
+}
+
+function updateDateTime(newValue: string) {
+  const timeWithoutSecond = newValue ? newValue.split(':').splice(0, 2).join(':') : null
+  displayDateTime.value = timeWithoutSecond || ''
+  inputData.value = newValue || null
+  emit('update:value', inputData.value)
+  emit('change', inputData.value)
 }
 </script>

@@ -47,19 +47,10 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { uid } from 'quasar'
-import { useInputComposable } from '@/composables/useInputComposable'
-import {
-  ref,
-  watch,
-  computed,
-  onMounted,
-  defineEmits,
-  defineProps
-} from 'vue'
+<script lang="ts">
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
 
-export type FormBuilderFileType = {
+export type FormBuilderFileType = FormBuilderGenericInputType & {
   name: string;
   value: string | File | null;
   caption?: string;
@@ -75,9 +66,25 @@ export type FormBuilderFileType = {
   loading?: boolean;
   rules?: unknown[];
   lazyRules?: boolean;
-}
+};
 
-const props = defineProps<FormBuilderFileType>()
+export const FormBuilderFileDefaults: FormBuilderFileType = {
+  ...FormBuilderGenericInputDefaults, // Include generic defaults
+  value: null
+}
+</script>
+
+<script lang="ts" setup>
+import { uid } from 'quasar'
+import { useInputComposable } from '@/composables/useInputComposable'
+import {
+  ref,
+  watch,
+  computed,
+  onMounted
+} from 'vue'
+
+const props = withDefaults(defineProps<FormBuilderFileType>(), FormBuilderFileDefaults)
 const emit = defineEmits(['update:value', 'onClick'])
 const { customClass } = useInputComposable(props)
 

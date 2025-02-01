@@ -1,7 +1,9 @@
 <template>
   <div class="form-builder-select"
        :class="customClass">
-    <div class="outsideLabel">{{ placeholder ? label : null }}</div>
+    <div class="outsideLabel">
+      {{ placeholder ? label : null }}
+    </div>
     <q-select ref="input"
               v-model="inputData"
               transition-show="jump-down"
@@ -19,7 +21,7 @@
               :options="filteredOptions"
               :label="placeholder ? null : label"
               :stack-label="!!placeholder"
-              :placeholder="placeholderSetter"
+              :placeholder="localPlaceholder"
               :rules="rules"
               :icon="icon"
               :lazy-rules="lazyRules"
@@ -45,170 +47,150 @@
       <template #no-option>
         <q-item v-if="!createNewValue"
                 v-show="showNoOption">
-          <q-item-section class="text-grey"> موردی یافت نشد </q-item-section>
+          <q-item-section class="text-grey">
+            موردی یافت نشد
+          </q-item-section>
         </q-item>
       </template>
     </q-select>
   </div>
 </template>
 
-<script>
-import inputMixin from '../mixins/inputMixin.js'
-export default {
-  name: 'FormBuilderSelect',
-  mixins: [inputMixin],
-  props: {
-    name: {
-      default: '',
-      type: String
-    },
-    value: {
-      default: () => [],
-      type: [Array, Object, String, Number, Boolean]
-    },
-    options: {
-      default: () => [],
-      type: Array
-    },
-    optionDisable: {
-      default: 'disable',
-      type: String
-    },
-    newValueMode: {
-      default: undefined,
-      type: String
-      // validator(value) {
-      //   return ['add' | 'add-unique' | 'toggle' | undefined].includes(value)
-      // }
-    },
-    clearable: {
-      default: true,
-      type: Boolean
-    },
-    hideDropdownIcon: {
-      default: false,
-      type: Boolean
-    },
-    dropdownIcon: {
-      default: 'arrow_drop_down',
-      type: String
-    },
-    showNoOption: {
-      default: true,
-      type: Boolean
-    },
-    filled: {
-      default: false,
-      type: Boolean
-    },
-    rounded: {
-      default: false,
-      type: Boolean
-    },
-    outlined: {
-      default: false,
-      type: Boolean
-    },
-    onChangeValue: {
-      default: (newValue, oldValue) => {
-      },
-      type: Function
-    }
-  },
-  data() {
-    return {
-      model: null,
-      filteredOptions: this.options
-    }
-  },
-  computed: {
-    placeholderSetter() {
-      if (this.inputData === null) {
-        return this.placeholder
-      }
-      // in single select after setting value,
-      // v-model type changes to string
-      if (typeof this.inputData === 'string') {
-        return ''
-      }
-      // in the multiple scenario, inputData type changes to Array!
-      if (this.multiple) {
-        if (this.inputData.length === 0) {
-          return this.placeholder
-        }
-        return ''
-      }
-      // be an object
-      if (Object.keys(this.inputData).length === 0) {
-        return this.placeholder
-      }
-      return ''
-    }
-  },
-  watch: {
-    inputData(newValue, oldValue) {
-      this.onChangeValue(newValue, oldValue)
-    },
-    options: {
-      handler(newValue) {
-        this.filteredOptions = newValue
-      },
-      immediate: true,
-      deep: true
-    }
-  },
-  methods: {
-    filterFn(val, update) {
-      const isObjectList =
-          this.options.length > 0 && typeof this.options[0] === 'object'
+<script lang="ts">
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
 
-      if (val === '') {
-        update(() => {
-          this.filteredOptions = this.options
-        })
-        return
-      }
+// Define the extended type with additional properties.
+export type FormBuilderSelectType = FormBuilderGenericInputType & {
+  value: string | number | null | Array<string | number>;
+  options: Array<unknown>;
+  optionValue?: string;
+  optionLabel?: string;
+  optionDisable?: string;
+  placeholder?: string;
+  createNewValue?: boolean;
+  newValueMode?: 'add' | 'add-unique' | 'toggle';
+  lazyRules?: Array<unknown>;
+  clearable?: boolean;
+  hideDropdownIcon?: boolean;
+  dropdownIcon?: string;
+  showNoOption?: boolean;
+  filled?: boolean;
+  rounded?: boolean;
+  outlined?: boolean;
+  multiple?: boolean;
+  useChips?: boolean;
+  behavior?: string;
+  icon?: string;
+  onChangeValue?: (newValue: unknown, oldValue: unknown) => void;
+}
 
-      update(() => {
-        const needle = val.toLowerCase()
-        this.filteredOptions = this.options.filter((v) => {
-          const itemLabel = isObjectList ? v[this.optionLabel] : v
-          return itemLabel.toString().toLowerCase().indexOf(needle) > -1
-        })
-      })
-    },
-    createValue(val, done) {
-      if (!this.createNewValue) {
-        return
-      }
-      // Calling done(var) when new-value-mode is not set or "add", or done(var, "add") adds "var" content to the model
-      // and it resets the input textbox to empty string
-      // ----
-      // Calling done(var) when new-value-mode is "add-unique", or done(var, "add-unique") adds "var" content to the model
-      // only if is not already set
-      // and it resets the input textbox to empty string
-      // ----
-      // Calling done(var) when new-value-mode is "toggle", or done(var, "toggle") toggles the model with "var" content
-      // (adds to model if not already in the model, removes from model if already has it)
-      // and it resets the input textbox to empty string
-      // ----
-      // If "var" content is undefined/null, then it doesn't tampers with the model
-      // and only resets the input textbox to empty string
-
-      // mr kerasus : why im wrote this code?
-      // if (val.length > 0) {
-      //   if (!this.filteredOptions.includes(val)) {
-      //     this.filteredOptions.push(val);
-      //   }
-      //   done(val, 'toggle');
-      // }
-      done(val, this.newValueMode)
-    },
-    test() {
-      this.inputData = []
-    }
-  }
+export const FormBuilderSelectDefaults: FormBuilderSelectType = {
+  ...FormBuilderGenericInputDefaults,
+  value: null,
+  placeholder: undefined,
+  options: [],
+  optionValue: 'value',
+  optionLabel: 'label',
+  optionDisable: 'disable',
+  createNewValue: false,
+  newValueMode: undefined,
+  lazyRules: undefined,
+  clearable: true,
+  hideDropdownIcon: false,
+  dropdownIcon: 'arrow_drop_down',
+  showNoOption: true,
+  filled: false,
+  rounded: false,
+  outlined: false,
+  multiple: false,
+  useChips: false,
+  behavior: 'menu',
+  icon: '',
+  onChangeValue: () => {}
 }
 </script>
 
-<style scoped></style>
+<script lang="ts" setup>
+import { useInputComposable } from '@/composables/useInputComposable'
+import {
+  ref,
+  watch,
+  computed,
+  onMounted
+} from 'vue'
+
+const props = withDefaults(defineProps<FormBuilderSelectType>(), FormBuilderSelectDefaults)
+
+const emit = defineEmits(['update:value', 'input', 'change', 'onClick', 'onKeyPress'])
+
+const inputData = ref(props.value)
+const filteredOptions = ref(props.options)
+
+const { customClass } = useInputComposable(props)
+
+const localPlaceholder = computed(() => {
+  if (inputData.value === null) {
+    return props.placeholder
+  }
+  if (typeof inputData.value === 'string') {
+    return ''
+  }
+  if (props.multiple) {
+    if (inputData.value.length === 0) {
+      return props.placeholder
+    }
+    return ''
+  }
+  if (Object.keys(inputData.value).length === 0) {
+    return props.placeholder
+  }
+  return ''
+})
+
+watch(() => props.value, (newValue) => {
+  inputData.value = newValue
+})
+
+watch(() => props.options, (newValue) => {
+  filteredOptions.value = newValue
+}, { immediate: true, deep: true })
+
+function change(val: unknown) {
+  emit('update:value', val)
+  emit('change', val)
+}
+
+function createValue(val: unknown, done: (val: unknown, mode?: string) => void) {
+  if (!props.createNewValue) {
+    return
+  }
+  done(val, props.newValueMode)
+}
+
+function filterFn(val: string, update: (callback: () => void) => void) {
+  const isObjectList = props.options.length > 0 && typeof props.options[0] === 'object'
+
+  if (val === '') {
+    update(() => {
+      filteredOptions.value = props.options
+    })
+    return
+  }
+
+  update(() => {
+    const needle = val.toLowerCase()
+    filteredOptions.value = props.options.filter((v) => {
+      const itemLabel = isObjectList ? v[props.optionLabel] : v
+      return itemLabel.toString().toLowerCase().indexOf(needle) > -1
+    })
+  })
+}
+
+function onClick(data: Event) {
+  emit('onClick', data)
+}
+
+onMounted(() => {
+  inputData.value = props.value
+})
+</script>

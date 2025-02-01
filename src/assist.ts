@@ -7,8 +7,10 @@ export type FormBuilderGenericInputType = {
   value?: unknown;
   responseKey?: string;
   tabindex?: number;
+  error?: boolean;
+  errorMessage?: string;
   col?: string;
-  customClass: string;
+  customClass?: string;
   label?: string;
   disable?: boolean;
   readonly?: boolean;
@@ -23,7 +25,7 @@ export type FormBuilderGenericInputType = {
 
 export const FormBuilderGenericInputDefaults: FormBuilderGenericInputType = {
   type: 'input', // Default to a text input
-  name: '', // Default to an empty string
+  name: 'sampleInputName', // Default to an empty string
   value: undefined, // Default value to undefined
   responseKey: '', // Default to an empty string
   tabindex: 0, // Default to tabindex 0
@@ -31,6 +33,8 @@ export const FormBuilderGenericInputDefaults: FormBuilderGenericInputType = {
   customClass: '', // Default to an empty string
   label: '', // Default to an empty label
   disable: false, // Default to not disabled
+  error: false, // Default to error
+  errorMessage: undefined, // Default to errorMessage
   readonly: false, // Default to not readonly
   sendNull: false, // Default to false
   ignoreValue: false, // Default to false

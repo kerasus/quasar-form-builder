@@ -23,96 +23,67 @@
          :disable="disable"
          :percentage="percentage"
          :class="customClass"
-         :input-class="customClass"
          @click="onClick"
          @keypress="onKeyPress" />
 </template>
 
-<script>
-import inputMixin from '../mixins/inputMixin.js'
-export default {
-  name: 'FormBuilderButton',
-  mixins: [inputMixin],
-  props: {
-    size: {
-      default: undefined,
-      type: String
-    },
-    padding: {
-      default: undefined,
-      type: String
-    },
-    color: {
-      default: 'primary',
-      type: String
-    },
-    textColor: {
-      default: undefined,
-      type: String
-    },
-    icon: {
-      default: undefined,
-      type: String
-    },
-    iconRight: {
-      default: undefined,
-      type: String
-    },
-    align: {
-      default: undefined,
-      type: String,
-      validator(value) {
-        return ['left' | 'right' | 'center' | 'around' | 'between' | 'evenly' | undefined].includes(value)
-      }
-    },
-    dense: {
-      default: false,
-      type: Boolean
-    },
-    outline: {
-      default: false,
-      type: Boolean
-    },
-    flat: {
-      default: false,
-      type: Boolean
-    },
-    unelevated: {
-      default: false,
-      type: Boolean
-    },
-    rounded: {
-      default: false,
-      type: Boolean
-    },
-    push: {
-      default: false,
-      type: Boolean
-    },
-    square: {
-      default: false,
-      type: Boolean
-    },
-    glossy: {
-      default: false,
-      type: Boolean
-    },
-    noWrap: {
-      default: false,
-      type: Boolean
-    },
-    stack: {
-      default: false,
-      type: Boolean
-    },
-    stretch: {
-      default: false,
-      type: Boolean
-    },
-    percentage: {
-      default: 0,
-      type: Number
-    }
-  }
+<script lang="ts">
+export type FormBuilderButtonProps = {
+  label?: string;
+  align?: 'left' | 'right' | 'center' | 'around' | 'between' | 'evenly';
+  size?: string;
+  padding?: string;
+  color?: string;
+  textColor?: string;
+  icon?: string;
+  iconRight?: string;
+  dense?: boolean;
+  outline?: boolean;
+  flat?: boolean;
+  unelevated?: boolean;
+  rounded?: boolean;
+  push?: boolean;
+  square?: boolean;
+  glossy?: boolean;
+  noWrap?: boolean;
+  stack?: boolean;
+  stretch?: boolean;
+  percentage?: number;
+  loading?: boolean;
+  disable?: boolean;
+};
+</script>
+
+<script lang="ts" setup>
+import { useInputComposable } from '@/composables/useInputComposable'
+
+const props = withDefaults(defineProps<FormBuilderButtonProps>(), {
+  color: 'primary',
+  percentage: 0,
+  dense: false,
+  outline: false,
+  flat: false,
+  unelevated: false,
+  rounded: false,
+  push: false,
+  square: false,
+  glossy: false,
+  noWrap: false,
+  stack: false,
+  stretch: false,
+  loading: false,
+  disable: false
+})
+
+const emit = defineEmits(['onClick', 'onKeyPress'])
+
+const { customClass } = useInputComposable(props)
+
+function onClick(event: Event) {
+  emit('onClick', event)
+}
+
+function onKeyPress(event: Event) {
+  emit('onKeyPress', event)
 }
 </script>
