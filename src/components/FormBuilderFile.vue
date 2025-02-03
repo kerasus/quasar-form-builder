@@ -51,7 +51,6 @@
 import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
 
 export type FormBuilderFileType = FormBuilderGenericInputType & {
-  name: string;
   value: string | File | null;
   caption?: string;
   capture?: string;
@@ -70,7 +69,20 @@ export type FormBuilderFileType = FormBuilderGenericInputType & {
 
 export const FormBuilderFileDefaults: FormBuilderFileType = {
   ...FormBuilderGenericInputDefaults, // Include generic defaults
-  value: null
+  value: null,
+  caption: undefined,
+  capture: undefined,
+  sendNull: false,
+  accept: undefined,
+  placeholder: undefined,
+  disable: false,
+  filled: false,
+  error: false,
+  errorMessage: undefined,
+  readonly: false,
+  loading: false,
+  rules: [],
+  lazyRules: false
 }
 </script>
 
@@ -85,6 +97,7 @@ import {
 } from 'vue'
 
 const props = withDefaults(defineProps<FormBuilderFileType>(), FormBuilderFileDefaults)
+
 const emit = defineEmits(['update:value', 'onClick'])
 const { customClass } = useInputComposable(props)
 

@@ -62,6 +62,8 @@
         </div>
       </div>
       <div class="form-builder q-pa-md q-mx-sm">
+        <q-select v-model="ggg"
+                  :options="[1,2,3,4,5]" />
         <form-builder ref="formBuilder"
                       v-model:value="inputs"
                       class="q-mx-md"
@@ -76,12 +78,12 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import FormBuilder from './FormBuilder.vue'
-// import CustomComponent from './CustomComponent.vue'
+import CustomComponent from './CustomComponent.vue'
 // import GeneratorPanel from './components/GeneratorPanel/GeneratorPanel.vue'
 
-// const CustomComponentInput = shallowRef(CustomComponent)
+const CustomComponentInput = shallowRef(CustomComponent)
 
 export default {
   name: 'LayoutDefault',
@@ -96,19 +98,12 @@ export default {
   },
   data() {
     return {
+      ggg: null,
       readonly: false,
       disable: false,
       dir: 'ltr',
       loading: false,
       inputs: [
-        {
-          type: 'input',
-          name: 'id4',
-          value: null,
-          label: 'input without placeholder',
-          col: 'col-md-6',
-          customLabelStyle: 'color: yellow !important;'
-        }
         // {
         //   type: 'file',
         //   name: 'exampleFileInput',
@@ -116,24 +111,24 @@ export default {
         //   accept: 'image/*',
         //   label: 'just capture',
         //   col: 'col-12'
-        // },
+        // }
         // {
         //   type: 'submit',
         //   label: 'submit btn',
         //   col: 'col-12'
         // },
-        // {
-        //   type: 'select',
-        //   dropdownIcon: 'add',
-        //   class: 'testCustomClass',
-        //   name: 'question_type',
-        //   responseKey: 'data.question_type',
-        //   options: [{ label: 'konkur', value: 'konkur' }, {
-        //     label: 'psychometric',
-        //     value: 'psychometric'
-        //   }, { label: 'descriptive', value: 'descriptive' }],
-        //   col: 'col-12'
-        // },
+        {
+          type: 'select',
+          dropdownIcon: 'add',
+          class: 'testCustomClass',
+          name: 'question_type',
+          responseKey: 'data.question_type',
+          options: [{ label: 'konkur', value: 'konkur' }, {
+            label: 'psychometric',
+            value: 'psychometric'
+          }, { label: 'descriptive', value: 'descriptive' }],
+          col: 'col-12'
+        }
         // {
         //   type: 'separator',
         //   color: 'secondary ',

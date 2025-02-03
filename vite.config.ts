@@ -1,29 +1,30 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
 export default defineConfig({
   plugins: [
     vue({
-      // Enable reactivity transform (optional)
-      reactivityTransform: true
-    })
+      template: { transformAssetUrls },
+    }),
+    quasar({
+      sassVariables: resolve(__dirname, './src/quasar-variables.sass')
+    }),
   ],
   resolve: {
     alias: {
       'src': resolve(__dirname, './src'),
       '@': resolve(__dirname, './src') // Alias for src directory
-      // '@': '/src'
     },
-    extensions: ['.ts', '.js', '.vue', '.json'] // Add .ts to the list of extensions
+    extensions: ['.ts', '.js', '.vue', '.json'],
   },
   build: {
     lib: {
-      // Entry point for the library
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, './src/index.ts'),
       name: 'QuasarFormBuilder',
       fileName: (format) => `quasar-form-builder.${format}.js`,
-      formats: ['es', 'cjs'] // Output both ES and CommonJS modules
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       // Externalize peer dependencies

@@ -57,17 +57,20 @@ const componentMap = {
   formBuilder: defineAsyncComponent(() => import('./FormBuilder.vue')),
   optionGroupRadio: defineAsyncComponent(() => import('./components/FormBuilderOptionGroup.vue')),
   optionGroupCheckbox: defineAsyncComponent(() => import('./components/FormBuilderOptionGroup.vue')),
-  textInput: defineAsyncComponent(() => import('./components/FormBuilderTextInput.vue')),
-  numberInput: defineAsyncComponent(() => import('./components/FormBuilderNumberInput.vue')),
-  selectInput: defineAsyncComponent(() => import('./components/FormBuilderSelect.vue')),
-  fileInput: defineAsyncComponent(() => import('./components/FormBuilderFile.vue')),
-  textarea: defineAsyncComponent(() => import('./components/FormBuilderTextarea.vue')),
-  datePicker: defineAsyncComponent(() => import('./components/FormBuilderDatePicker.vue')),
-  switchInput: defineAsyncComponent(() => import('./components/FormBuilderSwitch.vue')),
-  slider: defineAsyncComponent(() => import('./components/FormBuilderSlider.vue')),
+  optionGroupToggle: defineAsyncComponent(() => import('./components/FormBuilderOptionGroup.vue')),
+  toggle: defineAsyncComponent(() => import('./components/FormBuilderToggleButton.vue')),
+  input: defineAsyncComponent(() => import('./components/FormBuilderInput.vue')),
+  dateTime: defineAsyncComponent(() => import('./components/FormBuilderDateTime.vue')),
+  date: defineAsyncComponent(() => import('./components/FormBuilderDate.vue')),
+  time: defineAsyncComponent(() => import('./components/FormBuilderTime.vue')),
+  select: defineAsyncComponent(() => import('./components/FormBuilderSelect.vue')),
+  button: defineAsyncComponent(() => import('./components/FormBuilderButton.vue')),
   checkbox: defineAsyncComponent(() => import('./components/FormBuilderCheckbox.vue')),
-  radioGroup: defineAsyncComponent(() => import('./components/FormBuilderRadioGroup.vue')),
-  toggle: defineAsyncComponent(() => import('./components/FormBuilderToggle.vue'))
+  color: defineAsyncComponent(() => import('./components/FormBuilderColor.vue')),
+  file: defineAsyncComponent(() => import('./components/FormBuilderFile.vue')),
+  rangeSlider: defineAsyncComponent(() => import('./components/FormBuilderRangeSlider.vue')),
+  separator: defineAsyncComponent(() => import('./components/FormBuilderSeparator.vue')),
+  slider: defineAsyncComponent(() => import('./components/FormBuilderSlider.vue'))
 }
 
 const props = withDefaults(defineProps<{
@@ -77,6 +80,7 @@ const props = withDefaults(defineProps<{
   showGeneratorButtons?: boolean,
   loading?: boolean
 }>(), {
+  value: [],
   gutterSize: 'md',
   disable: false,
   showGeneratorButtons: false,
@@ -185,61 +189,6 @@ const getComponent = (input: unknown) => {
   }
 
   return componentMap[input.type] || null
-
-  // // Dynamically import based on the input type
-  // switch (input.type) {
-  //   case 'formBuilder':
-  //     return defineAsyncComponent(() => import('./FormBuilder.vue'))
-  //
-  //   case 'optionGroupRadio':
-  //   case 'optionGroupCheckbox':
-  //   case 'optionGroupToggle':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderOptionGroup.vue'))
-  //
-  //   case 'toggleButton':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderToggleButton.vue'))
-  //
-  //   case 'input':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderInput.vue'))
-  //
-  //   case 'dateTime':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderDateTime.vue'))
-  //
-  //   case 'select':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderSelect.vue'))
-  //
-  //   case 'button':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderButton.vue'))
-  //
-  //   case 'checkbox':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderCheckbox.vue'))
-  //
-  //   case 'color':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderColor.vue'))
-  //
-  //   case 'date':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderDate.vue'))
-  //
-  //   case 'file':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderFile.vue'))
-  //
-  //   case 'rangeSlider':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderRangeSlider.vue'))
-  //
-  //   case 'separator':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderSeparator.vue'))
-  //
-  //   case 'slider':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderSlider.vue'))
-  //
-  //   case 'time':
-  //     return defineAsyncComponent(() => import('./components/FormBuilderTime.vue'))
-  //
-  //   default:
-  //     return null
-  //     // Optional: Attempt dynamic import as a fallback
-  //     // return defineAsyncComponent(() => import(`./components/FormBuilder${input.type}.vue`))
-  }
 }
 
 const getComponentName = (input: unknown) => {
@@ -273,10 +222,10 @@ const getComponentSlots = (input: unknown) => {
 }
 
 const change = (event: Event, inputIndex: number) => {
-  if (event?.target?.files && event.target.files[0]) {
-    inputData.value[inputIndex].value = event.target.files[0]
-  }
-  emit('input', inputData.value)
+  // if (event?.target?.files && event.target.files[0]) {
+  //   inputData.value[inputIndex].value = event.target.files[0]
+  // }
+  // emit('input', inputData.value)
 }
 
 const onValueUpdated = () => {
