@@ -1,6 +1,6 @@
 <script setup>
 import { copyToClipboard } from 'quasar'
-import FormBuilder from '../../FormBuilder.vue'
+import FormBuilder from '../FormBuilder.vue'
 import { ref, defineAsyncComponent, computed } from 'vue'
 
 const typeOptions = ref([

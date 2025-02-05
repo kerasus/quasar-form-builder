@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
-import FormBuilderColor from '../../FormBuilderColor.vue'
+import FormBuilderColor from '../../controls/FormBuilderColor.vue'
 
 const config = defineModel('config')
 const defaultConfig = {

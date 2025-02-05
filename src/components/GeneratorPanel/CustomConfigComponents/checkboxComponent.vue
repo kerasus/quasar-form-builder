@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
-import FormBuilderCheckbox from '../../FormBuilderCheckbox.vue'
+import FormBuilderCheckbox from '../../controls/FormBuilderCheckbox.vue'
 
 const config = defineModel('config')
 const defaultConfig = {

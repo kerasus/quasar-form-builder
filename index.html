@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="/favicon.ico">
-    <title>Quasar Form Builder</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your App</title>
+    <!-- Quasar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.17.7/dist/quasar.prod.css" rel="stylesheet">
+    <!-- Your package's CSS if any -->
+    <link href="path/to/your-package.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.17.7/dist/quasar.rtl.prod.css" rel="stylesheet" type="text/css">
+</head>
+<body>
     <div id="app"></div>
+    <!-- Vue.js -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>-->
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.prod.js"></script>
+    <!-- Quasar UMD -->
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.17.7/dist/quasar.umd.prod.js"></script>
+    <!-- Your package UMD -->
+    <script src="path/to/quasar-form-builder.umd.js"></script>
+    <!-- Your main script -->
     <script type="module" src="/src/main.ts"></script>
-  </body>
+</body>
 </html>

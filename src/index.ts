@@ -1,24 +1,40 @@
-import FormBuilder from './FormBuilder.vue'
-import FormBuilderGenerator from './components/GeneratorPanel/GeneratorPanel.vue'
+import { defineAppExtension } from '@quasar/app-vite'
 
-// Mixins
-import inputMixin from './mixins/inputMixin.js'
+export default defineAppExtension((api) => {
+  // Ensure compatibility with the host app's Quasar version
+  api.compatibleWith('quasar', '^2.0.0')
 
-// Utilities
-import * as FormBuilderAssist from './assist.js'
+  // Extend Quasar configuration
+  api.extendQuasarConf((conf) => {
+    // Register the boot file
+    conf.boot.push('~quasar-app-extension-form-builder/src/boot/form-builder')
 
-// Export components, mixins, and utilities
-export {
-  inputMixin,
-  FormBuilder,
-  FormBuilderAssist,
-  FormBuilderGenerator
-}
+    // Ensure the boot file is transpiled
+    conf.build.transpileDependencies.push(/quasar-app-extension-form-builder[\\/]src[\\/]boot/)
+  })
+})
 
-// Default export for backward compatibility
-export default {
-  inputMixin,
-  FormBuilder,
-  FormBuilderAssist,
-  FormBuilderGenerator
-}
+// import FormBuilder from './components/FormBuilder.vue'
+// import FormBuilderGenerator from './components/GeneratorPanel/GeneratorPanel.vue'
+//
+// // Mixins
+// import inputMixin from './mixins/inputMixin.js'
+//
+// // Utilities
+// import * as FormBuilderAssist from './assist.js'
+//
+// // Export components, mixins, and utilities
+// export {
+//   inputMixin,
+//   FormBuilder,
+//   FormBuilderAssist,
+//   FormBuilderGenerator
+// }
+//
+// // Default export for backward compatibility
+// export default {
+//   inputMixin,
+//   FormBuilder,
+//   FormBuilderAssist,
+//   FormBuilderGenerator
+// }

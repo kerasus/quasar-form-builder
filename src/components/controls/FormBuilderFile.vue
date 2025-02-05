@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from '@/assist.ts'
 
 export type FormBuilderFileType = FormBuilderGenericInputType & {
   value: string | File | null;

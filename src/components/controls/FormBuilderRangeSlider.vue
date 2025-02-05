@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from '@/assist.ts'
 
 // Define the extended type for the range slider component
 export type FormBuilderRangeSliderType = FormBuilderGenericInputType & {

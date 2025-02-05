@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
-import FormBuilderSelect from '../../FormBuilderSelect.vue'
+import FormBuilderSelect from '../../controls/FormBuilderSelect.vue'
 
 const config = defineModel('config')
 const behaviorTypes = ref([

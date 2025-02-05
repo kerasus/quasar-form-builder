@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from '@/assist.ts'
 
 // Define the extended type with additional properties.
 export type FormBuilderColorType = FormBuilderGenericInputType & {

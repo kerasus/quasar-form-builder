@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
-import FormBuilderTime from '../../FormBuilderTime.vue'
+import FormBuilderTime from '../../controls/FormBuilderTime.vue'
 
 const config = defineModel('config')
 const defaultConfig = {

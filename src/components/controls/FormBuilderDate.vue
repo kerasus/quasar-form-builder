@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from '@/assist.ts'
 
 export type FormBuilderDateType = FormBuilderGenericInputType & {
   value: string;
@@ -86,7 +86,7 @@ export const FormBuilderDateDefaults: FormBuilderDateType = {
 </script>
 
 <script lang="ts" setup>
-import jMoment from '../assets/jalali-moment.browser.js'
+import jMoment from '../../assets/jalali-moment.browser.js'
 import { useInputComposable } from '@/composables/useInputComposable'
 import {
   ref,

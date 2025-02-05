@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
-import FormBuilderInput from '../../FormBuilderInput.vue'
+import FormBuilderInput from '../../controls/FormBuilderInput.vue'
 
 const config = defineModel('config')
 const inputTypes = ref([

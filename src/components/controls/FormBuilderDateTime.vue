@@ -1,5 +1,5 @@
 <template>
-  <div class="form-builder-input"
+  <div class="form-builder-datetime"
        :class="customClass">
     <div class="outsideLabel">
       {{ placeholder ? label : null }}
@@ -12,14 +12,10 @@
              :lazy-rules="lazyRules"
              :label="placeholder ? null : label"
              :stack-label="!!placeholder"
-             :type="inputType"
              :error="error"
              :hint="hint"
              :error-message="errorMessage"
              :disable="disable"
-             :mask="mask"
-             :fill-mask="fillMask"
-             :reverse-fill-mask="reverseFillMask"
              :clearable="clearable"
              :loading="loading"
              :readonly="readonly"
@@ -28,48 +24,44 @@
              :placeholder="placeholder"
              :class="customClass"
              :input-class="customClass"
-             :autogrow="autogrow"
-             :maxlength="maxlength"
+             mask="####/##/## ##:##"
              @update:model-value="change"
              @click="onClick"
-             @keypress="onKeyPress" />
+             @keypress="onKeyPress">
+      <template #append>
+        <q-icon name="event"
+                class="cursor-pointer"
+                @click="openDatePicker" />
+      </template>
+    </q-input>
+    <q-popup-proxy ref="qDateProxy"
+                   transition-show="scale"
+                   transition-hide="scale">
+      <q-datetime v-model="inputData"
+                  mask="YYYY-MM-DD HH:mm"
+                  @update:model-value="change" />
+    </q-popup-proxy>
   </div>
 </template>
 
 <script lang="ts">
-import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist.ts'
+import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from '@/assist.ts'
 
-// Define the extended type with additional properties.
-export type FormBuilderInputType = FormBuilderGenericInputType & {
-  value: string | number | null;
-  autogrow?: boolean;
-  mask?: string;
-  fillMask?: string;
-  reverseFillMask?: boolean;
-  inputType?: 'text' | 'password' | 'textarea' | 'email' | 'search' | 'tel' | 'file' | 'number' | 'url' | 'time' | 'date' | 'datetime-local';
-  maxlength?: string | number;
+export type FormBuilderDateTimeType = FormBuilderGenericInputType & {
+  value: string | null;
   hint?: string;
   placeholder?: string;
-  error?: boolean;
-  errorMessage?: string;
   filled?: boolean;
   lazyRules?: boolean;
   rounded?: boolean;
   outlined?: boolean;
 }
 
-const FormBuilderInputDefaults: FormBuilderInputType = {
+export const FormBuilderDateTimeDefaults: FormBuilderDateTimeType = {
+  ...FormBuilderGenericInputDefaults, // Include generic defaults
   value: null,
-  autogrow: false,
-  mask: undefined,
-  fillMask: undefined,
-  reverseFillMask: undefined,
-  inputType: 'text',
-  maxlength: undefined,
   hint: undefined,
   placeholder: '',
-  error: false,
-  errorMessage: '',
   filled: false,
   lazyRules: false,
   rounded: false,
@@ -86,24 +78,22 @@ import {
 } from 'vue'
 
 const props = withDefaults(
-  defineProps<FormBuilderInputType>(),
+  defineProps<FormBuilderDateTimeType>(),
   {
     ...FormBuilderGenericInputDefaults,
-    ...FormBuilderInputDefaults
+    ...FormBuilderDateTimeDefaults
   }
 )
 
 const emit = defineEmits(['update:value', 'input', 'change', 'onClick', 'onKeyPress'])
-
 const inputData = ref(props.value)
-
 const { customClass } = useInputComposable(props)
 
 watch(() => props.value, (newValue) => {
   inputData.value = newValue
 })
 
-function change (val: string | number | boolean) {
+function change(val: string) {
   emit('update:value', val)
 }
 
@@ -115,8 +105,12 @@ function onKeyPress(data: Event) {
   emit('onKeyPress', data)
 }
 
+function openDatePicker() {
+  const proxy = (document.querySelector('.q-popup-proxy') as unknown)
+  if (proxy) proxy.show()
+}
+
 onMounted(() => {
   inputData.value = props.value
-  console.log('hiiiiiiiiiii input')
 })
 </script>

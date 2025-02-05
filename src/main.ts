@@ -7,7 +7,7 @@ import quasarConfig from '../quasar.config'
 import { FormBuilder } from './index'
 
 const app = createApp(App)
-app.use(Quasar, quasarConfig)
+app.use(Quasar, quasarConfig())
 // Register your library components globally for testing
 app.component('FormBuilder', FormBuilder)
 app.mount('#app')

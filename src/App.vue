@@ -79,7 +79,7 @@
 
 <script>
 import { ref, shallowRef } from 'vue'
-import FormBuilder from './FormBuilder.vue'
+import FormBuilder from './components/FormBuilder.vue'
 import CustomComponent from './CustomComponent.vue'
 // import GeneratorPanel from './components/GeneratorPanel/GeneratorPanel.vue'
 

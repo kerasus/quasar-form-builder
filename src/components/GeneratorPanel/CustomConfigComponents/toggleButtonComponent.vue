@@ -2,7 +2,7 @@
 import { ref, onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
 import ColorList from '../../../assets/colorList.js'
-import FormBuilderToggleButton from '../../FormBuilderToggleButton.vue'
+import FormBuilderToggleButton from '../../controls/FormBuilderToggleButton.vue'
 
 const config = defineModel('config')
 const colorList = ref(ColorList.ColorList)

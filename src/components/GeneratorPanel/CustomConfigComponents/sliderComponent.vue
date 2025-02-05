@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, defineModel } from 'vue'
 import InputPreview from '../InputPreview.vue'
-import FormBuilderSlider from '../../FormBuilderSlider.vue'
+import FormBuilderSlider from '../../controls/FormBuilderSlider.vue'
 
 const config = defineModel('config')
 const defaultConfig = {
