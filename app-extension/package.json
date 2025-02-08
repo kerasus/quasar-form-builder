@@ -1,0 +1,16 @@
+{
+  "name": "quasar-app-extension-form-builder",
+  "version": "0.0.1",
+  "description": "A powerful and customizable form builder for Quasar Framework, providing dynamic form generation with validation, input types, and responsive design.",
+  "author": "ali <a.esmaeili@asredanesh.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "quasar-ui-form-builder": "latest"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  }
+}
