@@ -2,7 +2,6 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
 const path = require('path')
-const webpack = require('webpack')
 
 module.exports = function (ctx) {
   return {
@@ -46,15 +45,27 @@ module.exports = function (ctx) {
     build: {
       vueRouterMode: 'history',
 
-      chainWebpack (chain) {
-        chain.resolve.alias.merge({
-          ui: path.resolve(__dirname, `../src/index.esm.js`)
-        })
+      // Vite-specific alias resolution
+      alias: {
+        ui: path.resolve(__dirname, `../src/index.esm.js`)
+      },
 
-        chain.plugin('define-ui')
-          .use(webpack.DefinePlugin, [{
-            __UI_VERSION__: `'${require('../package.json').version}'`
-          }])
+      // Use Vite for bundling instead of Webpack
+      vitePlugins: [
+        // Add any Vite plugins you might need, for example, Vue 3 plugin
+        ['vite-plugin-checker', {
+          vueTsc: {
+            tsconfigPath: 'tsconfig.vue-tsc.json'
+          },
+          eslint: {
+            lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"'
+          }
+        }, { server: false }]
+      ],
+
+      // Define custom environment variables (you can keep this if needed)
+      define: {
+        __UI_VERSION__: `'${require('../package.json').version}'`
       }
     },
 

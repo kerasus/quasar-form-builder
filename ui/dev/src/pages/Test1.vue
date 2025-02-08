@@ -1,9 +1,6 @@
 <template>
   <q-page padding>
-    
-    <QFormBuilder />
-    
-    
+    hi
   </q-page>
 </template>
 
