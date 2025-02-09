@@ -35,73 +35,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { PropType } from 'vue'
-import { FormBuilderGenericInputType, FormBuilderGenericInputDefaults } from 'src/assist'
-
-// Define the extended type with additional properties.
-export type FormBuilderToggleButtonType = FormBuilderGenericInputType & {
-  value: string | number | boolean | object | Array<unknown>;
-  toggleTextColor?: string;
-  toggleColor?: string;
-  push?: boolean;
-  glossy?: boolean;
-  clearable?: boolean;
-  unelevated?: boolean;
-  stretch?: boolean;
-  stack?: boolean;
-  spread?: boolean;
-  noWrap?: boolean;
-  noCaps?: boolean;
-  options?: Array<{ label: string; value: unknown }>;
-  color?: string;
-  inline?: boolean;
-  dense?: boolean;
-  toggleType?: string;
-  textColor?: string;
-  flat?: boolean;
-  outlined?: boolean;
-  rounded?: boolean;
-  size?: string;
-  ripple?: boolean;
-}
-
-export const FormBuilderToggleButtonDefaults: FormBuilderToggleButtonType = {
-  ... FormBuilderGenericInputDefaults,
-  value: '',
-  name: '',
-  toggleTextColor: 'black',
-  toggleColor: 'primary',
-  push: false,
-  glossy: false,
-  clearable: false,
-  unelevated: false,
-  stretch: false,
-  stack: false,
-  spread: false,
-  noWrap: false,
-  noCaps: false,
-  options: [],
-  color: '',
-  inline: false,
-  dense: false,
-  toggleType: '',
-  textColor: '',
-  flat: false,
-  outlined: false,
-  rounded: false,
-  size: '',
-  ripple: false
-}
-</script>
-
 <script lang="ts" setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, defineProps, withDefaults, defineEmits } from 'vue'
 import { useInputComposable } from 'src/composables/useInputComposable'
+import { type FormBuilderToggleButtonType } from 'src/types'
+import { FormBuilderToggleButtonDefaults } from 'src/defaults'
 
-const props = defineProps<FormBuilderToggleButtonType>({
-  ...FormBuilderToggleButtonDefaults
-})
+// Define the props type and defaults in one go
+const props = withDefaults(
+  defineProps<FormBuilderToggleButtonType>(),
+  FormBuilderToggleButtonDefaults
+)
 
 const emit = defineEmits(['update:value', 'input', 'change', 'onClick'])
 
@@ -113,12 +57,12 @@ watch(() => props.value, (newValue) => {
   inputData.value = newValue
 })
 
-function change(val: unknown) {
+function change (val: unknown) {
   emit('update:value', val)
   emit('change', val)
 }
 
-function onClick(data: Event) {
+function onClick (data: Event) {
   emit('onClick', data)
 }
 

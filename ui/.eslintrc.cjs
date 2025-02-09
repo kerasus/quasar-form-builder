@@ -95,10 +95,12 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
 
     'vue/multi-word-component-names': 'off',
     'vue/no-unused-vars': 'error',
+    'vue/valid-define-props': 'error',
     'vue/attributes-order': 'error',
     'vue/order-in-components': 'error',
     'vue/max-attributes-per-line': 'error',
