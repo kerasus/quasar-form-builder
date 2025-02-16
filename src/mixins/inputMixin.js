@@ -253,7 +253,7 @@ export default {
           } else {
             if (
                 (
-                    (item.sendNull && item.value === null) ||
+                    (item.sendNull) ||
                     (!item.sendNull && item.value !== null)
                 ) &&
                 typeof item.value !== 'undefined'
