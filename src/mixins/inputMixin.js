@@ -251,7 +251,13 @@ export default {
               }
             })
           } else {
-            if (item.value !== null && typeof item.value !== 'undefined') {
+            if (
+                (
+                    (item.sendNull && item.value === null) ||
+                    (!item.sendNull && item.value !== null)
+                ) &&
+                typeof item.value !== 'undefined'
+            ) {
               formData.append(item.name, item.value)
             }
           }
