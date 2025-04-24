@@ -165,8 +165,9 @@ export default {
           this.displayDateTime = ''
           return
         }
-        const newDate = jMoment(newValue.toString()).format('YYYY-MM-DD')
-        const newTime = jMoment(newValue.toString()).format('HH:mm:00')
+        const jmomentValue = jMoment.utc(newValue.toString())
+        const newDate = jmomentValue.format('YYYY-MM-DD')
+        const newTime = jmomentValue.format('HH:mm:00')
         this.updateDateTime(newDate, 'date')
         this.updateDateTime(newTime, 'time')
       },

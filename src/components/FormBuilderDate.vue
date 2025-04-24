@@ -177,7 +177,8 @@ export default {
       return jMoment(date, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
     },
     miladiToShamsiDate(date) {
-      return jMoment(date, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
+      const jmomentValue = jMoment.utc(date, 'YYYY-MM-DD')
+      return jmomentValue.format('jYYYY/jMM/jDD')
     }
   }
 }
